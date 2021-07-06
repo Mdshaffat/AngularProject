@@ -5,6 +5,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserRoutingModule } from './user-routing.module';
+import { MaterialModule } from 'src/app/Shared/material/material.module';
 
 
 
@@ -17,7 +18,8 @@ import { UserRoutingModule } from './user-routing.module';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    MaterialModule
   ]
 })
 export class UserModule { }

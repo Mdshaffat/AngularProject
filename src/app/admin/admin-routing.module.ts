@@ -5,7 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard'},
-{path: '', component: AdminComponent,
+  {path: '', component: AdminComponent,
     children: [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'user', loadChildren: () => import('./user/user.module')
@@ -13,7 +13,7 @@ const routes: Routes = [
       {path: 'hospital', loadChildren: () => import('./hospital/hospital.module')
                                     .then(m => m.HospitalModule)},
     ],
-}
+  }
 ];
 
 

@@ -1,0 +1,28 @@
+table {
+    margin: 10px;
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .search {
+    float: left;
+    width: 70%;
+    margin-left: 5%;
+  }
+  .addnewuser {
+    float: right;
+    width: 15%;
+    margin-right: 5%;
+  }
+  .mat-column-Edit {
+    padding-right: 20px;
+    text-align: center;
+  }
+  .buttonadd {
+    margin-right: -1%;
+    color: cornsilk;
+  
+  }
