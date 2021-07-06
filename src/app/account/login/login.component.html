@@ -1,0 +1,21 @@
+<body>
+    <h1 class="logo">LOGO</h1>
+    <div class="loginForm">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="nope">
+            <mat-form-field>
+                <mat-label>Enter Your Email</mat-label>
+                <input formControlName="email" matInput placeholder="example@domain.com" >
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>Enter Your Password</mat-label>
+                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <button mat-raised-button color="primary">Submit</button>
+        </form>    
+    </div>
+</body>

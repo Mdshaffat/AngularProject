@@ -1,0 +1,25 @@
+body {
+    background-color: gainsboro;
+}
+.logo {
+    margin: 1%;
+    padding: auto;
+    color: #3f51b5;
+}
+.mat-form-field {
+    width: 220px;
+    margin: 5px;
+}
+.loginForm {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-bottom: 40px;  
+    width: 100%;
+    max-width: 330px;
+    margin: auto;
+    border: #3f51b5;
+}
+button {
+    float: right;
+}

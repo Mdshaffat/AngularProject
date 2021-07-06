@@ -4,11 +4,14 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'dashboard'},
 {path: '', component: AdminComponent,
     children: [
       {path: 'dashboard', component: DashboardComponent},
       {path: 'user', loadChildren: () => import('./user/user.module')
-                                    .then(m => m.UserModule)}
+                                    .then(m => m.UserModule)},
+      {path: 'hospital', loadChildren: () => import('./hospital/hospital.module')
+                                    .then(m => m.HospitalModule)},
     ],
 }
 ];

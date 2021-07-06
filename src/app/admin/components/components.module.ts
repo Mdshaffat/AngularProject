@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent } from '../../user/components/navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MaterialModule } from 'src/app/Shared/material/material.module';
+import { RouterLink, RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +15,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     SidebarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule,
+    RouterModule
   ],
   exports: [
     NavbarComponent,

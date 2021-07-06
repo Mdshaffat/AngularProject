@@ -1,1 +1,39 @@
-<p>sidebar works!</p>
+<div style="height: 80vh;">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-icon>face</mat-icon>
+        <span>ADMIN</span>
+        <span class="menu-spacer"></span>
+        <div fxShow="true" fxHide.lt-md>
+          <a *ngFor="let menuItem of menuItems"
+          mat-button
+          [routerLink]="menuItem.path"
+          >{{menuItem.title}}</a>
+          <a mat-button ><mat-icon>logout</mat-icon></a>
+          
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+  
+    <mat-sidenav-container fxFlexFill>
+      <mat-sidenav #sidenav>
+        <mat-nav-list>
+          <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
+          <a *ngFor="let menuItem of menuItems"
+           mat-list-item (click)="sidenav.toggle()"
+           [routerLink]="menuItem.path"
+           >{{menuItem.title}}</a>
+           <a mat-list-item >Logout &nbsp;<mat-icon>logout</mat-icon></a>
+
+        </mat-nav-list>
+      </mat-sidenav>
+      <mat-sidenav-content fxFlexFill>
+        <main class="bfa-main">
+            <ng-content></ng-content>
+        </main>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
