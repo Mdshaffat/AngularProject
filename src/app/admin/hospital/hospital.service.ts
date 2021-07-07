@@ -26,8 +26,8 @@ export class HospitalService {
       );
     }
 
-    getHospitalById(id: string) {
-      return this.http.get<IHospital>(this.baseUrl + 'hospital' + id).pipe(
+    getHospitalById(id: number) {
+      return this.http.get<IHospital>(this.baseUrl + 'hospital/gethospital/' + id).pipe(
         map(response => {
           this.updatehospital = response;
           return response;
@@ -51,7 +51,7 @@ export class HospitalService {
       const token = localStorage.getItem('token');
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', `Bearer ${token}`);
-      return this.http.put<any>(this.baseUrl + 'hospital/updatehospital', values, {headers}).pipe(
+      return this.http.put<any>(this.baseUrl + 'hospital', values, {headers}).pipe(
         map((response: any) => {
           console.log(response.message);
         })

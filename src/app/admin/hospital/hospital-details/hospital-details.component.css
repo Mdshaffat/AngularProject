@@ -1,0 +1,15 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }
+  .userdetails{
+    height: 100%;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    border: #3f51b5;
+  }

@@ -1,7 +1,7 @@
 <body>
     <button mat-button [routerLink]="['../hospitals']" >Back</button>
       <div class="loginForm">
-          <form [formGroup]="hospitalAddForm">
+          <form [formGroup]="hospitalAddForm" (ngSubmit)="onSubmit()">
               <mat-form-field>
                   <mat-label>Hospital Name</mat-label>
                   <input required formControlName="name" matInput placeholder="example@domain.com" >

@@ -39,7 +39,7 @@ export class UserEditComponent implements OnInit , AfterViewInit {
     this.populateFrom();
   }
   ngAfterViewInit(){
-    this.populateFrom();
+      this.populateFrom();
   }
   createUpdateFrom(){
     this.updateUserForm = this.fb.group({

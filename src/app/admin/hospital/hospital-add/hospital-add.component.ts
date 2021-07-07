@@ -33,4 +33,14 @@ export class HospitalAddComponent implements OnInit {
   get f(){
     return this.hospitalAddForm.controls;
   }
+
+  onSubmit(){
+    this.hospitalService.addHospital(this.hospitalAddForm.value).subscribe(response => {
+      this.toastr.success( 'Added a new Hospital' , 'Success' );
+      this.router.navigateByUrl('/admin/hospital/hospitals').then(() => {location.reload(); } );
+    }, error => {
+      console.log(error);
+      this.toastr.error('Error to Create.Please check your connection and try again');
+    });
+  }
 }
