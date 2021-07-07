@@ -34,6 +34,19 @@ export class HospitalService {
         })
       );
     }
+
+  addHospital(values: any) {
+    const token = localStorage.getItem('token');
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${token}`);
+    return this.http.post(this.baseUrl + 'hospital', values,  {headers}).pipe(
+      map((response: any) => {
+        if (response) {
+          console.log(response.message);
+        }
+      })
+    );
+  }
     updateHospital(values: any){
       const token = localStorage.getItem('token');
       let headers = new HttpHeaders();
@@ -44,4 +57,4 @@ export class HospitalService {
         })
       );
     }
-  }
+}
