@@ -40,4 +40,6 @@ table {
     cursor: pointer;
     color: ivory;
   }
- 
+  th.mat-sort-header-sorted {
+    color: black;
+  }

@@ -9,34 +9,32 @@
           add
         </span>New Hospital</button>
     </div>
-    
-    </div>
-    
+</div>
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
         <ng-container matColumnDef="Name">
-          <th mat-header-cell *matHeaderCellDef>Name </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="name">Name </th>
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.name}} </td>
         </ng-container>
         <ng-container matColumnDef="Address">
-          <th mat-header-cell *matHeaderCellDef> Address </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="address"> Address </th>
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.address}} </td>
         </ng-container>
         <ng-container matColumnDef="Upazila">
-          <th mat-header-cell *matHeaderCellDef> Upazila </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="upazilla"> Upazila </th>
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.upazilla}} </td>
         </ng-container>
         <ng-container matColumnDef="District">
-          <th mat-header-cell *matHeaderCellDef> District </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="district"> District </th>
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.district}} </td>
         </ng-container>
         <ng-container matColumnDef="Active">
-          <th mat-header-cell *matHeaderCellDef> Active </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="isActive"> Active </th>
           <td mat-cell *matCellDef="let dataSource">
             <mat-checkbox disabled [checked] = dataSource.isActive></mat-checkbox>
           </td>
         </ng-container>
         <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef> Action </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
           <td mat-cell *matCellDef="let dataSource">
             <mat-icon [routerLink]="['../edit/'+ dataSource.id]">edit</mat-icon>
             <mat-icon [routerLink]="['../details/'+ dataSource.id]">info</mat-icon>
