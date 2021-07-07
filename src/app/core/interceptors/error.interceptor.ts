@@ -21,6 +21,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error) {
           if (error.status === 0){
             this.router.navigate(['/account/login']);
+            this.toastr.error('Connection Refused');
             }
           if (error.status === 400) {
             if (error.error.errors) {

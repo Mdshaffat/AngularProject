@@ -10,8 +10,8 @@ import { UserService } from '../user.service';
 })
 export class UserDetailsComponent implements OnInit {
 userDetails: IUser;
-id:any;
-  constructor(private activateRoute: ActivatedRoute, private userService:UserService ) { }
+id: any;
+  constructor(private activateRoute: ActivatedRoute, private userService: UserService ) { }
 
   ngOnInit(): void {
     this.loaduser();
@@ -22,7 +22,7 @@ id:any;
       console.log(response);
       this.userDetails = response;
     }, error => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
 }

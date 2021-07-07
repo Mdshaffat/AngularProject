@@ -42,7 +42,7 @@ export class UserAddComponent implements OnInit {
       email: ['', [ Validators.required, Validators.email], [this.validateEmailNotTaken()]],
       designation: [''],
       phoneNumber: [''],
-      joiningDate: ['', ],
+      joiningDate: ['', Validators.required ],
       isActive: [true, Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
@@ -75,7 +75,7 @@ export class UserAddComponent implements OnInit {
       this.router.navigateByUrl('/admin/user/userlist').then(() => {location.reload(); } );
     }, error => {
       console.log(error);
-
+      this.toastr.error('Check input value again');
       if (error.error.ConfirmPassword){this.toastr.error(error.errors.ConfirmPassword[0], 'Error'); }
       else
       {this.toastr.error(error.error.title, 'Error'); }

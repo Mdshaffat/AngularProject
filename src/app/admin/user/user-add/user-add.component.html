@@ -14,18 +14,20 @@
               </mat-form-field>
             <mat-form-field>
                 <mat-label>First Name</mat-label>
-                <input formControlName="firstName" matInput placeholder="example@domain.com" >
-                <mat-error></mat-error>
+                <input required formControlName="firstName" matInput placeholder="example@domain.com" >
+                <mat-error *ngIf="f.firstName.hasError('required')">Required</mat-error>
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Last Name</mat-label>
-                <input formControlName="lastName" matInput >
-                <mat-error></mat-error>
+                <input required formControlName="lastName" matInput >
+                <mat-error *ngIf="f.lastName.hasError('required')">Required</mat-error>
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Email</mat-label>
-                <input formControlName="email" matInput >
-                <mat-error></mat-error>
+                <input required formControlName="email" matInput >
+                <mat-error *ngIf="f.email.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="f.email.hasError('email')">Enter a valid email</mat-error>
+                <mat-error *ngIf="f.email.errors?.emailExists">Email Exist.</mat-error>
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Designation</mat-label>
@@ -42,10 +44,11 @@
                 <input formControlName="joiningDate" matInput [matDatepicker]="picker" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="f.joiningDate.hasError('required')">Please choose Joinning Date</mat-error>
               </mat-form-field>
             <mat-form-field>
                 <mat-label>Password</mat-label>
-                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                <input required formControlName="password" matInput [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
@@ -53,12 +56,16 @@
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Confirm Password</mat-label>
-                <input formControlName="confirmPassword" matInput [type]="hide ? 'password' : 'text'">
+                <input required formControlName="confirmPassword" matInput [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-                <mat-error></mat-error>
-            </mat-form-field><br>
+                <mat-error *ngIf="f.confirmPassword.hasError('required')">Required</mat-error>
+                <mat-error *ngIf="userAddForm.errors?.identityRevealed"></mat-error>
+            </mat-form-field>
+            <small style="margin-left: 15px;" *ngIf="f.confirmPassword.touched || userAddForm.errors?.identityRevealed">
+              <mat-error style="margin-left: 15px;" *ngIf="userAddForm.errors?.identityRevealed">Passwords do not match</mat-error>
+            </small><br>
             <mat-form-field appearance="fill">
                 <mat-label>Role</mat-label>
                 <mat-select formControlName="role" required>
@@ -70,7 +77,7 @@
                 <mat-error *ngIf="f.role.hasError('required')">Please choose a Role</mat-error>
               </mat-form-field>
 
-                <mat-checkbox class="active">Active</mat-checkbox>
+                <mat-checkbox formControlName="isActive" class="active">Active</mat-checkbox>
 
                 <br/><button mat-raised-button color="primary" type="submit">ADD</button>
             

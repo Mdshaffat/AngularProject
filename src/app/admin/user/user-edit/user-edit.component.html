@@ -48,7 +48,7 @@
                   <mat-error *ngIf="f.role.hasError('required')">Please choose a Role</mat-error>
                 </mat-form-field>
   
-                  <mat-checkbox [checked]= "updateUser.role" class="active">Active</mat-checkbox>
+                  <mat-checkbox formControlName="isActive" [checked]="updateUser.role" class="active">Active</mat-checkbox>
   
                   <br/><button mat-raised-button color="primary" type="submit">Save</button>
               

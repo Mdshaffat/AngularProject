@@ -2,10 +2,12 @@
     <h1 class="logo">LOGO</h1>
     <div class="loginForm">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="nope">
+            <h2>Login</h2>
             <mat-form-field>
                 <mat-label>Enter Your Email</mat-label>
                 <input formControlName="email" matInput placeholder="example@domain.com" >
-                <mat-error></mat-error>
+                <mat-error *ngIf="f.email.errors?.required">Email Required.</mat-error>
+                <mat-error *ngIf="f.email.errors?.email">Email Invalid</mat-error>
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Enter Your Password</mat-label>
@@ -13,9 +15,12 @@
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
-                <mat-error></mat-error>
+                <mat-error *ngIf="f.password.errors?.required">Password Required.</mat-error>
+                <mat-error *ngIf="f.password.errors?.minlength">Minimum 8 charecter</mat-error>
             </mat-form-field><br>
-            <button mat-raised-button color="primary">Submit</button>
-        </form>    
+            <button mat-raised-button color="primary" [disabled]="!loginForm.valid">Submit</button><br>
+            <a [routerLink]="['../forgotpassword']" routerLinkActive="router-link-active" >Forget Password</a>   
+        </form><br>
+       
     </div>
 </body>
