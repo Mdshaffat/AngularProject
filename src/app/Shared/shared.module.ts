@@ -9,7 +9,8 @@ FormsModule
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   providers: [
     {provide: ToastrService, useClass: ToastrService}
   ],

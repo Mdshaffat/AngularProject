@@ -1,1 +1,79 @@
-<p>user-add works!</p>
+<body>
+  <button mat-button [routerLink]="['../userlist']" >Back</button>
+    <div class="loginForm">
+        <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()" autocomplete="nope">
+            <mat-form-field appearance="fill">
+                <mat-label>Hospital</mat-label>
+                <mat-select formControlName="hospitalId" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                    {{hospital.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.hospitalId.hasError('required')">Please choose Hospital</mat-error>
+              </mat-form-field>
+            <mat-form-field>
+                <mat-label>First Name</mat-label>
+                <input formControlName="firstName" matInput placeholder="example@domain.com" >
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>Last Name</mat-label>
+                <input formControlName="lastName" matInput >
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput >
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>Designation</mat-label>
+                <input formControlName="designation" matInput>
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>Phone Number</mat-label>
+                <input formControlName="phoneNumber" matInput>
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Joining Date</mat-label>
+                <input formControlName="joiningDate" matInput [matDatepicker]="picker" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field>
+                <mat-label>Confirm Password</mat-label>
+                <input formControlName="confirmPassword" matInput [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                <mat-error></mat-error>
+            </mat-form-field><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let role of roles" [value]="role.roleName">
+                    {{role.roleName}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.role.hasError('required')">Please choose a Role</mat-error>
+              </mat-form-field>
+
+                <mat-checkbox class="active">Active</mat-checkbox>
+
+                <br/><button mat-raised-button color="primary" type="submit">ADD</button>
+            
+        </form>    
+    </div>
+</body>

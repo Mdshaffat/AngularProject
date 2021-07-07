@@ -1,10 +1,10 @@
 <div>
     <mat-form-field class="search">
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
     </mat-form-field>
     <div class="addnewuser">
-      <button class="btn btn-primary" [routerLink]="['../../account/register']" >
+      <button class="btn addbutton" [routerLink]="['../useradd']" >
         <span class="material-icons buttonadd btn">
           add
         </span>Add New User</button>
@@ -55,11 +55,8 @@
         <ng-container matColumnDef="Action">
           <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let dataSource">
-            <button [routerLink]="['../user/'+dataSource.userId]" >
-              <span class="material-icons">
-              edit
-              </span>
-            </button> 
+            <mat-icon [routerLink]="['../useredit/'+dataSource.userId]">edit</mat-icon>
+            <mat-icon [routerLink]="['../userdetails/'+dataSource.userId]">info</mat-icon>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

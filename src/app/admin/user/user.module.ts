@@ -6,6 +6,7 @@ import { UserAddComponent } from './user-add/user-add.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserRoutingModule } from './user-routing.module';
 import { MaterialModule } from 'src/app/Shared/material/material.module';
+import { SharedModule } from 'src/app/Shared/shared.module';
 
 
 
@@ -19,7 +20,8 @@ import { MaterialModule } from 'src/app/Shared/material/material.module';
   imports: [
     CommonModule,
     UserRoutingModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule
   ]
 })
 export class UserModule { }

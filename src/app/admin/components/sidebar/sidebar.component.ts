@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AccountService } from 'src/app/account/account.service';
 import { IUserTokenProvider } from 'src/app/core/models/UserTokenProvider';
+import { LoaderService } from 'src/app/Shared/loader/loader.service';
 
 declare interface RouteInfo {
   path: string;
@@ -25,7 +26,9 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   currentUser$: Observable<IUserTokenProvider>;
-  constructor(private toastr: ToastrService, private accountService: AccountService) { }
+  constructor(private toastr: ToastrService,
+              private accountService: AccountService,
+              public loaderService: LoaderService) { }
 
   ngOnInit(): void {
     this.menuItems = ROUTES.filter(menuItem => menuItem);

@@ -1,1 +1,27 @@
-<p>user-details works!</p>
+<body class="userdetails">
+    <mat-card class="example-card">
+        <mat-card-header>
+        <mat-card-title>{{userDetails.firstName}} {{userDetails.lastName}}</mat-card-title>
+        <mat-card-subtitle>{{userDetails.designation}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p>Hospital Name: <small>{{userDetails.hospitalName}}</small></p>
+            <p>Email: <small>{{userDetails.email}}</small></p>
+            <p>Mobile Number: <small>{{userDetails.phoneNumber}}</small></p>
+            <p>Joining Date: <small>{{userDetails.joiningDate | date:'dd/MM/YYY'}}</small></p>
+            <p>Last Login Date: <small>{{userDetails.lastLoginDate | date:'dd/MM/YYY'}}</small></p>
+            <p>Updated On: <small>{{userDetails.updatedOn | date:'dd/MM/YYY'}}</small></p>
+            <p>Updated By: <small>{{userDetails.updatedBy}}</small></p>
+            <p>Created On: <small>{{userDetails.createdOn | date:'dd/MM/YYY'}}</small></p>
+            <p>Created By: <small>{{userDetails.createdBy}}</small></p>
+            <p>Active:
+                <mat-checkbox style="margin-left: 10px;" disabled [checked] = userDetails.isActive></mat-checkbox>
+        </p>
+            <p>Role: <small>{{userDetails.role}}</small></p>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button [routerLink]="['../../userlist']" >Back</button>
+        <button mat-button [routerLink]="['../../useredit/'+ userDetails.userId]">Edit</button>
+        </mat-card-actions>
+    </mat-card>
+</body>

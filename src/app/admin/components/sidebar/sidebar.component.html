@@ -1,4 +1,4 @@
-<div class="sidebar" style="height: 80vh;">
+<div class="sidebar" style="height: 90vh;">
     <mat-toolbar color="primary">
       <mat-toolbar-row>
         <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
@@ -13,12 +13,14 @@
           [routerLink]="menuItem.path"
           >{{menuItem.title}}</a>
           <a mat-button (click)="logout()" ><mat-icon>logout</mat-icon></a>
-          
         </div>
       </mat-toolbar-row>
+      <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+      </div>
     </mat-toolbar>
   
-    <mat-sidenav-container fxFlexFill>
+    <mat-sidenav-container fxFlexFill class="container" autosize>
       <mat-sidenav #sidenav>
         <mat-nav-list>
           <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
@@ -30,10 +32,11 @@
 
         </mat-nav-list>
       </mat-sidenav>
-      <mat-sidenav-content fxFlexFill>
-        <main class="bfa-main">
+      <div *ngIf="loaderService.isLoading | async" class="loader-container">
+        <mat-spinner style="top: 50%; left: 50%;"></mat-spinner>
+      </div>
+      <mat-sidenav-content>
             <ng-content></ng-content>
-        </main>
       </mat-sidenav-content>
     </mat-sidenav-container>
   </div>
