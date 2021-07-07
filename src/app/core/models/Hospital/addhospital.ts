@@ -4,8 +4,4 @@ export interface IAddHospital {
     upazilla: string;
     district: string;
     isActive: boolean;
-    createdOn: string;
-    createdBy: string;
-    updatedOn: Date;
-    updatedBy: string;
 }

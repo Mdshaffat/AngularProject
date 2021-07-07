@@ -9,9 +9,9 @@ const routes: Routes = [
 {path: '', redirectTo: 'hospitals'},
 {path: 'hospitals', component: HospitalListComponent},
 {path: 'add', component: HospitalAddComponent},
-{path: 'details', component: HospitalDetailsComponent },
-{path: 'edit', component: HospitalEditComponent}
-]
+{path: 'details/:id', component: HospitalDetailsComponent },
+{path: 'edit/:id', component: HospitalEditComponent}
+];
 
 @NgModule({
   imports: [
