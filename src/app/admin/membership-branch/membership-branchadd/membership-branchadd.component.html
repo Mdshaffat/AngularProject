@@ -1,0 +1,31 @@
+<body>
+    <button mat-button [routerLink]="['../branches']" >Back</button>
+      <div class="loginForm">
+          <form [formGroup]="branchAddForm" (ngSubmit)="onSubmit()">
+              <mat-form-field>
+                  <mat-label>Branch Name</mat-label>
+                  <input required formControlName="name" matInput>
+                  <mat-error *ngIf="f.name.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field>
+                  <mat-label>Address</mat-label>
+                  <input required formControlName="address" matInput >
+                  <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field>
+                  <mat-label>Upazila</mat-label>
+                  <input required formControlName="upazila" matInput >
+                  <mat-error *ngIf="f.upazila.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field>
+                  <mat-label>District</mat-label>
+                  <input required formControlName="district" matInput>
+                  <mat-error *ngIf="f.district.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+                  <mat-checkbox formControlName="isActive" class="active">Active</mat-checkbox>
+  
+                  <br/><button mat-raised-button color="primary" type="submit">ADD</button>
+              
+          </form>    
+      </div>
+  </body>

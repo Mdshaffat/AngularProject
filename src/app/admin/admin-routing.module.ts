@@ -12,6 +12,8 @@ const routes: Routes = [
                                     .then(m => m.UserModule)},
       {path: 'hospital', loadChildren: () => import('./hospital/hospital.module')
                                     .then(m => m.HospitalModule)},
+      {path: 'membershipbranch', loadChildren: () => import('./membership-branch/membership-branch.module')
+                                    .then(m => m.MembershipBranchModule)},
     ],
   }
 ];

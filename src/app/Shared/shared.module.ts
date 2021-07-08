@@ -16,7 +16,7 @@ FormsModule
   imports: [
     sharedModule,
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 2000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),

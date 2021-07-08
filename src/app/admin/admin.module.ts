@@ -5,7 +5,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { ComponentsModule } from './components/components.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MaterialModule } from '../Shared/material/material.module';
-import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from '../Shared/shared.module';
 
 

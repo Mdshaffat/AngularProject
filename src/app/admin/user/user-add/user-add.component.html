@@ -31,13 +31,13 @@
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Designation</mat-label>
-                <input formControlName="designation" matInput>
-                <mat-error></mat-error>
+                <input required formControlName="designation" matInput>
+                <mat-error *ngIf="f.designation.hasError('required')">Required</mat-error>
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Phone Number</mat-label>
-                <input formControlName="phoneNumber" matInput>
-                <mat-error></mat-error>
+                <input required formControlName="phoneNumber" matInput>
+                <mat-error *ngIf="f.phoneNumber.hasError('required')">Required</mat-error>
             </mat-form-field><br>
             <mat-form-field appearance="fill">
                 <mat-label>Joining Date</mat-label>
