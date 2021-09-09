@@ -1,0 +1,51 @@
+<body>
+    <button mat-button (click)="closeDialog()" >Close</button>
+      <div class="loginForm">
+          <form [formGroup]="visitEntryAddForm">
+            <mat-form-field class="col-hospitalId" appearance="fill">
+                <mat-label>Hospital</mat-label>
+                <mat-select formControlName="hospitalId" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                    {{hospital.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.hospitalId.hasError('required')">Please choose Hospital</mat-error>
+              </mat-form-field><br>
+              <mat-form-field class="col-hospitalId" appearance="fill">
+                <mat-label>Patient</mat-label>
+                <mat-select formControlName="patientId" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let patient of patients" [value]="patient.id">
+                    {{patient.firstName}} {{patient.lastName}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.patientId.hasError('required')">Please choose Hospital</mat-error>
+              </mat-form-field><br>
+              <mat-form-field class="col-doB" appearance="fill">
+                <mat-label>Date</mat-label>
+                <input formControlName="date" matInput [matDatepicker]="picker" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="f.date.hasError('required')">Please choose a Date</mat-error>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Serial</mat-label>
+                <input required formControlName="serial" matInput>
+                <mat-error *ngIf="f.serial.hasError('required')">Required</mat-error>
+            </mat-form-field><br>  
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status">
+                <mat-option value="Waiting">Waiting</mat-option>
+                <mat-option value="Cancel">Cancel</mat-option>
+                <mat-option value="Done">Done</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.status.hasError('required')">Required</mat-error>
+          </mat-form-field><br>  
+              <div mat-dialog-actions>
+                <button mat-button (click)="doAction()" [disabled]="!visitEntryAddForm.valid">ADD</button>
+              </div>
+          </form>    
+      </div>
+  </body>

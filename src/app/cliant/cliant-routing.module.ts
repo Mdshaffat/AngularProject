@@ -8,6 +8,13 @@ const routes: Routes = [
   {path: '', component: CliantComponent,
         children: [
             {path: 'home', component: HomeComponent},
+            {path: 'patient', loadChildren: () => import('./patient/patient.module').then(m => m.PatientModule)},
+            {path: 'physicalstate', loadChildren: () => import('./physical-state/physical-state.module')
+                                    .then(m => m.PhysicalStateModule)},
+            {path: 'prescription', loadChildren: () => import('./prescription/prescription.module')
+                                    .then(m => m.PrescriptionModule)},
+            {path: 'medicine', loadChildren: () => import('./medicine/medicine.module')
+                                    .then(m => m.MedicineModule)},
           ]
   }
 ];

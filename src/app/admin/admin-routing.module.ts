@@ -14,6 +14,8 @@ const routes: Routes = [
                                     .then(m => m.HospitalModule)},
       {path: 'membershipbranch', loadChildren: () => import('./membership-branch/membership-branch.module')
                                     .then(m => m.MembershipBranchModule)},
+      {path: 'visitEntries', loadChildren: () => import('./visit-entry/visit-entry.module')
+                                    .then(m => m.VisitEntryModule)},
     ],
   }
 ];

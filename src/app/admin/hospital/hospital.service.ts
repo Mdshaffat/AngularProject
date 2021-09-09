@@ -36,7 +36,7 @@ export class HospitalService {
     }
 
   addHospital(values: any) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('hotpital_user_token');
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
     return this.http.post(this.baseUrl + 'hospital', values,  {headers}).pipe(
@@ -48,7 +48,7 @@ export class HospitalService {
     );
   }
     updateHospital(values: any){
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('hotpital_user_token');
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', `Bearer ${token}`);
       return this.http.put<any>(this.baseUrl + 'hospital', values, {headers}).pipe(

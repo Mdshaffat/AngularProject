@@ -14,7 +14,7 @@
               </mat-form-field>
             <mat-form-field>
                 <mat-label>First Name</mat-label>
-                <input required formControlName="firstName" matInput placeholder="example@domain.com" >
+                <input required formControlName="firstName" matInput >
                 <mat-error *ngIf="f.firstName.hasError('required')">Required</mat-error>
             </mat-form-field><br>
             <mat-form-field>
@@ -36,7 +36,7 @@
             </mat-form-field><br>
             <mat-form-field>
                 <mat-label>Phone Number</mat-label>
-                <input required formControlName="phoneNumber" matInput>
+                <input required formControlName="phoneNumber" type="number" matInput>
                 <mat-error *ngIf="f.phoneNumber.hasError('required')">Required</mat-error>
             </mat-form-field><br>
             <mat-form-field appearance="fill">

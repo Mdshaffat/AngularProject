@@ -1,0 +1,66 @@
+<div>
+    <mat-form-field class="search">
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
+    </mat-form-field><br>
+    <div class="addnewuser">
+      <button class="btn addbutton" [routerLink]="['../add']" >
+        <span class="material-icons buttonadd btn">
+          add
+        </span>Physical State</button>
+    </div>
+</div>
+      <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+        <ng-container matColumnDef="PatientID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="patientId">Patient Id </th>
+          <td mat-cell *matCellDef="let dataSource"> {{dataSource.patientId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="PatientName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="patientFirstName"> Patient Name </th>
+          <td mat-cell *matCellDef="let dataSource"> {{dataSource.patientFirstName}} {{dataSource.patientLastName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="VisitId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="visitEntryId"> Visit Id </th>
+          <td mat-cell *matCellDef="let dataSource"> {{dataSource.visitEntryId}} </td>
+        </ng-container>
+        <ng-container matColumnDef="BloodPressure">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="bloodPressure"> Blood Pressure </th>
+          <td mat-cell *matCellDef="let dataSource"> {{dataSource.bloodPressure}} </td>
+        </ng-container>
+        <ng-container matColumnDef="HeartRate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="heartRate"> Heart Rate </th>
+            <td mat-cell *matCellDef="let dataSource"> {{dataSource.heartRate}} </td>
+          </ng-container>
+          <ng-container matColumnDef="BodyTemparature">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="bodyTemparature"> Body Temparature </th>
+            <td mat-cell *matCellDef="let dataSource"> {{dataSource.bodyTemparature}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Weight">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="weight"> Weight </th>
+            <td mat-cell *matCellDef="let dataSource"> {{dataSource.weight}} </td>
+          </ng-container>
+          <ng-container matColumnDef="CreatedOn">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="createdOn"> CreatedOn </th>
+            <td mat-cell *matCellDef="let dataSource"> {{dataSource.createdOn | date:'dd/MM/YYY'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="CreatedBy">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="createdBy"> Created By </th>
+            <td mat-cell *matCellDef="let dataSource"> {{dataSource.createdBy}} </td>
+          </ng-container>
+        <ng-container matColumnDef="Action">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+          <td mat-cell *matCellDef="let dataSource">
+            <mat-icon [routerLink]="['../edit/'+ dataSource.id]">edit</mat-icon>
+            <mat-icon [routerLink]="['../details/'+ dataSource.id]">info</mat-icon>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+        <!-- Row shown when there is no matching data. -->
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10,20,50,100,1000]" showFirstLastButtons></mat-paginator>
+    

@@ -1,0 +1,59 @@
+
+<div mat-dialog-content>
+  <!-- my Content -->
+  <div class="loginForm">
+    <form [formGroup]="patientVitalAddForm">
+      <mat-form-field class="col-hospitalId" appearance="fill">
+        <mat-label>Hospital</mat-label>
+        <mat-select formControlName="hospitalId" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let hospital of hospitals" [value]="hospital.id">
+            {{hospital.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.hospitalId.hasError('required')">Please choose Hospital</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-v-height" appearance="fill">
+          <mat-label>Height</mat-label>
+          <input required formControlName="height" matInput >
+          <mat-error *ngIf="f.height.hasError('required')">Required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-v-weight" appearance="fill">
+        <mat-label>Weight</mat-label>
+        <input required formControlName="weight" matInput>
+        <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-v-bmi" appearance="fill">
+        <mat-label>BMI</mat-label>
+        <input type="number" required formControlName="bmi" matInput >
+        <mat-error *ngIf="f.bmi.hasError('required')">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-v-waist" appearance="fill">
+        <mat-label>Waist</mat-label>
+        <input required formControlName="waist" matInput >
+        <mat-error *ngIf="f.waist.hasError('required')">Required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="col-v-hip" appearance="fill">
+      <mat-label>Hip</mat-label>
+      <input required formControlName="hip" matInput>
+      <mat-error *ngIf="f.hip.hasError('required')">Required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="col-v-spO2" appearance="fill">
+      <mat-label>SpO2</mat-label>
+      <input type="number" required formControlName="spO2" matInput >
+      <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="col-v-pulseRate" appearance="fill">
+      <mat-label>Pulse Rate</mat-label>
+      <input type="number" required formControlName="pulseRate" matInput >
+      <mat-error *ngIf="f.pulseRate.hasError('required')">Required</mat-error>
+  </mat-form-field>
+  <!-- Material Dialouge Action -->
+  <div mat-dialog-actions>
+    <button mat-button (click)="doAction()" [disabled]="!patientVitalAddForm.valid">Update</button>
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">Cancel</button>
+  </div>
+    </form>    
+</div>
+<!-- my Content -->
+</div>

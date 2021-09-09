@@ -6,12 +6,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
-import { SharedModule } from './Shared/shared.module';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 import { LoaderInterceptor } from './Shared/loader/loader.interceptor';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,11 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     BrowserAnimationsModule,
     HttpClientModule,
     LoadingBarModule,
@@ -30,6 +34,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
+    {provide: ToastrService, useClass: ToastrService},
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

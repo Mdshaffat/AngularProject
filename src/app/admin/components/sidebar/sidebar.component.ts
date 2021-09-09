@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/admin/user', title: 'Users',  icon: 'person', class: 'active' },
   { path: '/admin/hospital', title: 'Hospital',  icon: 'person', class: 'active' },
   { path: '/admin/membershipbranch', title: 'Branch',  icon: 'person', class: 'active' },
+  { path: '/admin/visitEntries', title: 'Visit Enries',  icon: 'person', class: 'active' },
 ];
 
 @Component({

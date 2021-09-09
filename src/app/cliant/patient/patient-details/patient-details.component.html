@@ -1,0 +1,151 @@
+<button mat-button [routerLink]="['/patient']" >Back</button>
+<body class="userdetails">
+
+    <mat-card class="example-card">
+        <mat-card-header>
+        <h2 style="float: left; width: 80%;">{{patientDetails.firstName}} {{patientDetails.lastName}}</h2>
+            <button style="float: right; width: 20%;" mat-button [routerLink]="['../../history/' + patientDetails.id]" >History</button>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="table">
+                <tr>
+                <td>ID </td>
+                <td>{{patientDetails.id}}</td>
+                </tr>
+                <tr>
+                    <td>Hospital Name</td>
+                    <td>{{patientDetails.hospitalName}}</td>
+                </tr>
+                
+                <tr>
+                    <td>Branch Name </td>
+                    <td>{{patientDetails.branchName}}</td>
+                    </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>{{patientDetails.age}}</td>
+                </tr>
+                <tr>
+                    <td>Mobile Number</td>
+                    <td>{{patientDetails.mobileNumber}}</td>
+                </tr>
+                <tr>
+                    <td>Bate Of Birth</td>
+                    <td>{{patientDetails.doB | date:'dd-MM-YYY'}}</td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>{{patientDetails.gender}}</td>
+                </tr>
+                <tr>
+                    <td>Marital Status</td>
+                    <td>{{patientDetails.maritalStatus}}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{patientDetails.address}}</td>
+                </tr>
+                
+                <tr>
+                    <td>NID</td>
+                    <td>{{patientDetails.nid}}</td>
+                    </tr>
+                <tr>
+                    <td>Blood Group</td>
+                    <td>{{patientDetails.bloodGroup}}</td>
+                </tr>
+                <tr>
+                    <td>Updated On</td>
+                    <td>{{patientDetails.updatedOn | date:'dd-MM-YYY'}}</td>
+                </tr>
+                <tr>
+                    <td>Updated By</td>
+                    <td>{{patientDetails.updatedBy}}</td>
+                </tr>
+                <tr>
+                    <td>Created On</td>
+                    <td>{{patientDetails.createdOn | date:'dd-MM-YYY'}}</td>
+                </tr>
+                <tr>
+                    <td>Created By</td>
+                    <td>{{patientDetails.createdBy}}</td>
+                </tr>
+                <tr>
+                    <td>Note</td>
+                    <td>{{patientDetails.note}}</td>
+                </tr>
+                <tr>
+                    <td>Primary Member</td>
+                    <td><mat-checkbox style="margin-left: 10px;" disabled [checked] = patientDetails.primaryMember></mat-checkbox></td>
+                </tr>
+                <tr>
+                    <td>Active</td>
+                    <td><mat-checkbox style="margin-left: 10px;" disabled [checked] = patientDetails.isActive></mat-checkbox></td>
+                </tr>
+            </table>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button [routerLink]="['../../list']" >Back</button>
+        <button mat-button [routerLink]="['../../edit/'+ patientDetails.id]">Edit</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-divider></mat-divider>
+    <ng-container *ngFor="let patientVital of patientDetails.patientVitals">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <h2>Vital</h2>
+                <mat-icon mat-button color="primary" class="addnewuser" (click)="openDialog(patientVital)">add</mat-icon>
+            </mat-card-header>
+            <mat-card-content>
+                <table class="table">
+                    <tr>
+                    <td>Height</td>
+                    <td>{{patientVital.height}}</td>
+                    </tr>
+                    <tr>
+                        <td>Weight</td>
+                        <td>{{patientVital.weight}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>BMI</td>
+                        <td>{{patientVital.bmi}}</td>
+                        </tr>
+                    <tr>
+                        <td>Waist</td>
+                        <td>{{patientVital.waist}}</td>
+                    </tr>
+                    <tr>
+                        <td>Hip</td>
+                        <td>{{patientVital.hip}}</td>
+                    </tr>
+                    <tr>
+                        <td>SpO2</td>
+                        <td>{{patientVital.spO2}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pulse Rate</td>
+                        <td>{{patientVital.pulseRate}}</td>
+                    </tr>
+                    <tr>
+                        <td>Last Updated</td>
+                        <td>{{patientVital.updatedAt | date:'dd-MM-YYY'}}</td>
+                    </tr>
+                    <tr>
+                        <td>Updated By</td>
+                        <td>{{patientVital.updatedBy}}</td>
+                    </tr>
+                    <tr>
+                        <td>Hospital</td>
+                        <td>{{patientVital.hospitalName}}</td>
+                    </tr>
+                </table>
+            </mat-card-content>
+            <mat-card-actions>
+           
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+
+</body>
+

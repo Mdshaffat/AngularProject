@@ -37,7 +37,7 @@ export class MembershipBranchService {
     }
 
     addBranch(values: any) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('hotpital_user_token');
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', `Bearer ${token}`);
       return this.http.post(this.baseUrl + 'branch', values,  {headers}).pipe(
@@ -49,7 +49,7 @@ export class MembershipBranchService {
       );
     }
     updateBranch(values: any){
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('hotpital_user_token');
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', `Bearer ${token}`);
       return this.http.put<any>(this.baseUrl + 'branch/editbranch', values, {headers}).pipe(

@@ -1,0 +1,77 @@
+<hr>
+<form>
+  <mat-form-field class="form-id" appearance="fill">
+    <mat-label>ID</mat-label>
+    <input type="number" matInput
+                        readonly
+                        aria-label="ID"
+                        [matAutocomplete]="autoID"
+                        [formControl]="medicineID">
+    <mat-autocomplete #autoID="matAutocomplete">
+        <mat-option *ngFor="let medicine of filteredMedicineByID | async"  (click)="selectMedicine(medicine)">
+          <span>{{medicine.id}}</span> |
+          <span>{{medicine.brandName}}</span> |
+          <small>{{medicine.genericName}}</small>
+        </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="form-brand-name" appearance="fill">
+      <mat-label>Brand Name</mat-label>
+      <input type="text" matInput
+                          aria-label="BrandName"
+                          [matAutocomplete]="autobrandName"
+                          [formControl]="brandName">
+      <mat-autocomplete #autobrandName="matAutocomplete">
+        <mat-option *ngFor="let medicine of filteredMedicine | async"  (click)="selectMedicine(medicine)">
+          <span>{{medicine.id}}</span> |
+          <span>{{medicine.brandName}}</span> |
+          <small>{{medicine.genericName}}</small>
+        </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="form-generic-name" appearance="fill">
+    <mat-label>Generic Name</mat-label>
+    <input type="text" matInput
+                        aria-label="GenericName"
+                        [matAutocomplete]="autoGenericName"
+                        [formControl]="genericName">
+    <mat-autocomplete #autoGenericName="matAutocomplete">
+        <mat-option *ngFor="let medicine of filteredMedicineByGname | async"  (click)="selectMedicine(medicine)">
+          <span>{{medicine.id}}</span> |
+          <span>{{medicine.brandName}}</span> |
+          <small>{{medicine.genericName}}</small>
+        </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="form-quantity" appearance="fill">
+    <mat-label>Quantity</mat-label>
+    <input type="number" matInput [formControl]="quantity">
+  </mat-form-field>
+
+  <button mat-button (click)="addMedicinetoLine()">ADD</button>
+</form>
+<hr>
+<form [formGroup]="medicinePurchaseForm" (ngSubmit)="onSubmit()" novalidate *ngIf="medicinePurchaseForm">
+    <div formArrayName="purchaseMedicineList">
+
+        <table>
+          <tr>
+            <th>Medicine ID</th>
+            <th>Medicine Name</th>
+            <th>Quantity</th>
+          </tr>
+          <tr *ngFor="let medicine of medicinePurchaseForm.controls['purchaseMedicineList'].controls; index as t" [formGroupName]="t">
+
+              <td><input type="text" formControlName="medicineId" placeholder="ID" /></td>
+              <td><input type="text" formControlName="medicineName" placeholder="Name" /></td>
+              <td><input type="text" placeholder="quantity" formControlName="quantity"></td>
+              <td>Price: {{medicine.quantity}}</td>
+          </tr>
+        </table>
+    </div>
+    <button type="button" (click)="addMedicinetoLine()">Add</button>
+    <button type="submit">Submit</button>
+</form>

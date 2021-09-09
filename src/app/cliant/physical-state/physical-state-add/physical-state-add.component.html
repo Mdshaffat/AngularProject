@@ -1,0 +1,60 @@
+
+<body>
+    <button mat-button [routerLink]="['../list']" >Back</button>
+      <div class="loginForm">
+          <form [formGroup]="physicalStateAddForm" (ngSubmit)="onSubmit()" autocomplete="nope">
+              <mat-form-field appearance="fill">
+                  <mat-label>Hospital</mat-label>
+                  <mat-select formControlName="hospitalId" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                      {{hospital.name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="f.hospitalId.hasError('required')">Please choose Hospital</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Patient</mat-label>
+                    <mat-select formControlName="patientId" required>
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let patient of patients" [value]="patient.id">
+                        {{patient.id}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f.patientId.hasError('required')">Please choose Hospital</mat-error>
+                  </mat-form-field>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Visit Entry</mat-label>
+                    <mat-select formControlName="visitEntryId" required>
+                      <mat-option>--</mat-option>
+                      <mat-option *ngFor="let visitEntry of visitEntries" [value]="visitEntry.id">
+                        {{visitEntry.id}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="f.visitEntryId.hasError('required')">Please choose Hospital</mat-error>
+                  </mat-form-field>
+              <mat-form-field>
+                  <mat-label>Blood Pressure</mat-label>
+                  <input required formControlName="bloodPressure" matInput >
+                  <mat-error *ngIf="f.bloodPressure.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field>
+                  <mat-label>Heart Rate</mat-label>
+                  <input required formControlName="heartRate" matInput >
+                  <mat-error *ngIf="f.heartRate.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field>
+                  <mat-label>Body Temparature</mat-label>
+                  <input required formControlName="bodyTemparature" matInput >
+                  <mat-error *ngIf="f.bodyTemparature.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field>
+                  <mat-label>Weight</mat-label>
+                  <input required formControlName="weight" matInput>
+                  <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+                  <br/><button mat-raised-button color="primary" type="submit">ADD</button>
+              
+          </form>    
+      </div>
+  </body>

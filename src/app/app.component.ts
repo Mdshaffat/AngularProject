@@ -15,10 +15,7 @@ export class AppComponent implements OnInit{
     this.loadCurrentUser();
   }
   loadCurrentUser() {
-    const token = localStorage.getItem('token');
-    if (token == null) {
-      this.router.navigateByUrl('account/login');
-    }
+    const token = localStorage.getItem('hotpital_user_token');
     this.accountService.loadCurrentUser(token).subscribe(() => {
       console.log('loaded user');
     }, error => {

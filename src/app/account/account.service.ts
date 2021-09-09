@@ -17,6 +17,8 @@ export class AccountService {
   currentUser$ = this.currentUserSource.asObservable();
   private isAdminSource = new ReplaySubject<boolean>(1);
   isAdmin$ = this.isAdminSource.asObservable();
+  private isDoctorSource = new ReplaySubject<boolean>(1);
+  isDoctor$ = this.isDoctorSource.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -32,9 +34,11 @@ export class AccountService {
     return this.http.get(this.baseUrl + 'account', {headers}).pipe(
       map((user: IUserTokenProvider) => {
         if (user) {
-          localStorage.setItem('token', user.token);
+          localStorage.setItem('hotpital_user_token', user.token);
+          localStorage.setItem('email', user.email);
           this.currentUserSource.next(user);
           this.isAdminSource.next(this.isAdmin(user.token));
+          this.isDoctorSource.next(this.isDoctor(user.token));
         }
       })
     );
@@ -48,21 +52,31 @@ export class AccountService {
       }
     }
   }
+  isDoctor(token: string): boolean {
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      if (decodedToken.role.indexOf('Doctor') > -1) {
+        return true;
+      }
+    }
+  }
 
   login(values: any) {
     return this.http.post(this.baseUrl + 'account/login', values).pipe(
       map((user: IUserTokenProvider) => {
         if (user) {
-          localStorage.setItem('token', user.token);
+          localStorage.setItem('hotpital_user_token', user.token);
+          localStorage.setItem('email', user.email);
           this.currentUserSource.next(user);
           this.isAdminSource.next(this.isAdmin(user.token));
+          this.isDoctorSource.next(this.isDoctor(user.token));
         }
       })
     );
   }
 
   register(values: any) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('hotpital_user_token');
     let headers = new HttpHeaders();
     headers = headers.set('Authorization', `Bearer ${token}`);
     return this.http.post(this.baseUrl + 'account/registration', values, {headers}).pipe(
@@ -75,7 +89,7 @@ export class AccountService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('hotpital_user_token');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('account/login');
   }
@@ -114,7 +128,7 @@ export class AccountService {
       if (this.roles.length > 0) {
         return of(this.roles);
       }
-      return this.http.get<IRole[]>('https://localhost:5001/api/UserManagement/rolelist').pipe(
+      return this.http.get<IRole[]>(this.baseUrl + 'UserManagement/rolelist').pipe(
         map(response => {
           this.roles = response;
           return response;

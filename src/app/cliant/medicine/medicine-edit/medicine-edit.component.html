@@ -1,0 +1,36 @@
+<body >
+    <div >
+    <button mat-button [routerLink]="['/medicine']" >Back</button>
+      <div class="loginForm">
+          <form [formGroup]="updatemedicineForm" (ngSubmit)="onSubmit()">
+              <mat-form-field >
+                  <mat-label>Brand Name</mat-label>
+                  <input [value]="medicine.brandName" required  formControlName="brandName" matInput>
+                  <mat-error *ngIf="f.brandName.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field >
+                  <mat-label>Generic Name</mat-label>
+                  <input  required formControlName="genericName" matInput >
+                  <mat-error *ngIf="f.genericName.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field >
+                  <mat-label>Manufacturar</mat-label>
+                  <input  required formControlName="manufacturar" matInput >
+                  <mat-error *ngIf="f.manufacturar.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+              <mat-form-field >
+                <mat-label>Unit</mat-label>
+                <input  required formControlName="unit" matInput >
+                <mat-error *ngIf="f.unit.hasError('required')">Required</mat-error>
+            </mat-form-field><br>
+              <mat-form-field >
+                  <mat-label>Unit Price</mat-label>
+                  <input  required formControlName="unitPrice" matInput>
+                  <mat-error *ngIf="f.unitPrice.hasError('required')">Required</mat-error>
+              </mat-form-field><br>
+                  <mat-checkbox formControlName="isActive" class="active">Active</mat-checkbox>
+                  <br/><button mat-raised-button color="primary" type="submit">UPDATE</button>
+        </form>    
+      </div>
+    </div>
+  </body>

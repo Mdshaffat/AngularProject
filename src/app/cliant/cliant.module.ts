@@ -6,6 +6,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { CliantRoutingModule } from './cliant-routing.module';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../Shared/shared.module';
+import { HospitalModule } from '../admin/hospital/hospital.module';
 
 
 
@@ -20,6 +21,9 @@ import { SharedModule } from '../Shared/shared.module';
     MaterialModule,
     CliantRoutingModule,
     SharedModule
+  ],
+  exports: [
+    HospitalModule
   ]
 })
 export class CliantModule { }

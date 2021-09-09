@@ -1,0 +1,16 @@
+[class*="form-"] {
+  margin: 1%;
+}
+
+.form-id {
+  width: 10%;
+}
+.form-brand-name {
+  width: 20%;
+}
+.form-generic-name {
+  width: 20%;
+}
+.form-quantity {
+  width: 10%;
+}

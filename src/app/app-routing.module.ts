@@ -6,9 +6,9 @@ import { AuthGuard } from './core/gurd/auth.guard';
 import { AdminGuard } from './core/gurd/admin.guard';
 
 const routes: Routes = [
+  {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
   {path: '', loadChildren: () => import('./cliant/cliant.module').then(m => m.CliantModule),
                                           canActivate: [AuthGuard]},
-  {path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule)},
   {path: 'admin',
       canActivate: [AuthGuard, AdminGuard],
       loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)},

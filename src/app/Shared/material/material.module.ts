@@ -35,6 +35,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+
 
 
 
@@ -76,7 +78,8 @@ const MaterialComponents = [
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
-  FlexLayoutModule
+  FlexLayoutModule,
+  MatMomentDateModule
 ];
 
 
@@ -86,6 +89,9 @@ const MaterialComponents = [
   imports: [
     MaterialComponents
   ],
-  exports: [MaterialComponents]
+  exports: [MaterialComponents],
+  providers: [
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+  ]
 })
 export class MaterialModule { }

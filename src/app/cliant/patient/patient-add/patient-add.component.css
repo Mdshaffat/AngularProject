@@ -1,0 +1,82 @@
+.loginForm {
+    padding-top: 0% !important ;
+    padding: 5%;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .loginForm {
+        width: 80%;
+        margin: auto;
+      }
+    .col-hospitalId{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-branchId{
+        width: 48%;
+        margin-left: 2%;
+    }
+    .col-firstName{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-lastName{
+        width: 48%;
+        margin-left: 2%;
+    }
+    .col-nid{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-mobileNumber{
+        width: 48%;
+        margin-left: 2%;
+    }
+    .col-address{
+        display: block;
+        margin: auto;
+    }
+    .col-doB{
+        width: 32%;
+        margin-right: 2%;
+    }
+    .col-age{
+        width: 32%;
+        margin-right: 2%;
+    }
+    .col-gender{
+        width: 32%;
+    }
+    .col-maritalStatus{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-bloodGroup{
+        width: 48%;
+        margin-left: 2%;
+    }
+    .col-note{
+        display: block;
+        margin: auto;
+    }
+    [class*="col-v-"] {
+        margin: 1%;
+        width: 23%;
+      }
+    
+}
+
+
+    /* For mobile phones: */
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+      }
+      .mat-form-field {
+          width: 100%;
+      }
+      .loginForm {
+          width: 100%;
+      }
+}

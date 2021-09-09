@@ -1,0 +1,76 @@
+<button mat-button [routerLink]="['/prescription']" >Back</button>
+<mat-icon style="cursor: pointer; float: right; padding: 3%;" (click)="printData()" >print</mat-icon>
+
+<body class="userdetails">
+
+    <mat-card class="example-card" id="print">
+        <mat-card-header>
+        <mat-card-title>{{prescriptionDetails.id}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="table">
+
+                <tr>
+                    <td>Hospital Name</td>
+                    <td>{{prescriptionDetails.hospitalName}}</td>
+                </tr>
+                <tr>
+                    <td>Visit Id</td>
+                    <td>{{prescriptionDetails.visitEntryId}}</td>
+                </tr>
+                <tr>
+                    <td>Physical State ID</td>
+                    <td>{{prescriptionDetails.physicalStateId}}</td>
+                </tr>
+                <tr>
+                    <td>Doctor Name </td>
+                    <td>{{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</td>
+                </tr>
+                <tr>
+                    <td>Patient ID </td>
+                    <td>{{prescriptionDetails.patientId}}</td>
+                </tr>
+                <tr>
+                    <td>Patient Name</td>
+                    <td>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}}</td>
+                </tr>
+
+                <tr>
+                    <td>Patient Mobile </td>
+                    <td>{{prescriptionDetails.patientMobile}}</td>
+                </tr>
+                <tr>
+                    <td>Doctors Observation</td>
+                    <td>{{prescriptionDetails.doctorsObservation}}</td>
+                </tr>
+                <tr>
+                    <td>Advice Medication</td>
+                    <td>{{prescriptionDetails.adviceMedication}}</td>
+                </tr>
+                
+                <tr>
+                    <td>Advice Test</td>
+                    <td>{{prescriptionDetails.adviceTest}}</td>
+                    </tr>
+                <tr>
+                    <td>Note</td>
+                    <td>{{prescriptionDetails.note}}</td>
+                </tr>
+                <tr>
+                    <td>Created On</td>
+                    <td>{{prescriptionDetails.createdOn | date:'dd-MM-YYY'}}</td>
+                </tr>
+                <tr>
+                    <td>Updated On</td>
+                    <td>{{prescriptionDetails.updatedOn | date:'dd-MM-YYY'}}</td>
+                </tr>
+            </table>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button [routerLink]="['../../list']" >Back</button>
+        <!-- <button mat-button [routerLink]="['../../edit/'+ prescriptionDetails.id]">Edit</button> -->
+        </mat-card-actions>
+    </mat-card>
+
+</body>
+

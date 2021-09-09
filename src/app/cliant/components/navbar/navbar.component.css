@@ -1,4 +1,18 @@
 .menu-spacer {
-    flex: 1 1 auto;
-  }
-  
+  flex: 1 1 auto;
+}
+.active{
+border-bottom: 5px solid white;
+}
+.mat-button:hover{
+background-color: white;
+color: #3f51b5 ;
+}
+.mat-button {
+  border: 1px solid white;
+  margin: 5px;
+}
+/* .router-link-active{
+  background-color: white;
+  color: #3f51b5 ;
+} */

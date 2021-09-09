@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { MaterialModule } from './material/material.module';
 
 const sharedModule = [
 ReactiveFormsModule,
@@ -20,6 +21,7 @@ FormsModule
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    MaterialModule
   ],
   exports: [
     sharedModule,

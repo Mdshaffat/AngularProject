@@ -1,0 +1,333 @@
+<div *ngIf="!id">
+<mat-form-field>
+    <mat-label color='red'>Enter Patient ID</mat-label>
+    <input type="number" #searchBar matInput value='searchValue' (keyup.enter)='getPatientHistory(searchBar.value)'>
+ </mat-form-field>&nbsp;
+ <button mat-raised-button color="primary" (click)='getPatientHistory(searchBar.value)'type='submit'>Submit</button>
+</div>
+
+<body class="userdetails" *ngIf="patientHistory">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Patient">
+            <mat-card class="example-card">
+                <mat-card-header>
+                <mat-card-title>{{patientHistory.patient.firstName}} {{patientHistory.patient.lastName}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <table class="table">
+                        <tr>
+                        <td>ID </td>
+                        <td>{{patientHistory.patient.id}}</td>
+                        </tr>
+                        <tr>
+                            <td>Hospital Name</td>
+                            <td>{{patientHistory.patient.hospitalName}}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>Branch Name </td>
+                            <td>{{patientHistory.patient.branchName}}</td>
+                            </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td>{{patientHistory.patient.age}}</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Number</td>
+                            <td>{{patientHistory.patient.mobileNumber}}</td>
+                        </tr>
+                        <tr>
+                            <td>Bate Of Birth</td>
+                            <td>{{patientHistory.patient.doB | date:'dd-MM-YYY'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>{{patientHistory.patient.gender}}</td>
+                        </tr>
+                        <tr>
+                            <td>Marital Status</td>
+                            <td>{{patientHistory.patient.maritalStatus}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address</td>
+                            <td>{{patientHistory.patient.address}}</td>
+                        </tr>
+                        
+                        <tr>
+                            <td>NID</td>
+                            <td>{{patientHistory.patient.nid}}</td>
+                            </tr>
+                        <tr>
+                            <td>Blood Group</td>
+                            <td>{{patientHistory.patient.bloodGroup}}</td>
+                        </tr>
+                        <tr>
+                            <td>Updated On</td>
+                            <td>{{patientHistory.patient.updatedOn | date:'dd-MM-YYY'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Updated By</td>
+                            <td>{{patientHistory.patient.updatedBy}}</td>
+                        </tr>
+                        <tr>
+                            <td>Created On</td>
+                            <td>{{patientHistory.patient.createdOn | date:'dd-MM-YYY'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Created By</td>
+                            <td>{{patientHistory.patient.createdBy}}</td>
+                        </tr>
+                        <tr>
+                            <td>Note</td>
+                            <td>{{patientHistory.patient.note}}</td>
+                        </tr>
+                        <tr>
+                            <td>Primary Member</td>
+                            <td><mat-checkbox style="margin-left: 10px;" disabled [checked] = patientHistory.patient.primaryMember></mat-checkbox></td>
+                        </tr>
+                        <tr>
+                            <td>Active</td>
+                            <td><mat-checkbox style="margin-left: 10px;" disabled [checked] = patientHistory.patient.isActive></mat-checkbox></td>
+                        </tr>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+        </mat-tab>
+        <mat-tab label="Patient Vital">
+            <ng-container *ngFor="let patientVital of patientHistory.patient.patientVitals">
+                <mat-card class="example-card">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-title> {{patientVital.updatedAt | date:'dd-MM-YYY'}} </mat-title>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <mat-card-content>
+                            <table class="table">
+                                <tr>
+                                <td>Height</td>
+                                <td>{{patientVital.height}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>{{patientVital.weight}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>BMI</td>
+                                    <td>{{patientVital.bmi}}</td>
+                                    </tr>
+                                <tr>
+                                    <td>Waist</td>
+                                    <td>{{patientVital.waist}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hip</td>
+                                    <td>{{patientVital.hip}}</td>
+                                </tr>
+                                <tr>
+                                    <td>SpO2</td>
+                                    <td>{{patientVital.spO2}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Pulse Rate</td>
+                                    <td>{{patientVital.pulseRate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Updated</td>
+                                    <td>{{patientVital.updatedAt | date:'dd-MM-YYY'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Updated By</td>
+                                    <td>{{patientVital.updatedBy}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hospital</td>
+                                    <td>{{patientVital.hospitalName}}</td>
+                                </tr>
+                            </table>
+                        </mat-card-content>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                </mat-card>
+            </ng-container>
+        </mat-tab>
+        <mat-tab label="Visit Status">
+            <ng-container *ngFor="let visitStatus of patientHistory.visitEntries">
+                <mat-card class="example-card">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-title> {{visitStatus.date | date:'dd-MM-YYY'}} </mat-title>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <mat-card-content>
+                            <table class="table">
+                                <tr>
+                                <td>Hospital Name</td>
+                                <td>{{visitStatus.hospitalName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Patient Name</td>
+                                    <td>{{visitStatus.patientFirstName}} {{visitStatus.patientLastName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Serial</td>
+                                    <td>{{visitStatus.serial}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Status</td>
+                                    <td>{{visitStatus.status}}</td>
+                                </tr>
+                            </table>
+                        </mat-card-content>  
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                </mat-card>
+            </ng-container>
+
+        </mat-tab>
+        <mat-tab label="Prescription">
+            <ng-container *ngFor="let prescription of patientHistory.prescription">
+                <mat-card class="example-card">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-title> {{prescription.updatedOn | date:'dd-MM-YYY'}} </mat-title>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <mat-card-content>
+                            <table class="table">
+                                <tr>
+                                <td>Hospital name</td>
+                                <td>{{prescription.hospitalName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Patient Name</td>
+                                    <td>{{prescription.patientFirstName}} {{prescription.patientLastName}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Doctor Name</td>
+                                    <td>{{prescription.doctorFirstName}} {{prescription.doctorLastName}}</td>
+                                    </tr>
+                                <tr>
+                                    <td>Visit Entry ID</td>
+                                    <td>{{prescription.visitEntryId}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Physical State Id</td>
+                                    <td>{{prescription.physicalStateId}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Doctor Observation</td>
+                                    <td>{{prescription.doctorsObservation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Advice Medication</td>
+                                    <td>{{prescription.adviceMedication}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Advice test</td>
+                                    <td>{{prescription.adviceTest}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Note</td>
+                                    <td>{{prescription.note}}</td>
+                                </tr>
+                            </table>
+                        </mat-card-content>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                </mat-card>
+            </ng-container>
+        </mat-tab>
+        <mat-tab label="Physical State">
+            <ng-container *ngFor="let physicalState of patientHistory.physicalState">
+                <mat-card class="example-card">
+                    <mat-accordion>
+                        <mat-expansion-panel (opened)="panelOpenState = true"
+                                             (closed)="panelOpenState = false">
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <mat-title>{{physicalState.editedOn | date:'dd-MM-YYY'}}</mat-title>
+                            </mat-panel-title>
+                          </mat-expansion-panel-header>
+                          <mat-card-content>
+                            <table class="table">
+                                <tr>
+                                    <td>Id</td>
+                                    <td>{{physicalState.id}}</td>
+                                    </tr>
+                                <tr>
+                                <td>Hospital Name</td>
+                                <td>{{physicalState.hospitalName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Patient Name</td>
+                                    <td>{{physicalState.patientFirstName}} {{physicalState.patientLastName}}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Visit Entry ID</td>
+                                    <td>{{physicalState.visitEntryId}}</td>
+                                    </tr>
+                                <tr>
+                                    <td>Blood Pressure</td>
+                                    <td>{{physicalState.bloodPressure}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Heart Rate</td>
+                                    <td>{{physicalState.heartRate}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Body Temparature</td>
+                                    <td>{{physicalState.bodyTemparature}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Weight</td>
+                                    <td>{{physicalState.weight}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Created On</td>
+                                    <td>{{physicalState.createdOn | date:'dd-MM-YYY'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Created By</td>
+                                    <td>{{physicalState.createdBy}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Updated</td>
+                                    <td>{{physicalState.editedOn | date:'dd-MM-YYY'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Updated By</td>
+                                    <td>{{physicalState.editedBy}}</td>
+                                </tr>
+                            </table>
+                        </mat-card-content>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                    <mat-card-header>
+                        <mat-title>  </mat-title>
+                    </mat-card-header>
+
+                    <mat-card-actions>
+                   
+                    </mat-card-actions>
+                </mat-card>
+            </ng-container>
+
+        </mat-tab>
+      </mat-tab-group>
+</body>
+<body class="userdetails" *ngIf="message">
+    {{message}}
+</body>
+

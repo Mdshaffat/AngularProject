@@ -13,6 +13,7 @@
           [routerLink]="menuItem.path"
           [routerLinkActive]="menuItem.class"
           >{{menuItem.title}}</a>
+          <button mat-button [routerLink]="['/']">Home</button>
           <a mat-button (click)="logout()" ><mat-icon>logout</mat-icon></a>
         </div>
       </mat-toolbar-row>
