@@ -72,11 +72,8 @@
               <td>Price: {{medicinePurchaseForm.controls['purchaseMedicineList'].controls[t].controls.quantity.value * medicinePurchaseForm.controls['purchaseMedicineList'].controls[t].controls.unitPrice.value}}</td>
           </tr>
         </table>
+
+        <!-- Calculate Total Price shows Here -->
     </div>
-    <div>
-      <p>TOTAL: {{ totalPrice }}</p>
-    </div>
-    
-    <button type="button" (click)="addMedicinetoLine()">Add</button>
     <button type="submit">Submit</button>
 </form>

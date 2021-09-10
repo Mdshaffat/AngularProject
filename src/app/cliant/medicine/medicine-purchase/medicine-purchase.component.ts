@@ -34,6 +34,8 @@ export class MedicinePurchaseComponent implements OnInit {
   medicines: IMedicine[];
   filteredOptions: Observable<any[]>;
   medicinePurchaseForm: FormGroup;
+
+
   constructor(private medicineService: MedicineService, private fb: FormBuilder) {
     this.filteredMedicine = this.brandName.valueChanges
     .pipe(
@@ -85,26 +87,6 @@ export class MedicinePurchaseComponent implements OnInit {
     });
     return lineItem;
   }
-
-  calculateTotal(): void {
-    if(this.medicinePurchaseForm.get('unitPrice').value === null && this.medicinePurchaseForm.get('quantity').value === null) {
-        this.medicinePurchaseForm.patchValue({
-            itemTotal: 0.00
-        });
-    } else if (this.medicinePurchaseForm.get('unitPrice').value === null) {
-        this.medicinePurchaseForm.patchValue({
-            itemTotal: 0.00
-        });
-    } else if (this.medicinePurchaseForm.get('quantity').value === null) {
-        this.medicinePurchaseForm.patchValue({
-            itemTotal: 0.00
-        });
-    } else {
-        this.medicinePurchaseForm.patchValue({
-            itemTotal: +(this.medicinePurchaseForm.get('unitPrice').value) * +(this.medicinePurchaseForm.get('quantity').value)
-        });
-    }
-}
 
   onSubmit(){
     console.log(this.medicinePurchaseForm.value);
