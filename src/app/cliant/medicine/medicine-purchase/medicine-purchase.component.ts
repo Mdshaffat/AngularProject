@@ -28,10 +28,6 @@ export class MedicinePurchaseComponent implements OnInit {
   filteredMedicine: Observable<IMedicine[]>;
   filteredMedicineByID: Observable<IMedicine[]>;
   filteredMedicineByGname: Observable<IMedicine[]>;
-  private destroyed$ = new Subject<void>();
-  linesChange = new EventEmitter<Medicine[]>();
-  lines: Medicine[];
-
   medicine: IMedicine[] = [
   ];
 
@@ -58,7 +54,6 @@ export class MedicinePurchaseComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMedicine();
     this.initForm();
-    this.onLinesChange(this.lines);
   }
   private initForm() {
     this.medicinePurchaseForm = new FormGroup({
@@ -66,15 +61,6 @@ export class MedicinePurchaseComponent implements OnInit {
       subtotal: new FormControl(),
       purchaseMedicineList: new FormArray([])
     });
-    this.medicinePurchaseForm.valueChanges.pipe(
-      takeUntil(this.destroyed$),
-      debounceTime(300)
-    ).subscribe(value => {
-       if (!this.medicinePurchaseForm.valid) {
-         return;
-       }
-       this.lines = (value.purchaseMedicineList);
-   });
   }
   get medicineArray() {
     return this.medicinePurchaseForm.controls.purchaseMedicineList as FormArray;
@@ -97,23 +83,9 @@ export class MedicinePurchaseComponent implements OnInit {
           quantity: new FormControl(this.quantity.value, Validators.required),
           itemTotal: new FormControl(),
     });
-    lineItem.valueChanges.pipe(
-      takeUntil(this.destroyed$)
-    ).subscribe(value => this.calcTotal(lineItem));
     return lineItem;
   }
-  calcTotal(line: FormGroup): void {
-    const quantity =  +line.controls.quantity.value;
-    const rate =      +line.controls.unitPrice.value;
-    line.controls.itemTotal.setValue((quantity * rate).toFixed(2), {emitEvent: false});
-  }
-  onLinesChange(lines: Medicine[]) {
-    const total = lines.map(line =>  {
-      console.log(line, +line.itemTotal);
-      return +line.itemTotal;
-    }).reduce((x, y) => x + y, 0);
-    this.totalPrice = total;
-  }
+
   calculateTotal(): void {
     if(this.medicinePurchaseForm.get('unitPrice').value === null && this.medicinePurchaseForm.get('quantity').value === null) {
         this.medicinePurchaseForm.patchValue({
