@@ -3,8 +3,9 @@ export interface IMedicinePurchase {
     medicineListWithQuantity: Medicine[];
 }
 export interface Medicine {
-    id: number;
-    brandName: string;
-    genericName: string;
+    medicineId: number;
+    medicineName: string;
+    unitPrice: string;
     quantity: number;
+    itemTotal: number;
 }

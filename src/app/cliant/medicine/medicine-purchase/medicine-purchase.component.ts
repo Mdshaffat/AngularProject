@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, map, startWith, takeUntil } from 'rxjs/operators';
 import { IMedicine } from 'src/app/core/models/Medicine/medicine';
-import { IMedicinePurchase } from 'src/app/core/models/Medicine/medicinePurchase';
+import { IMedicinePurchase, Medicine } from 'src/app/core/models/Medicine/medicinePurchase';
 import { MedicineService } from '../medicine.service';
 export interface State {
   flag: string;
@@ -17,15 +17,20 @@ export interface State {
   styleUrls: ['./medicine-purchase.component.css']
 })
 export class MedicinePurchaseComponent implements OnInit {
+  trial: any;
   medicinePurchase: IMedicinePurchase;
   medicineID = new FormControl();
   brandName = new FormControl();
   genericName = new FormControl();
   quantity = new FormControl();
   price = new FormControl();
+  totalPrice: number;
   filteredMedicine: Observable<IMedicine[]>;
   filteredMedicineByID: Observable<IMedicine[]>;
   filteredMedicineByGname: Observable<IMedicine[]>;
+  private destroyed$ = new Subject<void>();
+  linesChange = new EventEmitter<Medicine[]>();
+  lines: Medicine[];
 
   medicine: IMedicine[] = [
   ];
@@ -53,19 +58,23 @@ export class MedicinePurchaseComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMedicine();
     this.initForm();
+    this.onLinesChange(this.lines);
   }
   private initForm() {
     this.medicinePurchaseForm = new FormGroup({
       prescriptionId: new FormControl(),
-      purchaseMedicineList: new FormArray([
-        new FormGroup ({
-          medicineId: new FormControl(),
-          medicineName: new FormControl(),
-          unitPrice: new FormControl(),
-          quantity: new FormControl()
-        })
-      ])
+      subtotal: new FormControl(),
+      purchaseMedicineList: new FormArray([])
     });
+    this.medicinePurchaseForm.valueChanges.pipe(
+      takeUntil(this.destroyed$),
+      debounceTime(300)
+    ).subscribe(value => {
+       if (!this.medicinePurchaseForm.valid) {
+         return;
+       }
+       this.lines = (value.purchaseMedicineList);
+   });
   }
   get medicineArray() {
     return this.medicinePurchaseForm.controls.purchaseMedicineList as FormArray;
@@ -77,18 +86,54 @@ export class MedicinePurchaseComponent implements OnInit {
     this.price.setValue(value.unitPrice);
   }
   addMedicinetoLine(){
-    const purchasemedicine = new FormGroup({
+    this.medicineArray.push(this.getLineFormGroup());
+  }
+
+  getLineFormGroup(){
+    const lineItem = this.fb.group({
           medicineId: new FormControl(this.medicineID.value, Validators.required),
           medicineName: new FormControl(this.brandName.value, Validators.required),
           unitPrice: new FormControl(this.price.value),
           quantity: new FormControl(this.quantity.value, Validators.required),
+          itemTotal: new FormControl(),
     });
-    this.medicineArray.push(purchasemedicine);
+    lineItem.valueChanges.pipe(
+      takeUntil(this.destroyed$)
+    ).subscribe(value => this.calcTotal(lineItem));
+    return lineItem;
   }
+  calcTotal(line: FormGroup): void {
+    const quantity =  +line.controls.quantity.value;
+    const rate =      +line.controls.unitPrice.value;
+    line.controls.itemTotal.setValue((quantity * rate).toFixed(2), {emitEvent: false});
+  }
+  onLinesChange(lines: Medicine[]) {
+    const total = lines.map(line =>  {
+      console.log(line, +line.itemTotal);
+      return +line.itemTotal;
+    }).reduce((x, y) => x + y, 0);
+    this.totalPrice = total;
+  }
+  calculateTotal(): void {
+    if(this.medicinePurchaseForm.get('unitPrice').value === null && this.medicinePurchaseForm.get('quantity').value === null) {
+        this.medicinePurchaseForm.patchValue({
+            itemTotal: 0.00
+        });
+    } else if (this.medicinePurchaseForm.get('unitPrice').value === null) {
+        this.medicinePurchaseForm.patchValue({
+            itemTotal: 0.00
+        });
+    } else if (this.medicinePurchaseForm.get('quantity').value === null) {
+        this.medicinePurchaseForm.patchValue({
+            itemTotal: 0.00
+        });
+    } else {
+        this.medicinePurchaseForm.patchValue({
+            itemTotal: +(this.medicinePurchaseForm.get('unitPrice').value) * +(this.medicinePurchaseForm.get('quantity').value)
+        });
+    }
+}
 
-  deleteLesson(i: number){
-    // this.lesson.removeAt(i);
-  }
   onSubmit(){
     console.log(this.medicinePurchaseForm.value);
   }
