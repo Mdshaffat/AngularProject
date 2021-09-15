@@ -13,16 +13,20 @@
                   </mat-select>
                   <mat-error *ngIf="f.hospitalId.hasError('required')">Please choose Hospital</mat-error>
                 </mat-form-field>
-                <mat-form-field appearance="fill">
-                    <mat-label>Patient Id</mat-label>
-                    <mat-select formControlName="patientId" required>
-                      <mat-option>--</mat-option>
-                      <mat-option *ngFor="let patient of patients" [value]="patient.id">
-                        {{patient.id}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="f.patientId.hasError('required')">Please choose Hospital</mat-error>
-                  </mat-form-field>
+                <mat-form-field class="form-brand-name" appearance="fill">
+                  <mat-label>Brand Name</mat-label>
+                  <input type="text" matInput
+                                      aria-label="BrandName"
+                                      [matAutocomplete]="autobrandName"
+                                      [formControl]="patientsearch">
+                  <mat-autocomplete #autobrandName="matAutocomplete">
+                    <mat-option *ngFor="let medicine of filteredPatient | async">
+                      <span>{{medicine.id}}</span> |
+                      <span>{{medicine.firstName}}</span>|
+                      <span>{{medicine.mobileNumber}}</span>
+                    </mat-option>
+                  </mat-autocomplete>
+              </mat-form-field>
                   <mat-form-field appearance="fill">
                     <mat-label>Visit Entry Id</mat-label>
                     <mat-select formControlName="visitEntryId" required>
@@ -43,7 +47,7 @@
                     </mat-select>
                     <mat-error *ngIf="f.physicalStateId.hasError('required')">Please choose Hospital</mat-error>
                   </mat-form-field>
-              <mat-form-field>
+              <!-- <mat-form-field>
                   <mat-label>Doctor Observation</mat-label>
                   <input required formControlName="doctorsObservation" matInput >
                   <mat-error *ngIf="f.doctorsObservation.hasError('required')">Required</mat-error>
@@ -62,7 +66,7 @@
                   <mat-label>Note</mat-label>
                   <input required formControlName="note" matInput>
                   <mat-error *ngIf="f.note.hasError('required')">Required</mat-error>
-              </mat-form-field><br>
+              </mat-form-field><br> -->
                   <br/><button mat-raised-button color="primary" type="submit">ADD</button>
               
           </form>    

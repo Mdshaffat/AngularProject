@@ -16,6 +16,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/physicalstate', title: 'PHYSICAL STATE',  icon: 'physicalstate', class: 'router-link-active' },
   { path: '/medicine', title: 'MEDICINE',  icon: 'physicalstate', class: 'router-link-active' },
   { path: '/medicine/purchase', title: 'PURCHASE MEDICINE',  icon: 'physicalstate', class: 'router-link-active' },
+  { path: '/visitentries', title: 'VISIT ENTRIES',  icon: 'physicalstate', class: 'router-link-active' },
 ];
 
 @Component({

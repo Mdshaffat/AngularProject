@@ -1,3 +1,109 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+	margin: 0;
+	padding: 0;
+}
+
+div {
+	width: 100%;
+}
+
+h3 {
+	padding: 5px;
+	margin: 5px;
+}
+
+textarea {
+	padding: 5px;
+	margin: 5px 0 20px 5px;
+	width: 93%;
+	height: 90px;
+}
+
+div:nth-child(odd) {
+	background-color: rgb(246, 248, 246);
+}
+
+div:nth-child(even) {
+	background-color: rgb(245, 248, 247);
+}
+
+#container {
+	width: 100%;
+    
+}
+
+#head {
+	padding: 20px 0px 20px 0px;
+}
+
+#head > h1,
+#head > p,
+#head > h2 {
+	text-align: center;
+}
+
+#nav {
+	width: 100%;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 7px 0 7px 0;
+}
+
+#nav > p:first-child {
+	float: left;
+	margin-left: 20px;
+}
+
+#nav > p:last-child {
+	float: right;
+	margin-right: 200px;
+}
+
+#nav::after {
+	content: '';
+	clear: both;
+	display: table;
+}
+
+#content {
+	height: 800px;
+}
+
+#aside {
+	width: 30%;
+	height: 100%;
+	box-sizing: border-box;
+	float: left;
+	border-right: 1px solid black;
+}
+
+#main {
+	width: 70%;
+	height: 100%;
+	box-sizing: border-box;
+	float: left;
+	position: relative;
+}
+.rel {
+	position: absolute;
+	bottom: 25px;
+}
+
+.rel > textarea {
+	margin: 10px;
+	padding: 0;
+	box-sizing: border-box;
+	width: 95%;
+	height: 90px;
+}
 
 .mat-form-field {
     width: 330px;
@@ -22,4 +128,8 @@ button {
     width: 330px;
     margin: 5px;
     padding: 10px;
+}
+#total-Area{
+    height: 100%;
+    width: 100%;
 }

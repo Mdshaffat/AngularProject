@@ -41,9 +41,10 @@ export class PrescriptionService {
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', `Bearer ${token}`);
       return this.http.post(this.baseUrl + 'prescription', values,  {headers}).pipe(
-        map((response: any) => {
+        map((response: IPrescription) => {
           if (response) {
-            console.log(response.message);
+            this.prescription = response;
+            return response;
           }
         })
       );

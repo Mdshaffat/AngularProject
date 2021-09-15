@@ -39,7 +39,7 @@ export class VistEntryAddComponent implements OnInit {
   createVisitEntryAddForm(){
     this.visitEntryAddForm = this.fb.group({
       hospitalId: ['', Validators.required],
-      date: ['', Validators.required],
+      date: [new Date(), Validators.required],
       patientId: ['', Validators.required],
       serial: ['', Validators.required],
       status: ['', Validators.required]

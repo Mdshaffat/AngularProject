@@ -40,7 +40,7 @@ export class MedicinePurchaseComponent implements OnInit {
     this.filteredMedicine = this.brandName.valueChanges
     .pipe(
       startWith(''),
-      map(state => state ? this._filtermedicine(state) : this.medicine.slice())
+      map(state => state ? this._filtermedicineByBName(state) : this.medicine.slice())
     );
     this.filteredMedicineByGname = this.genericName.valueChanges
     .pipe(
@@ -96,7 +96,7 @@ export class MedicinePurchaseComponent implements OnInit {
       this.medicine = value;
     });
   }
-  private _filtermedicine(value: string): IMedicine[] {
+  private _filtermedicineByBName(value: string): IMedicine[] {
     const filterValue = value.toLowerCase();
 
     return this.medicine.filter(state => state.brandName.toLowerCase().includes(filterValue));

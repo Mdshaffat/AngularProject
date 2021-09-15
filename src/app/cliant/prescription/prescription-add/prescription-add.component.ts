@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { VisitEntryService } from 'src/app/admin/visit-entry/visit-entry.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
@@ -21,10 +23,14 @@ import { PrescriptionService } from '../prescription.service';
 export class PrescriptionAddComponent implements OnInit {
 
   prescriptionAddForm: FormGroup = new FormGroup({});
+  prescription: IPrescription;
   hospitals: IHospital[];
-  patients: IPatient[];
+  patients: IPatient[] = [
+  ];
   physicalStates: IPhysicalState[];
   visitEntries: IVisitEntry[];
+  filteredPatient: Observable<IPatient[]>;
+  patientsearch = new FormControl();
   constructor(private toastr: ToastrService,
               private fb: FormBuilder,
               private router: Router,
@@ -32,7 +38,13 @@ export class PrescriptionAddComponent implements OnInit {
               private physicalStateService: PhysicalStateService,
               private hospitalService: HospitalService,
               private visitEntryService: VisitEntryService,
-              private patientService: PatientService) { }
+              private patientService: PatientService) {
+                this.filteredPatient = this.patientsearch.valueChanges
+                  .pipe(
+                    startWith(''),
+                    map(p => p ? this._filterPatient(p) : this.patients.slice())
+                        );
+              }
 
   ngOnInit(): void {
     this.loadHospital();
@@ -45,13 +57,13 @@ export class PrescriptionAddComponent implements OnInit {
   createPrescriptionAddForm(){
     this.prescriptionAddForm = this.fb.group({
       hospitalId: ['', Validators.required],
-      patientId: ['', Validators.required],
+      patientId: [1, Validators.required],
       visitEntryId: ['', Validators.required],
       physicalStateId: ['', Validators.required],
-      doctorsObservation: ['', Validators.required],
-      adviceMedication: ['', Validators.required],
-      adviceTest: ['', Validators.required],
-      note: ['', Validators.required]
+      // doctorsObservation: ['', Validators.required],
+      // adviceMedication: ['', Validators.required],
+      // adviceTest: ['', Validators.required],
+      // note: ['', Validators.required]
     });
   }
 
@@ -80,11 +92,23 @@ export class PrescriptionAddComponent implements OnInit {
   }
   onSubmit(){
     this.prescriptionService.addPrescription(this.prescriptionAddForm.value).subscribe(response => {
+      this.prescription = response;
       this.toastr.success( 'Added' , 'Success' );
-      this.router.navigateByUrl('/prescription/list').then(() => {location.reload(); } );
+      this.router.navigateByUrl('/prescription/edit/' + response.id).then(() => {location.reload(); } );
     }, error => {
       console.log(error);
       this.toastr.error('Error to Create.Please check your connection and try again');
     });
+  }
+
+  private _filterPatient(value: string): IPatient[] {
+    const filterValue = value.toLowerCase();
+    const result = this.patients.filter(
+      (p) =>
+        p.firstName?.toLowerCase().includes(filterValue) ||
+        p.lastName?.toLowerCase().includes(filterValue) ||
+        p.mobileNumber?.toLowerCase().includes(filterValue)
+    );
+    return result;
   }
 }

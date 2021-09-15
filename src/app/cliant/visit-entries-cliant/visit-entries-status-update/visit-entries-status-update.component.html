@@ -1,0 +1,19 @@
+<body>
+    <button mat-button (click)="closeDialog()" >Close</button>
+      <div class="loginForm">
+          <form [formGroup]="visitEntryStatusUpdateForm">
+              <mat-form-field>
+                  <mat-label>Status</mat-label>
+                  <mat-select formControlName="status">
+                    <mat-option value="Waiting">Waiting</mat-option>
+                    <mat-option value="Cancel">Cancel</mat-option>
+                    <mat-option value="Done">Done</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="f.status.hasError('required')">Required</mat-error>
+              </mat-form-field><br>  
+              <div mat-dialog-actions>
+                <button mat-button (click)="doAction()" [disabled]="!visitEntryStatusUpdateForm.valid">Update</button>
+              </div>
+          </form>    
+      </div>
+  </body>

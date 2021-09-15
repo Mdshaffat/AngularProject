@@ -67,8 +67,8 @@
 
               <td><input type="text" formControlName="medicineId" placeholder="ID" /></td>
               <td><input type="text" formControlName="medicineName" placeholder="Name" /></td>
-              <td><input type="text" placeholder="quantity" formControlName="quantity" (input)="calculateTotal()"></td>
-              <td><input type="text" placeholder="Item Total" formControlName="itemTotal" (input)="calculateTotal()"></td>
+              <td><input type="text" placeholder="quantity" formControlName="quantity" ></td>
+              <td><input type="text" placeholder="Item Total" formControlName="itemTotal" ></td>
               <td>Price: {{medicinePurchaseForm.controls['purchaseMedicineList'].controls[t].controls.quantity.value * medicinePurchaseForm.controls['purchaseMedicineList'].controls[t].controls.unitPrice.value}}</td>
           </tr>
         </table>
