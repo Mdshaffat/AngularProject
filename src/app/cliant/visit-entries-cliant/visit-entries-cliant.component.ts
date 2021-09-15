@@ -14,10 +14,10 @@ export class VisitEntriesCliantComponent implements OnInit {
   ngOnInit(): void {
   }
   allVisit(){
-    this.router.navigateByUrl('/visitentries/list').then(() => {location.reload(); } );
+    this.router.navigateByUrl('/visitentries/list');
   }
   currentVisit(){
-    this.router.navigateByUrl('/visitentries/todayslist').then(() => {location.reload(); } );
+    this.router.navigateByUrl('/visitentries/todayslist');
   }
 
 }
