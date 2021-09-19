@@ -9,14 +9,7 @@
         width: 80%;
         margin: auto;
       }
-    .col-hospitalId{
-        width: 48%;
-        margin-right: 2%;
-    }
-    .col-branchId{
-        width: 48%;
-        margin-left: 2%;
-    }
+
     .col-firstName{
         width: 48%;
         margin-right: 2%;
@@ -25,21 +18,30 @@
         width: 48%;
         margin-left: 2%;
     }
-    .col-nid{
+    .col-hospitalId{
         width: 48%;
         margin-right: 2%;
     }
-    .col-mobileNumber{
+    .col-branchId{
         width: 48%;
-        margin-left: 2%;
+        margin-right: 2%;
     }
     .col-address{
         display: block;
         margin: auto;
     }
-    .col-doB{
-        width: 32%;
+    .col-nid{
+        width: 48%;
+        margin-left: 2%;
+    }
+
+    .col-mobileNumber{
+        width: 58%;
         margin-right: 2%;
+    }
+    .col-doB{
+        width: 38%;
+        margin-left: 2%;
     }
     .col-age{
         width: 32%;
@@ -47,14 +49,14 @@
     }
     .col-gender{
         width: 32%;
+        margin-right: 2%;
     }
     .col-maritalStatus{
-        width: 48%;
+        width: 32%;
         margin-right: 2%;
     }
     .col-bloodGroup{
-        width: 48%;
-        margin-left: 2%;
+        width: 32%;
     }
     .col-note{
         display: block;
@@ -80,3 +82,6 @@
           width: 100%;
       }
 }
+td {
+    padding-right: 8px;
+  }

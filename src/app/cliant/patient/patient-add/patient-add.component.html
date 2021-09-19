@@ -2,26 +2,6 @@
     <button mat-button [routerLink]="['/patient']" >Back</button>
       <div class="loginForm">
           <form [formGroup]="patientAddForm" (ngSubmit)="onSubmit()">
-            <mat-form-field class="col-hospitalId" appearance="fill">
-                <mat-label>Hospital</mat-label>
-                <mat-select formControlName="hospitalId" required>
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let hospital of hospitals" [value]="hospital.id">
-                    {{hospital.name}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="f.hospitalId.hasError('required')">Please choose Hospital</mat-error>
-              </mat-form-field>
-              <mat-form-field class="col-branchId" appearance="fill">
-                <mat-label>Branch</mat-label>
-                <mat-select formControlName="branchId" required>
-                  <mat-option>--</mat-option>
-                  <mat-option *ngFor="let branch of branches" [value]="branch.id">
-                    {{branch.name}}
-                  </mat-option>
-                </mat-select>
-                <mat-error *ngIf="f.branchId.hasError('required')">Please choose Branch</mat-error>
-              </mat-form-field>
               <mat-form-field class="col-firstName" appearance="fill">
                   <mat-label>First Name</mat-label>
                   <input required formControlName="firstName" matInput>
@@ -29,24 +9,34 @@
               </mat-form-field>
               <mat-form-field class="col-lastName" appearance="fill">
                 <mat-label>Last Name</mat-label>
-                <input required formControlName="lastName" matInput>
+                <input formControlName="lastName" matInput>
                 <mat-error *ngIf="f.lastName.hasError('required')">Required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-branchId" appearance="fill">
+              <mat-label>Branch</mat-label>
+              <mat-select formControlName="branchId" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let branch of branches" [value]="branch.id">
+                  {{branch.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.branchId.hasError('required')">Please choose Branch</mat-error>
             </mat-form-field>
               <mat-form-field class="col-nid" appearance="fill">
                 <mat-label>NID</mat-label>
-                <input required formControlName="nid" matInput >
+                <input  formControlName="nid" matInput >
                 <mat-error *ngIf="f.nid.hasError('required')">Required</mat-error>
             </mat-form-field>
+            <mat-form-field class="col-address" appearance="fill">
+              <mat-label>Address</mat-label>
+              <input style="overflow: scroll;" formControlName="address" matInput>
+              <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
+          </mat-form-field>
               <mat-form-field class="col-mobileNumber" appearance="fill">
                   <mat-label>Mobile Number</mat-label>
-                  <input required formControlName="mobileNumber" matInput >
+                  <input formControlName="mobileNumber" matInput >
                   <mat-error *ngIf="f.mobileNumber.hasError('required')">Required</mat-error>
               </mat-form-field>
-              <mat-form-field class="col-address" appearance="fill">
-                <mat-label>Address</mat-label>
-                <input style="overflow: scroll;" required formControlName="address" matInput>
-                <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
-            </mat-form-field>
               <mat-form-field class="col-doB" appearance="fill">
                 <mat-label>Date Of Birth</mat-label>
                 <input formControlName="doB" matInput [matDatepicker]="picker" required>
@@ -54,11 +44,6 @@
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="f.doB.hasError('required')">Please choose a Date</mat-error>
               </mat-form-field>
-              <mat-form-field class="col-age" appearance="fill">
-                <mat-label>Age</mat-label>
-                <input required formControlName="age" matInput >
-                <mat-error *ngIf="f.age.hasError('required')">Required</mat-error>
-            </mat-form-field>
             <mat-form-field class="col-gender" appearance="fill">
                 <mat-label>Gender</mat-label>
                 <mat-select formControlName="gender" required>
@@ -71,7 +56,7 @@
             </mat-form-field>
             <mat-form-field class="col-maritalStatus" appearance="fill">
                 <mat-label>Marital Status</mat-label>
-                <mat-select formControlName="maritalStatus" required>
+                <mat-select formControlName="maritalStatus">
                   <mat-option>--</mat-option>
                   <mat-option value="Married">Married</mat-option>
                   <mat-option value="Single">Single</mat-option>
@@ -83,7 +68,7 @@
             </mat-form-field>
             <mat-form-field class="col-bloodGroup" appearance="fill">
                 <mat-label>Blood Group</mat-label>
-                <mat-select formControlName="bloodGroup" required>
+                <mat-select formControlName="bloodGroup">
                   <mat-option>--</mat-option>
                   <mat-option value="A RhD positive (A+)">A RhD positive (A+)</mat-option>
                   <mat-option value="A RhD negative (A-)">A RhD negative (A-)</mat-option>
@@ -96,7 +81,7 @@
             </mat-form-field>
             <mat-form-field class="col-note" appearance="fill">
               <mat-label>Note</mat-label>
-              <input required formControlName="note" matInput >
+              <input formControlName="note" matInput >
               <mat-error *ngIf="f.note.hasError('required')">Required</mat-error>
           </mat-form-field>
 <!-- checkBox -->
@@ -105,40 +90,42 @@
 
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <!-- Patient Vital -->
-<h2>Vital</h2>
-            <mat-form-field class="col-v-height" appearance="fill">
-                <mat-label>Height</mat-label>
-                <input required formControlName="height" matInput >
-                <mat-error *ngIf="f.height.hasError('required')">Required</mat-error>
-            </mat-form-field>
-            <mat-form-field class="col-v-weight" appearance="fill">
+      <h2>Vital</h2>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <p>Height: </p>
+         </td>
+          <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Feet</mat-label>
+              <input formControlName="height" matInput >
+              <mat-error *ngIf="f.height.hasError('required')">Required</mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+            <mat-form-field appearance="fill">
+              <mat-label>Inches</mat-label>
+              <input formControlName="height" matInput >
+              <mat-error *ngIf="f.height.hasError('required')">Required</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+
+          <mat-form-field class="col-v-weight" appearance="fill">
               <mat-label>Weight</mat-label>
-              <input required formControlName="weight" matInput>
+              <input formControlName="weight" matInput>
               <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
           </mat-form-field>
-          <mat-form-field class="col-v-bmi" appearance="fill">
-              <mat-label>BMI</mat-label>
-              <input type="number" required formControlName="bmi" matInput >
-              <mat-error *ngIf="f.bmi.hasError('required')">Required</mat-error>
-          </mat-form-field>
-          <mat-form-field class="col-v-waist" appearance="fill">
-              <mat-label>Waist</mat-label>
-              <input required formControlName="waist" matInput >
-              <mat-error *ngIf="f.waist.hasError('required')">Required</mat-error>
-          </mat-form-field>
-          <mat-form-field class="col-v-hip" appearance="fill">
-            <mat-label>Hip</mat-label>
-            <input required formControlName="hip" matInput>
-            <mat-error *ngIf="f.hip.hasError('required')">Required</mat-error>
-        </mat-form-field>
         <mat-form-field class="col-v-spO2" appearance="fill">
             <mat-label>SpO2</mat-label>
-            <input type="number" required formControlName="spO2" matInput >
+            <input type="number" formControlName="spO2" matInput >
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
         <mat-form-field class="col-v-pulseRate" appearance="fill">
             <mat-label>Pulse Rate</mat-label>
-            <input type="number" required formControlName="pulseRate" matInput >
+            <input type="number" formControlName="pulseRate" matInput >
             <mat-error *ngIf="f.pulseRate.hasError('required')">Required</mat-error>
         </mat-form-field>
         <!-- checkBox -->

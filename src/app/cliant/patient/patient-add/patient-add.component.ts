@@ -32,28 +32,24 @@ export class PatientAddComponent implements OnInit {
 
   createPatientAddForm(){
     this.patientAddForm = this.fb.group({
-      hospitalId: ['', Validators.required],
       firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      age: ['', Validators.required],
-      mobileNumber: ['', Validators.required],
+      lastName: [''],
+      mobileNumber: [],
       doB: ['', Validators.required],
       gender: ['', Validators.required],
-      maritalStatus: ['', Validators.required],
-      primaryMember: [true, Validators.required],
-      address: ['', Validators.required],
-      nid: ['', Validators.required],
-      bloodGroup: ['', Validators.required],
+      maritalStatus: [],
+      primaryMember: [true],
+      address: [],
+      nid: [''],
+      bloodGroup: [''],
       branchId: ['', Validators.required],
-      isActive: [true, Validators.required],
-      note: ['', Validators.required],
-      height: ['', Validators.required],
-      weight: ['', Validators.required],
-      bmi: ['', Validators.required],
-      waist: ['', Validators.required],
-      hip: ['', Validators.required],
-      spO2: ['', Validators.required],
-      pulseRate: ['', Validators.required]
+      isActive: [true],
+      note: [''],
+      height: [''],
+      weight: [''],
+      bmi: [''],
+      spO2: [''],
+      pulseRate: ['']
     });
   }
 
