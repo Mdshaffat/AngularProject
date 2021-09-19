@@ -20,7 +20,7 @@ export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['HospitalName', 'Date', 'FirstName', 'LastName', 'Serial',
                                  'Status', 'EditStatus', 'Action'];
   visitEntries: IVisitEntry[] = [];
-  dataSource = new MatTableDataSource<IVisitEntry>(this.visitEntries);
+  dataSource = new MatTableDataSource(this.visitEntries);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private visitEntryService: VisitEntriesCliantService,
@@ -28,6 +28,7 @@ export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
               public dialog: MatDialog) { }
   ngOnInit(): void {
     this.getVisitEntryList();
+    this.dataSource = new MatTableDataSource(this.visitEntries);
     this.dataSource.paginator = this.paginator;
   }
   ngAfterViewInit() {
@@ -42,22 +43,13 @@ export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
       console.log(error);
     });
   }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-  // For Add And Updade Dialog Box
-  // Add visit Entry
-  openVisitEntryAddDialog() {
-    const dialogBoxWithData = this.dialog.open(VisitEntriesAddComponent, {
-      width: '80%',
-    });
-    dialogBoxWithData.afterClosed().subscribe(result => {
-        this.VisitEntryRowData(result.data);
-    });
   }
 
   VisitEntryRowData(data: any){
@@ -71,28 +63,13 @@ export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
       });
     }
 
-    // Update VisitEntry
-    openUpdateVisitEntryDialog(obj: any) {
-      const dialogBoxWithData = this.dialog.open(VisitEntriesEditComponent, {
-        width: '80%',
-        data: obj
+    updateVisitEntryRowData(){
+      this.visitEntryService.getAllCurrentDayVisitEntry().subscribe(response => {
+        this.visitEntries = response;
+        this.dataSource = new MatTableDataSource(response);
+      }, error => {
+        console.log(error);
       });
-      dialogBoxWithData.afterClosed().subscribe(result => {
-          this.updateVisitEntryRowData(result.data);
-          console.log(result.data);
-      });
-    }
-
-    updateVisitEntryRowData(data: any){
-        this.visitEntryService.updateVisitEntry(data).subscribe(response => {
-          this.toastr.success('Updated');
-          location.reload();
-          console.log(response);
-        }, error => {
-          console.log(error);
-          location.reload();
-          this.toastr.error('Error to Update.');
-        });
       }
 
      // Update VistEntry Status

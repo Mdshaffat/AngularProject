@@ -56,10 +56,8 @@ export class PrescriptionAddComponent implements OnInit {
 
   createPrescriptionAddForm(){
     this.prescriptionAddForm = this.fb.group({
-      hospitalId: ['', Validators.required],
-      patientId: [1, Validators.required],
       visitEntryId: ['', Validators.required],
-      physicalStateId: ['', Validators.required],
+      physicalStateId: [],
       // doctorsObservation: ['', Validators.required],
       // adviceMedication: ['', Validators.required],
       // adviceTest: ['', Validators.required],
@@ -81,7 +79,7 @@ export class PrescriptionAddComponent implements OnInit {
     });
   }
   loadVisitEntries(){
-    this.visitEntryService.getAllVisitEntry().subscribe(response => {
+    this.visitEntryService.getAllCurrentDayVisitEntry().subscribe(response => {
       this.visitEntries = response;
     });
   }

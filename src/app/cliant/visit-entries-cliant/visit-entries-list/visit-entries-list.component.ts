@@ -26,14 +26,15 @@ export class VisitEntriesListComponent implements OnInit  , AfterViewInit {
               private toastr: ToastrService,
               public dialog: MatDialog) { }
   ngOnInit(): void {
-    this.getPatientList();
+    this.getVisitEnties();
+    this.dataSource = new MatTableDataSource<IVisitEntry>(this.visitEntries);
     this.dataSource.paginator = this.paginator;
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  getPatientList(){
+  getVisitEnties(){
     this.visitEntryService.getAllVisitEntry().subscribe(response => {
       this.visitEntries = response;
       this.dataSource.data = response;

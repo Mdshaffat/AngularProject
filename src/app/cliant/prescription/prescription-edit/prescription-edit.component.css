@@ -92,9 +92,23 @@ div:nth-child(even) {
 	float: left;
 	position: relative;
 }
+#main > textarea {
+	padding: 0;
+	box-sizing: border-box;
+	width: 95%;
+	height: 60%;
+}
+
+#aside > textarea {
+	margin: 10px;
+	padding: 0;
+	box-sizing: border-box;
+	width: 95%;
+	height: 35%;
+}
 .rel {
-	position: absolute;
 	bottom: 25px;
+
 }
 
 .rel > textarea {
@@ -102,34 +116,14 @@ div:nth-child(even) {
 	padding: 0;
 	box-sizing: border-box;
 	width: 95%;
-	height: 90px;
-}
-
-.mat-form-field {
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
-}
-.loginForm {
-    height: 100%;
-    align-items: center;
-    padding-bottom: 40px;  
-    width: 100%;
-    max-width: 360px;
-    margin: auto;
+	height: 70px;
 }
 button {
     width: 330px;
     margin: 5px;
     padding: 10px;
     align-items: center;
-}
-.active{
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
-}
-#total-Area{
-    height: 100%;
-    width: 100%;
+	float: right;
+	margin-right: 40px;
+
 }

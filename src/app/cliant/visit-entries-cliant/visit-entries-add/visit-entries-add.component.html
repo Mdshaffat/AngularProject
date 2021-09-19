@@ -1,5 +1,5 @@
 <body>
-    <button mat-button>Close</button>
+  <button mat-button [routerLink]="['../list']" >Back</button>
       <div class="loginForm">
           <form [formGroup]="visitEntryAddForm" (ngSubmit)="onSubmit()">
             <mat-form-field class="form-brand-name" appearance="fill">

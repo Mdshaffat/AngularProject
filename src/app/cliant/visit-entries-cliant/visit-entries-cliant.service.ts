@@ -19,9 +19,6 @@ export class VisitEntriesCliantService {visitEntries: IVisitEntry[] = [];
       const token = localStorage.getItem('hotpital_user_token');
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', `Bearer ${token}`);
-      if (this.visitEntries.length > 0) {
-        return of(this.visitEntries);
-      }
       return this.http.get<IVisitEntry[]>(this.baseUrl + 'visitentry/getvisitentricliant', {headers}).pipe(
         map(response => {
           this.visitEntries = response;
@@ -40,9 +37,6 @@ export class VisitEntriesCliantService {visitEntries: IVisitEntry[] = [];
       const token = localStorage.getItem('hotpital_user_token');
       let headers = new HttpHeaders();
       headers = headers.set('Authorization', `Bearer ${token}`);
-      if (this.visitEntries.length > 0) {
-        return of(this.visitEntries);
-      }
       return this.http.get<IVisitEntry[]>(this.baseUrl + 'VisitEntry/todaysVisitcliant', {headers}).pipe(
         map(response => {
           this.visitEntries = response;

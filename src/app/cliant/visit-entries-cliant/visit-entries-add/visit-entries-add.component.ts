@@ -33,14 +33,14 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
               private router: Router,
               private visitEntryService: VisitEntriesCliantService,
               private hospitalService: HospitalService,
-              private patientService: PatientService) {}
-  ngAfterViewInit(): void {
-    this.filteredPatient = this.patientsearch.valueChanges
+              private patientService: PatientService) {
+                this.filteredPatient = this.patientsearch.valueChanges
                 .pipe(
                   startWith(''),
                   map(p => p ? this._filterPatient(p) : this.patients.slice())
                       );
-  }
+              }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
     this.loadAllHospital();
@@ -65,7 +65,7 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
 
   onSelectPatient(patient: IPatient){
     this.visitEntryAddForm.patchValue({
-      date: moment(),
+      date: new Date(),
       patientId: patient.id,
       serial: this.lastSerialNumber
     });
