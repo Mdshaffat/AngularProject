@@ -93,67 +93,6 @@
                 </mat-card-content>
             </mat-card>
         </mat-tab>
-        <mat-tab label="Patient Vital">
-            <ng-container *ngFor="let patientVital of patientHistory.patient.patientVitals">
-                <mat-card class="example-card">
-                    <mat-accordion>
-                        <mat-expansion-panel (opened)="panelOpenState = true"
-                                             (closed)="panelOpenState = false">
-                          <mat-expansion-panel-header>
-                            <mat-panel-title>
-                                <mat-title> {{patientVital.updatedAt | date:'dd-MM-YYY'}} </mat-title>
-                            </mat-panel-title>
-                          </mat-expansion-panel-header>
-                          <mat-card-content>
-                            <table class="table">
-                                <tr>
-                                <td>Height</td>
-                                <td>{{patientVital.height}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Weight</td>
-                                    <td>{{patientVital.weight}}</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>BMI</td>
-                                    <td>{{patientVital.bmi}}</td>
-                                    </tr>
-                                <tr>
-                                    <td>Waist</td>
-                                    <td>{{patientVital.waist}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Hip</td>
-                                    <td>{{patientVital.hip}}</td>
-                                </tr>
-                                <tr>
-                                    <td>SpO2</td>
-                                    <td>{{patientVital.spO2}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Pulse Rate</td>
-                                    <td>{{patientVital.pulseRate}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Last Updated</td>
-                                    <td>{{patientVital.updatedAt | date:'dd-MM-YYY'}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Updated By</td>
-                                    <td>{{patientVital.updatedBy}}</td>
-                                </tr>
-                                <tr>
-                                    <td>Hospital</td>
-                                    <td>{{patientVital.hospitalName}}</td>
-                                </tr>
-                            </table>
-                        </mat-card-content>
-                        </mat-expansion-panel>
-                      </mat-accordion>
-                </mat-card>
-            </ng-container>
-        </mat-tab>
         <mat-tab label="Visit Status">
             <ng-container *ngFor="let visitStatus of patientHistory.visitEntries">
                 <mat-card class="example-card">

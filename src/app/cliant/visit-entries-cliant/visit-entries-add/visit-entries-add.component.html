@@ -23,9 +23,9 @@
             </mat-form-field>
               <mat-form-field class="col-doB" appearance="fill">
                 <mat-label>Date</mat-label>
-                <input formControlName="date" matInput [matDatepicker]="picker" required>
+                <input formControlName="date" matInput [matDatepicker]="picker" (dateChange)="loadSerialByDate()" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <mat-datepicker #picker  ></mat-datepicker>
                 <mat-error *ngIf="f.date.hasError('required')">Please choose a Date</mat-error>
               </mat-form-field>
               <mat-form-field>

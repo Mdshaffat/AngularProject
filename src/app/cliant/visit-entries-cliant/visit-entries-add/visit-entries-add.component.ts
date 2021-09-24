@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { AfterViewInit, Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -20,7 +21,7 @@ import { VisitEntriesCliantService } from '../visit-entries-cliant.service';
   styleUrls: ['./visit-entries-add.component.css']
 })
 export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
-  patients: IPatient [];
+  patients: IPatient [] = [];
   filteredPatient: Observable<IPatient[]>;
   visitEntries: IVisitEntry [];
   hospitals: IHospital [];
@@ -28,12 +29,16 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
   patientsearch = new FormControl();
   visitEntryAddForm: FormGroup = new FormGroup({});
 
+  date = new Date();
+  latestdate = this.datepipe.transform(this.date, 'yyyy-MM-dd');
+
   constructor(private toastr: ToastrService,
               private fb: FormBuilder,
               private router: Router,
               private visitEntryService: VisitEntriesCliantService,
               private hospitalService: HospitalService,
-              private patientService: PatientService) {
+              private patientService: PatientService,
+              public datepipe: DatePipe) {
                 this.filteredPatient = this.patientsearch.valueChanges
                 .pipe(
                   startWith(''),
@@ -45,6 +50,7 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     this.loadAllHospital();
     this.loadAllPatient();
+    // this.loadDateWiseSerialNumber(this.latestdate);
     this.loadLastSerialNumber();
     this.createVisitEntryAddForm();
     // this.f.serial.patchValue(this.lastSerialNumber);
@@ -64,13 +70,15 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
   }
 
   onSelectPatient(patient: IPatient){
-    this.visitEntryAddForm.patchValue({
+      this.visitEntryService.getlastvisitnumber().subscribe(response => {
+        this.lastSerialNumber = response;
+      });
+      this.visitEntryAddForm.patchValue({
       date: new Date(),
       patientId: patient.id,
       serial: this.lastSerialNumber
     });
-    this.patientsearch.patchValue(patient.firstName);
-   // this.f.serial.setValue(this.lastSerialNumber);
+      this.patientsearch.patchValue(patient.firstName);
   }
 
   loadAllPatient(){
@@ -88,8 +96,21 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
       this.lastSerialNumber = response;
     });
   }
-
-
+  loadDateWiseSerialNumber(date: string){
+    this.visitEntryService.getDateWisevisitNumber(date).subscribe(response => {
+      this.lastSerialNumber = response;
+    });
+  }
+  loadSerialByDate(){
+    const dateToString = moment(this.visitEntryAddForm.value.date).format('YYYY-MM-DD');
+    this.visitEntryService.getDateWisevisitNumber(dateToString).subscribe(response => {
+      this.lastSerialNumber = response;
+    }, error => {
+      console.log(error);
+    }, () => {
+      this.visitEntryAddForm.controls.serial.patchValue(this.lastSerialNumber);
+    });
+  }
   onSubmit(){
     this.visitEntryService.addVisitEntry(this.visitEntryAddForm.value).subscribe(response => {
       this.toastr.success( 'Added' , 'Success' );

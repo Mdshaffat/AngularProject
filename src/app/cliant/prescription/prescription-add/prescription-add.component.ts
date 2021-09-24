@@ -57,7 +57,7 @@ export class PrescriptionAddComponent implements OnInit {
   createPrescriptionAddForm(){
     this.prescriptionAddForm = this.fb.group({
       visitEntryId: ['', Validators.required],
-      physicalStateId: [],
+      // physicalStateId: [],
       // doctorsObservation: ['', Validators.required],
       // adviceMedication: ['', Validators.required],
       // adviceTest: ['', Validators.required],

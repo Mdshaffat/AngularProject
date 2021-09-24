@@ -6,6 +6,7 @@ export interface IPrescription {
     patientFirstName: string;
     patientLastName: string;
     patientDob: Date;
+    patientAge: number;
     patientMobile: string;
     doctorId: string;
     doctorFirstName: string;

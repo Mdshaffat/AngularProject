@@ -1,14 +1,21 @@
 <div>
   <form [formGroup]="prescriptionUpdateForm" (ngSubmit)="onSubmit()">
-<body id="total-Area">
+<body id="print-section">
   <div id="container">
       <div id="head">
           <h1>{{prescription.hospitalName}}</h1>
           <p>Doctor: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
       </div>
-      <div id="nav">
-          <p>Patient Name: {{prescription.patientFirstName}} {{prescription.patientLastName}}</p>
-          <p>Age: {{patientAge}} 25</p>
+      <div id="nav" *ngFor="let prescriptionVital of prescription.physicalStat">
+          <p> <strong> Patient Name: </strong>{{prescription.patientFirstName}} {{prescription.patientLastName}} </p>
+          <p>
+            Age: {{prescription.patientAge}}
+          | Body Temperature: {{prescriptionVital.bodyTemparature}}
+          | BMI: {{prescriptionVital.bmi}}
+          | spO2: {{prescriptionVital.spO2}} 
+          | Blood Pressure: {{prescriptionVital.bloodPressure}} 
+          | Pulse Rate: {{prescriptionVital.pulseRate}}
+          </p>
       </div>
       <div id="content">
           <div id="aside">
@@ -24,11 +31,25 @@
                   <h3>Note</h3>
                   <textarea formControlName="note"></textarea>
               </div>
-              <div><button mat-raised-button class="button" color="primary" type="submit">SAVE</button></div>
             </div>
-      </div>
+          </div>
+          
+        </div>
+      </body>
+      <div>
+        <button 
+        mat-raised-button
+        class="button1" color="success" type="button" [routerLink]="['../../list']">
+        Back To List
+      </button>
 
-  </div>
-</body>
+        <button
+         mat-raised-button
+          class="button2" color="primary" 
+          type="submit"
+          [useExistingCss]="true" 
+          printSectionId="print-section"  
+          ngxPrint
+          >SAVE</button></div>
 </form>
 </div>

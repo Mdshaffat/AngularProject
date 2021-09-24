@@ -27,7 +27,14 @@ export class VisitEntriesCliantService {visitEntries: IVisitEntry[] = [];
       );
     }
     getlastvisitnumber() {
-      return this.http.get<number>(this.baseUrl + 'visitentry/latestserial').pipe(
+      return this.http.get<number>(this.baseUrl + 'visitentry/latestserial/').pipe(
+        map(response => {
+          return response;
+        })
+      );
+    }
+    getDateWisevisitNumber(date: string) {
+      return this.http.get<number>(this.baseUrl + 'visitentry/latestserial/' + date).pipe(
         map(response => {
           return response;
         })

@@ -1,42 +1,149 @@
-.example-card {
-    max-width: 800px;
-  }
-  
-  .example-header-image {
-    background-size: cover;
-  }
-  .userdetails{
-    height: 100%;
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+	margin: 0;
+	padding: 0;
+}
+
+div {
+	width: 100%;
+}
+
+h3 {
+	padding: 5px;
+	margin: 5px;
+}
+
+textarea {
+	padding: 5px;
+	margin: 5px 0 20px 5px;
+	width: 93%;
+	height: 90px;
+}
+
+div:nth-child(odd) {
+	background-color: rgb(246, 248, 246);
+}
+
+div:nth-child(even) {
+	background-color: rgb(245, 248, 247);
+}
+
+#container {
+	width: 100%;
+	height: 10% !important;
+    
+}
+
+#head {
+	padding: 5px 0px 20px 0px;
+}
+
+#head > h1,
+#head > p,
+#head > h2 {
+	text-align: center;
+}
+
+#nav {
+	width: 100%;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding: 7px 0 7px 0;
+}
+
+#nav > p:first-child {
+	float: left;
+	margin-left: 20px;
+}
+
+#nav > p:last-child {
+	float: right;
+	margin-right: 20px;
+}
+
+#nav::after {
+	content: '';
+	clear: both;
+	display: table;
+}
+
+#content {
+	height: 600px;
+}
+
+#aside {
+	width: 30%;
+	height: 100%;
+	box-sizing: border-box;
+	float: left;
+	border-right: 1px solid black;
+}
+
+#main {
+	width: 70%;
+	height: 100%;
+	box-sizing: border-box;
+	float: left;
+	position: relative;
+}
+#main > textarea {
+	padding: 0;
+	box-sizing: border-box;
+	width: 95%;
+	height: 60%;
+}
+
+#aside > textarea {
+	margin: 10px;
+	padding: 0;
+	box-sizing: border-box;
+	width: 95%;
+	height: 35%;
+}
+.rel {
+	bottom: 25px;
+
+}
+
+.rel > textarea {
+	margin: 10px;
+	padding: 0;
+	box-sizing: border-box;
+	width: 95%;
+	height: 70px;
+}
+.button1 {
+	display: inline;
+    width: 330px;
+    margin: 5px;
+    padding: 10px;
     align-items: center;
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
-  }
-  .table {
-    font-family: Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .table td, .table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .table tr:nth-child(even){background-color: #f2f2f2;}
-  
-  .table tr:hover {background-color: #ddd;}
-  
-  .table th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    color: white;
-  }
-  .addnewuser{
-    font-size: 30px;
-    margin-left: 80%;
-  }
-  .addnewuser:hover{
-    cursor: pointer;
+	float: left;
+	margin-right: 40px;
+
+}
+.button2 {
+	display: inline;
+    width: 330px;
+    margin: 5px;
+    padding: 10px;
+    align-items: center;
+	float: right;
+	margin-right: 40px;
+
+}
+textarea {
+	padding: 12px 20px !important; 
+	box-sizing: border-box;
+	border: 2px solid #ccc;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	font-size: 14px;
   }

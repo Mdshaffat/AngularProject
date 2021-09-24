@@ -24,7 +24,7 @@
             </mat-form-field>
               <mat-form-field class="col-nid" appearance="fill">
                 <mat-label>NID</mat-label>
-                <input  formControlName="nid" matInput >
+                <input type="number" formControlName="nid" matInput >
                 <mat-error *ngIf="f.nid.hasError('required')">Required</mat-error>
             </mat-form-field>
             <mat-form-field class="col-address" appearance="fill">
@@ -34,7 +34,7 @@
           </mat-form-field>
               <mat-form-field class="col-mobileNumber" appearance="fill">
                   <mat-label>Mobile Number</mat-label>
-                  <input formControlName="mobileNumber" matInput >
+                  <input formControlName="mobileNumber" type="number" matInput >
                   <mat-error *ngIf="f.mobileNumber.hasError('required')">Required</mat-error>
               </mat-form-field>
               <mat-form-field class="col-doB" appearance="fill">
@@ -70,12 +70,14 @@
                 <mat-label>Blood Group</mat-label>
                 <mat-select formControlName="bloodGroup">
                   <mat-option>--</mat-option>
-                  <mat-option value="A RhD positive (A+)">A RhD positive (A+)</mat-option>
-                  <mat-option value="A RhD negative (A-)">A RhD negative (A-)</mat-option>
-                  <mat-option value="B RhD positive (B+)">B RhD positive (B+)</mat-option>
-                  <mat-option value="B RhD negative (B-)">B RhD negative (B-)</mat-option>
-                  <mat-option value="O RhD positive (O+)">O RhD positive (O+)</mat-option>
-                  <mat-option value="O RhD negative (O-)">O RhD negative (O-)</mat-option>
+                  <mat-option value="O+">O+</mat-option>
+                  <mat-option value="O-">O-</mat-option>
+                  <mat-option value="A+">A+</mat-option>
+                  <mat-option value="A-">A-</mat-option>
+                  <mat-option value="B+">B+</mat-option>
+                  <mat-option value="B-">B-</mat-option>
+                  <mat-option value="AB+">AB+</mat-option>
+                  <mat-option value="AB-">AB-</mat-option>
                 </mat-select>
                 <mat-error *ngIf="f.bloodGroup.hasError('required')">Required</mat-error>
             </mat-form-field>
@@ -90,45 +92,68 @@
 
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <!-- Patient Vital -->
-      <h2>Vital</h2>
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
-            <p>Height: </p>
+            <p style="float: right;">Height: </p>
          </td>
           <td>
             <mat-form-field appearance="fill">
               <mat-label>Feet</mat-label>
-              <input formControlName="height" matInput >
-              <mat-error *ngIf="f.height.hasError('required')">Required</mat-error>
+              <mat-select formControlName="heightFeet">
+                <mat-option *ngFor="let heightFeet of heightFeet" [value]="heightFeet.feet">
+                  {{heightFeet.feet}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Inch</mat-label>
+            <mat-select formControlName="heightInches">
+              <mat-option *ngFor="let heightinch of heightInch" [value]="heightinch.inch">
+                {{heightinch.inch}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </td>
         <td>
-            <mat-form-field appearance="fill">
-              <mat-label>Inches</mat-label>
-              <input formControlName="height" matInput >
-              <mat-error *ngIf="f.height.hasError('required')">Required</mat-error>
+          <mat-form-field  appearance="fill">
+            <mat-label>Weight</mat-label>
+            <input formControlName="weight" matInput>
+            <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
           </mat-form-field>
         </td>
       </tr>
-    </table>
-
-          <mat-form-field class="col-v-weight" appearance="fill">
-              <mat-label>Weight</mat-label>
-              <input formControlName="weight" matInput>
-              <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
-          </mat-form-field>
-        <mat-form-field class="col-v-spO2" appearance="fill">
-            <mat-label>SpO2</mat-label>
-            <input type="number" formControlName="spO2" matInput >
-            <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
+      <tr>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Body Temparature</mat-label>
+            <input type="number" formControlName="bodyTemparature" matInput >
         </mat-form-field>
-        <mat-form-field class="col-v-pulseRate" appearance="fill">
+        </td>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Blood Pressure</mat-label>
+            <input type="number" formControlName="bloodPressure" matInput >
+        </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field  appearance="fill">
             <mat-label>Pulse Rate</mat-label>
             <input type="number" formControlName="pulseRate" matInput >
             <mat-error *ngIf="f.pulseRate.hasError('required')">Required</mat-error>
         </mat-form-field>
-        <!-- checkBox -->
+        </td>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>SpO2</mat-label>
+            <input type="number" formControlName="spO2" matInput >
+            <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
+        </mat-form-field>
+        </td>
+      </tr>
+    </table>
         <br/><button mat-raised-button color="primary" type="submit">ADD</button>
           </form>    
       </div>

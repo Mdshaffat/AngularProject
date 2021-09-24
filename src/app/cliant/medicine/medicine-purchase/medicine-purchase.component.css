@@ -14,3 +14,30 @@
 .form-quantity {
   width: 10%;
 }
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.mat-form-field{
+  padding: 0%;
+}
+.mat-icon {
+  font-size: 30px;
+  padding-left: 10px;
+}
+.iconchange:hover {
+  color: #dddddd;
+  background: rgb(199, 16, 77);
+}

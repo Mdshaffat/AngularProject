@@ -21,9 +21,6 @@ export class PatientService {
     constructor(private http: HttpClient) { }
 
     getAllPatient(){
-      if (this.patients.length > 0) {
-        return of(this.patients);
-      }
       return this.http.get<IPatient[]>(this.baseUrl + 'patient').pipe(
         map(response => {
           this.patients = response;

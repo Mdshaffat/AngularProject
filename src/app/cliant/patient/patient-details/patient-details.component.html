@@ -90,17 +90,16 @@
         </mat-card-actions>
     </mat-card>
     <mat-divider></mat-divider>
-    <ng-container *ngFor="let patientVital of patientDetails.patientVitals">
+    <ng-container *ngFor="let patientVital of patientDetails.physicalStat">
         <mat-card class="example-card">
             <mat-card-header>
-                <h2>Vital</h2>
-                <mat-icon mat-button color="primary" class="addnewuser" (click)="openDialog(patientVital)">add</mat-icon>
+                <h2>Physical Stat</h2>
             </mat-card-header>
             <mat-card-content>
                 <table class="table">
                     <tr>
                     <td>Height</td>
-                    <td>{{patientVital.height}}</td>
+                    <td>{{patientVital.heightFeet}}" {{patientVital.heightInches}}'</td>
                     </tr>
                     <tr>
                         <td>Weight</td>
@@ -110,30 +109,31 @@
                     <tr>
                         <td>BMI</td>
                         <td>{{patientVital.bmi}}</td>
-                        </tr>
-                    <tr>
-                        <td>Waist</td>
-                        <td>{{patientVital.waist}}</td>
                     </tr>
                     <tr>
-                        <td>Hip</td>
-                        <td>{{patientVital.hip}}</td>
+                        <td>Body Temparature</td>
+                        <td>{{patientVital.bodyTemparature}}</td>
                     </tr>
                     <tr>
-                        <td>SpO2</td>
-                        <td>{{patientVital.spO2}}</td>
+                        <td>Blood Pressure</td>
+                        <td>{{patientVital.bloodPressure}}</td>
                     </tr>
                     <tr>
                         <td>Pulse Rate</td>
                         <td>{{patientVital.pulseRate}}</td>
                     </tr>
                     <tr>
+                        <td>SpO2</td>
+                        <td>{{patientVital.spO2}}</td>
+                    </tr>
+
+                    <tr>
                         <td>Last Updated</td>
-                        <td>{{patientVital.updatedAt | date:'dd-MM-YYY'}}</td>
+                        <td>{{patientVital.editedOn | date:'dd-MM-YYY'}}</td>
                     </tr>
                     <tr>
                         <td>Updated By</td>
-                        <td>{{patientVital.updatedBy}}</td>
+                        <td>{{patientVital.editedBy}}</td>
                     </tr>
                     <tr>
                         <td>Hospital</td>

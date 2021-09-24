@@ -7,7 +7,7 @@ import { PrescriptionAddComponent } from './prescription-add/prescription-add.co
 import { PrescriptionRoutingModule } from './prescription-routing.module';
 import { SharedModule } from 'src/app/Shared/shared.module';
 import { MaterialModule } from 'src/app/Shared/material/material.module';
-
+import {NgxPrintModule} from 'ngx-print';
 
 
 @NgModule({
@@ -21,7 +21,8 @@ import { MaterialModule } from 'src/app/Shared/material/material.module';
     CommonModule,
     PrescriptionRoutingModule,
     SharedModule,
-    MaterialModule
+    MaterialModule,
+    NgxPrintModule
   ]
 })
 export class PrescriptionModule { }

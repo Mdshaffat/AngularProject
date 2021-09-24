@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/Shared/shared.module';
 import { MedicineRoutingModule } from './medicine-routing.module';
 import { FormsModule } from '@angular/forms';
 import { MedicinePurchaseComponent } from './medicine-purchase/medicine-purchase.component';
+import {NgxPrintModule} from 'ngx-print';
 
 
 
@@ -24,7 +25,8 @@ import { MedicinePurchaseComponent } from './medicine-purchase/medicine-purchase
     CommonModule,
     MaterialModule,
     SharedModule,
-    MedicineRoutingModule
+    MedicineRoutingModule,
+    NgxPrintModule
   ]
 })
 export class MedicineModule { }

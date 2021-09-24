@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IPrescription } from 'src/app/core/models/Prescriptions/getPrescriptions';
+import { IPrescriptionWithVital } from 'src/app/core/models/Prescriptions/getPrescriptionWithVital';
 import { PrescriptionService } from '../prescription.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { PrescriptionService } from '../prescription.service';
   styleUrls: ['./prescription-details.component.css']
 })
 export class PrescriptionDetailsComponent implements OnInit {
-  prescriptionDetails: IPrescription;
+  prescriptionDetails: IPrescriptionWithVital;
   id: any;
   constructor(private activateRoute: ActivatedRoute,
               private prescriptionService: PrescriptionService,

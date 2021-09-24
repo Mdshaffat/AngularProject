@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IPrescription } from 'src/app/core/models/Prescriptions/getPrescriptions';
+import { IPrescriptionWithVital } from 'src/app/core/models/Prescriptions/getPrescriptionWithVital';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -28,9 +29,8 @@ export class PrescriptionService {
     }
 
     getPrescriptionById(id: number) {
-      return this.http.get<IPrescription>(this.baseUrl + 'prescription/' + id).pipe(
+      return this.http.get<IPrescriptionWithVital>(this.baseUrl + 'prescription/' + id).pipe(
         map(response => {
-          this.prescription = response;
           return response;
         })
       );

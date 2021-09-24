@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { IPrescription } from 'src/app/core/models/Prescriptions/getPrescriptions';
+import { IPrescriptionWithVital } from 'src/app/core/models/Prescriptions/getPrescriptionWithVital';
 import { PrescriptionService } from '../prescription.service';
 
 @Component({
@@ -13,7 +14,7 @@ import { PrescriptionService } from '../prescription.service';
 })
 export class PrescriptionEditComponent implements OnInit, AfterViewInit {
   prescriptionUpdateForm: FormGroup = new FormGroup({});
-  prescription: IPrescription;
+  prescription: IPrescriptionWithVital;
   id: any;
   patientAge: number ;
   constructor(private toastr: ToastrService,
@@ -64,7 +65,6 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
       hospitalId: this.prescription.hospitalId,
       patientId: this.prescription.patientId,
       visitEntryId: this.prescription.visitEntryId,
-      physicalStateId: this.prescription.physicalStateId,
       doctorsObservation: this.prescription.doctorsObservation,
       adviceMedication: this.prescription.adviceMedication,
       adviceTest: this.prescription.adviceTest,

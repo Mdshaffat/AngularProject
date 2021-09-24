@@ -21,24 +21,31 @@ export interface IPatientWithVital {
     createdBy: string;
     updatedOn: Date;
     updatedBy: string;
-    patientVitals: PatientVital[];
+    physicalStat: PhysicalStat[];
 }
-export interface PatientVital {
+export interface PhysicalStat {
     id: number;
+    hospitalId: number;
+    hospitalName: string;
     patientId: number;
     patientFirstName: string;
     patientLastName: string;
-    hospitalId: number;
-    hospitalName: string;
-    height: string;
-    weight: string;
+    visitEntryId: number;
+    bloodPressure: string;
+    heartRate: string;
+    bodyTemparature: string;
+    heightFeet: number;
+    heightInches: number;
+    weight: number;
     bmi: number;
     waist: string;
     hip: string;
     spO2: number;
     pulseRate: number;
     isLatest: boolean;
-    updatedBy: string;
-    updatedAt: Date;
+    createdOn: Date;
+    createdBy: string;
+    editedOn: Date;
+    editedBy: string;
 }
 
