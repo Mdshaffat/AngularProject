@@ -33,10 +33,39 @@
                 <input formControlName="address" matInput>
                 <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
             </mat-form-field>
+            <mat-form-field class="col-division" appearance="fill">
+              <mat-label>Division</mat-label>
+              <!-- (click)="loadUpazilaBySelectDistrict(upazila.id)" -->
+              <mat-select formControlName="divisionId" #chooseddivValue (valueChange)="loadDistrictBySelectDivision(chooseddivValue.value)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let division of divisions" [value]="division.id">
+                  {{division.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-district" appearance="fill">
+              <mat-label>District</mat-label>
+              <!-- (click)="loadUpazilaBySelectDistrict(upazila.id)" -->
+              <mat-select formControlName="districtId" #choosedValue (valueChange)="loadUpazilaBySelectDistrict(choosedValue.value)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let district of districts" [value]="district.id">
+                  {{district.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-upazila" appearance="fill">
+              <mat-label>Upazila</mat-label>
+              <mat-select formControlName="upazilaId" >
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let upazila of upazilas" [value]="upazila.id" >
+                  {{upazila.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
               <mat-form-field class="col-mobileNumber" appearance="fill">
                   <mat-label>Mobile Number</mat-label>
-                  <input formControlName="mobileNumber" matInput >
-                  <mat-error *ngIf="f.mobileNumber.hasError('required')">Required</mat-error>
+                  <input formControlName="mobileNumber" matInput maxlength="11" >
+                  <mat-error *ngIf="f.mobileNumber.hasError('maxLength')">Maximum Length 11</mat-error>
               </mat-form-field>
               <mat-form-field class="col-doB" appearance="fill">
                 <mat-label>Date Of Birth</mat-label>
@@ -57,7 +86,7 @@
             </mat-form-field>
             <mat-form-field class="col-maritalStatus" appearance="fill">
                 <mat-label>Marital Status</mat-label>
-                <mat-select formControlName="maritalStatus" required>
+                <mat-select formControlName="maritalStatus">
                   <mat-option>--</mat-option>
                   <mat-option value="Married">Married</mat-option>
                   <mat-option value="Single">Single</mat-option>
@@ -65,7 +94,6 @@
                   <mat-option value="Separated">Separated</mat-option>
                   <mat-option value="Divorced">Divorced</mat-option>
                 </mat-select>
-                <mat-error *ngIf="f.maritalStatus.hasError('required')">Required</mat-error>
             </mat-form-field>
 
 

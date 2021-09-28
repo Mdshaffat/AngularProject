@@ -11,7 +11,7 @@
               <mat-autocomplete #autobrandName="matAutocomplete">
                 <mat-option *ngFor="let patient of filteredPatient | async" (click)="onSelectPatient(patient)">
                   <span>{{patient.id}}</span> |
-                  <span>{{patient.firstName}}</span>|
+                  <span>{{patient.patientName}}</span>|
                   <span>{{patient.mobileNumber}}</span>
                 </mat-option>
               </mat-autocomplete>

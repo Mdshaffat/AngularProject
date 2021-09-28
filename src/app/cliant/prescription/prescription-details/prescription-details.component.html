@@ -7,17 +7,21 @@
           <h1>{{prescriptionDetails.hospitalName}}</h1>
           <p>Doctor: {{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
       </div>
-      <div id="nav" *ngFor="let prescriptionDetailsVital of prescriptionDetails.physicalStat">
-          <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} </p>
-          <p>
-              Age: {{prescriptionDetails.patientAge}}
-            | Body Temperature: {{prescriptionDetails.bodyTemparature}}
-            | BMI: {{prescriptionDetailsVital.bmi}}
-            | spO2: {{prescriptionDetailsVital.spO2}} 
-            | Blood Pressure: {{prescriptionDetailsVital.bloodPressure}} 
-            | Pulse Rate: {{prescriptionDetailsVital.pulseRate}}
-            </p>
-      </div>
+      <div id="nav">
+        <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} 
+          | <strong>Age: </strong> {{prescriptionDetails.patientAge}} 
+          | <strong>Blood Group: </strong> {{prescriptionDetails.patientBloodGroup}} 
+        
+        </p>
+        <p *ngFor="let prescriptionVital of prescriptionDetails.physicalStat">
+        <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature: </strong>{{prescriptionVital.bodyTemparature}}</span> 
+        <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
+        <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span>
+        <span *ngIf="prescriptionVital.bloodPressure"> <strong> | Blood Pressure:</strong> {{prescriptionVital.bloodPressure}} </span>
+        <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
+        <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
+        </p>
+    </div>
       <div id="content">
           <div id="aside">
               <h3>Cc</h3>

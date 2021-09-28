@@ -10,6 +10,7 @@ import { map, startWith } from 'rxjs/operators';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
 import { IPatient } from 'src/app/core/models/Patient/patient';
+import { IPatientForSearch } from 'src/app/core/models/Patient/patientForSearch';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
 import { PatientService } from '../../patient/patient.service';
 import { VisitEntriesCliantService } from '../visit-entries-cliant.service';
@@ -22,7 +23,8 @@ import { VisitEntriesCliantService } from '../visit-entries-cliant.service';
 })
 export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
   patients: IPatient [] = [];
-  filteredPatient: Observable<IPatient[]>;
+  PatientsForSearch: IPatientForSearch[] = [];
+  filteredPatient: Observable<IPatientForSearch[]>;
   visitEntries: IVisitEntry [];
   hospitals: IHospital [];
   lastSerialNumber: number;
@@ -42,7 +44,7 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
                 this.filteredPatient = this.patientsearch.valueChanges
                 .pipe(
                   startWith(''),
-                  map(p => p ? this._filterPatient(p) : this.patients.slice())
+                  map(p => p ? this._filterPatient(p) : this.PatientsForSearch.slice())
                       );
               }
   ngAfterViewInit(): void {}
@@ -69,7 +71,7 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
     return this.visitEntryAddForm.controls;
   }
 
-  onSelectPatient(patient: IPatient){
+  onSelectPatient(patient: IPatientForSearch){
       this.visitEntryService.getlastvisitnumber().subscribe(response => {
         this.lastSerialNumber = response;
       });
@@ -78,12 +80,12 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
       patientId: patient.id,
       serial: this.lastSerialNumber
     });
-      this.patientsearch.patchValue(patient.firstName);
+      this.patientsearch.patchValue(patient.patientName);
   }
 
   loadAllPatient(){
-    this.patientService.getAllPatient().subscribe(response => {
-      this.patients = response;
+    this.patientService.getPatientForSearch().subscribe(response => {
+      this.PatientsForSearch = response;
     });
   }
   loadAllHospital(){
@@ -121,12 +123,12 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
     });
   }
 
-  private _filterPatient(value: string): IPatient[] {
+  private _filterPatient(value: any): IPatientForSearch[] {
     const filterValue = value.toLowerCase();
-    const result = this.patients.filter(
+    const result = this.PatientsForSearch.filter(
       (p) =>
-        p.firstName?.toLowerCase().includes(filterValue) ||
-        p.lastName?.toLowerCase().includes(filterValue) ||
+        p.id === filterValue ||
+        p.patientName?.toLowerCase().includes(filterValue) ||
         p.mobileNumber?.toLowerCase().includes(filterValue)
     );
     return result;

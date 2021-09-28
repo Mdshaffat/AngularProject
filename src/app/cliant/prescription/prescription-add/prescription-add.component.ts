@@ -13,6 +13,7 @@ import { IPrescription } from 'src/app/core/models/Prescriptions/getPrescription
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
 import { PatientService } from '../../patient/patient.service';
 import { PhysicalStateService } from '../../physical-state/physical-state.service';
+import { VisitEntriesCliantService } from '../../visit-entries-cliant/visit-entries-cliant.service';
 import { PrescriptionService } from '../prescription.service';
 
 @Component({
@@ -37,7 +38,7 @@ export class PrescriptionAddComponent implements OnInit {
               private prescriptionService: PrescriptionService,
               private physicalStateService: PhysicalStateService,
               private hospitalService: HospitalService,
-              private visitEntryService: VisitEntryService,
+              private visitEntryService: VisitEntriesCliantService,
               private patientService: PatientService) {
                 this.filteredPatient = this.patientsearch.valueChanges
                   .pipe(

@@ -30,6 +30,12 @@
         maritalStatus: string;
         primaryMember: boolean;
         address: string;
+        divisionId: number;
+        division: string;
+        upazilaId: number;
+        upazila: string;
+        districtId: number;
+        district: string;
         nid: string;
         bloodGroup: string;
         branchId: number;
@@ -84,7 +90,8 @@
         patientFirstName: string;
         patientLastName: string;
         visitEntryId: number;
-        bloodPressure: string;
+        bloodPressureSystolic: string;
+        bloodPressureDiastolic: string;
         heartRate: string;
         bodyTemparature: string;
         weight: string;

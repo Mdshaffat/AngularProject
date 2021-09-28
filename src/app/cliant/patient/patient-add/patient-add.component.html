@@ -32,10 +32,40 @@
               <input style="overflow: scroll;" formControlName="address" matInput>
               <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
           </mat-form-field>
+          <mat-form-field class="col-division" appearance="fill">
+            <mat-label>Division</mat-label>
+            <!-- (click)="loadUpazilaBySelectDistrict(upazila.id)" -->
+            <mat-select formControlName="divisionId" #chooseddivValue (valueChange)="loadDistrictBySelectDivision(chooseddivValue.value)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let division of divisions" [value]="division.id">
+                {{division.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-district" appearance="fill">
+            <mat-label>District</mat-label>
+            <!-- (click)="loadUpazilaBySelectDistrict(upazila.id)" -->
+            <mat-select formControlName="districtId" #choosedValue (valueChange)="loadUpazilaBySelectDistrict(choosedValue.value)">
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let district of districts" [value]="district.id">
+                {{district.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-upazila" appearance="fill">
+            <mat-label>Upazila</mat-label>
+            <mat-select formControlName="upazilaId" >
+              <mat-option>--</mat-option>
+              <mat-option *ngFor="let upazila of upazilas" [value]="upazila.id" >
+                {{upazila.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
               <mat-form-field class="col-mobileNumber" appearance="fill">
                   <mat-label>Mobile Number</mat-label>
-                  <input formControlName="mobileNumber" type="number" matInput >
-                  <mat-error *ngIf="f.mobileNumber.hasError('required')">Required</mat-error>
+                  <input formControlName="mobileNumber" matInput maxlength="11"  >
+                  <mat-error *ngIf="f.mobileNumber.hasError('maxLength')">Max 11 charecter</mat-error>
+                  <mat-error *ngIf="f.mobileNumber.hasError('pattern')">Please input a valid number</mat-error>
               </mat-form-field>
               <mat-form-field class="col-doB" appearance="fill">
                 <mat-label>Date Of Birth</mat-label>
@@ -95,6 +125,19 @@
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
+            <mat-form-field  appearance="fill">
+              <mat-label>Body Temparature(Fahrenheit)</mat-label>
+              <input type="number" formControlName="bodyTemparature" matInput >
+          </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field  appearance="fill">
+              <mat-label>Weight(Kg)</mat-label>
+              <input formControlName="weight" matInput>
+              <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
+            </mat-form-field>
+          </td>
+          <td>
             <p style="float: right;">Height: </p>
          </td>
           <td>
@@ -117,27 +160,9 @@
             </mat-select>
           </mat-form-field>
         </td>
-        <td>
-          <mat-form-field  appearance="fill">
-            <mat-label>Weight</mat-label>
-            <input formControlName="weight" matInput>
-            <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
-          </mat-form-field>
-        </td>
       </tr>
       <tr>
-        <td>
-          <mat-form-field  appearance="fill">
-            <mat-label>Body Temparature</mat-label>
-            <input type="number" formControlName="bodyTemparature" matInput >
-        </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field  appearance="fill">
-            <mat-label>Blood Pressure</mat-label>
-            <input type="number" formControlName="bloodPressure" matInput >
-        </mat-form-field>
-        </td>
+
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>Pulse Rate</mat-label>
@@ -149,6 +174,23 @@
           <mat-form-field  appearance="fill">
             <mat-label>SpO2</mat-label>
             <input type="number" formControlName="spO2" matInput >
+            <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
+        </mat-form-field>
+        </td>
+        <td>
+            <mat-label style="float: right;">Blood Pressure:</mat-label>
+        </td>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Systolic</mat-label>
+            <input type="number" formControlName="bloodPressureSystolic" matInput >
+            <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
+        </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Diastolic</mat-label>
+            <input type="number" formControlName="bloodPressureDiastolic" matInput >
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
         </td>

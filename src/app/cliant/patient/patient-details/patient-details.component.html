@@ -43,7 +43,12 @@
                 </tr>
                 <tr>
                     <td>Address</td>
-                    <td>{{patientDetails.address}}</td>
+                    <td>
+                        {{patientDetails.address}} 
+                        <strong>Division:</strong>  {{patientDetails.division}}
+                        <strong>District:</strong>  {{patientDetails.district}}
+                        <strong>Upazila:</strong>  {{patientDetails.upazila}} 
+                    </td>
                 </tr>
                 
                 <tr>
@@ -116,7 +121,7 @@
                     </tr>
                     <tr>
                         <td>Blood Pressure</td>
-                        <td>{{patientVital.bloodPressure}}</td>
+                        <td>{{patientVital.bloodPressureSystolic}}/{{patientVital.bloodPressureDiastolic}} mmHg</td>
                     </tr>
                     <tr>
                         <td>Pulse Rate</td>

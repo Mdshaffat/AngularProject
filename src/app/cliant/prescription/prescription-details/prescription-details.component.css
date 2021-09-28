@@ -16,13 +16,13 @@ div {
 }
 
 h3 {
-	padding: 5px;
+	padding: 0px;
 	margin: 5px;
 }
 
 textarea {
-	padding: 5px;
-	margin: 5px 0 20px 5px;
+	padding-left: 2px;
+	margin: 0px 0 5px 0px;
 	width: 93%;
 	height: 90px;
 }
@@ -37,12 +37,11 @@ div:nth-child(even) {
 
 #container {
 	width: 100%;
-	height: 10% !important;
     
 }
 
 #head {
-	padding: 5px 0px 20px 0px;
+	padding: 2px 0px 20px 0px;
 }
 
 #head > h1,
@@ -55,16 +54,16 @@ div:nth-child(even) {
 	width: 100%;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
-	padding: 7px 0 7px 0;
+	padding: 2px 0 2px 0;
 }
 
 #nav > p:first-child {
-	float: left;
+	float: left !important;
 	margin-left: 20px;
 }
 
 #nav > p:last-child {
-	float: right;
+	float: right ;
 	margin-right: 20px;
 }
 
@@ -75,7 +74,7 @@ div:nth-child(even) {
 }
 
 #content {
-	height: 600px;
+	height: 530px;
 }
 
 #aside {
@@ -94,7 +93,8 @@ div:nth-child(even) {
 	position: relative;
 }
 #main > textarea {
-	padding: 0;
+	margin: 10px;
+	padding: 0px;
 	box-sizing: border-box;
 	width: 95%;
 	height: 60%;
@@ -121,9 +121,9 @@ div:nth-child(even) {
 }
 .button1 {
 	display: inline;
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
+    width: 100px;
+    margin: 2px;
+    padding: 2px;
     align-items: center;
 	float: left;
 	margin-right: 40px;
@@ -131,9 +131,9 @@ div:nth-child(even) {
 }
 .button2 {
 	display: inline;
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
+    width: 100px;
+    margin: 2px;
+    padding: 2px;
     align-items: center;
 	float: right;
 	margin-right: 40px;

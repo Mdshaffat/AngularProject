@@ -27,8 +27,20 @@
         margin-right: 2%;
     }
     .col-address{
-        display: block;
-        margin: auto;
+        width: 40%;
+        margin-right: 1%;
+    }
+    .col-division{
+        width: 18%;
+        margin: 1%;
+    }
+    .col-district{
+        width: 18%;
+        margin: 1%;
+    }
+    .col-upazila{
+        width: 18%;
+        margin-left: 1%;
     }
     .col-nid{
         width: 48%;

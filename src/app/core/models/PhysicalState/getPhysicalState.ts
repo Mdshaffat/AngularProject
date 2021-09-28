@@ -1,16 +1,25 @@
 
-    export interface IPhysicalState {
+export interface IPhysicalState {
         id: number;
-        patientId: number;
         hospitalId: number;
         hospitalName: string;
+        patientId: number;
         patientFirstName: string;
         patientLastName: string;
         visitEntryId: number;
-        bloodPressure: string;
+        bloodPressureSystolic: string;
+        bloodPressureDiastolic: string;
         heartRate: string;
         bodyTemparature: string;
-        weight: string;
+        heightFeet: number;
+        heightInches: number;
+        weight: number;
+        bmi: number;
+        waist: string;
+        hip: string;
+        spO2: number;
+        pulseRate: number;
+        isLatest: boolean;
         createdOn: Date;
         createdBy: string;
         editedOn: Date;

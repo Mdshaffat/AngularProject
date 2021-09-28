@@ -1,11 +1,14 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
+import { startWith, map } from 'rxjs/operators';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { VisitEntryService } from 'src/app/admin/visit-entry/visit-entry.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
 import { IPatient } from 'src/app/core/models/Patient/patient';
+import { IHeightFeet, IHeightInch } from 'src/app/core/models/Patient/patientHeightandWeight';
 import { IPhysicalState } from 'src/app/core/models/PhysicalState/getPhysicalState';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
 import { PatientService } from '../../patient/patient.service';
@@ -20,9 +23,35 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
   updatePhysicalStateForm: FormGroup = new FormGroup({});
   physicalState: IPhysicalState;
   hospitals: IHospital[];
-  patients: IPatient[];
+  patients: IPatient[] = [];
+  patientsearch = new FormControl();
+  filteredPatient: Observable<IPatient[]>;
   visitEntries: IVisitEntry[];
   id: any;
+  heightFeet: IHeightFeet[] = [
+    {feet: 1},
+    {feet: 2},
+    {feet: 3},
+    {feet: 4},
+    {feet: 5},
+    {feet: 6},
+    {feet: 7},
+    {feet: 8}
+
+  ];
+  heightInch: IHeightInch[] = [
+    {inch: 1},
+    {inch: 2},
+    {inch: 3},
+    {inch: 4},
+    {inch: 5},
+    {inch: 6},
+    {inch: 7},
+    {inch: 8},
+    {inch: 9},
+    {inch: 10},
+    {inch: 11}
+  ];
   constructor(private toastr: ToastrService,
               private physicalStateService: PhysicalStateService,
               private hospitalService: HospitalService,
@@ -31,7 +60,13 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
               private activateRoute: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder,
-              ) {}
+              ) {
+                this.filteredPatient = this.patientsearch.valueChanges
+                .pipe(
+                  startWith(''),
+                  map(p => p ? this._filterPatient(p) : this.patients.slice())
+                      );
+              }
   ngOnInit(): void {
     this.loadHospital();
     this.loadPatient();
@@ -45,13 +80,17 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
   createUpdatePhysicalStateForm(){
     this.updatePhysicalStateForm = this.fb.group({
       id: [this.id],
-      hospitalId: ['', Validators.required],
       patientId: ['', Validators.required],
-      visitEntryId: ['', Validators.required],
-      bloodPressure: ['', Validators.required],
-      heartRate: ['', Validators.required],
-      bodyTemparature: ['', Validators.required],
-      weight: ['', Validators.required]
+      visitEntryId: [],
+      bodyTemparature: [],
+      heightFeet: [],
+      heightInches: [],
+      bloodPressureSystolic: [],
+      bloodPressureDiastolic: [],
+      heartRate: [],
+      pulseRate: [],
+      spO2: [],
+      weight: []
     });
   }
   get f(){
@@ -69,12 +108,16 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
   }
   populatePhysicalStateFrom(){
     this.updatePhysicalStateForm.patchValue({
-      hospitalId: this.physicalState.hospitalId,
       patientId: this.physicalState.patientId,
       visitEntryId: this.physicalState.visitEntryId,
-      bloodPressure: this.physicalState.bloodPressure,
-      heartRate: this.physicalState.heartRate,
       bodyTemparature: this.physicalState.bodyTemparature,
+      heightFeet: this.physicalState.heightFeet,
+      heightInches: this.physicalState.heightInches,
+      bloodPressureSystolic: this.physicalState.bloodPressureSystolic,
+      bloodPressureDiastolic: this.physicalState.bloodPressureDiastolic,
+      heartRate: this.physicalState.heartRate,
+      pulseRate: this.physicalState.pulseRate,
+      spO2: this.physicalState.spO2,
       weight: this.physicalState.weight
     });
   }
@@ -107,6 +150,16 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
     this.visitEntryService.getAllVisitEntry().subscribe(response => {
       this.visitEntries = response;
     });
+  }
+  private _filterPatient(value: string): IPatient[] {
+    const filterValue = value.toLowerCase();
+    const result = this.patients.filter(
+      (p) =>
+        p.firstName?.toLowerCase().includes(filterValue) ||
+        p.lastName?.toLowerCase().includes(filterValue) ||
+        p.mobileNumber?.toLowerCase().includes(filterValue)
+    );
+    return result;
   }
 
 }

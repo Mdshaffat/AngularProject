@@ -8,7 +8,11 @@ import { IHospital } from 'src/app/core/models/Hospital/hospital';
 import { IBranch } from 'src/app/core/models/MembershipBranch/branch';
 import { IPatient } from 'src/app/core/models/Patient/patient';
 import { IUpdatePatient } from 'src/app/core/models/Patient/updatePatient';
+import { IDistrict } from 'src/app/core/models/UpazilaAndDistrict/district';
+import { IDivision } from 'src/app/core/models/UpazilaAndDistrict/division';
+import { IUpazila } from 'src/app/core/models/UpazilaAndDistrict/upazila';
 import { PatientService } from '../patient.service';
+import { UpazilaAndDistrictService } from '../upazila-and-district.service';
 enum genders {
   Male,
   Female,
@@ -28,6 +32,9 @@ export class PatientUpdateComponent implements OnInit , AfterViewInit {
   patient: IPatient;
   hospitals: IHospital[];
   branches: IBranch[];
+  upazilas: IUpazila[] = [];
+  districts: IDistrict[] = [];
+  divisions: IDivision[] = [];
   id: any;
   constructor(private toastr: ToastrService,
               private hospitalService: HospitalService,
@@ -35,6 +42,7 @@ export class PatientUpdateComponent implements OnInit , AfterViewInit {
               private branchService: MembershipBranchService,
               private activateRoute: ActivatedRoute,
               private router: Router,
+              private upazilaAndDistrictService: UpazilaAndDistrictService,
               private fb: FormBuilder,
               ) {}
 
@@ -42,6 +50,8 @@ export class PatientUpdateComponent implements OnInit , AfterViewInit {
     this.loadPatient();
     this.loadHospital();
     this.loadBranch();
+    this.loadDivision();
+    // this. loadDistrict();
     this.createUpdatePatientForm();
   }
   ngAfterViewInit(){
@@ -53,10 +63,13 @@ export class PatientUpdateComponent implements OnInit , AfterViewInit {
       firstName: ['', Validators.required],
       lastName: [''],
       address: [''],
+      divisionId: [],
+      districtId: [],
+      upazilaId: [],
       mobileNumber: [''],
       doB: ['', Validators.required],
       gender: ['', Validators.required],
-      maritalStatus: ['', Validators.required],
+      maritalStatus: [],
       primaryMember: [true],
       nid: [true],
       bloodGroup: [''],
@@ -77,12 +90,35 @@ export class PatientUpdateComponent implements OnInit , AfterViewInit {
       console.log(error);
     });
   }
+  loadDivision(){
+    this.upazilaAndDistrictService.getAllDivision().subscribe(response => {
+      this.divisions = response;
+    });
+  }
+  loadDistrictBySelectDivision(id: number){
+    this.upazilaAndDistrictService.getAllDistrictByDivisionId(id).subscribe(response => {
+      this.districts = response;
+    });
+  }
+  // loadDistrict(){
+  //   this.upazilaAndDistrictService.getAllDistrict().subscribe(response => {
+  //     this.districts = response;
+  //   });
+  // }
+  loadUpazilaBySelectDistrict(id: number){
+    this.upazilaAndDistrictService.getAllUpazilaByDistrictId(id).subscribe(response => {
+      this.upazilas = response;
+    });
+  }
   populatePatientFrom(){
     this.updatePatientForm.patchValue({
       hospitalId: this.patient.hospitalId,
       firstName: this.patient.firstName,
       lastName: this.patient.lastName,
       address: this.patient.address,
+      divisionId: this.patient.divisionId,
+      districtId: this.patient.districtId,
+      upazilaId: this.patient.upazilaId,
       age: this.patient.age,
       mobileNumber: this.patient.mobileNumber,
       doB: this.patient.doB,

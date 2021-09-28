@@ -6,15 +6,18 @@
           <h1>{{prescription.hospitalName}}</h1>
           <p>Doctor: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
       </div>
-      <div id="nav" *ngFor="let prescriptionVital of prescription.physicalStat">
-          <p> <strong> Patient Name: </strong>{{prescription.patientFirstName}} {{prescription.patientLastName}} </p>
-          <p>
-            Age: {{prescription.patientAge}}
-          | Body Temperature: {{prescriptionVital.bodyTemparature}}
-          | BMI: {{prescriptionVital.bmi}}
-          | spO2: {{prescriptionVital.spO2}} 
-          | Blood Pressure: {{prescriptionVital.bloodPressure}} 
-          | Pulse Rate: {{prescriptionVital.pulseRate}}
+      <div id="nav" >
+          <p> <strong> Patient Name: </strong>{{prescription.patientFirstName}} {{prescription.patientLastName}} | 
+            <strong>Age: </strong> {{prescription.patientAge}}
+            | <strong *ngIf="prescription.patientBloodGroup">Blood Group: </strong> {{prescription.patientBloodGroup}} 
+           </p>
+          <p *ngFor="let prescriptionVital of prescription.physicalStat">
+          <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
+          <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
+          <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span>
+          <span *ngIf="prescriptionVital.bloodPressure"> <strong> | Blood Pressure:</strong> {{prescriptionVital.bloodPressure}} </span>
+          <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
+          <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
           </p>
       </div>
       <div id="content">

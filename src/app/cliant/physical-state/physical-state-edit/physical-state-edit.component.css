@@ -1,25 +1,88 @@
-
-.mat-form-field {
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
-}
 .loginForm {
-    height: 100%;
-    align-items: center;
-    padding-bottom: 40px;  
-    width: 100%;
-    max-width: 360px;
-    margin: auto;
+    padding-top: 0% !important ;
+    padding: 5%;
 }
-button {
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
-    align-items: center;
+
+
+@media only screen and (min-width: 768px) {
+    .loginForm {
+        width: 90%;
+        margin: auto;
+      }
+      .col-patient-id{
+        width: 31%;
+        margin-right: 2%;
+    }
+
+    .col-patient{
+        width: 31%;
+        margin-right: 2%;
+    }
+    .col-visit-entry{
+        width: 31%;
+        margin-left: 2%;
+    }
+    .col-hospitalId{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-branchId{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-address{
+        display: block;
+        margin: auto;
+    }
+    .col-nid{
+        width: 48%;
+        margin-left: 2%;
+    }
+
+    .col-mobileNumber{
+        width: 58%;
+        margin-right: 2%;
+    }
+    .col-doB{
+        width: 38%;
+        margin-left: 2%;
+    }
+    .col-age{
+        width: 32%;
+        margin-right: 2%;
+    }
+    .col-gender{
+        width: 32%;
+        margin-right: 2%;
+    }
+    .col-maritalStatus{
+        width: 32%;
+        margin-right: 2%;
+    }
+    .col-bloodGroup{
+        width: 32%;
+    }
+    .col-note{
+        display: block;
+        margin: auto;
+    }
+    [class*="col-v-"] {
+        margin: 1%;
+        width: 23%;
+      }
+    
 }
-.active{
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
+
+
+    /* For mobile phones: */
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+      }
+      .mat-form-field {
+          width: 100%;
+      }
+      .loginForm {
+          width: 100%;
+      }
 }

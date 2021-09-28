@@ -17,20 +17,16 @@
                     <td>{{physicalStateDetails.patientId}}</td>
                     </tr>
                 <tr>
-                    <td>First Name </td>
-                    <td>{{physicalStateDetails.patientFirstName}}</td>
+                    <td>Name</td>
+                    <td>{{physicalStateDetails.patientFirstName}} {{physicalStateDetails.patientLastName}}</td>
                     </tr>
-                <tr>
-                    <td>Last Name</td>
-                    <td>{{physicalStateDetails.patientLastName}}</td>
-                </tr>
                 <tr>
                     <td>Visit Id</td>
                     <td>{{physicalStateDetails.visitEntryId}}</td>
                 </tr>
                 <tr>
                     <td>Blood Pressure</td>
-                    <td>{{physicalStateDetails.bloodPressure}}</td>
+                    <td>  {{physicalStateDetails.bloodPressureSystolic}}/{{physicalStateDetails.bloodPressureDiastolic}} mmHg</td>
                 </tr>
                 <tr>
                     <td>Heart Rate</td>
@@ -40,11 +36,23 @@
                     <td>Body Temparature</td>
                     <td>{{physicalStateDetails.bodyTemparature}}</td>
                 </tr>
+                <tr>
+                    <td>Height</td>
+                    <td>{{physicalStateDetails.heightFeet}}'{{physicalStateDetails.heightInches}}"</td>
+                </tr>
                 
                 <tr>
                     <td>Weight</td>
                     <td>{{physicalStateDetails.weight}}</td>
-                    </tr>
+                </tr>
+                <tr>
+                    <td>BMI</td>
+                    <td>{{physicalStateDetails.bmi}}</td>
+                </tr>
+                <tr>
+                    <td>SpO2</td>
+                    <td>{{physicalStateDetails.spO2}}</td>
+                </tr>
                 <tr>
                     <td>Updated On</td>
                     <td>{{physicalStateDetails.editedOn | date:'dd-MM-YYY'}}</td>
