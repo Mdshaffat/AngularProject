@@ -90,3 +90,8 @@ tr{
           width: 100%;
       }
 }
+
+.addbutton {
+    background-color: #eae0c8;
+      color: black;
+}

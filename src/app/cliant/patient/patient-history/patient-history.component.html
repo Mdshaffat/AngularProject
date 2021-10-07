@@ -3,7 +3,7 @@
     <mat-label color='red'>Enter Patient ID</mat-label>
     <input type="number" #searchBar matInput value='searchValue' (keyup.enter)='getPatientHistory(searchBar.value)'>
  </mat-form-field>&nbsp;
- <button mat-raised-button color="primary" (click)='getPatientHistory(searchBar.value)'type='submit'>Submit</button>
+ <button class="submitbutton" mat-raised-button  (click)='getPatientHistory(searchBar.value)'type='submit'>Submit</button>
 </div>
 
 <body class="userdetails" *ngIf="patientHistory">

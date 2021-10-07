@@ -1,6 +1,6 @@
 table {
     margin: 10px;
-    width: 100%;
+    width: 99%;
   }
   
   .mat-form-field {
@@ -16,6 +16,7 @@ table {
   .addnewuser {
     float: right;
     width: 15%;
+    margin-bottom: 10px;
     margin-right: 5%;
   }
   .mat-column-Edit {
@@ -24,21 +25,26 @@ table {
   }
   .buttonadd {
     margin-right: -1%;
-    color: cornsilk;
+    color: rgb(0, 0, 0);
   
   }
   .mat-icon {
     margin: 2%;
   }
   .mat-icon:hover {
-    background-color: #3f51b5 ;
-    color: lavenderblush;
+    background-color: #ebc672 ;
+    color: rgb(0, 0, 0);
     cursor: pointer;
   }
   .addbutton {
-    background-color: #3f51b5;
+    background-color: #eae0c8;
     cursor: pointer;
-    color: ivory;
+    color: rgb(0, 0, 0);
+  }
+  .addbutton:hover {
+    background-color: #ecc66f;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
   }
   th.mat-sort-header-sorted {
     color: black;

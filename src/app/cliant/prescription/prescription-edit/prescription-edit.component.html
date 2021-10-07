@@ -1,44 +1,56 @@
 <div>
   <form [formGroup]="prescriptionUpdateForm" (ngSubmit)="onSubmit()">
-<body id="print-section">
-  <div id="container">
-      <div id="head">
-          <h1>{{prescription.hospitalName}}</h1>
-          <p>Doctor: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
-      </div>
-      <div id="nav" >
-          <p> <strong> Patient Name: </strong>{{prescription.patientFirstName}} {{prescription.patientLastName}} | 
-            <strong>Age: </strong> {{prescription.patientAge}}
-            | <strong *ngIf="prescription.patientBloodGroup">Blood Group: </strong> {{prescription.patientBloodGroup}} 
-           </p>
-          <p *ngFor="let prescriptionVital of prescription.physicalStat">
-          <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
-          <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
-          <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span>
-          <span *ngIf="prescriptionVital.bloodPressure"> <strong> | Blood Pressure:</strong> {{prescriptionVital.bloodPressure}} </span>
-          <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
-          <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
-          </p>
-      </div>
-      <div id="content">
-          <div id="aside">
-              <h3>Cc</h3>
-              <textarea formControlName="doctorsObservation" style="white-space: pre-wrap;"></textarea>
-              <h3>Advice Test</h3>
-              <textarea formControlName="adviceTest" style="white-space: pre-wrap;"></textarea>
-          </div>
-          <div id="main">
-            <h3>Rx</h3>
-            <textarea formControlName="adviceMedication"></textarea>
-              <div class="rel">
-                  <h3>Note</h3>
-                  <textarea formControlName="note"></textarea>
+  <body id="print-section">
+    <div id="container" class="bottomborder">
+        <div id="head">
+            <h1>{{prescription.hospitalName}}</h1>
+            <p>Doctor Name: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
+            <p>BMDC Reg No: {{prescription.bmdcRegNo}}</p>
+            <p>Email: {{prescription.optionalEmail}}</p>
+        </div>
+        <div id="nav" >
+            <p> <strong> Patient Name: </strong>{{prescription.patientFirstName}} {{prescription.patientLastName}} | 
+              <strong>Age: </strong> {{prescription.patientAge}}
+              | <strong *ngIf="prescription.patientBloodGroup">Blood Group: </strong> {{prescription.patientBloodGroup}} 
+            </p>
+        </div>
+        <div id="content">
+            <div id="aside">
+                <h3>Cc</h3>
+                <p *ngFor="let prescriptionVital of prescription.physicalStat">
+                  <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
+                  <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
+                  <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span> <strong> | </strong>
+                  <span *ngIf="prescriptionVital.bloodPressureSystolic"> <strong> Blood Pressure:</strong> {{prescriptionVital.bloodPressureSystolic}}/{{prescriptionVital.bloodPressureDiastolic}} mmHg </span>
+                  <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
+                  <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
+                </p>
+                <textarea formControlName="doctorsObservation" style="white-space: pre-wrap;">
+                </textarea>
+                <mat-error *ngIf="f.doctorsObservation.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+                <h3>Advice Test</h3>
+                <textarea formControlName="adviceTest" style="white-space: pre-wrap;"></textarea>
+                <mat-error *ngIf="f.adviceTest.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+            </div>
+            <div id="main">
+              <h3>Rx</h3>
+              <textarea formControlName="adviceMedication"></textarea>
+              <mat-error *ngIf="f.adviceMedication.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+                <div class="rel">
+                    <h3>Note</h3>
+                    <textarea 
+                      cdkTextareaAutosize
+                      cdkAutosizeMinRows=1
+                      formControlName="note"
+                    >
+                    </textarea>
+                    <mat-error *ngIf="f.note.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+                </div>
               </div>
             </div>
+            
           </div>
-          
-        </div>
-      </body>
+        </body>
       <div>
         <button 
         mat-raised-button

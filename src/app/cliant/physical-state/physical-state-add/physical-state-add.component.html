@@ -5,7 +5,7 @@
           <form [formGroup]="physicalStateAddForm" (ngSubmit)="onSubmit()" autocomplete="nope" class="loginForm">
             <mat-form-field class="col-patient-id" appearance="fill">
               <mat-label>Patient Id</mat-label>
-              <input formControlName="patientId" matInput >
+              <input formControlName="patientId" matInput readonly>
               <mat-error *ngIf="f.patientId.hasError('required')">Required</mat-error>
           </mat-form-field>    
             <mat-form-field appearance="fill" class="col-patient">
@@ -35,9 +35,9 @@
                   <tr>
                     <td>
                       <mat-form-field class="col-weight">
-                        <mat-label>Weight</mat-label>
-                        <input formControlName="weight" matInput>
-                        <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
+                        <mat-label>Weight(kg)</mat-label>
+                        <input formControlName="weight" matInput maxlength="3">
+                        <mat-error *ngIf="f.weight.hasError('pattern')">Input Valid Number</mat-error>
                     </mat-form-field>
                     </td>
                     <td>
@@ -68,8 +68,9 @@
                   <tr>
                     <td>
                       <mat-form-field class="col-temperature">
-                        <mat-label>Body Temparature</mat-label>
-                        <input formControlName="bodyTemparature" matInput >
+                        <mat-label>Body Temparature(Fahrenheit)</mat-label>
+                        <input formControlName="bodyTemparature" matInput maxlength="3" >
+                        <mat-error *ngIf="f.bodyTemparature.hasError('pattern')">Input Valid Number</mat-error>
                         <mat-error *ngIf="f.bodyTemparature.hasError('required')">Required</mat-error>
                     </mat-form-field>
                     </td>
@@ -79,14 +80,16 @@
                   <td>
                     <mat-form-field  appearance="fill">
                       <mat-label>Systolic</mat-label>
-                      <input type="number" formControlName="bloodPressureSystolic" matInput >
+                      <input formControlName="bloodPressureSystolic" matInput maxlength="3">
+                      <mat-error *ngIf="f.bloodPressureSystolic.hasError('pattern')">Input Valid Number</mat-error>
                       <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
                   </mat-form-field>
                   </td>
                   <td>
                     <mat-form-field  appearance="fill">
                       <mat-label>Diastolic</mat-label>
-                      <input type="number" formControlName="bloodPressureDiastolic" matInput >
+                      <input formControlName="bloodPressureDiastolic" matInput maxlength="3">
+                      <mat-error *ngIf="f.bloodPressureDiastolic.hasError('pattern')">Input Valid Number</mat-error>
                       <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
                   </mat-form-field>
                   </td>
@@ -95,13 +98,15 @@
                 
               <mat-form-field class="col-v-pulserate">
                 <mat-label>Pulse Rate</mat-label>
-                <input  formControlName="pulseRate" matInput >
+                <input  formControlName="pulseRate" matInput maxlength="3">
+                <mat-error *ngIf="f.pulseRate.hasError('pattern')">Input Valid Number</mat-error>
             </mat-form-field>
             <mat-form-field class="col-v-spo2">
               <mat-label>SpO2</mat-label>
-              <input  formControlName="spO2" matInput >
+              <input  formControlName="spO2" matInput maxlength="3">
+              <mat-error *ngIf="f.spO2.hasError('pattern')">Input Valid Number</mat-error>
           </mat-form-field>
-          <button mat-raised-button color="primary" type="submit">ADD</button>
+          <button class="addbutton" mat-raised-button type="submit">ADD</button>
           </form>    
       </div>
   </body>

@@ -17,7 +17,7 @@ div {
 
 h3 {
 	padding: 0px;
-	margin: 5px;
+	margin: 1px;
 }
 
 textarea {
@@ -39,9 +39,11 @@ div:nth-child(even) {
 	width: 100%;
     
 }
-
+.bottomborder {
+	border-bottom: 1px solid black;
+}
 #head {
-	padding: 2px 0px 20px 0px;
+	padding: 2px 0px 2px 0px;
 }
 
 #head > h1,
@@ -105,7 +107,7 @@ div:nth-child(even) {
 	padding: 0;
 	box-sizing: border-box;
 	width: 95%;
-	height: 35%;
+	height: 29%;
 }
 .rel {
 	bottom: 25px;

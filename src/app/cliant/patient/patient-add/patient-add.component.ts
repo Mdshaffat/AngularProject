@@ -70,31 +70,31 @@ export class PatientAddComponent implements OnInit {
 
   createPatientAddForm(){
     this.patientAddForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: [''],
+      firstName: ['', [Validators.required, Validators.maxLength(40)]],
+      lastName: ['', Validators.maxLength(40)],
       mobileNumber: [, [Validators.maxLength(11), Validators.pattern('^[0-9]*$')]],
       doB: ['', Validators.required],
       gender: ['', Validators.required],
       maritalStatus: [],
       primaryMember: [true],
-      address: [],
+      address: [, Validators.maxLength(200)],
       divisionId: [],
       districtId: [],
       upazilaId: [],
-      nid: [''],
+      nid: ['', [Validators.maxLength(25), Validators.pattern('^[0-9]*$')]],
       bloodGroup: [''],
       branchId: ['', Validators.required],
       isActive: [true],
-      note: [''],
+      note: ['', Validators.maxLength(300)],
       heightFeet: [],
       heightInches: [],
-      weight: [''],
+      weight: ['', [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
       bmi: [''],
-      bodyTemparature: [''],
-      bloodPressureSystolic: [],
-      bloodPressureDiastolic: [],
-      spO2: [''],
-      pulseRate: ['']
+      bodyTemparature: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      bloodPressureSystolic: [, [Validators.maxLength(4), Validators.pattern('^[0-9]*$')]],
+      bloodPressureDiastolic: [, [Validators.maxLength(4), Validators.pattern('^[0-9]*$')]],
+      spO2: ['', [Validators.maxLength(4), Validators.pattern('^[0-9]*$')]],
+      pulseRate: ['', [Validators.maxLength(4), Validators.pattern('^[0-9]*$')]]
     });
   }
   loadHospital(){

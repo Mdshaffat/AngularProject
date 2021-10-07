@@ -17,7 +17,7 @@ export class PrescriptionListComponent implements OnInit , AfterViewInit {
   currentUser$: Observable<IUserTokenProvider>;
   isAdmin$: Observable<boolean>;
   isDoctor$: Observable<boolean>;
-  displayedColumns: string[] = ['Id', 'PatientId', 'PatientName', 'PatientMobile', 'DoctorName', 'CreatedOn', 'Action'];
+  displayedColumns: string[] = ['Id', 'PatientId', 'PatientName', 'PatientMobile', 'DoctorName', 'CreatedOn', 'Edit/View'];
   prescriptions: IPrescription[] = [];
   dataSource = new MatTableDataSource<IPrescription>(this.prescriptions);
   @ViewChild(MatSort, {static: false}) sort: MatSort;

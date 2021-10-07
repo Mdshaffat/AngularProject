@@ -45,6 +45,10 @@
         </mat-option>
       </mat-autocomplete>
   </mat-form-field>
+  <mat-form-field class="form-stock" appearance="fill">
+    <mat-label>Total Stock</mat-label>
+    <input readonly type="number" matInput [formControl]="currentStock">
+  </mat-form-field>
 
   <mat-form-field class="form-quantity" appearance="fill">
     <mat-label>Quantity</mat-label>
@@ -55,7 +59,7 @@
     <input type="number" matInput [formControl]="itemTotal">
   </mat-form-field>
 
-  <button mat-button (click)="addMedicinetoLine()">ADD</button>
+  <button class="addbutton" mat-raised-button (click)="addMedicinetoLine()">ADD</button>
 </form>
 <hr>
 <form [formGroup]="medicinePurchaseForm" (ngSubmit)="onSubmit()" novalidate *ngIf="medicinePurchaseForm">
@@ -103,8 +107,10 @@
         </table>
     </div>
     <button mat-raised-button
+            color="accent"
             [useExistingCss]="true" 
             printSectionId="print-section"  
             ngxPrint
-            color="primary" type="submit">SAVE & PRINT</button>
+            class="addbutton"
+            type="submit">SAVE & PRINT</button>
 </form>

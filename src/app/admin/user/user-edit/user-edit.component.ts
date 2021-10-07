@@ -45,11 +45,13 @@ export class UserEditComponent implements OnInit , AfterViewInit {
     this.updateUserForm = this.fb.group({
       userId: [this.id],
       hospitalId: [],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(40)]],
+      lastName: ['', [Validators.maxLength(40)]],
       email: ['', [Validators.required, Validators.email]],
-      designation: [''],
-      phoneNumber: [''],
+      designation: ['', [ Validators.maxLength(15)]],
+      bmdcRegNo: [ ,  [ Validators.maxLength(15)]],
+      optionalEmail: [, Validators.email],
+      phoneNumber: ['', [Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')]],
       isActive: [true, Validators.required],
       role: []
   });
@@ -102,6 +104,8 @@ export class UserEditComponent implements OnInit , AfterViewInit {
         lastName: this.updateUser.lastName,
         email: this.updateUser.email,
         designation: this.updateUser.designation,
+        bmdcRegNo: this.updateUser.bmdcRegNo,
+        optionalEmail: this.updateUser.optionalEmail,
         phoneNumber: this.updateUser.phoneNumber,
         isActive: this.updateUser.isActive,
         role: this.updateUser.role

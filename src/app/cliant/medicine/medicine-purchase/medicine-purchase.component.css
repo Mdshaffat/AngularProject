@@ -41,3 +41,7 @@ tr:nth-child(even) {
   color: #dddddd;
   background: rgb(199, 16, 77);
 }
+.addbutton {
+  background-color: #eae0c8;
+  color: black;
+}

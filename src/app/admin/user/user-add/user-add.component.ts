@@ -37,11 +37,13 @@ export class UserAddComponent implements OnInit {
   createUserAddForm(){
     this.userAddForm = this.fb.group({
       hospitalId: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(40)]],
+      lastName: ['', [Validators.maxLength(40)]],
       email: ['', [ Validators.required, Validators.email], [this.validateEmailNotTaken()]],
-      designation: ['', Validators.required],
-      phoneNumber: ['', Validators.required],
+      designation: ['', [Validators.maxLength(20)]],
+      bmdcRegNo: [, [ Validators.maxLength(15)]],
+      optionalEmail: [, Validators.email],
+      phoneNumber: ['', [Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')]],
       joiningDate: ['', Validators.required ],
       isActive: [true, Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],

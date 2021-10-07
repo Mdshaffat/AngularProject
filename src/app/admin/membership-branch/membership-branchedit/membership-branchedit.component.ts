@@ -33,10 +33,10 @@ export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
   createUpdateBranchForm(){
     this.updateBranchForm = this.fb.group({
       id: [this.id],
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      upazila: ['', Validators.required],
-      district: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      address: ['', [Validators.required, Validators.maxLength(200)]],
+      upazila: ['', [Validators.required, Validators.maxLength(25)]],
+      district: ['', [Validators.required, Validators.maxLength(25)]],
       isActive: [true, Validators.required],
     });
   }

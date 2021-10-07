@@ -34,9 +34,9 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
     this.updateHospitalForm = this.fb.group({
       id: [this.id],
       name: ['', Validators.required],
-      address: ['', Validators.required],
-      upazilla: ['', Validators.required],
-      district: ['', Validators.required],
+      address: ['', [Validators.required, Validators.maxLength(200)]],
+      upazilla: ['', [Validators.required, Validators.maxLength(50)]],
+      district: ['', [Validators.required, Validators.maxLength(50)]],
       isActive: [true, Validators.required],
     });
   }

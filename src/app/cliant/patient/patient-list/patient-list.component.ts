@@ -13,7 +13,7 @@ import { PatientService } from '../patient.service';
 export class PatientListComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['FirstName', 'LastName', 'MobileNo',
                                  'DoB', 'Gender', 'BloodGroup', 'CreatedOn',
-                                  'Active', 'Action'];
+                                  'Active', 'Edit/View'];
   patients: IPatient[] = [];
   dataSource = new MatTableDataSource<IPatient>(this.patients);
   @ViewChild(MatSort, {static: false}) sort: MatSort;

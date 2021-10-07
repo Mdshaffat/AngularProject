@@ -4,7 +4,7 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
     </mat-form-field><br>
     <div class="addnewuser">
-      <button class="btn addbutton" [routerLink]="['../add']" >
+      <button mat-raised-button color="accent" class="btn addbutton" [routerLink]="['../add']" >
         <span class="material-icons buttonadd btn">
           add
         </span>New Branch</button>

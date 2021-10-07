@@ -36,14 +36,14 @@
             <td mat-cell *matCellDef="let dataSource"> {{dataSource.status}} </td>
           </ng-container>
           <ng-container matColumnDef="EditStatus">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="status"> Edit Status </th>
-            <td mat-cell *matCellDef="let dataSource">
+            <th mat-header-cell *matHeaderCellDef> Edit Status </th>
+            <td matTooltip="EditStatus" mat-cell *matCellDef="let dataSource">
                <mat-icon (click)="openUpdateVisitEntryStatusDialog(dataSource)">edit</mat-icon>
             </td>
           </ng-container>
-        <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
-          <td mat-cell *matCellDef="let dataSource">
+        <ng-container matColumnDef="Edit">
+          <th mat-header-cell *matHeaderCellDef> Edit </th>
+          <td matTooltip="Edit" mat-cell *matCellDef="let dataSource">
             <mat-icon (click)="openUpdateVisitEntryDialog(dataSource)">edit</mat-icon>
           </td>
         </ng-container>

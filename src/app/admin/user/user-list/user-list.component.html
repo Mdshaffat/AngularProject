@@ -4,7 +4,7 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
     </mat-form-field><br>
     <div class="addnewuser">
-      <button class="btn addbutton" [routerLink]="['../useradd']" >
+      <button mat-raised-button color="accent" class="btn addbutton" [routerLink]="['../useradd']" >
         <span class="material-icons buttonadd btn">
           add
         </span>Add New User</button>

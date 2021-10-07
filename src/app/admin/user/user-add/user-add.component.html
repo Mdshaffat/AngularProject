@@ -2,7 +2,7 @@
   <button mat-button [routerLink]="['../userlist']" >Back</button>
     <div class="loginForm">
         <form [formGroup]="userAddForm" (ngSubmit)="onSubmit()" autocomplete="nope">
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" class="col-hospital">
                 <mat-label>Hospital</mat-label>
                 <mat-select formControlName="hospitalId" required>
                   <mat-option>--</mat-option>
@@ -12,49 +12,52 @@
                 </mat-select>
                 <mat-error *ngIf="f.hospitalId.hasError('required')">Please choose Hospital</mat-error>
               </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="col-firstname">
                 <mat-label>First Name</mat-label>
-                <input required formControlName="firstName" matInput >
+                <input required formControlName="firstName" matInput maxlength="40">
+                <mat-error *ngIf="f.firstName.hasError('maxlength')">Maximum 40 charecter</mat-error>
                 <mat-error *ngIf="f.firstName.hasError('required')">Required</mat-error>
-            </mat-form-field><br>
-            <mat-form-field>
+            </mat-form-field>
+            <mat-form-field class="col-lastname">
                 <mat-label>Last Name</mat-label>
-                <input required formControlName="lastName" matInput >
+                <input formControlName="lastName" matInput maxlength="40">
                 <mat-error *ngIf="f.lastName.hasError('required')">Required</mat-error>
-            </mat-form-field><br>
-            <mat-form-field>
+            </mat-form-field>
+            <mat-form-field class="col-phonenumber">
+              <mat-label>Phone Number</mat-label>
+              <input required formControlName="phoneNumber" matInput maxlength="11">
+              <mat-error *ngIf="f.phoneNumber.hasError('pattern')">Input a valid number</mat-error>
+              <mat-error *ngIf="f.phoneNumber.hasError('required')">Required</mat-error>
+          </mat-form-field>
+            <mat-form-field class="col-email">
                 <mat-label>Email</mat-label>
                 <input required formControlName="email" matInput >
                 <mat-error *ngIf="f.email.hasError('required')">Required</mat-error>
                 <mat-error *ngIf="f.email.hasError('email')">Enter a valid email</mat-error>
                 <mat-error *ngIf="f.email.errors?.emailExists">Email Exist.</mat-error>
-            </mat-form-field><br>
-            <mat-form-field>
+            </mat-form-field>
+            <mat-form-field class="col-designation">
                 <mat-label>Designation</mat-label>
                 <input required formControlName="designation" matInput>
                 <mat-error *ngIf="f.designation.hasError('required')">Required</mat-error>
-            </mat-form-field><br>
-            <mat-form-field>
-                <mat-label>Phone Number</mat-label>
-                <input required formControlName="phoneNumber" type="number" matInput>
-                <mat-error *ngIf="f.phoneNumber.hasError('required')">Required</mat-error>
-            </mat-form-field><br>
-            <mat-form-field appearance="fill">
+                <mat-error *ngIf="f.designation.hasError('maxlength')">Maximum 20 charecter</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-joiningdate">
                 <mat-label>Joining Date</mat-label>
                 <input formControlName="joiningDate" matInput [matDatepicker]="picker" required>
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="f.joiningDate.hasError('required')">Please choose Joinning Date</mat-error>
               </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="col-password">
                 <mat-label>Password</mat-label>
                 <input required formControlName="password" matInput [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                     <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                 </button>
                 <mat-error></mat-error>
-            </mat-form-field><br>
-            <mat-form-field>
+            </mat-form-field>
+            <mat-form-field class="col-confirmpassword">
                 <mat-label>Confirm Password</mat-label>
                 <input required formControlName="confirmPassword" matInput [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -65,8 +68,8 @@
             </mat-form-field>
             <small style="margin-left: 15px;" *ngIf="f.confirmPassword.touched || userAddForm.errors?.identityRevealed">
               <mat-error style="margin-left: 15px;" *ngIf="userAddForm.errors?.identityRevealed">Passwords do not match</mat-error>
-            </small><br>
-            <mat-form-field appearance="fill">
+            </small>
+            <mat-form-field appearance="fill" class="col-role">
                 <mat-label>Role</mat-label>
                 <mat-select formControlName="role" required>
                   <mat-option>--</mat-option>
@@ -77,9 +80,19 @@
                 <mat-error *ngIf="f.role.hasError('required')">Please choose a Role</mat-error>
               </mat-form-field>
 
-                <mat-checkbox formControlName="isActive" class="active">Active</mat-checkbox>
+              <h2>For Doctors Only</h2>
+              <mat-form-field class="col-bmdcRegNo">
+                <mat-label>BMDC Reg No.(For Doctor Only)</mat-label>
+                <input  formControlName="bmdcRegNo" matInput>
+                <mat-error *ngIf="f.bmdcRegNo.hasError('maxlength')">Maximum 15 charecter</mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-optionalEmail">
+              <mat-label>Optional Email(For Doctor Only)</mat-label>
+              <input formControlName="optionalEmail" matInput>
+              <mat-error *ngIf="f.optionalEmail.hasError('email')">Input a valid email</mat-error>
+          </mat-form-field>
 
-                <br/><button mat-raised-button color="primary" type="submit">ADD</button>
+                <br/><button mat-raised-button color="accent" type="submit">ADD</button>
             
         </form>    
     </div>

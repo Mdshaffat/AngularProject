@@ -76,15 +76,15 @@ export class PhysicalStateAddComponent implements OnInit {
     this.physicalStateAddForm = this.fb.group({
       patientId: ['', Validators.required],
       visitEntryId: [],
-      bodyTemparature: [],
+      bodyTemparature: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
       heightFeet: [],
       heightInches: [],
-      bloodPressureSystolic: [],
-      bloodPressureDiastolic: [],
-      heartRate: [],
-      pulseRate: [],
-      spO2: [],
-      weight: []
+      bloodPressureSystolic: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      bloodPressureDiastolic: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      heartRate: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      pulseRate: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      spO2: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      weight: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]]
     });
   }
 

@@ -6,10 +6,12 @@
                   <mat-label>First Name</mat-label>
                   <input required formControlName="firstName" matInput>
                   <mat-error *ngIf="f.firstName.hasError('required')">Required</mat-error>
+                  <mat-error *ngIf="f.firstName.hasError('maxlength')">Maximum Length 40 Charecter</mat-error>
               </mat-form-field>
               <mat-form-field class="col-lastName" appearance="fill">
                 <mat-label>Last Name</mat-label>
                 <input formControlName="lastName" matInput>
+                <mat-error *ngIf="f.lastName.hasError('maxlength')">Maximum Length 40 Charecter</mat-error>
                 <mat-error *ngIf="f.lastName.hasError('required')">Required</mat-error>
             </mat-form-field>
             <mat-form-field class="col-branchId" appearance="fill">
@@ -24,12 +26,14 @@
             </mat-form-field>
               <mat-form-field class="col-nid" appearance="fill">
                 <mat-label>NID</mat-label>
-                <input type="number" formControlName="nid" matInput >
-                <mat-error *ngIf="f.nid.hasError('required')">Required</mat-error>
+                <input formControlName="nid" matInput maxlength="25">
+                <mat-error *ngIf="f.nid.hasError('maxlength')">Maximum 25 Charecter</mat-error>
+                <mat-error *ngIf="f.nid.hasError('pattern')">Please input valid number</mat-error>
             </mat-form-field>
             <mat-form-field class="col-address" appearance="fill">
               <mat-label>Address</mat-label>
               <input style="overflow: scroll;" formControlName="address" matInput>
+              <mat-error *ngIf="f.address.hasError('maxlength')">Maximum 200 Charecter</mat-error>
               <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
           </mat-form-field>
           <mat-form-field class="col-division" appearance="fill">
@@ -113,12 +117,12 @@
             </mat-form-field>
             <mat-form-field class="col-note" appearance="fill">
               <mat-label>Note</mat-label>
-              <input formControlName="note" matInput >
+              <textarea cdkTextareaAutosize matInput formControlName="note"></textarea>
               <mat-error *ngIf="f.note.hasError('required')">Required</mat-error>
-          </mat-form-field>
+              <mat-error *ngIf="f.note.hasError('maxlength')">Maximum 300 Charecter</mat-error>
+            </mat-form-field>
 <!-- checkBox -->
             <mat-checkbox formControlName="primaryMember" class="col-primaryMember">Primary Member</mat-checkbox><br>
-            <mat-checkbox formControlName="isActive" class="col-isActive">Active</mat-checkbox>
 
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <!-- Patient Vital -->
@@ -127,13 +131,15 @@
           <td>
             <mat-form-field  appearance="fill">
               <mat-label>Body Temparature(Fahrenheit)</mat-label>
-              <input type="number" formControlName="bodyTemparature" matInput >
+              <input formControlName="bodyTemparature" maxlength="3" matInput >
+              <mat-error *ngIf="f.bodyTemparature.hasError('pattern')">Please input a valid number</mat-error>
           </mat-form-field>
           </td>
           <td>
             <mat-form-field  appearance="fill">
               <mat-label>Weight(Kg)</mat-label>
-              <input formControlName="weight" matInput>
+              <input formControlName="weight" matInput maxlength="3">
+              <mat-error *ngIf="f.weight.hasError('pattern')">Please input a valid number</mat-error>
               <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
             </mat-form-field>
           </td>
@@ -166,14 +172,16 @@
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>Pulse Rate</mat-label>
-            <input type="number" formControlName="pulseRate" matInput >
+            <input formControlName="pulseRate" matInput  maxlength="4">
+            <mat-error *ngIf="f.pulseRate.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.pulseRate.hasError('required')">Required</mat-error>
         </mat-form-field>
         </td>
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>SpO2</mat-label>
-            <input type="number" formControlName="spO2" matInput >
+            <input maxlength="4" formControlName="spO2" matInput >
+            <mat-error *ngIf="f.spO2.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
         </td>
@@ -183,20 +191,22 @@
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>Systolic</mat-label>
-            <input type="number" formControlName="bloodPressureSystolic" matInput >
+            <input maxlength="4" formControlName="bloodPressureSystolic" matInput >
+            <mat-error *ngIf="f.bloodPressureSystolic.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
         </td>
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>Diastolic</mat-label>
-            <input type="number" formControlName="bloodPressureDiastolic" matInput >
+            <input maxlength="4" formControlName="bloodPressureDiastolic" matInput >
+            <mat-error *ngIf="f.bloodPressureDiastolic.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
         </td>
       </tr>
     </table>
-        <br/><button mat-raised-button color="primary" type="submit">ADD</button>
+        <br/><button class="addbutton" mat-raised-button type="submit">ADD</button>
           </form>    
       </div>
   </body>

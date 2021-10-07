@@ -16,10 +16,10 @@ export class MedicineService {
     constructor(private http: HttpClient) { }
 
     getAllMedicine(){
-      if (this.medicines.length > 0) {
-        return of(this.medicines);
-      }
-      return this.http.get<IMedicine[]>(this.baseUrl + 'medicine').pipe(
+      const token = localStorage.getItem('hotpital_user_token');
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', `Bearer ${token}`);
+      return this.http.get<IMedicine[]>(this.baseUrl + 'medicine', {headers}).pipe(
         map(response => {
           this.medicines = response;
           return response;

@@ -6,30 +6,33 @@
                   <mat-label>Brand Name</mat-label>
                   <input required formControlName="brandName" matInput>
                   <mat-error *ngIf="f.brandName.hasError('required')">Required</mat-error>
+                  <mat-error *ngIf="f.brandName.hasError('maxlength')">Maximum Length 40 charecter</mat-error>
               </mat-form-field><br>
               <mat-form-field>
                   <mat-label>Generic Name</mat-label>
                   <input required formControlName="genericName" matInput >
                   <mat-error *ngIf="f.genericName.hasError('required')">Required</mat-error>
+                  <mat-error *ngIf="f.genericName.hasError('maxlength')">Maximum Length 50 charecter</mat-error>
               </mat-form-field><br>
               <mat-form-field>
                   <mat-label>Manufacturar</mat-label>
                   <input required formControlName="manufacturar" matInput >
                   <mat-error *ngIf="f.manufacturar.hasError('required')">Required</mat-error>
+                  <mat-error *ngIf="f.manufacturar.hasError('maxlength')">Maximum Length 150 charecter</mat-error>
               </mat-form-field><br>
               <mat-form-field>
                 <mat-label>Unit</mat-label>
-                <input required formControlName="unit" matInput >
+                <input required formControlName="unit" matInput maxlength="8">
+                <mat-error *ngIf="f.unit.hasError('pattern')">Input Valid Number</mat-error>
                 <mat-error *ngIf="f.unit.hasError('required')">Required</mat-error>
             </mat-form-field><br>
               <mat-form-field>
                   <mat-label>Unit Price</mat-label>
-                  <input required formControlName="unitPrice" matInput>
+                  <input type="number" required formControlName="unitPrice" matInput max="8">
+                  <mat-error *ngIf="f.unitPrice.hasError('pattern')">Input Valid Number</mat-error>
                   <mat-error *ngIf="f.unitPrice.hasError('required')">Required</mat-error>
               </mat-form-field><br>
-                  <mat-checkbox formControlName="isActive" class="active">Active</mat-checkbox>
-  
-                  <br/><button mat-raised-button color="primary" type="submit">ADD</button>
+                  <br/><button mat-raised-button class="addbutton" type="submit">ADD</button>
               
           </form>    
       </div>

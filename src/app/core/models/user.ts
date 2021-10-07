@@ -7,6 +7,8 @@ export interface IUser {
     email: string;
     phoneNumber: string;
     designation: string;
+    bmdcRegNo: string;
+    optionalEmail: string;
     joiningDate: Date;
     lastLoginDate: Date;
     createdOn: Date;

@@ -12,7 +12,7 @@ import { PhysicalStateService } from '../physical-state.service';
 })
 export class PhysicalStateListComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['PatientID', 'PatientName', 'VisitId', 'BloodPressure', 'HeartRate',
-                                  'BodyTemparature', 'Weight', 'CreatedOn', 'CreatedBy', 'Action'];
+                                  'BodyTemparature', 'Weight', 'CreatedOn', 'CreatedBy', 'Edit/View'];
   physicalStates: IPhysicalState[] = [];
   dataSource = new MatTableDataSource<IPhysicalState>(this.physicalStates);
   @ViewChild(MatSort, {static: false}) sort: MatSort;

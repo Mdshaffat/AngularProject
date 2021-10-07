@@ -60,22 +60,22 @@ export class PatientUpdateComponent implements OnInit , AfterViewInit {
   createUpdatePatientForm(){
     this.updatePatientForm = this.fb.group({
       id: [this.id],
-      firstName: ['', Validators.required],
-      lastName: [''],
-      address: [''],
-      divisionId: [],
-      districtId: [],
-      upazilaId: [],
-      mobileNumber: [''],
+      firstName: ['', [Validators.required, Validators.maxLength(40)]],
+      lastName: ['', Validators.maxLength(40)],
+      address: [, Validators.maxLength(200)],
+      divisionId: [, Validators.required],
+      districtId: [,  Validators.required],
+      upazilaId: [,  Validators.required],
+      mobileNumber: [, [Validators.maxLength(11), Validators.pattern('^[0-9]*$')]],
       doB: ['', Validators.required],
       gender: ['', Validators.required],
       maritalStatus: [],
       primaryMember: [true],
-      nid: [true],
+      nid: ['', [Validators.maxLength(25), Validators.pattern('^[0-9]*$')]],
       bloodGroup: [''],
       branchId: ['', Validators.required],
       isActive: [true],
-      note: ['']
+      note: ['', Validators.maxLength(300)],
     });
   }
   get f(){

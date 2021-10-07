@@ -1,3 +1,6 @@
+#toolbar {
+  background-color: #eae0c8;
+}
 #logo {
   border-radius: 4px;
   margin-bottom: 5px;
@@ -13,11 +16,11 @@
 border-bottom: 5px solid white;
 }
 .mat-button:hover{
-background-color: white;
-color: #3f51b5 ;
+background-color: #ebcd89;
+color: #000000 ;
 }
 .mat-button {
-  border: 1px solid white;
+  border: 1px solid rgb(0, 0, 0);
   margin: 5px;
 }
 /* .router-link-active{

@@ -4,7 +4,7 @@
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
     </mat-form-field><br>
     <div class="addnewuser">
-      <button class="btn addbutton" [routerLink]="['../add']" >
+      <button  class="btn addbutton" [routerLink]="['../add']" >
         <span class="material-icons buttonadd btn">
           add
         </span>Physical Stat</button>
@@ -47,11 +47,11 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header="createdBy"> Created By </th>
             <td mat-cell *matCellDef="let dataSource"> {{dataSource.createdBy}} </td>
           </ng-container>
-        <ng-container matColumnDef="Action">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+        <ng-container matColumnDef="Edit/View">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit/View </th>
           <td mat-cell *matCellDef="let dataSource">
             <mat-icon matTooltip="Edit" [routerLink]="['../edit/'+ dataSource.id]">edit</mat-icon>
-            <mat-icon matTooltip="Details" [routerLink]="['../details/'+ dataSource.id]">info</mat-icon>
+            <mat-icon matTooltip="View" [routerLink]="['../details/'+ dataSource.id]">info</mat-icon>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

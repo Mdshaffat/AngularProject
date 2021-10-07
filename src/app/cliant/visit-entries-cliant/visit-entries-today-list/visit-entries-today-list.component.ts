@@ -18,7 +18,7 @@ import { VisitEntriesStatusUpdateComponent } from '../visit-entries-status-updat
 })
 export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['HospitalName', 'Date', 'FirstName', 'LastName', 'Serial',
-                                 'Status', 'EditStatus', 'Action'];
+                                 'Status', 'EditStatus', 'Edit'];
   visitEntries: IVisitEntry[] = [];
   dataSource = new MatTableDataSource(this.visitEntries);
   @ViewChild(MatSort, {static: false}) sort: MatSort;

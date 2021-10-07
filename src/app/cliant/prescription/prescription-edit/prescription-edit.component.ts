@@ -41,10 +41,10 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
       patientId: ['', Validators.required],
       visitEntryId: ['', Validators.required],
       physicalStateId: [],
-      doctorsObservation: [''],
-      adviceMedication: [''],
-      adviceTest: [''],
-      note: ['']
+      doctorsObservation: ['', Validators.maxLength(2000)],
+      adviceMedication: ['', Validators.maxLength(2000)],
+      adviceTest: ['', Validators.maxLength(2000)],
+      note: ['', Validators.maxLength(2000)]
     });
   }
   get f(){

@@ -22,10 +22,10 @@ export class HospitalAddComponent implements OnInit {
 
   createHospitalAddForm(){
     this.hospitalAddForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      upazilla: ['', Validators.required],
-      district: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(80)]],
+      address: ['', [Validators.required, Validators.maxLength(200)]],
+      upazilla: ['', [Validators.required, Validators.maxLength(25)]],
+      district: ['', [Validators.required, Validators.maxLength(25)]],
       isActive: [true, Validators.required]
     });
   }

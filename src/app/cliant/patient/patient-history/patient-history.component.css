@@ -40,3 +40,12 @@
   .addnewuser:hover{
     cursor: pointer;
   }
+
+  .submitbutton {
+    background-color: #eae0c8;
+    color: black;
+  }
+  .submitbutton:hover {
+    background-color: #e9c46d;
+    color: black;
+  }

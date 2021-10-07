@@ -22,12 +22,12 @@ export class MedicineAddComponent implements OnInit {
 
   createmedicineAddForm(){
     this.medicineAddForm = this.fb.group({
-      brandName: ['', Validators.required],
-      genericName: ['', Validators.required],
-      manufacturar: ['', Validators.required],
-      unit: ['', Validators.required],
-      unitPrice: ['', Validators.required],
-      isActive: [true, Validators.required]
+      brandName: ['', [Validators.required, Validators.maxLength(40)]],
+      genericName: ['', [Validators.required, Validators.maxLength(50)]],
+      manufacturar: ['', [Validators.required, Validators.maxLength(150)]],
+      unit: ['', [Validators.maxLength(8), Validators.pattern('^[0-9]*$')]],
+      unitPrice: ['', [Validators.maxLength(8)]],
+      isActive: [true]
     });
   }
 

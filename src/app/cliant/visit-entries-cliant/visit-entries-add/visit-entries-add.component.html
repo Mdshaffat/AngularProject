@@ -34,7 +34,11 @@
                 <mat-error *ngIf="f.serial.hasError('required')">Required</mat-error>
             </mat-form-field><br>   
               <div mat-dialog-actions>
-                <button mat-button type="submit" [disabled]="!visitEntryAddForm.valid">ADD</button>
+                <button 
+                mat-raised-button 
+                type="submit" 
+                class="addbutton"
+                [disabled]="!visitEntryAddForm.valid">ADD</button>
               </div>
           </form>    
       </div>

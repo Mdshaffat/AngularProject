@@ -1,7 +1,7 @@
 <body>
-    <img id="logo" src="../../../../assets/logo/Logo.png" alt="LOGO"  >
     <div class="loginForm">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="nope">
+            <div><img id="logo-large" src="../../../../assets/logo/Logo.png" alt="LOGO"  ></div>
             <h2>Login</h2>
             <mat-form-field>
                 <mat-label>Enter Your Email</mat-label>
@@ -18,7 +18,7 @@
                 <mat-error *ngIf="f.password.errors?.required">Password Required.</mat-error>
                 <mat-error *ngIf="f.password.errors?.minlength">Minimum 8 charecter</mat-error>
             </mat-form-field><br>
-            <button mat-raised-button color="primary" [disabled]="!loginForm.valid">Submit</button><br>
+            <button mat-raised-button color="accent" [disabled]="!loginForm.valid">Submit</button><br>
             <a [routerLink]="['../forgotpassword']" routerLinkActive="router-link-active" >Forget Password</a>   
         </form><br>
        

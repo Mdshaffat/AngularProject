@@ -39,6 +39,8 @@ export interface IPrescriptionWithVital {
     doctorId: string;
     doctorFirstName: string;
     doctorLastName: string;
+    bmdcRegNo: string;
+    optionalEmail: string;
     visitEntryId: number;
     doctorsObservation: string;
     adviceMedication: string;

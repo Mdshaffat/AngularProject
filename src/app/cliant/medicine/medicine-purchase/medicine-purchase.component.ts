@@ -26,6 +26,8 @@ export class MedicinePurchaseComponent implements OnInit {
   quantity = new FormControl();
   itemTotal = new FormControl();
   price = new FormControl();
+  stock = new FormControl();
+  currentStock = new FormControl();
   totalPrice = 0;
   filteredMedicine: Observable<IMedicine[]>;
   filteredMedicineByID: Observable<IMedicine[]>;
@@ -75,9 +77,19 @@ export class MedicinePurchaseComponent implements OnInit {
     this.genericName.setValue(value.genericName);
     this.brandName.setValue(value.brandName);
     this.price.setValue(value.unitPrice);
+    this.stock.setValue(value.unit);
+    this.currentStock.setValue(value.unit);
   }
   addMedicinetoLine(){
     this.medicineArray.push(this.getLineFormGroup());
+    this.medicineID.reset();
+    this.genericName.reset();
+    this.brandName.reset();
+    this.price.reset();
+    this.stock.reset();
+    this.currentStock.reset();
+    this.quantity.reset();
+    this.itemTotal.reset();
     this.totalPrice = 0;
     this.calculateTotal();
   }
@@ -108,6 +120,7 @@ export class MedicinePurchaseComponent implements OnInit {
     } else {
         this.itemTotal.patchValue( +(this.price.value) * +(this.quantity.value)
         );
+        this.currentStock.patchValue(+(this.stock.value) - +(this.quantity.value));
     }
   }
   calculateTotal(){
@@ -126,6 +139,7 @@ export class MedicinePurchaseComponent implements OnInit {
           purchaseMedicineList: new FormArray([])
         });
         this.totalPrice = 0;
+        this.getAllMedicine();
       }
       if (response.message === 'faild'){
         this.toastr.error( 'FAILED', response.data );

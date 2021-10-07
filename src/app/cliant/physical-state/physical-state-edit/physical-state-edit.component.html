@@ -37,7 +37,7 @@
                       <mat-form-field class="col-weight">
                         <mat-label>Weight</mat-label>
                         <input formControlName="weight" matInput>
-                        <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
+                        <mat-error *ngIf="f.weight.hasError('pattern')">Input Valid Number</mat-error>
                     </mat-form-field>
                     </td>
                     <td>
@@ -69,7 +69,8 @@
                     <td>
                       <mat-form-field class="col-temperature">
                         <mat-label>Body Temparature</mat-label>
-                        <input formControlName="bodyTemparature" matInput >
+                        <input formControlName="bodyTemparature" matInput maxlength="3">
+                        <mat-error *ngIf="f.bodyTemparature.hasError('pattern')">Input Valid Number</mat-error>
                         <mat-error *ngIf="f.bodyTemparature.hasError('required')">Required</mat-error>
                     </mat-form-field>
                     </td>
@@ -79,14 +80,16 @@
                   <td>
                     <mat-form-field  appearance="fill">
                       <mat-label>Systolic</mat-label>
-                      <input type="number" formControlName="bloodPressureSystolic" matInput >
+                      <input maxlength="3" formControlName="bloodPressureSystolic" matInput >
+                      <mat-error *ngIf="f.bloodPressureSystolic.hasError('pattern')">Input Valid Number</mat-error>
                       <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
                   </mat-form-field>
                   </td>
                   <td>
                     <mat-form-field  appearance="fill">
                       <mat-label>Diastolic</mat-label>
-                      <input type="number" formControlName="bloodPressureDiastolic" matInput >
+                      <input maxlength="3" formControlName="bloodPressureDiastolic" matInput >
+                      <mat-error *ngIf="f.bloodPressureDiastolic.hasError('pattern')">Input Valid Number</mat-error>
                       <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
                   </mat-form-field>
                   </td>
@@ -95,13 +98,15 @@
                 
               <mat-form-field class="col-v-pulserate">
                 <mat-label>Pulse Rate</mat-label>
-                <input  formControlName="pulseRate" matInput >
+                <input maxlength="3" formControlName="pulseRate" matInput >
+                <mat-error *ngIf="f.pulseRate.hasError('pattern')">Input Valid Number</mat-error>
             </mat-form-field>
             <mat-form-field class="col-v-spo2">
               <mat-label>SpO2</mat-label>
-              <input  formControlName="spO2" matInput >
+              <input maxlength="3" formControlName="spO2" matInput >
+              <mat-error *ngIf="f.spO2.hasError('pattern')">Input Valid Number</mat-error>
           </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">SAVE</button>
+        <button mat-raised-button class="addbutton" type="submit">SAVE</button>
         </form>    
     </div>
 </body>

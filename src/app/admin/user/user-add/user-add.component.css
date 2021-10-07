@@ -1,25 +1,88 @@
-
-.mat-form-field {
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
-}
 .loginForm {
-    height: 100%;
-    align-items: center;
-    padding-bottom: 40px;  
-    width: 100%;
-    max-width: 360px;
-    margin: auto;
+    padding-top: 0% !important ;
+    padding: 5%;
 }
-button {
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
-    align-items: center;
+
+
+@media only screen and (min-width: 768px) {
+    .loginForm {
+        width: 60%;
+        margin: auto;
+      }
+
+    .col-hospital{
+        width: 100%;
+        margin-right: 0%;
+    }
+    .col-firstname{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-lastname{
+        width: 48%;
+        margin-left: 2%;
+    }
+
+    .col-phonenumber{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-email{
+        width: 48%;
+        margin-left: 2%;
+    }
+    .col-designation{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-joiningdate{
+        width: 48%;
+        margin-left: 2%;
+    }
+    .col-password{
+        width: 48%;
+        margin-right: 1%;
+    }
+
+    .col-confirmpassword{
+        width: 48%;
+        margin-left: 1%;
+    }
+    .col-role{
+        width: 40%;
+        margin-left: 28%;
+    }
+    .col-bmdcRegNo{
+        width: 48%;
+        margin-right: 2%;
+    }
+    .col-optionalEmail{
+        width: 48%;
+        margin-left: 2%;
+    }
+
+   
+
+    [class*="col-v-"] {
+        margin: 1%;
+        width: 10%;
+      }
+    
 }
-.active{
-    width: 330px;
-    margin: 5px;
-    padding: 10px;
+
+
+    /* For mobile phones: */
+@media only screen and (max-width: 768px) {
+    [class*="col-"] {
+        width: 100%;
+      }
+      .mat-form-field {
+          width: 100%;
+      }
+      .loginForm {
+          width: 100%;
+      }
 }
+td {
+    padding-right: 8px;
+  }

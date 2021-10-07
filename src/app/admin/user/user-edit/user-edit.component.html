@@ -14,12 +14,12 @@
                 </mat-form-field>
               <mat-form-field>
                   <mat-label>First Name</mat-label>
-                  <input formControlName="firstName" matInput placeholder="example@domain.com" >
-                  <mat-error></mat-error>
+                  <input formControlName="firstName" matInput placeholder="example@domain.com" maxlength="40" >
+                  <mat-error *ngIf="f.firstName.hasError('maxlength')">Maximum 40 charecter</mat-error>
               </mat-form-field><br>
               <mat-form-field>
                   <mat-label>Last Name</mat-label>
-                  <input formControlName="lastName" matInput >
+                  <input formControlName="lastName" matInput maxlength="40">
                   <mat-error></mat-error>
               </mat-form-field><br>
               <mat-form-field>
@@ -30,12 +30,13 @@
               <mat-form-field>
                   <mat-label>Designation</mat-label>
                   <input formControlName="designation" matInput>
-                  <mat-error></mat-error>
+                  <mat-error *ngIf="f.designation.hasError('maxlength')">Maximum 20 charecter</mat-error>
               </mat-form-field><br>
               <mat-form-field>
                   <mat-label>Phone Number</mat-label>
                   <input formControlName="phoneNumber" matInput>
-                  <mat-error></mat-error>
+                  <mat-error *ngIf="f.phoneNumber.hasError('pattern')">Input a valid number</mat-error>
+                  <mat-error *ngIf="f.phoneNumber.hasError('required')">Required</mat-error>
               </mat-form-field><br>
               <mat-form-field appearance="fill">
                   <mat-label>Role</mat-label>
@@ -47,10 +48,19 @@
                   </mat-select>
                   <mat-error *ngIf="f.role.hasError('required')">Please choose a Role</mat-error>
                 </mat-form-field>
-  
                   <mat-checkbox formControlName="isActive" [checked]="updateUser.role" class="active">Active</mat-checkbox>
-  
-                  <br/><button mat-raised-button color="primary" type="submit">Save</button>
+                  <h2>For Doctors Only</h2>
+                  <mat-form-field class="col-bmdcRegNo">
+                    <mat-label>BMDC Reg No.(For Doctor Only)</mat-label>
+                    <input  formControlName="bmdcRegNo" matInput maxlength="15">
+                    <mat-error *ngIf="f.bmdcRegNo.hasError('maxlength')">Maximum 15 charecter</mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-optionalEmail">
+                  <mat-label>Optional Email(For Doctor Only)</mat-label>
+                  <input formControlName="optionalEmail" matInput>
+                  <mat-error *ngIf="f.optionalEmail.hasError('email')">Input a valid email</mat-error>
+              </mat-form-field>
+                  <br/><button mat-raised-button color="accent" type="submit">Save</button>
               
           </form>    
       </div>

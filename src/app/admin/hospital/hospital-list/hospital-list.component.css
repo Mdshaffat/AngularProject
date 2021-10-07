@@ -24,21 +24,18 @@ table {
   }
   .buttonadd {
     margin-right: -1%;
-    color: cornsilk;
+    margin-bottom: 3px;
   
   }
   .mat-icon {
     margin: 2%;
   }
   .mat-icon:hover {
-    background-color: #3f51b5 ;
-    color: lavenderblush;
     cursor: pointer;
   }
   .addbutton {
-    background-color: #3f51b5;
     cursor: pointer;
-    color: ivory;
+    margin-bottom: 5px;
   }
   th.mat-sort-header-sorted {
     color: black;

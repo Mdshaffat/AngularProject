@@ -31,11 +31,11 @@ export class MedicineEditComponent implements OnInit , AfterViewInit {
   createUpdateHospitalForm(){
     this.updatemedicineForm = this.fb.group({
       id: [this.id],
-      brandName: ['', Validators.required],
-      genericName: ['', Validators.required],
-      manufacturar: ['', Validators.required],
-      unit: ['', Validators.required],
-      unitPrice: ['', Validators.required],
+      brandName: ['', [Validators.required, Validators.maxLength(40)]],
+      genericName: ['', [Validators.required, Validators.maxLength(50)]],
+      manufacturar: ['', [Validators.required, Validators.maxLength(150)]],
+      unit: ['',  [Validators.maxLength(15), Validators.pattern('^[0-9]*$')]],
+      unitPrice: ['',  [Validators.maxLength(15)]],
       isActive: [true, Validators.required]
     });
   }

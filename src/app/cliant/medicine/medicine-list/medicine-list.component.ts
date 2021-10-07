@@ -12,7 +12,7 @@ import { MedicineService } from '../medicine.service';
 })
 export class MedicineListComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['BrandName', 'GenericName', 'Manufacturar',
-                                 'Unit', 'UnitPrice', 'Active', 'Action'];
+                                 'Unit', 'UnitPrice', 'Active', 'Edit/View'];
   medicines: IMedicine[] = [];
   dataSource = new MatTableDataSource<IMedicine>(this.medicines);
   @ViewChild(MatSort, {static: false}) sort: MatSort;

@@ -1,59 +1,61 @@
 <div>
   <div >
-<body id="container">
-  <div id="print-section">
-  <div>
-      <div id="head">
-          <h1>{{prescriptionDetails.hospitalName}}</h1>
-          <p>Doctor: {{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
-      </div>
-      <div id="nav">
-        <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} 
-          | <strong>Age: </strong> {{prescriptionDetails.patientAge}} 
-          | <strong>Blood Group: </strong> {{prescriptionDetails.patientBloodGroup}} 
-        
-        </p>
-        <p *ngFor="let prescriptionVital of prescriptionDetails.physicalStat">
-        <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature: </strong>{{prescriptionVital.bodyTemparature}}</span> 
-        <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
-        <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span>
-        <span *ngIf="prescriptionVital.bloodPressure"> <strong> | Blood Pressure:</strong> {{prescriptionVital.bloodPressure}} </span>
-        <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
-        <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
-        </p>
-    </div>
-      <div id="content">
-          <div id="aside">
-              <h3>Cc</h3>
-              <textarea readonly style="white-space: pre-wrap;">{{prescriptionDetails.doctorsObservation}}</textarea>
-              <h3>Advice Test</h3>
-              <textarea readonly style="white-space: pre-wrap;">{{prescriptionDetails.adviceTest}}</textarea>
+    <body id="container">
+      <div id="print-section">
+      <div class="bottomborder">
+          <div id="head">
+              <h1>{{prescriptionDetails.hospitalName}}</h1>
+              <p>Doctor: {{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
+              <p>BMDC Reg No: {{prescriptionDetails.bmdcRegNo}}</p>
+              <p>Email: {{prescriptionDetails.optionalEmail}}</p>
           </div>
-          <div id="main">
-            <h3>Rx</h3>
-            <textarea readonly>{{prescriptionDetails.adviceMedication}}</textarea>
-              <div class="rel">
-                  <h3>Note</h3>
-                  <textarea readonly>{{prescriptionDetails.note}}</textarea>
+          <div id="nav">
+            <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} 
+              | <strong>Age: </strong> {{prescriptionDetails.patientAge}} 
+              | <strong>Blood Group: </strong> {{prescriptionDetails.patientBloodGroup}} 
+            
+            </p>
+        </div>
+          <div id="content">
+              <div id="aside">
+                  <h3>Cc</h3>
+                  <p *ngFor="let prescriptionVital of prescriptionDetails.physicalStat">
+                    <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature: </strong>{{prescriptionVital.bodyTemparature}}</span> 
+                    <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
+                    <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span>
+                    <span *ngIf="prescriptionVital.bloodPressureSystolic"> <strong>| Blood Pressure:</strong> {{prescriptionVital.bloodPressureSystolic}}/{{prescriptionVital.bloodPressureDiastolic}} mmHg </span>
+                    <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
+                    <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
+                    </p>
+                  <textarea readonly style="white-space: pre-wrap;">{{prescriptionDetails.doctorsObservation}}</textarea>
+                  <h3>Advice Test</h3>
+                  <textarea readonly style="white-space: pre-wrap;">{{prescriptionDetails.adviceTest}}</textarea>
+              </div>
+              <div id="main">
+                <h3>Rx</h3>
+                <textarea readonly>{{prescriptionDetails.adviceMedication}}</textarea>
+                  <div class="rel">
+                      <h3>Note</h3>
+                      <textarea readonly>{{prescriptionDetails.note}}</textarea>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <button 
-          mat-raised-button
-          class="button1" color="success"  [routerLink]="['../../list']" >
-          Back To List
-      </button>
-      <button 
-          mat-raised-button
-          class="button2" color="primary" 
-          type="submit" 
-          [useExistingCss]="true" 
-          printSectionId="print-section"  
-          ngxPrint>
-          Print
-      </button>
-</body>
+          <button 
+              mat-raised-button
+              class="button1" color="success"  [routerLink]="['../../list']" >
+              Back To List
+          </button>
+          <button 
+              mat-raised-button
+              class="button2" color="primary" 
+              type="submit" 
+              [useExistingCss]="true" 
+              printSectionId="print-section"  
+              ngxPrint>
+              Print
+          </button>
+    </body>
 </div>
 </div>
