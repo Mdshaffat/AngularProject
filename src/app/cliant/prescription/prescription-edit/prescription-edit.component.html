@@ -3,8 +3,10 @@
   <body id="print-section">
     <div id="container" class="bottomborder">
         <div id="head">
-            <h1>{{prescription.hospitalName}}</h1>
-            <p>Doctor Name: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
+          <h2>Health Program </h2>
+          <h1> <strong>Integrated Development Foundation</strong> </h1>
+            <p>{{prescription.hospitalName}}</p>
+            <p>Prescribed By: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
             <p>BMDC Reg No: {{prescription.bmdcRegNo}}</p>
             <p>Email: {{prescription.optionalEmail}}</p>
         </div>
@@ -12,31 +14,65 @@
             <p> <strong> Patient Name: </strong>{{prescription.patientFirstName}} {{prescription.patientLastName}} | 
               <strong>Age: </strong> {{prescription.patientAge}}
               | <strong *ngIf="prescription.patientBloodGroup">Blood Group: </strong> {{prescription.patientBloodGroup}} 
+              
+            </p>
+            <p>
+              <strong> Date:</strong>  {{currentDate | date: 'dd/MM/yyyy'}}
             </p>
         </div>
+        <div id="nav" *ngFor="let prescriptionVital of prescription.physicalStat">
+           <p >O/E:
+            <span *ngIf="prescriptionVital.heightFeet"> <strong>| Height: </strong> {{prescriptionVital.heightFeet}}" {{prescriptionVital.heightInches}}'</span>
+            <span *ngIf="prescriptionVital.weight"> <strong>| Weight: </strong> {{prescriptionVital.weight}} kg</span>
+            <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
+            <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
+            <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} %</span> <strong> | </strong><br>
+            <span *ngIf="prescriptionVital.bloodPressureSystolic"> <strong> Blood Pressure:</strong> {{prescriptionVital.bloodPressureSystolic}}/{{prescriptionVital.bloodPressureDiastolic}} mmHg </span>
+            <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}} bpm</span>
+            <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
+          </p>
+      </div>
+      <div id="nav">
+        <p >G/E:
+          <mat-checkbox color="primary" class="example-margin" formControlName="appearance">Appearance</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="anemia">Anemia</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="jundice">Jaundice</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="dehydration">Dehydration</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="edema">Edema</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="cyanosis">Cyanosis</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="heart">Heart</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="lung">Lung</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="abdomen">Abdomen</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" formControlName="kub">KUB</mat-checkbox>
+       </p>
+   </div>
         <div id="content">
             <div id="aside">
                 <h3>Cc</h3>
-                <p *ngFor="let prescriptionVital of prescription.physicalStat">
-                  <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
-                  <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
-                  <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span> <strong> | </strong>
-                  <span *ngIf="prescriptionVital.bloodPressureSystolic"> <strong> Blood Pressure:</strong> {{prescriptionVital.bloodPressureSystolic}}/{{prescriptionVital.bloodPressureDiastolic}} mmHg </span>
-                  <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
-                  <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
-                </p>
-                <textarea formControlName="doctorsObservation" style="white-space: pre-wrap;">
+                <textarea formControlName="doctorsObservation" wrap="virtual">
                 </textarea>
                 <mat-error *ngIf="f.doctorsObservation.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
                 <h3>Advice Test</h3>
-                <textarea formControlName="adviceTest" style="white-space: pre-wrap;"></textarea>
+                <textarea formControlName="adviceTest"></textarea>
                 <mat-error *ngIf="f.adviceTest.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
             </div>
             <div id="main">
               <h3>Rx</h3>
               <textarea formControlName="adviceMedication"></textarea>
               <mat-error *ngIf="f.adviceMedication.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
-                <div class="rel">
+              <div class="nextvisit">
+              <span>Next Visit: </span>
+              <mat-form-field appearance="fill">
+                <input formControlName="nextVisit" matInput [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+              <div class="sign">
+                <p>_________________</p>
+                <p>{{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
+              </div>
+                <div class="rel"><br>
                     <h3>Note</h3>
                     <textarea 
                       cdkTextareaAutosize
@@ -62,9 +98,7 @@
          mat-raised-button
           class="button2" color="primary" 
           type="submit"
-          [useExistingCss]="true" 
-          printSectionId="print-section"  
-          ngxPrint
+          styleSheetFile="assets/printStyle.css"
           >SAVE</button></div>
 </form>
 </div>

@@ -27,14 +27,20 @@ export class VisitEntriesCliantService {visitEntries: IVisitEntry[] = [];
       );
     }
     getlastvisitnumber() {
-      return this.http.get<number>(this.baseUrl + 'visitentry/latestserial/').pipe(
+      const token = localStorage.getItem('hotpital_user_token');
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', `Bearer ${token}`);
+      return this.http.get<number>(this.baseUrl + 'visitentry/latestserial/', {headers}).pipe(
         map(response => {
           return response;
         })
       );
     }
     getDateWisevisitNumber(date: string) {
-      return this.http.get<number>(this.baseUrl + 'visitentry/latestserial/' + date).pipe(
+      const token = localStorage.getItem('hotpital_user_token');
+      let headers = new HttpHeaders();
+      headers = headers.set('Authorization', `Bearer ${token}`);
+      return this.http.get<number>(this.baseUrl + 'visitentry/latestserial/' + date, {headers}).pipe(
         map(response => {
           return response;
         })

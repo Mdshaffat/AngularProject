@@ -51,24 +51,24 @@
         width: 58%;
         margin-right: 2%;
     }
-    .col-doB{
+    .col-gender{
         width: 38%;
         margin-left: 2%;
     }
     .col-age{
-        width: 32%;
-        margin-right: 2%;
+        width: 23%;
+        margin-right: 1%;
     }
-    .col-gender{
-        width: 32%;
-        margin-right: 2%;
+    .col-doB{
+        width: 24%;
+        margin-right: 1%;
     }
     .col-maritalStatus{
-        width: 32%;
-        margin-right: 2%;
+        width: 25%;
+        margin-right: 1%;
     }
     .col-bloodGroup{
-        width: 32%;
+        width: 25%;
     }
     .col-note{
         display: block;

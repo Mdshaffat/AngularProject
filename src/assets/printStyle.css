@@ -96,6 +96,7 @@ div:nth-child(even) {
 }
 
 #aside > textarea {
+	
 	padding: 0;
 	box-sizing: border-box;
 	width: 95%;
@@ -103,15 +104,14 @@ div:nth-child(even) {
 }
 textarea {
 	padding: 12px 20px !important; 
-	box-sizing: border-box;
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	background-color: #f8f8f8;
+	box-sizing: unset;
+	border: none;
 	font-size: 14px;
 	margin-left: 3px;
   }
 .rel {
 	bottom: 25px;
+
 }
 
 .rel > textarea {
@@ -151,13 +151,14 @@ textarea {
 	text-align: center;
 }
 .example-margin {
-	margin: 0 10px;
+	margin: 0 0px;
+  }
+  .mat-checkbox {
+	margin: 0%;
+	padding: 0%;
+	display: inline;
   }
   .nextvisit{
 	  width: 50%;
 	  display: inline-block;
-  }
-
-  input {
-	  display: inline;
   }

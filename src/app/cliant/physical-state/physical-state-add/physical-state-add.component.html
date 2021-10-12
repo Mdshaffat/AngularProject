@@ -35,7 +35,7 @@
                   <tr>
                     <td>
                       <mat-form-field class="col-weight">
-                        <mat-label>Weight(kg)</mat-label>
+                        <mat-label>Weight (kg)</mat-label>
                         <input formControlName="weight" matInput maxlength="3">
                         <mat-error *ngIf="f.weight.hasError('pattern')">Input Valid Number</mat-error>
                     </mat-form-field>
@@ -68,7 +68,7 @@
                   <tr>
                     <td>
                       <mat-form-field class="col-temperature">
-                        <mat-label>Body Temparature(Fahrenheit)</mat-label>
+                        <mat-label>Body Temparature (&#176;F)</mat-label>
                         <input formControlName="bodyTemparature" matInput maxlength="3" >
                         <mat-error *ngIf="f.bodyTemparature.hasError('pattern')">Input Valid Number</mat-error>
                         <mat-error *ngIf="f.bodyTemparature.hasError('required')">Required</mat-error>
@@ -97,12 +97,12 @@
                 </table>
                 
               <mat-form-field class="col-v-pulserate">
-                <mat-label>Pulse Rate</mat-label>
+                <mat-label>Pulse Rate (bpm)</mat-label>
                 <input  formControlName="pulseRate" matInput maxlength="3">
                 <mat-error *ngIf="f.pulseRate.hasError('pattern')">Input Valid Number</mat-error>
             </mat-form-field>
             <mat-form-field class="col-v-spo2">
-              <mat-label>SpO2</mat-label>
+              <mat-label>SpO2 (%)</mat-label>
               <input  formControlName="spO2" matInput maxlength="3">
               <mat-error *ngIf="f.spO2.hasError('pattern')">Input Valid Number</mat-error>
           </mat-form-field>

@@ -17,6 +17,7 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
   prescription: IPrescriptionWithVital;
   id: any;
   patientAge: number ;
+  currentDate = moment();
   constructor(private toastr: ToastrService,
               private fb: FormBuilder,
               private router: Router,
@@ -44,7 +45,18 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
       doctorsObservation: ['', Validators.maxLength(2000)],
       adviceMedication: ['', Validators.maxLength(2000)],
       adviceTest: ['', Validators.maxLength(2000)],
-      note: ['', Validators.maxLength(2000)]
+      nextVisit: [ ],
+      note: ['', Validators.maxLength(2000)],
+      appearance: [],
+      anemia: [],
+      jundice: [],
+      dehydration: [],
+      edema: [],
+      cyanosis: [],
+      heart: [],
+      lung: [],
+      abdomen: [],
+      kub: []
     });
   }
   get f(){
@@ -68,7 +80,17 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
       doctorsObservation: this.prescription.doctorsObservation,
       adviceMedication: this.prescription.adviceMedication,
       adviceTest: this.prescription.adviceTest,
-      note: this.prescription.note
+      note: this.prescription.note,
+      appearance: this.prescription.generalExamination.appearance,
+      anemia: this.prescription.generalExamination.anemia,
+      jundice: this.prescription.generalExamination.jundice,
+      dehydration: this.prescription.generalExamination.dehydration,
+      edema: this.prescription.generalExamination.edema,
+      cyanosis: this.prescription.generalExamination.cyanosis,
+      heart: this.prescription.generalExamination.heart,
+      lung: this.prescription.generalExamination.lung,
+      abdomen: this.prescription.generalExamination.abdomen,
+      kub: this.prescription.generalExamination.kub
     });
   }
 
@@ -76,7 +98,7 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
     this.prescriptionService.updatePrescription(this.prescriptionUpdateForm.value).subscribe(response => {
       this.toastr.success(' Updated');
       console.log(response);
-      this.router.navigateByUrl('/prescription/list').then(() => {location.reload(); } );
+      this.router.navigateByUrl('/prescription/details/' + this.id).then(() => {location.reload(); } );
     },
     error => {
       this.toastr.error('error to Update');

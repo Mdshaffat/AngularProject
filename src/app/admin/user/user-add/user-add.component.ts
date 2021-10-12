@@ -40,7 +40,7 @@ export class UserAddComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.maxLength(40)]],
       lastName: ['', [Validators.maxLength(40)]],
       email: ['', [ Validators.required, Validators.email], [this.validateEmailNotTaken()]],
-      designation: ['', [Validators.maxLength(20)]],
+      designation: ['', [Validators.maxLength(40)]],
       bmdcRegNo: [, [ Validators.maxLength(15)]],
       optionalEmail: [, Validators.email],
       phoneNumber: ['', [Validators.required, Validators.maxLength(11), Validators.pattern('^[0-9]*$')]],

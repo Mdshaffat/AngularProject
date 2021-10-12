@@ -4,7 +4,7 @@
       <div class="loginForm">
           <form [formGroup]="prescriptionAddForm" (ngSubmit)="onSubmit()" autocomplete="nope" novalidate>
                   <mat-form-field appearance="fill">
-                    <mat-label>Visit Entry Id</mat-label>
+                    <mat-label>Visit Entry Serial</mat-label>
                     <mat-select formControlName="visitEntryId" required>
                       <mat-option>--</mat-option>
                       <mat-option *ngFor="let visitEntry of visitEntries" [value]="visitEntry.id">

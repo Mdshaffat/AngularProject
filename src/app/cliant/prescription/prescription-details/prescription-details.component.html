@@ -1,47 +1,79 @@
 <div>
   <div >
     <body id="container">
-      <div id="print-section">
-      <div class="bottomborder">
-          <div id="head">
-              <h1>{{prescriptionDetails.hospitalName}}</h1>
-              <p>Doctor: {{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
-              <p>BMDC Reg No: {{prescriptionDetails.bmdcRegNo}}</p>
-              <p>Email: {{prescriptionDetails.optionalEmail}}</p>
-          </div>
-          <div id="nav">
-            <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} 
-              | <strong>Age: </strong> {{prescriptionDetails.patientAge}} 
-              | <strong>Blood Group: </strong> {{prescriptionDetails.patientBloodGroup}} 
-            
+      <body id="print-section">
+    <div id="container" class="bottomborder">
+        <div id="head">
+          <h2>Health Program </h2>
+          <h1> <strong>Integrated Development Foundation</strong> </h1>
+            <p>{{prescriptionDetails.hospitalName}}</p>
+            <p>Prescribed By: {{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
+            <p *ngIf="prescriptionDetails.bmdcRegNo">BMDC Reg No: {{prescriptionDetails.bmdcRegNo}}</p>
+            <p *ngIf="prescriptionDetails.optionalEmail">Email: {{prescriptionDetails.optionalEmail}}</p>
+        </div>
+        <div id="nav" >
+            <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} | 
+              <strong>Age: </strong> {{prescriptionDetails.patientAge}}
+              | <strong *ngIf="prescriptionDetails.patientBloodGroup">Blood Group: </strong> {{prescriptionDetails.patientBloodGroup}} 
+              
+            </p>
+            <p>
+              <strong> Date:</strong>  {{prescriptionDetails.updatedOn | date: 'dd/MM/yyyy'}}
             </p>
         </div>
-          <div id="content">
-              <div id="aside">
-                  <h3>Cc</h3>
-                  <p *ngFor="let prescriptionVital of prescriptionDetails.physicalStat">
-                    <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature: </strong>{{prescriptionVital.bodyTemparature}}</span> 
-                    <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
-                    <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} </span>
-                    <span *ngIf="prescriptionVital.bloodPressureSystolic"> <strong>| Blood Pressure:</strong> {{prescriptionVital.bloodPressureSystolic}}/{{prescriptionVital.bloodPressureDiastolic}} mmHg </span>
-                    <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}}</span>
-                    <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
-                    </p>
-                  <textarea readonly style="white-space: pre-wrap;">{{prescriptionDetails.doctorsObservation}}</textarea>
-                  <h3>Advice Test</h3>
-                  <textarea readonly style="white-space: pre-wrap;">{{prescriptionDetails.adviceTest}}</textarea>
+        <div id="nav" *ngFor="let prescriptionDetailsVital of prescriptionDetails.physicalStat">
+           <p >O/E:
+             <span *ngIf="prescriptionDetailsVital.heightFeet"> <strong>| Height: </strong> {{prescriptionDetailsVital.heightFeet}}" {{prescriptionDetailsVital.heightInches}}'</span>
+             <span *ngIf="prescriptionDetailsVital.weight"> <strong>| Weight: </strong> {{prescriptionDetailsVital.weight}} kg</span>
+             <span *ngIf="prescriptionDetailsVital.bmi"> <strong>| BMI: </strong> {{prescriptionDetailsVital.bmi}}</span>
+             <span *ngIf="prescriptionDetailsVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionDetailsVital.bodyTemparature}}&#176;F</span> 
+            <span *ngIf="prescriptionDetailsVital.spO2"> <strong> | spO2:</strong> {{prescriptionDetailsVital.spO2}} %</span> <strong> | </strong><br>
+            <span *ngIf="prescriptionDetailsVital.bloodPressureSystolic"> <strong> Blood Pressure:</strong> {{prescriptionDetailsVital.bloodPressureSystolic}}/{{prescriptionDetailsVital.bloodPressureDiastolic}} mmHg </span>
+            <span *ngIf="prescriptionDetailsVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionDetailsVital.pulseRate}} bpm</span>
+            <span *ngIf="prescriptionDetailsVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionDetailsVital.editedOn | date: 'dd/MM/yyyy'}}</span>
+          </p>
+      </div>
+      <div id="nav">
+        <p >G/E:
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.appearance" >Appearance</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.anemia" >Anemia</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.jundice" >Jaundice</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.dehydration" >Dehydration</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.edema" >Edema</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.cyanosis" >Cyanosis</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.heart" >Heart</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.lung" >Lung</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.abdomen" >Abdomen</mat-checkbox>
+          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.kub" >KUB</mat-checkbox>
+       </p>
+   </div>
+        <div id="content">
+            <div id="aside">
+                <h3>Cc</h3>
+                <textarea readonly>{{prescriptionDetails.doctorsObservation}}</textarea>
+                <h3>Advice Test</h3>
+                <textarea readonly>{{prescriptionDetails.adviceTest}}</textarea>
+            </div>
+            <div id="main">
+              <h3>Rx</h3>
+              <textarea readonly>{{prescriptionDetails.adviceMedication}}</textarea>
+              <div class="nextvisit">
+              <span>Next Visit: {{prescriptionDetails.nextVisit | date: 'dd/MM/yyyy'}} </span>
+              
+            </div>
+              <div class="sign">
+                <p>___________________</p>
+                <p>{{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
               </div>
-              <div id="main">
-                <h3>Rx</h3>
-                <textarea readonly>{{prescriptionDetails.adviceMedication}}</textarea>
-                  <div class="rel">
-                      <h3>Note</h3>
-                      <textarea readonly>{{prescriptionDetails.note}}</textarea>
-                  </div>
+                <div class="rel"><br>
+                    <h3>Note</h3>
+                    <textarea  readonly cdkTextareaAutosize cdkAutosizeMinRows=2 >{{prescriptionDetails.note}}</textarea>
                 </div>
               </div>
             </div>
+            
           </div>
+        </body>
           <button 
               mat-raised-button
               class="button1" color="success"  [routerLink]="['../../list']" >

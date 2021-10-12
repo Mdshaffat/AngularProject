@@ -23,6 +23,19 @@ export interface PhysicalStat {
     editedOn: Date;
     editedBy: string;
 }
+export interface GeneralExamination {
+    id: number;
+    appearance: boolean;
+    anemia: boolean;
+    jundice: boolean;
+    dehydration: boolean;
+    edema: boolean;
+    cyanosis: boolean;
+    heart: boolean;
+    lung: boolean;
+    abdomen: boolean;
+    kub: boolean;
+}
 
 export interface IPrescriptionWithVital {
     id: number;
@@ -36,6 +49,7 @@ export interface IPrescriptionWithVital {
     patientMobile: string;
     patientBloodGroup: string;
     physicalStat: PhysicalStat[];
+    generalExamination: GeneralExamination;
     doctorId: string;
     doctorFirstName: string;
     doctorLastName: string;
@@ -45,6 +59,7 @@ export interface IPrescriptionWithVital {
     doctorsObservation: string;
     adviceMedication: string;
     adviceTest: string;
+    nextVisit: Date;
     note: string;
     createdOn: Date;
     updatedOn: Date;

@@ -20,12 +20,6 @@ h3 {
 	margin: 1px;
 }
 
-textarea {
-	padding-left: 2px;
-	margin: 0px 0 5px 0px;
-	width: 93%;
-	height: 90px;
-}
 
 div:nth-child(odd) {
 	background-color: rgb(246, 248, 246);
@@ -36,8 +30,7 @@ div:nth-child(even) {
 }
 
 #container {
-	width: 100%;
-    
+	width: 100%;  
 }
 .bottomborder {
 	border-bottom: 1px solid black;
@@ -65,7 +58,7 @@ div:nth-child(even) {
 }
 
 #nav > p:last-child {
-	float: right ;
+	float: right;
 	margin-right: 20px;
 }
 
@@ -76,7 +69,7 @@ div:nth-child(even) {
 }
 
 #content {
-	height: 530px;
+	height: 672px;
 }
 
 #aside {
@@ -95,31 +88,39 @@ div:nth-child(even) {
 	position: relative;
 }
 #main > textarea {
-	margin: 10px;
 	padding: 0px;
+	border: none;
+    outline: none;
 	box-sizing: border-box;
 	width: 95%;
 	height: 60%;
 }
 
 #aside > textarea {
-	margin: 10px;
+	
 	padding: 0;
-	box-sizing: border-box;
+	border: none;
+    outline: none;
 	width: 95%;
-	height: 29%;
+	height: 40%;
 }
+textarea {
+	padding: 12px 20px !important; 
+	border: none;
+    outline: none;
+	background-color: #f8f8f8;
+	font-size: 14px;
+	margin-left: 3px;
+  }
 .rel {
 	bottom: 25px;
 
 }
 
 .rel > textarea {
-	margin: 10px;
-	padding: 0;
-	box-sizing: border-box;
+	border: none;
+    outline: none;
 	width: 95%;
-	height: 70px;
 }
 .button1 {
 	display: inline;
@@ -141,11 +142,26 @@ div:nth-child(even) {
 	margin-right: 40px;
 
 }
-textarea {
-	padding: 12px 20px !important; 
-	box-sizing: border-box;
-	border: 2px solid #ccc;
-	border-radius: 4px;
-	background-color: #f8f8f8;
-	font-size: 14px;
+
+.sign {
+	display: inline;
+    width: 20%;
+    align-items: center;
+	float: right;
+	margin-top: 10px;
+	margin-right: 100px;
+}
+.sign > p {
+	text-align: center;
+}
+.example-margin {
+	margin: 0 10px;
+  }
+  .nextvisit{
+	  width: 50%;
+	  display: inline-block;
+  }
+
+  input {
+	  display: inline;
   }
