@@ -14,17 +14,34 @@
                   <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
                   <mat-error *ngIf="f.address.hasError('maxlength')">Maximum 200 Charecter</mat-error>
               </mat-form-field><br>
-              <mat-form-field>
-                  <mat-label>Upazila</mat-label>
-                  <input required formControlName="upazila" matInput >
-                  <mat-error *ngIf="f.upazila.hasError('required')">Required</mat-error>
-                  <mat-error *ngIf="f.upazila.hasError('maxlength')">Maxim 25 Charecter</mat-error>
+              <mat-form-field class="col-division" appearance="fill">
+                <mat-label>Division</mat-label>
+                <!-- (click)="loadUpazilaBySelectDistrict(upazila.id)" -->
+                <mat-select formControlName="divisionId" #chooseddivValue (valueChange)="loadDistrictBySelectDivision(chooseddivValue.value)">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let division of divisions" [value]="division.id">
+                    {{division.name}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field><br>
-              <mat-form-field>
-                  <mat-label>District</mat-label>
-                  <input required formControlName="district" matInput>
-                  <mat-error *ngIf="f.district.hasError('required')">Required</mat-error>
-                  <mat-error *ngIf="f.district.hasError('maxlength')">Maximum 25 Charecter</mat-error>
+              <mat-form-field class="col-district" appearance="fill">
+                <mat-label>District</mat-label>
+                <!-- (click)="loadUpazilaBySelectDistrict(upazila.id)" -->
+                <mat-select formControlName="districtId" #choosedValue (valueChange)="loadUpazilaBySelectDistrict(choosedValue.value)">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let district of districts" [value]="district.id">
+                    {{district.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field><br>
+              <mat-form-field class="col-upazila" appearance="fill">
+                <mat-label>Upazila</mat-label>
+                <mat-select formControlName="upazilaId" >
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let upazila of upazilas" [value]="upazila.id" >
+                    {{upazila.name}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field><br>
                   <mat-checkbox formControlName="isActive" class="active">Active</mat-checkbox>
   

@@ -2,8 +2,12 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UpazilaAndDistrictService } from 'src/app/cliant/patient/upazila-and-district.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
 import { IUpdateHospital } from 'src/app/core/models/Hospital/updateHospital';
+import { IDistrict } from 'src/app/core/models/UpazilaAndDistrict/district';
+import { IDivision } from 'src/app/core/models/UpazilaAndDistrict/division';
+import { IUpazila } from 'src/app/core/models/UpazilaAndDistrict/upazila';
 import { HospitalService } from '../hospital.service';
 
 @Component({
@@ -12,6 +16,9 @@ import { HospitalService } from '../hospital.service';
   styleUrls: ['./hospital-edit.component.css']
 })
 export class HospitalEditComponent implements OnInit , AfterViewInit {
+  upazilas: IUpazila[] = [];
+  districts: IDistrict[] = [];
+  divisions: IDivision[] = [];
   updateHospitalForm: FormGroup = new FormGroup({});
   updatehospital: IUpdateHospital;
   hospital: IHospital;
@@ -20,9 +27,11 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
               private hospitalService: HospitalService,
               private activateRoute: ActivatedRoute,
               private router: Router,
+              private upazilaAndDistrictService: UpazilaAndDistrictService,
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.loadDivision();
     this.loadHospital();
     this.createUpdateHospitalForm();
     this.populateHospitalFrom();
@@ -35,8 +44,9 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
       id: [this.id],
       name: ['', Validators.required],
       address: ['', [Validators.required, Validators.maxLength(200)]],
-      upazilla: ['', [Validators.required, Validators.maxLength(50)]],
-      district: ['', [Validators.required, Validators.maxLength(50)]],
+      divisionId: [],
+      upazilaId: [],
+      districtId: [],
       isActive: [true, Validators.required],
     });
   }
@@ -52,12 +62,33 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
       console.log(error);
     });
   }
+  loadDivision(){
+    this.upazilaAndDistrictService.getAllDivision().subscribe(response => {
+      this.divisions = response;
+    });
+  }
+  loadDistrictBySelectDivision(id: number){
+    this.upazilaAndDistrictService.getAllDistrictByDivisionId(id).subscribe(response => {
+      this.districts = response;
+    });
+  }
+  // loadDistrict(){
+  //   this.upazilaAndDistrictService.getAllDistrict().subscribe(response => {
+  //     this.districts = response;
+  //   });
+  // }
+  loadUpazilaBySelectDistrict(id: number){
+    this.upazilaAndDistrictService.getAllUpazilaByDistrictId(id).subscribe(response => {
+      this.upazilas = response;
+    });
+  }
   populateHospitalFrom(){
     this.updateHospitalForm.patchValue({
       name: this.hospital.name,
       address: this.hospital.address,
-      upazilla: this.hospital.upazilla,
-      district: this.hospital.district,
+      divisionId: this.hospital.divisionId,
+      upazilaId: this.hospital.upazilaId,
+      districtId: this.hospital.districtId,
       isActive: this.hospital.isActive,
     });
   }

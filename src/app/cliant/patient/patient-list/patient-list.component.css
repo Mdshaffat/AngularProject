@@ -2,6 +2,7 @@ table {
     margin: 10px;
     width: 99%;
   }
+
   
   .mat-form-field {
     font-size: 14px;
@@ -57,4 +58,39 @@ table {
   .mat-cell {
     padding-top:0% ;
     padding-bottom:0% ;
+  }
+  .mat-column-ID {
+    width: 90px !important;
+    padding-right: 10px !important;
+  }
+  .mat-column-MobileNo {
+    width: 120px !important;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+  .mat-column-DoB {
+    width: 100px !important;
+    padding-right: 10px !important;
+  }
+  .mat-column-BloodGroup {
+    width: 50px !important;
+    padding-right: 3px !important;
+  }
+  .mat-column-Active {
+    width: 50px !important;
+    padding: 3px !important;
+  }
+  .mat-column-Gender {
+    width: 60px !important;
+    padding: 10px !important;
+  }
+  .mat-column-CreatedOn {
+    width: 100px !important;
+    padding-right: 10px !important;
+    padding-left: 10px !important;
+  }
+
+  .mat-column-EditView {
+    width: 60px !important;
+    padding-right: 5px !important;
   }

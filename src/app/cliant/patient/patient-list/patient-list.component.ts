@@ -11,9 +11,9 @@ import { PatientService } from '../patient.service';
   styleUrls: ['./patient-list.component.css']
 })
 export class PatientListComponent implements OnInit , AfterViewInit {
-  displayedColumns: string[] = ['FirstName', 'LastName', 'MobileNo',
-                                 'DoB', 'Gender', 'BloodGroup', 'CreatedOn',
-                                  'Active', 'Edit/View'];
+  displayedColumns: string[] = ['ID', 'FirstName', 'LastName', 'MobileNo',
+                                 'DoB', 'Gender', 'BloodGroup', 'Hospital', 'CreatedOn',
+                                  'Active', 'EditView'];
   patients: IPatient[] = [];
   dataSource = new MatTableDataSource<IPatient>(this.patients);
   @ViewChild(MatSort, {static: false}) sort: MatSort;

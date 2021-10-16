@@ -19,6 +19,10 @@ border-bottom: 5px solid white;
 background-color: #ebcd89;
 color: #000000 ;
 }
+.router-link-active {
+  background-color: #ebcd89;
+  color: #000000 ;
+}
 .mat-button {
   border: 1px solid rgb(0, 0, 0);
   margin: 5px;

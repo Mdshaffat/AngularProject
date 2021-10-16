@@ -11,10 +11,10 @@
     </div>
 </div>
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
-        <!-- <ng-container matColumnDef="ID">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="id">Patient Id </th>
+        <ng-container class="cell-id" matColumnDef="ID">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="id">Id </th>
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.id}} </td>
-        </ng-container> -->
+        </ng-container>
         <ng-container matColumnDef="FirstName">
           <th mat-header-cell *matHeaderCellDef mat-sort-header="firstName"> First Name </th>
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.firstName}} </td>
@@ -24,7 +24,7 @@
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.lastName}} </td>
         </ng-container>
         <ng-container matColumnDef="MobileNo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header="mobileNumber"> MobileNo </th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header="mobileNumber"> Mobile No. </th>
           <td mat-cell *matCellDef="let dataSource"> {{dataSource.mobileNumber}} </td>
         </ng-container>
         <ng-container matColumnDef="DoB">
@@ -35,21 +35,25 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header="gender"> Gender </th>
             <td mat-cell *matCellDef="let dataSource"> {{dataSource.gender}} </td>
           </ng-container>
-          <ng-container matColumnDef="BloodGroup">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="bloodGroup"> Blood Group </th>
+          <ng-container class="cell-blood-group" matColumnDef="BloodGroup">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="bloodGroup"> Blood <br> Group </th>
             <td mat-cell *matCellDef="let dataSource"> {{dataSource.bloodGroup}} </td>
           </ng-container>
+          <ng-container matColumnDef="Hospital">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="hospitalName"> Hospital </th>
+            <td mat-cell *matCellDef="let dataSource"> {{dataSource.hospitalName}} </td>
+          </ng-container>
           <ng-container matColumnDef="CreatedOn">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header="createdOn"> CreatedOn </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header="createdOn"> Created On </th>
             <td mat-cell *matCellDef="let dataSource"> {{dataSource.createdOn | date:'dd/MM/YYY'}} </td>
           </ng-container>
-          <ng-container matColumnDef="Active">
+          <ng-container class="cell-Active" matColumnDef="Active">
             <th mat-header-cell *matHeaderCellDef mat-sort-header="isActive"> Active </th>
             <td mat-cell *matCellDef="let dataSource">
               <mat-checkbox disabled [checked] = dataSource.isActive></mat-checkbox>
             </td>
           </ng-container>
-        <ng-container matColumnDef="Edit/View">
+        <ng-container matColumnDef="EditView">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit/View </th>
           <td mat-cell *matCellDef="let dataSource">
             <mat-icon 

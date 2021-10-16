@@ -4,7 +4,7 @@
     <div id="container" class="bottomborder">
         <div id="head">
           <h2>Health Program </h2>
-          <h1> <strong>Integrated Development Foundation</strong> </h1>
+          <h1> Integrated Development Foundation</h1>
             <p>{{prescription.hospitalName}}</p>
             <p>Prescribed By: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
             <p>BMDC Reg No: {{prescription.bmdcRegNo}}</p>
@@ -24,7 +24,7 @@
            <p >O/E:
             <span *ngIf="prescriptionVital.heightFeet"> <strong>| Height: </strong> {{prescriptionVital.heightFeet}}" {{prescriptionVital.heightInches}}'</span>
             <span *ngIf="prescriptionVital.weight"> <strong>| Weight: </strong> {{prescriptionVital.weight}} kg</span>
-            <span *ngIf="prescriptionVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
+            <span *ngIf="prescriptionVital.bodyTemparature"><strong> | Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
             <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
             <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} %</span> <strong> | </strong><br>
             <span *ngIf="prescriptionVital.bloodPressureSystolic"> <strong> Blood Pressure:</strong> {{prescriptionVital.bloodPressureSystolic}}/{{prescriptionVital.bloodPressureDiastolic}} mmHg </span>

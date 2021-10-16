@@ -11,12 +11,12 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: '/patient', title: 'PATIENT',  icon: 'Patient', class: 'router-link-active' },
+  { path: '/patient/list', title: 'PATIENT',  icon: 'Patient', class: 'router-link-active' },
   { path: '/patient/history', title: 'PATIENT HISTORY',  icon: 'Patient', class: 'router-link-active' },
-  { path: '/physicalstate', title: 'PHYSICAL STAT',  icon: 'physicalstate', class: 'router-link-active' },
-  { path: '/medicine', title: 'MEDICINE',  icon: 'physicalstate', class: 'router-link-active' },
+  { path: '/physicalstate/list', title: 'PHYSICAL STAT',  icon: 'physicalstate', class: 'router-link-active' },
+  { path: '/medicine/list', title: 'MEDICINE',  icon: 'physicalstate', class: 'router-link-active' },
   { path: '/medicine/purchase', title: 'PURCHASE MEDICINE',  icon: 'physicalstate', class: 'router-link-active' },
-  { path: '/visitentries', title: 'VISIT ENTRIES',  icon: 'physicalstate', class: 'router-link-active' },
+  { path: '/visitentries/list', title: 'VISIT ENTRIES',  icon: 'physicalstate', class: 'router-link-active' },
 ];
 
 @Component({

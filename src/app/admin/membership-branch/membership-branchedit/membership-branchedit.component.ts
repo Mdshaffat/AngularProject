@@ -2,8 +2,12 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { UpazilaAndDistrictService } from 'src/app/cliant/patient/upazila-and-district.service';
 import { IBranch } from 'src/app/core/models/MembershipBranch/branch';
 import { IUpdateBranch } from 'src/app/core/models/MembershipBranch/updateBranch';
+import { IDistrict } from 'src/app/core/models/UpazilaAndDistrict/district';
+import { IDivision } from 'src/app/core/models/UpazilaAndDistrict/division';
+import { IUpazila } from 'src/app/core/models/UpazilaAndDistrict/upazila';
 import { MembershipBranchService } from '../membership-branch.service';
 
 @Component({
@@ -12,6 +16,9 @@ import { MembershipBranchService } from '../membership-branch.service';
   styleUrls: ['./membership-branchedit.component.css']
 })
 export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
+  upazilas: IUpazila[] = [];
+  districts: IDistrict[] = [];
+  divisions: IDivision[] = [];
   updateBranchForm: FormGroup = new FormGroup({});
   updateBranch: IUpdateBranch;
   branch: IBranch;
@@ -20,9 +27,11 @@ export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
               private branchService: MembershipBranchService,
               private activateRoute: ActivatedRoute,
               private router: Router,
+              private upazilaAndDistrictService: UpazilaAndDistrictService,
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.loadDivision();
     this.loadBranch();
     this.createUpdateBranchForm();
     this.populateHospitalFrom();
@@ -35,8 +44,9 @@ export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
       id: [this.id],
       name: ['', [Validators.required, Validators.maxLength(100)]],
       address: ['', [Validators.required, Validators.maxLength(200)]],
-      upazila: ['', [Validators.required, Validators.maxLength(25)]],
-      district: ['', [Validators.required, Validators.maxLength(25)]],
+      divisionId: [],
+      upazilaId: [],
+      districtId: [],
       isActive: [true, Validators.required],
     });
   }
@@ -52,12 +62,33 @@ export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
       console.log(error);
     });
   }
+  loadDivision(){
+    this.upazilaAndDistrictService.getAllDivision().subscribe(response => {
+      this.divisions = response;
+    });
+  }
+  loadDistrictBySelectDivision(id: number){
+    this.upazilaAndDistrictService.getAllDistrictByDivisionId(id).subscribe(response => {
+      this.districts = response;
+    });
+  }
+  // loadDistrict(){
+  //   this.upazilaAndDistrictService.getAllDistrict().subscribe(response => {
+  //     this.districts = response;
+  //   });
+  // }
+  loadUpazilaBySelectDistrict(id: number){
+    this.upazilaAndDistrictService.getAllUpazilaByDistrictId(id).subscribe(response => {
+      this.upazilas = response;
+    });
+  }
   populateHospitalFrom(){
     this.updateBranchForm.patchValue({
       name: this.branch.name,
       address: this.branch.address,
-      upazila: this.branch.upazila,
-      district: this.branch.district,
+      divisionId: this.branch.divisionId,
+      districtId: this.branch.districtId,
+      upazilaId: this.branch.upazilaId,
       isActive: this.branch.isActive,
     });
   }

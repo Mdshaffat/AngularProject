@@ -11,8 +11,10 @@
         mat-button
         [routerLink]="menuItem.path"
         [routerLinkActive]="menuItem.class"
+        [routerLinkActiveOptions]="{exact:true}"
         >{{menuItem.title}}</a>
-        <button mat-button [routerLink]="['/prescription']" routerLinkActive="router-link-active" >PRESCRIPTION</button>
+        <button mat-button [routerLink]="['/prescription/list']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: true}" >PRESCRIPTION</button>
+        <button mat-button >REPORT</button>
         <button mat-button *ngIf="(isAdmin$ | async)" [routerLink]="['/admin']">ADMIN</button>
         <a mat-button (click)="logout()" ><mat-icon matTooltip="Logout">logout</mat-icon></a>
       </div>

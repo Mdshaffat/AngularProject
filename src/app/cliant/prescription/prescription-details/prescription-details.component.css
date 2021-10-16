@@ -165,3 +165,9 @@ textarea {
   input {
 	  display: inline;
   }
+  .footer {
+	position: relative;
+	font-size: 10px;
+	text-align: center;
+	bottom: 0;
+}
