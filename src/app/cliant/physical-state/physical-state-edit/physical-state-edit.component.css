@@ -86,7 +86,17 @@
           width: 100%;
       }
 }
-.addbutton {
-    background-color: #eae0c8;
+button {
+    width: 330px;
+    margin: 5px;
+    padding: 10px;
+    font-size: 18px;
+    align-items: center;
+}
+button:hover {
     color: black;
 }
+.addbutton {
+      background-color: #fff;
+      color: #787878;
+  }

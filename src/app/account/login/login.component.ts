@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { FrontDialogComponent } from 'src/app/Shared/component/front-dialog/front-dialog.component';
 import { AccountService } from '../account.service';
 
 @Component({
@@ -17,7 +19,8 @@ export class LoginComponent implements OnInit {
               private fb: FormBuilder,
               private accountService: AccountService,
               private router: Router,
-              private activatedRoute: ActivatedRoute
+              private activatedRoute: ActivatedRoute,
+              public dialog: MatDialog
               ) { }
 
   ngOnInit(): void {
@@ -42,6 +45,42 @@ export class LoginComponent implements OnInit {
     {
       this.toastr.error('Contact with Admin', error.error.title);
       console.log(error);
+    });
+  }
+
+  openFAQDialog() {
+    this.dialog.open(FrontDialogComponent, {
+      data: {
+        title: 'Frequently Asked Questions:',
+        details: `
+                    1. How can I get user id and password? 
+                    2. Where should I contact for technical support?
+                    3. Why I can not save the prescription data?
+                    4. How to find out patient’s details?
+                    5. How to find out prescription details?
+                    6. How to download reports?
+        `
+      },
+    });
+  }
+  openSubInfoDialog() {
+    this.dialog.open(FrontDialogComponent, {
+      data: {
+        title: ' ',
+        details: `Please contact, info@outreachforall.org
+        for collaboration/subscription details.
+        `
+      },
+    });
+  }
+  openHelpDeskDialog() {
+    this.dialog.open(FrontDialogComponent, {
+      data: {
+        title: ' ',
+        details: `
+        For technical support: dotplusfeedback@gmail.com
+        `
+      },
     });
   }
 }

@@ -2,7 +2,6 @@ import { AfterViewInit, Component, Inject, OnInit, Optional } from '@angular/cor
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
-import { IPatient } from 'src/app/core/models/Patient/patient';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
 import { PatientService } from '../../patient/patient.service';
 import { VisitEntriesAddComponent } from '../visit-entries-add/visit-entries-add.component';
@@ -13,7 +12,6 @@ import { VisitEntriesAddComponent } from '../visit-entries-add/visit-entries-add
 })
 export class VisitEntriesStatusUpdateComponent implements OnInit, AfterViewInit {
 
-  patients: IPatient [];
   visitEntry: any;
   visitEntryStatusUpdateForm: FormGroup = new FormGroup({});
   constructor(private fb: FormBuilder,

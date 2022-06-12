@@ -5,9 +5,11 @@ import { ToastrService } from 'ngx-toastr';
 import { UpazilaAndDistrictService } from 'src/app/cliant/patient/upazila-and-district.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
 import { IUpdateHospital } from 'src/app/core/models/Hospital/updateHospital';
+import { IBranch } from 'src/app/core/models/MembershipBranch/branch';
 import { IDistrict } from 'src/app/core/models/UpazilaAndDistrict/district';
 import { IDivision } from 'src/app/core/models/UpazilaAndDistrict/division';
 import { IUpazila } from 'src/app/core/models/UpazilaAndDistrict/upazila';
+import { MembershipBranchService } from '../../membership-branch/membership-branch.service';
 import { HospitalService } from '../hospital.service';
 
 @Component({
@@ -16,9 +18,11 @@ import { HospitalService } from '../hospital.service';
   styleUrls: ['./hospital-edit.component.css']
 })
 export class HospitalEditComponent implements OnInit , AfterViewInit {
+  title  = 'Update Hospital';
   upazilas: IUpazila[] = [];
   districts: IDistrict[] = [];
   divisions: IDivision[] = [];
+  branches: IBranch[] = [];
   updateHospitalForm: FormGroup = new FormGroup({});
   updatehospital: IUpdateHospital;
   hospital: IHospital;
@@ -27,10 +31,12 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
               private hospitalService: HospitalService,
               private activateRoute: ActivatedRoute,
               private router: Router,
+              private branchService: MembershipBranchService,
               private upazilaAndDistrictService: UpazilaAndDistrictService,
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.loadBranch();
     this.loadDivision();
     this.loadHospital();
     this.createUpdateHospitalForm();
@@ -44,6 +50,7 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
       id: [this.id],
       name: ['', Validators.required],
       address: ['', [Validators.required, Validators.maxLength(200)]],
+      branchId: [],
       divisionId: [],
       upazilaId: [],
       districtId: [],
@@ -53,6 +60,7 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
   get f(){
     return this.updateHospitalForm.controls;
   }
+
   loadHospital(){
     this.id =  this.activateRoute.snapshot.paramMap.get('id');
     this.hospitalService.getHospitalById(this.id).subscribe(response => {
@@ -60,6 +68,11 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
       this.hospital = response;
     }, error => {
       console.log(error);
+    });
+  }
+  loadBranch(){
+    this.branchService.getAllBranchesSortByName().subscribe(response => {
+      this.branches = response;
     });
   }
   loadDivision(){
@@ -86,6 +99,7 @@ export class HospitalEditComponent implements OnInit , AfterViewInit {
     this.updateHospitalForm.patchValue({
       name: this.hospital.name,
       address: this.hospital.address,
+      branchId: this.hospital.branchId,
       divisionId: this.hospital.divisionId,
       upazilaId: this.hospital.upazilaId,
       districtId: this.hospital.districtId,

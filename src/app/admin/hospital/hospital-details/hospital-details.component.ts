@@ -9,6 +9,7 @@ import { HospitalService } from '../hospital.service';
   styleUrls: ['./hospital-details.component.css']
 })
 export class HospitalDetailsComponent implements OnInit {
+  title = 'Hospital Details';
   hospitalDetails: IHospital;
   id: any;
   constructor(private activateRoute: ActivatedRoute, private hospitalService: HospitalService) { }

@@ -13,36 +13,47 @@ table {
   margin-left: 5%;
   height: 2%;
 }
+
+button {
+  width: 200px;
+  font-size: 18px;
+  align-items: center;
+}
+.mat-column-Edit {
+  padding-right: 20px;
+  text-align: center;
+}
 .addnewuser {
   float: right;
   width: 15%;
   margin-bottom: 10px;
   margin-right: 5%;
 }
-.mat-column-Edit {
-  padding-right: 20px;
-  text-align: center;
-}
 .buttonadd {
   margin-right: -1%;
   color: rgb(0, 0, 0);
-
+}
+.addbutton {
+  background-color: #fff;
+  cursor: pointer;
+  color: #787878;
+  height: 42px;
 }
 .mat-icon {
+  color: #787878;
   margin: 2%;
 }
 .mat-icon:hover {
-  background-color: #ebc672 ;
+  background-color: #fff ;
   color: rgb(0, 0, 0);
   cursor: pointer;
 }
 .addbutton {
-  background-color: #eae0c8;
+  background-color: #fff;
   cursor: pointer;
-  color: rgb(0, 0, 0);
+  color: #787878;
 }
 .addbutton:hover {
-  background-color: #ecc66f;
   cursor: pointer;
   color: rgb(0, 0, 0);
 }

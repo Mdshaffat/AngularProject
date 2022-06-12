@@ -1,0 +1,29 @@
+
+.mat-form-field {
+    width: 330px;
+    margin: 5px;
+    padding: 10px;
+}
+.loginForm {
+    height: 100%;
+    align-items: center;
+    padding-bottom: 40px;  
+    width: 100%;
+    max-width: 360px;
+    margin: auto;
+}
+button {
+    width: 330px;
+    margin: 5px;
+    padding: 10px;
+    align-items: center;
+}
+.active{
+    width: 330px;
+    margin: 5px;
+    padding: 10px;
+}
+.addbutton {
+    background-color: #eae0c8;
+    color: black;
+}

@@ -7,16 +7,42 @@
       <img id="logo" src="../../../../assets/logo/Logo.png" alt="LOGO" [routerLink]="['/']" >
       <span class="menu-spacer"></span>
       <div fxShow="true" fxHide.lt-md>
+        <button mat-button [matMenuTriggerFor]="menupatient">Patient<mat-icon>expand_more</mat-icon></button>
+        <mat-menu #menupatient="matMenu" class="my-class">
+          <button mat-menu-item [routerLink]="['/patient/list']" routerLinkActive="router-link-active" >Patient list</button>
+          <button mat-menu-item [routerLink]="['/patient/history']" routerLinkActive="router-link-active">Patient history</button>
+          <button mat-menu-item [routerLink]="['/report/followup']" routerLinkActive="router-link-active" >Followup</button>
+        </mat-menu>
+        <!-- <button mat-button [matMenuTriggerFor]="menumedicine" >MEDICINE<mat-icon>expand_more</mat-icon></button> -->
+        <mat-menu #menumedicine="matMenu" class="my-class">
+          <button mat-menu-item [routerLink]="['/medicine/list']" routerLinkActive="router-link-active" >Medicine list</button>
+          <!-- <button mat-menu-item [routerLink]="['/medicine/purchase']" routerLinkActive="router-link-active">PURCHASE MEDICINE</button> -->
+        </mat-menu>
+        <button mat-button [matMenuTriggerFor]="menuappoinment" >Appoinment<mat-icon>expand_more</mat-icon></button>
+        <mat-menu #menuappoinment="matMenu" class="my-class">
+          <button mat-menu-item [routerLink]="['/visitentries/list']" routerLinkActive="router-link-active" >Visit entry</button>
+          <button mat-menu-item [routerLink]="['/prescription/list']" routerLinkActive="router-link-active">Prescription</button>
+        </mat-menu>
+        <button mat-button  [routerLink]="['/medicine/list']" routerLinkActive="router-link-active">Medicine</button>
+        <button mat-button  [routerLink]="['/pregnancy/list']" routerLinkActive="router-link-active">Maternity Health</button>
         <a *ngFor="let menuItem of menuItems"
         mat-button
         [routerLink]="menuItem.path"
         [routerLinkActive]="menuItem.class"
         [routerLinkActiveOptions]="{exact:true}"
         >{{menuItem.title}}</a>
-        <button mat-button [routerLink]="['/prescription/list']" routerLinkActive="router-link-active" [routerLinkActiveOptions]="{exact: true}" >PRESCRIPTION</button>
-        <button mat-button >REPORT</button>
-        <button mat-button *ngIf="(isAdmin$ | async)" [routerLink]="['/admin']">ADMIN</button>
-        <a mat-button (click)="logout()" ><mat-icon matTooltip="Logout">logout</mat-icon></a>
+        <button *ngIf="(isDoctor$ | async) || (isAdmin$ | async)" mat-button [matMenuTriggerFor]="menureport" >Report<mat-icon>expand_more</mat-icon></button>
+        <mat-menu  #menureport="matMenu" class="my-class">
+          <button mat-menu-item [routerLink]="['/report/countpatientbydate']" routerLinkActive="router-link-active">Patient tally report</button>
+          <button mat-menu-item [routerLink]="['/report/countprescriptionbydate']" routerLinkActive="router-link-active">Prescription tally report</button>
+          <button mat-menu-item [routerLink]="['/report/diagnosismonthlyreport']" routerLinkActive="router-link-active">Monthly disease report</button>
+          <button mat-menu-item [routerLink]="['/report/medicalreport']" routerLinkActive="router-link-active">Medical report</button>
+          <button mat-menu-item [routerLink]="['/report/telimedicinereport']" routerLinkActive="router-link-active">Telemedicine report</button>
+        </mat-menu>
+        <button mat-button >Telemedicine</button>
+
+        <button mat-button *ngIf="(isAdmin$ | async)" [routerLink]="['/admin']">Admin</button>
+        <a mat-button (click)="logout()" >Logout&nbsp;<mat-icon matTooltip="Logout" >logout</mat-icon></a>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
@@ -24,14 +50,62 @@
   <mat-sidenav-container fxFlexFill class="container" autosize>
     <mat-sidenav #sidenav>
       <mat-nav-list>
-        <a (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-        <a *ngFor="let menuItem of menuItems"
-         mat-list-item (click)="sidenav.toggle()"
-         [routerLink]="menuItem.path"
-         >{{menuItem.title}}</a>
-         <a mat-list-item [routerLink]="['/prescription']" >PRESCRIPTION</a>
-         <a mat-list-item *ngIf="(isAdmin$ | async)" [routerLink]="['/admin']" >ADMIN</a>
-         <a mat-list-item (click)="logout()" >Logout &nbsp;<mat-icon>logout</mat-icon></a>
+        <a (click)="sidenav.toggle()" href="" mat-list-item>CLOSE</a>
+        <!-- <a mat-list-item  [routerLink]="['/report/followup']"  >FOLLOWUP</a> -->
+         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <!-- This is the tree node template for leaf nodes -->
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="20">
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <button mat-icon-button></button>
+            <a [routerLink]="[node.ROUTES]" routerLinkActive="link-active" >
+              <mat-icon class="sub-icon" *ngIf="node.icon">{{node.icon}}</mat-icon> 
+             {{node.name}}</a>
+          </mat-tree-node>
+          <!-- This is the tree node template for expandable nodes -->
+          <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="20">
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+              {{node.name}}
+            </button>
+          </mat-tree-node>
+        </mat-tree>
+
+
+        <!--  -->
+
+        <mat-tree *ngIf="(isDoctor$ | async) || (isAdmin$ | async)" [dataSource]="dataSource1" [treeControl]="treeControl">
+          <!-- This is the tree node template for leaf nodes -->
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding matTreeNodePaddingIndent="20">
+            <!-- use a disabled button to provide padding for tree leaf -->
+            <button mat-icon-button></button>
+            <a [routerLink]="[node.ROUTES]" routerLinkActive="link-active" >
+              <mat-icon class="sub-icon" *ngIf="node.icon">{{node.icon}}</mat-icon> 
+             {{node.name}}</a>
+          </mat-tree-node>
+          <!-- This is the tree node template for expandable nodes -->
+          <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="20">
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+              {{node.name}}
+            </button>
+          </mat-tree-node>
+        </mat-tree>
+
+
+        <!--  -->
+        <a mat-list-item [routerLink]="['/physicalstate/list']" >Physical stat</a>
+        <!-- <a mat-list-item [routerLink]="['/report']" routerLinkActive="router-link-active" >REPORT</a> -->
+        <a mat-list-item  >Telemedicine</a>
+        <a mat-list-item  [routerLink]="['/medicine/list']" >Medicine</a>
+        <a mat-list-item  [routerLink]="['/pregnancy/list']" >Maternity Health</a>
+        <a mat-list-item *ngIf="(isAdmin$ | async)" [routerLink]="['/admin']" >Admin</a>
+        <a mat-list-item (click)="logout()" >Logout &nbsp;<mat-icon>logout</mat-icon></a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

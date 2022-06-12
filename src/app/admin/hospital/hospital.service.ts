@@ -25,7 +25,17 @@ export class HospitalService {
         })
       );
     }
-
+    // hospitallistsortbyname
+    getAllHospitalSortByName(){
+      if (this.hospital.length > 0) {
+        return of(this.hospital);
+      }
+      return this.http.get<IHospital[]>(this.baseUrl + 'hospital/hospitallistsortbyname').pipe(
+        map(response => {
+          return response;
+        })
+      );
+    }
     getHospitalById(id: number) {
       return this.http.get<IHospital>(this.baseUrl + 'hospital/gethospital/' + id).pipe(
         map(response => {

@@ -1,0 +1,155 @@
+<div id="report">
+    <div id="searchform">
+        <mat-form-field appearance="fill" class="col-patient">
+            <mat-label>Search Patient</mat-label>
+            <input type="text" matInput
+                                aria-label="BrandName"
+                                [matAutocomplete]="autobrandName"
+                                placeholder="Name/Mobile Number"
+                                [formControl]="patientsearch">
+            <mat-autocomplete #autobrandName="matAutocomplete">
+              <mat-option *ngFor="let patient of filteredPatient | async" (click)="onSelectPatient(patient)">
+                <span>{{patient.id}}</span> |
+                <span>{{patient.firstName}}</span>|
+                <span>{{patient.mobileNumber}}</span>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <button class="btn searchbutton" type="submit" (click)="onSubmit()">
+            <span class="material-icons buttonadd btn">
+              search
+            </span>Search
+          </button>
+    </div>
+    
+    <div id="print-section">
+    
+        <div class="data reportTable" *ngIf="medicalReport">
+            <table>
+                <tr>
+                    <th colspan="7" id="header">
+                        <p>
+                            Intigrated Development Foundation
+                        </p> 
+                        <p>
+                            Medical Report
+                        </p>
+                    </th>
+                </tr>
+                <tr>
+                    <td colspan="7" class="patientInfo">
+                        <span>
+                            Name: {{medicalReport.patient.firstName}} {{medicalReport.patient.lastName}},
+                        </span>
+                        <span>
+                            DOB: {{medicalReport.patient.doB  | date:'dd-MM-YYY'}},
+                        </span>
+                        <span>
+                            Gender: {{medicalReport.patient.gender}},
+                        </span>
+                        <span>
+                            Age: {{medicalReport.patient.age}}  ,
+                        </span>
+                        <span>
+                            Mobile: {{medicalReport.patient.mobileNumber}},
+                        </span>
+                        <span>
+                            NID: {{medicalReport.patient.nid}} ,
+                        </span>
+                        <span>
+                            Blood Group: {{medicalReport.patient.bloodGroup}},
+                        </span>
+                    </td>
+                </tr>
+                <tr class="patientheader">
+                    <td class="patientheader">
+                        Visit Date
+                    </td >
+                    <td class="patientheader">
+                        Vitals
+                    </td>
+                    <td class="patientheader">
+                        Diagnosis
+                    </td>
+                    <td class="patientheader">
+                        Doctors Observation
+                    </td>
+                    <td class="patientheader">
+                        History Of Past Illness
+                    </td>
+                    <td class="patientheader">
+                        Medicine
+                    </td>
+                    <td class="patientheader">
+                        Doctor
+                    </td>
+    
+                </tr>
+                <tr *ngFor="let item of medicalReport.patientVitalAndPrescription">
+                    <td>
+                        {{item.prescription.createdOn | date: 'dd/MM/yyyy'}}
+                    </td>
+                    <td>
+                        <span *ngIf="item.vital.heightFeet" >
+                            Height: <span>{{item.vital.heightFeet}}' {{item.vital.heightInches}}"</span>
+                        </span>
+                        <span *ngIf="item.vital.weight">
+                            Weight: <span>{{item.vital.weight}}</span>
+                        </span>
+                        <span *ngIf="item.vital.bodyTemparature">
+                            Body Tempature: <span>{{item.vital.bodyTemparature}}</span>
+                        </span>
+                        <span *ngIf="item.vital.bmi">
+                            BMI: <span>{{item.vital.bmi}}</span>
+                        </span>
+                    </td>
+                    <td>
+                        {{item.prescription.doctorsObservation}}
+                    </td>
+                    <td>
+                        {{item.prescription.historyOfPastIllness}}
+                    </td>
+                    <td>
+                        <span *ngFor="let diagnosis of item.prescription.diagnosis; index as t">&nbsp;{{t+1}}. {{diagnosis.diseases.name}}</span>
+                    </td>
+                    <td>
+                        <span *ngFor="let medicine of item.prescription.medicineForPrescription; index as t">&nbsp;{{t+1}}. {{medicine.brandName}}</span>
+                    </td>
+                    <td>
+                        <span>NAME: {{item.prescription.doctorFirstName}} {{item.prescription.doctorLastName}}</span><br>
+                        <span>BMDC Reg. No: {{item.prescription.bmdcRegNo}}</span><br>
+                        <span>BRANCH NAME: {{item.prescription.hospitalName}}</span><br>
+                    </td>
+    
+                </tr>
+                <tr id="footerr">
+                    <td colspan="7" class="footer">
+                        <p>
+                            This medical report generated by dotplus.
+                            <br>
+                            Powered by Outreach  for All, Inc, USA.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        
+        </div>
+    </div>
+    <button 
+    mat-raised-button
+    class="button2" color="primary" 
+    type="button" 
+    (click)="exportexcel()">
+    Download
+    </button>
+    
+      <button 
+              mat-raised-button
+              class="button2" color="primary" 
+              type="submit" 
+              styleSheetFile="assets/css/printmedicalreport.css"
+              printSectionId="print-section"  
+              ngxPrint>
+              Print
+      </button>
+</div>

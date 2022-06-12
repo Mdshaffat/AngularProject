@@ -1,9 +1,10 @@
 <div>
+  <app-title [title]="title"></app-title>
     <mat-form-field class="search">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
     </mat-form-field><br>
-    <div class="addnewuser">
+    <div *ngIf="(isDoctor$ | async) || (isAdmin$ | async)" class="addnewuser">
       <button class="btn addbutton" [routerLink]="['../add']" >
         <span class="material-icons buttonadd btn">
           add
@@ -53,4 +54,5 @@
         </tr>
       </table>
       <mat-paginator [pageSizeOptions]="[10,20,50,100,1000]" showFirstLastButtons></mat-paginator>
+      <footer-for-all [footerName]="footerName"></footer-for-all>
     

@@ -14,6 +14,7 @@ export class MedicineEditComponent implements OnInit , AfterViewInit {
   updatemedicineForm: FormGroup = new FormGroup({});
   medicine: IMedicine;
   id: any;
+  title = 'Update Medicine';
   constructor(private toastr: ToastrService,
               private medicineService: MedicineService,
               private activateRoute: ActivatedRoute,
@@ -56,9 +57,6 @@ export class MedicineEditComponent implements OnInit , AfterViewInit {
       brandName: this.medicine.brandName,
       genericName: this.medicine.genericName,
       manufacturar: this.medicine.manufacturar,
-      unit: this.medicine.unit,
-      unitPrice: this.medicine.unitPrice,
-      isActive: this.medicine.isActive
     });
   }
 

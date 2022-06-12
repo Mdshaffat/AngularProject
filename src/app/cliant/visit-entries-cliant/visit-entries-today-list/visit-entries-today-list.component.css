@@ -13,6 +13,11 @@ table {
   margin-left: 5%;
   height: 2%;
 }
+.selecthospital {
+  float: left;
+  width: 30%;
+  margin-left: 5% !important;
+}
 .addnewuser {
   float: right;
   width: 15%;
@@ -28,21 +33,24 @@ table {
   color: rgb(0, 0, 0);
 
 }
+button {
+  width: 200px;
+  font-size: 18px;
+  align-items: center;
+}
 .mat-icon {
   margin: 2%;
 }
 .mat-icon:hover {
-  background-color: #ebc672 ;
   color: rgb(0, 0, 0);
   cursor: pointer;
 }
 .addbutton {
-  background-color: #eae0c8;
+  background-color: #fff;
   cursor: pointer;
-  color: rgb(0, 0, 0);
+  color: #787878;
 }
 .addbutton:hover {
-  background-color: #ecc66f;
   cursor: pointer;
   color: rgb(0, 0, 0);
 }

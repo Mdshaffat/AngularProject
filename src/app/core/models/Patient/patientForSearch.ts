@@ -1,5 +1,6 @@
 export interface IPatientForSearch {
     id: number;
-    patientName: string;
+    firstName: string;
+    lastName: string;
     mobileNumber: string;
 }

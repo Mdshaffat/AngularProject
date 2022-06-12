@@ -1,17 +1,24 @@
 <body>
+  <app-title [title]="title"></app-title>
   <button mat-button [routerLink]="['../list']" >Back</button>
       <div class="loginForm">
           <form [formGroup]="visitEntryAddForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill" class="selecthospital">
+              <mat-label>Select Branch</mat-label>
+              <mat-select #value formControlName="hospitalId">
+                <mat-option [value]="option.id" *ngFor="let option of hospitals">{{option.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>
             <mat-form-field class="form-brand-name" appearance="fill">
               <mat-label>Patient</mat-label>
-              <input type="text" matInput
+              <input type="text" matInput id="patientName" name="patientName"
                                   aria-label="BrandName"
                                   [matAutocomplete]="autobrandName"
                                   [formControl]="patientsearch">
               <mat-autocomplete #autobrandName="matAutocomplete">
                 <mat-option *ngFor="let patient of filteredPatient | async" (click)="onSelectPatient(patient)">
                   <span>{{patient.id}}</span> |
-                  <span>{{patient.patientName}}</span>|
+                  <span>{{patient.firstName}} {{patient.lastName}}</span>|
                   <span>{{patient.mobileNumber}}</span>
                 </mat-option>
               </mat-autocomplete>

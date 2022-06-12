@@ -1,0 +1,51 @@
+<body >
+    <div >
+    <app-title [title]="title"></app-title>
+    <button mat-button (click)="goBack()" >Back</button>
+      <div class="loginForm">
+          <form [formGroup]="updatemedicineForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill">
+                <mat-label>Medicine Type</mat-label>
+                <mat-select formControlName="medicineType">
+                  <mat-option value="Syrup">Syrup</mat-option>
+                  <mat-option value="Tablet">Tablet</mat-option>
+                  <mat-option value="Capsules">Capsules</mat-option>
+                  <mat-option value="Cream">Cream</mat-option>
+                  <mat-option value="Oral Gel">Oral Gel</mat-option>
+                  <mat-option value="Suppositories">Suppositories</mat-option>
+                  <mat-option value="Drops">Drops</mat-option>
+                  <mat-option value="Inhalers">Inhalers</mat-option>
+                  <mat-option value="Injections">Injections</mat-option>
+                  <mat-option value="Implants or patches">Implants or patches</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field >
+                  <mat-label>Brand Name</mat-label>
+                  <input [value]="medicine.brandName" required  formControlName="brandName" matInput>
+                  <mat-error *ngIf="f.brandName.hasError('required')">Required</mat-error>
+                  <mat-error *ngIf="f.brandName.hasError('maxlength')">Maximum Length 40 charecter</mat-error>
+              </mat-form-field><br>
+              <mat-form-field >
+                  <mat-label>Generic Name</mat-label>
+                  <input  required formControlName="genericName" matInput >
+                  <mat-error *ngIf="f.genericName.hasError('required')">Required</mat-error>
+                  <mat-error *ngIf="f.genericName.hasError('maxlength')">Maximum Length 50 charecter</mat-error>
+              </mat-form-field><br>
+              <mat-form-field class="form-brand-name">
+                <mat-label>Manufacturar</mat-label>
+                <input type="text" matInput id="patientName" name="patientName"
+                                    aria-label="BrandName"
+                                    [matAutocomplete]="autobrandName"
+                                    [formControl]="manufacturarsearch">
+                <mat-autocomplete #autobrandName="matAutocomplete">
+                  <mat-option *ngFor="let manufacturar of filteredManufacturar | async" (keyup.enter)="selectManufacturar(manufacturar)" (click)="selectManufacturar(manufacturar)">
+                    <span>{{manufacturar.name}}</span> |
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field><br>
+                  <mat-checkbox formControlName="isActive" class="active">Active</mat-checkbox>
+                  <br/><button mat-raised-button class="addbutton" type="submit">UPDATE</button>
+        </form>    
+      </div>
+    </div>
+  </body>

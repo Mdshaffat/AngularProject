@@ -1,91 +1,156 @@
 <div>
   <div >
-    <body id="container">
+    <body>
       <body id="print-section">
-    <div id="container" class="bottomborder">
-        <div id="head">
-          <h2>Health Program </h2>
-          <h1> Integrated Development Foundation</h1>
-            <p>{{prescriptionDetails.hospitalName}}</p>
-            <p>Prescribed By: {{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
-            <p *ngIf="prescriptionDetails.bmdcRegNo">BMDC Reg No: {{prescriptionDetails.bmdcRegNo}}</p>
-            <p *ngIf="prescriptionDetails.optionalEmail">Email: {{prescriptionDetails.optionalEmail}}</p>
-        </div>
-        <div id="nav" >
-            <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} | 
-              <strong>Age: </strong> {{prescriptionDetails.patientAge}}
-              | <strong *ngIf="prescriptionDetails.patientBloodGroup">Blood Group: </strong> {{prescriptionDetails.patientBloodGroup}} 
-              
-            </p>
-            <p>
-              <strong> Date:</strong>  {{prescriptionDetails.updatedOn | date: 'dd/MM/yyyy'}}
-            </p>
-        </div>
-        <div id="nav" *ngFor="let prescriptionDetailsVital of prescriptionDetails.physicalStat">
-           <p >O/E:
-             <span *ngIf="prescriptionDetailsVital.heightFeet"> <strong>| Height: </strong> {{prescriptionDetailsVital.heightFeet}}" {{prescriptionDetailsVital.heightInches}}'</span>
-             <span *ngIf="prescriptionDetailsVital.weight"> <strong>| Weight: </strong> {{prescriptionDetailsVital.weight}} kg</span>
-             <span *ngIf="prescriptionDetailsVital.bmi"> <strong>| BMI: </strong> {{prescriptionDetailsVital.bmi}}</span>
-             <span *ngIf="prescriptionDetailsVital.bodyTemparature"><strong> Body Temperature:</strong> {{prescriptionDetailsVital.bodyTemparature}}&#176;F</span> 
-            <span *ngIf="prescriptionDetailsVital.spO2"> <strong> | spO2:</strong> {{prescriptionDetailsVital.spO2}} %</span> <br>
-            <span *ngIf="prescriptionDetailsVital.bloodPressureSystolic"> <strong> Blood Pressure:</strong> {{prescriptionDetailsVital.bloodPressureSystolic}}/{{prescriptionDetailsVital.bloodPressureDiastolic}} mmHg </span>
-            <span *ngIf="prescriptionDetailsVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionDetailsVital.pulseRate}} bpm</span>
-            <span *ngIf="prescriptionDetailsVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionDetailsVital.editedOn | date: 'dd/MM/yyyy'}}</span>
-          </p>
-      </div>
-      <div id="nav">
-        <p >G/E:
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.appearance" >Appearance</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.anemia" >Anemia</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.jundice" >Jaundice</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.dehydration" >Dehydration</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.edema" >Edema</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.cyanosis" >Cyanosis</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.heart" >Heart</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.lung" >Lung</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.abdomen" >Abdomen</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" [checked]="prescriptionDetails.generalExamination.kub" >KUB</mat-checkbox>
-       </p>
-   </div>
-        <div id="content">
-            <div id="aside">
-                <h3>Cc</h3>
-                <textarea readonly>{{prescriptionDetails.doctorsObservation}}</textarea>
-                <h3>Advice Test</h3>
-                <textarea readonly>{{prescriptionDetails.adviceTest}}</textarea>
+        <div class="bottomborder">
+          <div id="container">
+            <div id="head">
+              <img id="idflogo" src="/assets/logo/idflogo.jpeg" alt="IDF">
+              <p style="font-size: 14px;">Health Program </p>
+              <p style="font-size: 16px;">Integrated Development Foundation</p>
+              <p>{{prescriptionDetails.hospitalName}}</p>
+              <p>Prescribed By: {{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
+              <p *ngIf="prescriptionDetails.bmdcRegNo">BMDC Reg No: {{prescriptionDetails.bmdcRegNo}}</p>
+              <p *ngIf="prescriptionDetails.optionalEmail">Email: {{prescriptionDetails.optionalEmail}}</p>
             </div>
-            <div id="main">
-              <h3>Rx</h3>
-              <textarea readonly>{{prescriptionDetails.adviceMedication}}</textarea>
-              <div class="nextvisit">
-              <span>Next Visit: {{prescriptionDetails.nextVisit | date: 'dd/MM/yyyy'}} </span>
-              
+            <div id="nav" >
+                <p> <strong> Patient Name: </strong>{{prescriptionDetails.patientFirstName}} {{prescriptionDetails.patientLastName}} | 
+                  <strong>Age: </strong> {{prescriptionDetails.patientAge}} |
+                  <strong>Gender: </strong> {{prescriptionDetails.patientGender}}
+                  <strong *ngIf="prescriptionDetails.patientBloodGroup">Blood Group: </strong> {{prescriptionDetails.patientBloodGroup}} 
+                  
+                </p>
+                <p>
+                  <strong> Date:</strong>  {{prescriptionDetails.updatedOn | date: 'dd/MM/yyyy'}}
+                </p>
             </div>
-              <div class="sign">
-                <p>___________________</p>
-                <p>{{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
-              </div>
-                <div class="rel"><br>
-                    <h3>Note</h3>
-                    <textarea  readonly cdkTextareaAutosize cdkAutosizeMinRows=2 >{{prescriptionDetails.note}}</textarea>
+            <!-- vitalSign -->
+            <div id="nav-2" *ngIf="prescriptionDetails.physicalStat">
+               <p >O/E:
+                <span *ngIf="prescriptionDetails.physicalStat.heightFeet"> <strong> Height:</strong>&nbsp;{{prescriptionDetails.physicalStat.heightFeet}}'&nbsp;{{prescriptionDetails.physicalStat.heightInches}}"</span>
+                <span *ngIf="prescriptionDetails.physicalStat.weight"> <strong> | Weight:</strong>&nbsp;{{prescriptionDetails.physicalStat.weight}}kg</span>
+                <span *ngIf="prescriptionDetails.physicalStat.bodyTemparature"><strong> | Body&nbsp;Temperature:</strong>&nbsp;{{prescriptionDetails.physicalStat.bodyTemparature}}&nbsp;&#176;F</span> 
+                <span *ngIf="prescriptionDetails.physicalStat.bmi"> <strong> | BMI:</strong>&nbsp;{{prescriptionDetails.physicalStat.bmi}}</span>
+                <span *ngIf="prescriptionDetails.physicalStat.spO2"> <strong> | spO2:</strong>&nbsp;{{prescriptionDetails.physicalStat.spO2}} %</span>
+                <span *ngIf="prescriptionDetails.physicalStat.bloodPressureSystolic"> <strong> |&nbsp;Blood&nbsp;Pressure:</strong> {{prescriptionDetails.physicalStat.bloodPressureSystolic}}/{{prescriptionDetails.physicalStat.bloodPressureDiastolic}} mmHg </span>
+                <span *ngIf="prescriptionDetails.physicalStat.pulseRate"> <strong> | Pulse&nbsp;Rate:</strong>&nbsp;{{prescriptionDetails.physicalStat.pulseRate}} bpm</span>
+                <span *ngIf="prescriptionDetails.physicalStat.rbsFbs"> <strong> | RBS/FBS:</strong>&nbsp;{{prescriptionDetails.physicalStat.rbsFbs}}</span>
+              </p>
+          </div>
+          <div  id="nav-3" *ngIf="prescriptionDetails.physicalStat">
+            <p *ngIf="prescriptionDetails.physicalStat.appearance || prescriptionDetails.physicalStat.anemia || prescriptionDetails.physicalStat.jaundice || prescriptionDetails.physicalStat.dehydration || prescriptionDetails.physicalStat.edema || prescriptionDetails.physicalStat.cyanosis || prescriptionDetails.physicalStat.kub">G/E:
+              <span *ngIf="prescriptionDetails.physicalStat.appearance"> <strong> Appearance:</strong>&nbsp;{{prescriptionDetails.physicalStat.appearance}}</span>
+             <span *ngIf="prescriptionDetails.physicalStat.anemia"> <strong> | Anemia:</strong>&nbsp;{{prescriptionDetails.physicalStat.anemia}}</span>
+             <span *ngIf="prescriptionDetails.physicalStat.jaundice"><strong> | Jaundice:</strong>&nbsp;{{prescriptionDetails.physicalStat.jaundice}}</span> 
+             <span *ngIf="prescriptionDetails.physicalStat.dehydration"> <strong>| Dehydration:</strong>&nbsp;{{prescriptionDetails.physicalStat.dehydration}}</span>
+             <span *ngIf="prescriptionDetails.physicalStat.edema"> <strong> | Edema:</strong>&nbsp;{{prescriptionDetails.physicalStat.edema}}</span>
+             <span *ngIf="prescriptionDetails.physicalStat.cyanosis"> <strong> | Cyanosis:</strong>&nbsp;{{prescriptionDetails.physicalStat.cyanosis}}</span>
+           </p>
+       </div>
+    
+          <div id="content">
+    
+              <!-- Side Section -->
+              <div id="aside">
+                <div class="col-cc">
+                  <h3>Cc</h3>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=3>{{prescriptionDetails.doctorsObservation}}</textarea>
+                </div>
+                <div *ngIf="prescriptionDetails.systemicExamination" class="col-mh">
+                  <h3>Systemic Examination </h3>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=2>{{prescriptionDetails.systemicExamination}}</textarea>
+                </div>
+                <div *ngIf="prescriptionDetails.oh" class="col-oh">
+                  <h3>OB-gyn/H</h3>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=1>{{prescriptionDetails.oh}}</textarea>
+                </div>
+                <div *ngIf="prescriptionDetails.historyOfPastIllness" class="col-mh">
+                  <h3>History of Past Illness </h3>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=1>{{prescriptionDetails.historyOfPastIllness}}</textarea>
+                </div>
+                <div *ngIf="prescriptionDetails.familyHistory" class="col-oh">
+                  <h3>Family History </h3>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=1  >{{prescriptionDetails.familyHistory}}</textarea>
+                </div>
+                <div *ngIf="prescriptionDetails.allergicHistory" class="col-investigation">
+                  <h3>Allergic History</h3>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=1 >{{prescriptionDetails.allergicHistory}}</textarea>
+                </div>
+                <div class="col-investigation">
+                  <h3>Investigation</h3>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=1>{{prescriptionDetails.adviceTest}}</textarea>
+                </div>
+                <div class="col-dx">
+                  <h3>Dignosis</h3>
+                  <p style="margin-left: 5px;" *ngFor="let item of prescriptionDetails.diagnosis">{{item.diseases.name}}</p>
+                  <textarea readonly cdkTextareaAutosize cdkAutosizeMinRows=1>{{prescriptionDetails.dx}}</textarea>
                 </div>
               </div>
-            </div>
-            
-          </div>
+
+          <!-- Main Section -->
+                <div id="main">
+                  <h3>Rx</h3>
+                  <div>
+
+                    <table *ngIf="prescriptionDetails.medicineForPrescription">
+                      <!-- <tr>
+                        <th>MEDICINE</th>
+                        <th>DOSE</th>
+                        <th>TIME</th>
+                      </tr> -->
+                      <tr *ngFor="let medicine of prescriptionDetails.medicineForPrescription" >
+                          <td>
+                            <p> {{medicine.medicineType}}.&nbsp;{{medicine.brandName}}</p>
+                          </td>
+                          <td>
+                            <p>{{medicine.dose}}</p>
+                          </td>
+                          <td>
+                            <p>{{medicine.time}}</p>
+                          </td>
+                          <td>
+                            <p>{{medicine.comment}}</p>
+                          </td>
+                      </tr>
+                    </table>
+                </div>
+                  <textarea  *ngIf="prescriptionDetails.adviceMedication" cdkTextareaAutosize cdkAutosizeMinRows=.9 readonly>{{prescriptionDetails.adviceMedication}}</textarea>
+
+                  <div Id="buttomelement">
+                    <div class="rel"><br>
+                      <h3>Advice</h3>
+                      <textarea cdkTextareaAutosize cdkAutosizeMinRows=3 readonly>{{prescriptionDetails.note}}</textarea>
+                  </div>
+                    <div class="nextvisit">
+                      <h3>Next Visit: {{prescriptionDetails.nextVisit | date: 'dd/MM/yyyy'}} </h3>
+                  </div>
+                  <div class="sign">
+                      <p>_____________________________________</p>
+                      <p>{{prescriptionDetails.doctorFirstName}} {{prescriptionDetails.doctorLastName}}</p>
+                    </div>
+                  <!-- <mat-checkbox disabled [checked]="prescriptionDetails.isTelimedicine" color="primary">Telemedicine</mat-checkbox><br> -->
+                  </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+
+
+          <!-- footer -->
           <div class="footer">
             <p>
-              This prescription is generated by dot+ 
+              This prescription is generated by dotplus.
             </p>
             <p>
               Powered by Outreach  for All, Inc, USA.
             </p>
           </div>
         </body>
+        <br>
           <button 
               mat-raised-button
-              class="button1" color="success"  [routerLink]="['../../list']" >
-              Back To List
+              class="button1" color="success"  (click)="goBack()" >
+              Back
           </button>
           <button 
               mat-raised-button

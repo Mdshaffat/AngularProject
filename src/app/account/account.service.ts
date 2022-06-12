@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { IRole } from '../core/models/role';
 import { IUserTokenProvider } from '../core/models/UserTokenProvider';
+import jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,16 @@ import { IUserTokenProvider } from '../core/models/UserTokenProvider';
 export class AccountService {
   roles: IRole[] = [];
   baseUrl = environment.apiUrl;
+  jwtToken: string;
+  decodedToken: { [key: string]: string };
   private currentUserSource = new ReplaySubject<IUserTokenProvider>(1);
   currentUser$ = this.currentUserSource.asObservable();
   private isAdminSource = new ReplaySubject<boolean>(1);
   isAdmin$ = this.isAdminSource.asObservable();
   private isDoctorSource = new ReplaySubject<boolean>(1);
   isDoctor$ = this.isDoctorSource.asObservable();
+  private isdesignationDoctorSource = new ReplaySubject<boolean>(1);
+  isdesignationDoctor$ = this.isdesignationDoctorSource.asObservable();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -39,6 +44,7 @@ export class AccountService {
           this.currentUserSource.next(user);
           this.isAdminSource.next(this.isAdmin(user.token));
           this.isDoctorSource.next(this.isDoctor(user.token));
+          this.isdesignationDoctorSource.next(this.isDesignationDoctor(user.token));
         }
       })
     );
@@ -56,6 +62,15 @@ export class AccountService {
     if (token) {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       if (decodedToken.role.indexOf('Doctor') > -1) {
+        return true;
+      }
+    }
+  }
+
+  isDesignationDoctor(token: string): boolean {
+    if (token) {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      if (decodedToken.designation.indexOf('Doctor') > -1) {
         return true;
       }
     }
@@ -136,4 +151,13 @@ export class AccountService {
       );
     }
   }
+
+  getDecoadedHospitalIdFromToken(){
+    const token = localStorage.getItem('hotpital_user_token');
+    if (token) {
+      this.decodedToken = jwt_decode(token);
+    }
+    return this.decodedToken ? this.decodedToken.HospitalId : null;
+  }
+
 }

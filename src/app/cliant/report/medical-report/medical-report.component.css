@@ -1,0 +1,121 @@
+p {
+    margin: 0;
+    padding: 0;
+}
+#searchform {
+    margin: 2%;
+}
+.searchbutton {
+  background-color: #fff;
+  cursor: pointer;
+  color: #787878;
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+  align-items: center;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 1px 1px rgb(185, 189, 190);
+  margin-left: 10px
+}
+.searchbutton:hover {
+  color: black;
+}
+.search {
+    float: left;
+    width: 60%;
+    margin-left: 5%;
+    height: 2%;
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    
+    padding: 8px;
+  }
+  th {
+    text-align: center;
+  }
+  td {
+    text-align: left;
+  }
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+.mat-column-Edit {
+    padding-right: 20px;
+    text-align: center;
+  }
+ .downloadxls {
+   float: left;
+   padding-left: 10px;
+ }
+ .downloadbutton {
+    float: left;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    background-color: #FFF;
+    cursor: pointer;
+    color: #787878;
+    height: 48px;
+    width: 200px;
+    font-size: 18px;
+    align-items: center;
+ }
+ .button2 {
+   color: #787878;
+   background-color: #fff;
+    display: inline;
+      width: 100px;
+      margin: 2px;
+      padding: 2px;
+      align-items: center;
+    float: right;
+    margin-right: 40px;
+  
+  }
+  .button2 :hover {
+    color: black !important;
+  }
+ .downloadbutton:hover {
+  color: black;
+}
+
+.mat-elevation-z8 {
+  visibility: hidden;
+}
+.footer {
+	font-size: 10px;
+	text-align: center;
+	bottom: 0;
+  background: none;
+  border: none;
+}
+#header {
+  background: none;
+  border: none;
+}
+#footerr {
+  background: none;
+  border: none !important;
+}
+#header > p:first-child {
+    font-size: 18px;
+}
+#header > p:last-child {
+    font-size: 16px;
+}
+.patientInfo {
+    text-align: center;
+}
+.patientheader {
+  text-align: center;
+}
+#report {
+  width: 99%;
+}

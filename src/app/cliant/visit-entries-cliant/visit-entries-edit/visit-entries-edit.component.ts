@@ -4,7 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
+import { IHospitalSortByName } from 'src/app/core/models/Hospital/hospitalsortbyname';
 import { IPatient } from 'src/app/core/models/Patient/patient';
+import { IPatientForSearch } from 'src/app/core/models/Patient/patientForSearch';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
 import { PatientService } from '../../patient/patient.service';
 import { VisitEntriesAddComponent } from '../visit-entries-add/visit-entries-add.component';
@@ -16,11 +18,11 @@ import { VisitEntriesAddComponent } from '../visit-entries-add/visit-entries-add
   styleUrls: ['./visit-entries-edit.component.css']
 })
 export class VisitEntriesEditComponent implements OnInit, AfterViewInit {
-
-  patients: IPatient [];
+  title = 'Update Visit Entries';
+  patients: IPatientForSearch [];
   visitEntries: IVisitEntry [];
   visitEntry: any;
-  hospitals: IHospital [];
+  hospitals: IHospitalSortByName [];
   visitEntryUpdateForm: FormGroup = new FormGroup({});
   constructor(private fb: FormBuilder,
               private hospitalService: HospitalService,
@@ -33,7 +35,7 @@ export class VisitEntriesEditComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loadAllHospital();
-    this.loadAllPatient();
+    // this.loadAllPatient();
     this.updateVisitEntryEditForm();
     this. populateHospitalFrom();
   }
@@ -63,12 +65,12 @@ export class VisitEntriesEditComponent implements OnInit, AfterViewInit {
     return this.visitEntryUpdateForm.controls;
   }
   loadAllPatient(){
-    this.patientService.getAllPatient().subscribe(response => {
-      this.patients = response;
-    });
+    // this.patientService.getPatientForSearch().subscribe(response => {
+    //   this.patients = response;
+    // });
   }
   loadAllHospital(){
-    this.hospitalService.getAllHospital().subscribe(response => {
+    this.hospitalService.getAllHospitalSortByName().subscribe(response => {
       this.hospitals = response;
     });
   }

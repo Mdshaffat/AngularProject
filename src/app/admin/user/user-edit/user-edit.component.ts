@@ -6,6 +6,7 @@ import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
+import { IHospitalSortByName } from 'src/app/core/models/Hospital/hospitalsortbyname';
 import { IRole } from 'src/app/core/models/role';
 import { IUser } from 'src/app/core/models/user';
 import { HospitalService } from '../../hospital/hospital.service';
@@ -17,8 +18,9 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit , AfterViewInit {
+  title = 'Update User';
   updateUserForm: FormGroup = new FormGroup({});
-  hospitals: IHospital[] = [];
+  hospitals: IHospitalSortByName[] = [];
   roles: IRole[] = [];
   updateUser!: IUser ;
   id: any;
@@ -112,7 +114,7 @@ export class UserEditComponent implements OnInit , AfterViewInit {
       });
   }
   getHospital(){
-    this.hospitalService.getAllHospital().subscribe(response => {
+    this.hospitalService.getAllHospitalSortByName().subscribe(response => {
       this.hospitals = response;
     }, error => {
       console.log(error);

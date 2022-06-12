@@ -1,22 +1,33 @@
 <body>
+  <app-title [title]="title"></app-title>
     <button mat-button [routerLink]="['/patient']" >Back</button>
       <div class="loginForm">
           <form [formGroup]="patientAddForm" (ngSubmit)="onSubmit()">
               <mat-form-field class="col-firstName" appearance="fill">
                   <mat-label>First Name</mat-label>
-                  <input required formControlName="firstName" matInput>
+                  <input required formControlName="firstName" matInput id="firstname" name="firstname">
                   <mat-error *ngIf="f.firstName.hasError('required')">Required</mat-error>
                   <mat-error *ngIf="f.firstName.hasError('maxlength')">Maximum Length 40 Charecter</mat-error>
               </mat-form-field>
               <mat-form-field class="col-lastName" appearance="fill">
                 <mat-label>Last Name</mat-label>
-                <input formControlName="lastName" matInput>
+                <input formControlName="lastName" matInput id="lastname" name="lastname">
                 <mat-error *ngIf="f.lastName.hasError('maxlength')">Maximum Length 40 Charecter</mat-error>
                 <mat-error *ngIf="f.lastName.hasError('required')">Required</mat-error>
             </mat-form-field>
+            <mat-form-field class="col-hospitalId" appearance="fill">
+              <mat-label>Hospital</mat-label>
+              <mat-select [(value)]="hospital" required (selectionChange)="setHospitalAndBranch(hospital)">
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let hospital of hospitals" [value]="hospital">
+                  {{hospital.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.branchId.hasError('required')">Please choose Branch</mat-error>
+            </mat-form-field>
             <mat-form-field class="col-branchId" appearance="fill">
               <mat-label>Branch</mat-label>
-              <mat-select formControlName="branchId" required>
+              <mat-select formControlName="branchId" disabled>
                 <mat-option>--</mat-option>
                 <mat-option *ngFor="let branch of branches" [value]="branch.id">
                   {{branch.name}}
@@ -24,15 +35,9 @@
               </mat-select>
               <mat-error *ngIf="f.branchId.hasError('required')">Please choose Branch</mat-error>
             </mat-form-field>
-              <mat-form-field class="col-nid" appearance="fill">
-                <mat-label>NID</mat-label>
-                <input formControlName="nid" matInput maxlength="25">
-                <mat-error *ngIf="f.nid.hasError('maxlength')">Maximum 25 Charecter</mat-error>
-                <mat-error *ngIf="f.nid.hasError('pattern')">Please input valid number</mat-error>
-            </mat-form-field>
             <mat-form-field class="col-address" appearance="fill">
               <mat-label>Address</mat-label>
-              <input style="overflow: scroll;" formControlName="address" matInput>
+              <input style="overflow: scroll;" formControlName="address" matInput id="address" name="address">
               <mat-error *ngIf="f.address.hasError('maxlength')">Maximum 200 Charecter</mat-error>
               <mat-error *ngIf="f.address.hasError('required')">Required</mat-error>
           </mat-form-field>
@@ -65,9 +70,15 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-form-field class="col-nid" appearance="fill">
+            <mat-label>NID</mat-label>
+            <input formControlName="nid" matInput maxlength="25" id="nid" name="nid">
+            <mat-error *ngIf="f.nid.hasError('maxlength')">Maximum 25 Charecter</mat-error>
+            <mat-error *ngIf="f.nid.hasError('pattern')">Please input valid number</mat-error>
+        </mat-form-field>
               <mat-form-field class="col-mobileNumber" appearance="fill">
                   <mat-label>Mobile Number</mat-label>
-                  <input formControlName="mobileNumber" matInput maxlength="11"  >
+                  <input formControlName="mobileNumber" matInput maxlength="11" id="mobilenumber" name="mobilenumber">
                   <mat-error *ngIf="f.mobileNumber.hasError('maxLength')">Max 11 charecter</mat-error>
                   <mat-error *ngIf="f.mobileNumber.hasError('pattern')">Please input a valid number</mat-error>
               </mat-form-field>
@@ -81,11 +92,28 @@
                 </mat-select>
                 <mat-error *ngIf="f.gender.hasError('required')">Required</mat-error>
             </mat-form-field>
+            <!-- <div class="age"> -->
+            <div class="age">
+              <span>Age:&nbsp;</span>
               <mat-form-field class="col-age" appearance="fill">
-                <mat-label>Age</mat-label>
-                <input formControlName="age" matInput maxlength="3">
-                <mat-error *ngIf="f.age.hasError('pattern')">Please input a valid number</mat-error>
-            </mat-form-field>
+                <mat-label>Year</mat-label>
+                <input formControlName="year" matInput  id="year" name="year" max="2021" type="number">
+                <mat-error *ngIf="f.year.hasError('max')">Years should be less then 2021</mat-error>
+                <mat-error *ngIf="f.year.hasError('pattern')">Should be positive number</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-age" appearance="fill">
+                <mat-label>Month</mat-label>
+                <input formControlName="month" matInput  id="month" name="month" max="11" type="number">
+                <mat-error *ngIf="f.month.hasError('max')">Months should be less then 11</mat-error>
+                <mat-error *ngIf="f.month.hasError('pattern')">Should be positive number</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-age" appearance="fill">
+                <mat-label>Day</mat-label>
+                <input formControlName="day" matInput  id="day" name="day" max="30" type="number">
+                <mat-error *ngIf="f.day.hasError('max')">Days should be less then 30</mat-error>
+                <mat-error *ngIf="f.day.hasError('pattern')">Should be positive number</mat-error>
+              </mat-form-field>
+              <span>Or&nbsp;</span>
               <mat-form-field class="col-doB" appearance="fill">
                 <mat-label>Date Of Birth</mat-label>
                 <input formControlName="doB" matInput [matDatepicker]="picker" (dateChange)="calculateAge()">
@@ -93,6 +121,8 @@
                 <mat-datepicker #picker></mat-datepicker>
                 <mat-error *ngIf="f.doB.hasError('required')">Please choose a Date</mat-error>
               </mat-form-field>
+            </div>
+            <!-- </div> -->
             <mat-form-field class="col-maritalStatus" appearance="fill">
                 <mat-label>Marital Status</mat-label>
                 <mat-select formControlName="maritalStatus">
@@ -120,30 +150,85 @@
                 </mat-select>
                 <mat-error *ngIf="f.bloodGroup.hasError('required')">Required</mat-error>
             </mat-form-field>
-            <mat-form-field class="col-note" appearance="fill">
-              <mat-label>Note</mat-label>
-              <textarea cdkTextareaAutosize matInput formControlName="note"></textarea>
-              <mat-error *ngIf="f.note.hasError('required')">Required</mat-error>
-              <mat-error *ngIf="f.note.hasError('maxlength')">Maximum 300 Charecter</mat-error>
-            </mat-form-field>
+            <mat-form-field class="col-covidvaccine" appearance="fill">
+              <mat-label>COVID-19 Vaccination</mat-label>
+              <mat-select formControlName="covidvaccine" #covidvaccine required>
+                <mat-option>--</mat-option>
+                <mat-option value="1">Yes</mat-option>
+                <mat-option value="2">No</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.covidvaccine.hasError('required')">Required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-vaccineBrand" appearance="fill" *ngIf="covidvaccine.value == '1'">
+            <mat-label>Vaccine</mat-label>
+            <mat-select formControlName="vaccineBrand" #vaccineBrand required>
+              <mat-option>--</mat-option>
+              <mat-option value="1">Pfizer</mat-option>
+              <mat-option value="2">Astrazeneca</mat-option>
+              <mat-option value="3">Moderna</mat-option>
+              <mat-option value="4">Sinopharm</mat-option>
+              <mat-option value="5">Others</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.vaccineBrand.hasError('required')">Required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-vaccineDose" appearance="fill" *ngIf="covidvaccine.value == '1'">
+          <mat-label>Vaccine Dose</mat-label>
+          <mat-select formControlName="vaccineDose" #vccc>
+            <mat-option>--</mat-option>
+            <mat-option value="1">1st Dose</mat-option>
+            <mat-option value="2">2nd Dose</mat-option>
+            <mat-option value="3">Boster Dose</mat-option>
+          </mat-select>
+          <mat-error *ngIf="f.vaccineBrand.hasError('required')">Required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-d-firstDoseDate" appearance="fill" *ngIf="patientAddForm.controls.vaccineDose.value">
+        <mat-label>First Dose Date</mat-label>
+        <input formControlName="firstDoseDate" matInput [matDatepicker]="pickerf">
+        <mat-datepicker-toggle matSuffix [for]="pickerf"></mat-datepicker-toggle>
+        <mat-datepicker #pickerf></mat-datepicker>
+        <mat-error *ngIf="f.firstDoseDate.hasError('required')">Please choose a Date</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-d-secondDoseDate" appearance="fill" *ngIf="patientAddForm.controls.vaccineDose.value == 2 || patientAddForm.controls.vaccineDose.value == 3">
+        <mat-label>Second Dose Date</mat-label>
+        <input formControlName="secondDoseDate" matInput [matDatepicker]="pickers">
+        <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+        <mat-datepicker #pickers></mat-datepicker>
+        <mat-error *ngIf="f.secondDoseDate.hasError('required')">Please choose a Date</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-d-bosterDoseDate" appearance="fill" *ngIf="patientAddForm.controls.vaccineDose.value == 3">
+        <mat-label>Boster Dose Date</mat-label>
+        <input formControlName="bosterDoseDate" matInput [matDatepicker]="pickerb">
+        <mat-datepicker-toggle matSuffix [for]="pickerb"></mat-datepicker-toggle>
+        <mat-datepicker #pickerb></mat-datepicker>
+        <mat-error *ngIf="f.bosterDoseDate.hasError('required')">Please choose a Date</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-note" appearance="fill">
+        <mat-label>Note</mat-label>
+        <textarea cdkTextareaAutosize matInput formControlName="note" id="note" name="note"></textarea>
+        <mat-error *ngIf="f.note.hasError('required')">Required</mat-error>
+        <mat-error *ngIf="f.note.hasError('maxlength')">Maximum 300 Charecter</mat-error>
+      </mat-form-field>
 <!-- checkBox -->
-            <mat-checkbox formControlName="primaryMember" class="col-primaryMember">Primary Member</mat-checkbox><br>
-
-            <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+      <mat-checkbox formControlName="primaryMember" class="col-primaryMember">Primary Member</mat-checkbox><br>
+      <mat-form-field class="col-membershipRegistrationNumber" appearance="fill">
+        <mat-label>Registration Number</mat-label>
+        <input formControlName="membershipRegistrationNumber" matInput maxlength="20" id="membershipregistrationnumber" name="membershipregistrationnumber">
+    </mat-form-field>
+      <hr style="height:2px;border-width:0;color:gray;background-color:gray">
 <!-- Patient Vital -->
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
             <mat-form-field  appearance="fill">
               <mat-label>Body Temparature (&#176;F)</mat-label>
-              <input formControlName="bodyTemparature" maxlength="3" matInput >
+              <input formControlName="bodyTemparature" maxlength="5" matInput id="bodyTemparature" name="bodyTemparature">
               <mat-error *ngIf="f.bodyTemparature.hasError('pattern')">Please input a valid number</mat-error>
           </mat-form-field>
           </td>
           <td>
             <mat-form-field  appearance="fill">
               <mat-label>Weight (Kg)</mat-label>
-              <input formControlName="weight" matInput maxlength="3">
+              <input formControlName="weight" matInput maxlength="3" id="weight" name="weight">
               <mat-error *ngIf="f.weight.hasError('pattern')">Please input a valid number</mat-error>
               <mat-error *ngIf="f.weight.hasError('required')">Required</mat-error>
             </mat-form-field>
@@ -177,7 +262,7 @@
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>Pulse Rate (bpm)</mat-label>
-            <input formControlName="pulseRate" matInput  maxlength="4">
+            <input formControlName="pulseRate" matInput  maxlength="4" id="pulserate" name="pulserate">
             <mat-error *ngIf="f.pulseRate.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.pulseRate.hasError('required')">Required</mat-error>
         </mat-form-field>
@@ -185,7 +270,7 @@
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>SpO2 (%)</mat-label>
-            <input maxlength="4" formControlName="spO2" matInput >
+            <input maxlength="4" formControlName="spO2" matInput id="spo2" name="spo2">
             <mat-error *ngIf="f.spO2.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
@@ -196,7 +281,7 @@
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>Systolic</mat-label>
-            <input maxlength="4" formControlName="bloodPressureSystolic" matInput >
+            <input maxlength="4" formControlName="bloodPressureSystolic" matInput id="systolic" name="systolic">
             <mat-error *ngIf="f.bloodPressureSystolic.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
@@ -204,12 +289,60 @@
         <td>
           <mat-form-field  appearance="fill">
             <mat-label>Diastolic</mat-label>
-            <input maxlength="4" formControlName="bloodPressureDiastolic" matInput >
+            <input maxlength="4" formControlName="bloodPressureDiastolic" matInput id="bloodpressure" name="bloodpressure">
             <mat-error *ngIf="f.bloodPressureDiastolic.hasError('pattern')">Please input a valid number</mat-error>
             <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
         </mat-form-field>
         </td>
       </tr>
+      <tr>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Appearance</mat-label>
+            <input formControlName="appearance" matInput maxlength="10" id="appearance" name="appearance">
+        </mat-form-field>
+      </td>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Anemia</mat-label>
+            <input formControlName="anemia" maxlength="10" matInput id="anemia" name="anemia">
+        </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Jaundice</mat-label>
+            <input formControlName="jaundice" matInput maxlength="10" id="jaundice" name="jaundice">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Dehydration</mat-label>
+            <input formControlName="dehydration" matInput maxlength="10" id="dehydration" name="dehydration">
+          </mat-form-field>
+       </td>
+        <td>
+            <mat-form-field  appearance="fill">
+              <mat-label>Edema</mat-label>
+              <input formControlName="edema" matInput maxlength="10" id="edema" name="edema">
+            </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+          <mat-form-field  appearance="fill">
+            <mat-label>Cyanosis</mat-label>
+            <input formControlName="cyanosis" matInput maxlength="10" id="cyanosis" name="cyanosis">
+          </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field  appearance="fill">
+          <mat-label>RBS/FBS</mat-label>
+          <input formControlName="rbsFbs" matInput maxlength="20" id="rbsfbs" name="rbsfbs">
+        </mat-form-field>
+      </td>
+       <td></td> <td></td> <td></td> 
+
+    </tr>
     </table>
         <br/><button class="addbutton" mat-raised-button type="submit">ADD</button>
           </form>    

@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -5,9 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
-import { VisitEntryService } from 'src/app/admin/visit-entry/visit-entry.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
-import { IPatient } from 'src/app/core/models/Patient/patient';
+import { IPatientForSearch } from 'src/app/core/models/Patient/patientForSearch';
 import { IHeightFeet, IHeightInch } from 'src/app/core/models/Patient/patientHeightandWeight';
 import { IPhysicalState } from 'src/app/core/models/PhysicalState/getPhysicalState';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
@@ -20,12 +20,13 @@ import { PhysicalStateService } from '../physical-state.service';
   styleUrls: ['./physical-state-edit.component.css']
 })
 export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
+  title = 'Update Physical Stat';
   updatePhysicalStateForm: FormGroup = new FormGroup({});
   physicalState: IPhysicalState;
   hospitals: IHospital[];
-  patients: IPatient[] = [];
+  patients: IPatientForSearch[] = [];
   patientsearch = new FormControl();
-  filteredPatient: Observable<IPatient[]>;
+  filteredPatient: Observable<IPatientForSearch[]>;
   visitEntries: IVisitEntry[];
   id: any;
   heightFeet: IHeightFeet[] = [
@@ -55,11 +56,11 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
   constructor(private toastr: ToastrService,
               private physicalStateService: PhysicalStateService,
               private hospitalService: HospitalService,
-              private visitEntryService: VisitEntryService,
               private patientService: PatientService,
               private activateRoute: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder,
+              private location: Location
               ) {
                 this.filteredPatient = this.patientsearch.valueChanges
                 .pipe(
@@ -70,7 +71,6 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loadHospital();
     this.loadPatient();
-    this.loadVisitEntries();
     this.loadPhysicalState();
     this.createUpdatePhysicalStateForm();
   }
@@ -81,8 +81,15 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
     this.updatePhysicalStateForm = this.fb.group({
       id: [this.id],
       patientId: ['', Validators.required],
-      visitEntryId: [],
       bodyTemparature: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      appearance: [ , Validators.maxLength(10)],
+      anemia: [ , Validators.maxLength(10)],
+      jaundice: [ , Validators.maxLength(10)],
+      dehydration: [ , Validators.maxLength(10)],
+      edema: [ , Validators.maxLength(10)],
+      cyanosis: [ , Validators.maxLength(10)],
+      kub: [ , Validators.maxLength(10)],
+      rbsFbs: [ , Validators.maxLength(20)],
       heightFeet: [],
       heightInches: [],
       bloodPressureSystolic: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
@@ -111,6 +118,14 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
       patientId: this.physicalState.patientId,
       visitEntryId: this.physicalState.visitEntryId,
       bodyTemparature: this.physicalState.bodyTemparature,
+      appearance:  this.physicalState.appearance,
+      anemia:  this.physicalState.anemia,
+      jaundice:  this.physicalState.jaundice,
+      dehydration:  this.physicalState.dehydration,
+      edema:  this.physicalState.edema,
+      cyanosis:  this.physicalState.cyanosis,
+      kub:  this.physicalState.kub,
+      rbsFbs: this.physicalState.rbsFbs,
       heightFeet: this.physicalState.heightFeet,
       heightInches: this.physicalState.heightInches,
       bloodPressureSystolic: this.physicalState.bloodPressureSystolic,
@@ -142,16 +157,14 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
 
   }
   loadPatient(){
-    this.patientService.getAllPatient().subscribe(response => {
-      this.patients = response;
-    });
+    // this.patientService.getPatientForSearch().subscribe(response => {
+    //   this.patients = response;
+    // });
   }
-  loadVisitEntries(){
-    this.visitEntryService.getAllVisitEntry().subscribe(response => {
-      this.visitEntries = response;
-    });
+  goBack(){
+    this.location.back()
   }
-  private _filterPatient(value: string): IPatient[] {
+  private _filterPatient(value: string): IPatientForSearch[] {
     const filterValue = value.toLowerCase();
     const result = this.patients.filter(
       (p) =>

@@ -2,7 +2,9 @@
     padding-top: 0% !important ;
     padding: 5%;
 }
-
+body {
+    background-color: rgb(251, 251, 251);
+}
 
 @media only screen and (min-width: 768px) {
     .loginForm {
@@ -24,8 +26,9 @@
     }
     .col-branchId{
         width: 48%;
-        margin-right: 2%;
+        margin-left: 2%;
     }
+
     .col-address{
         width: 40%;
         margin-right: 1%;
@@ -42,43 +45,69 @@
         width: 18%;
         margin-left: 1%;
     }
-    .col-nid{
-        width: 48%;
-        margin-left: 2%;
-    }
 
+    .col-nid{
+        width: 36%;
+        margin-right: 2%;
+    }
     .col-mobileNumber{
-        width: 58%;
+        width: 33%;
         margin-right: 2%;
     }
     .col-gender{
-        width: 38%;
-        margin-left: 2%;
+        width: 27%;
     }
     .col-age{
-        width: 23%;
+        width: 11%;
         margin-right: 1%;
     }
     .col-doB{
-        width: 24%;
+        width: 20%;
         margin-right: 1%;
     }
     .col-maritalStatus{
-        width: 25%;
+        width: 18%;
         margin-right: 1%;
     }
     .col-bloodGroup{
-        width: 25%;
+        width: 18%;
+    }
+    .col-covidvaccine {
+        margin-right: 1%;
+    }
+    .col-vaccineBrand {
+        margin-right: 1%;
     }
     .col-note{
         display: block;
         margin: auto;
     }
+    .col-membershipRegistrationNumber {
+        width: 40%;
+        margin-right: 1%;
+    }
+    .age{
+
+        border: 1px solid black;
+        text-align: center;
+        display: inline;
+        padding-top: 30px;
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+    td {
+        text-align: right;
+    }
     [class*="col-v-"] {
         margin: 1%;
-        width: 10%;
+        width: 13%;
       }
-    
+      [class*="col-d-"] {
+        margin: 1%;
+        width: 15%;
+      }
+      
 }
 
 
@@ -93,11 +122,27 @@
       .loginForm {
           width: 100%;
       }
+      .age{
+        border: 1px solid black;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        margin-bottom: 10px;
+    }
 }
-td {
-    padding-right: 8px;
-  }
+button {
+    background-color: #fff;
+    color: #787878;
+    cursor: pointer;
+    height: 45px;
+    margin: 5px;
+    font-size: 18px;
+    align-items: center;
+}
+button:hover {
+    color: black;
+}
 .addbutton {
-      background-color: #eae0c8;
-      color: black;
+    width: 250px;
+      color: #787878;
   }

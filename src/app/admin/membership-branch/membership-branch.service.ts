@@ -27,6 +27,15 @@ export class MembershipBranchService {
       );
     }
 
+    // sortbyname
+    getAllBranchesSortByName(){
+      return this.http.get<IBranch[]>(this.baseUrl + 'branch/sortbyname').pipe(
+        map(response => {
+          return response;
+        })
+      );
+    }
+
     getBranchById(id: number) {
       return this.http.get<IBranch>(this.baseUrl + 'branch/' + id).pipe(
         map(response => {

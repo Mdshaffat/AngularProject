@@ -1,0 +1,76 @@
+table {
+    margin: 10px;
+    width: 99%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  .search {
+    float: left;
+    width: 70%;
+    margin-left: 5%;
+    height: 2%;
+  }
+  .selecthospital {
+    float: left;
+    width: 30%;
+    margin-left: 5% !important;
+  }
+  .addnewuser {
+    float: right;
+    width: 15%;
+    margin-bottom: 10px;
+    margin-right: 5%;
+  }
+  .mat-column-Edit {
+    padding-right: 20px;
+    text-align: center;
+  }
+  .buttonadd {
+    margin-right: -1%;
+    color: #787878;
+  
+  }
+  button {
+    width: 200px;
+    font-size: 18px;
+    align-items: center;
+  }
+  .mat-icon {
+    color: #787878;
+    margin: 2%;
+  }
+  .mat-icon:hover {
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+  .addbutton {
+    background-color: #fff;
+    cursor: pointer;
+    color: #787878;
+  }
+  .addbutton:hover {
+    background-color: #fff;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  
+  .mat-row {
+    height: 0%;
+  }
+  
+  .mat-cell {
+    padding-top:0% ;
+    padding-bottom:0% ;
+  }
+  th {
+    text-align: center !important;
+  }
+  /* td {
+    text-align: center;
+  } */

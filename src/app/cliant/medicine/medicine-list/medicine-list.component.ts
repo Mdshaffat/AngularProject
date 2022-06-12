@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { AccountService } from 'src/app/account/account.service';
 import { IMedicine } from 'src/app/core/models/Medicine/medicine';
 import { MedicineService } from '../medicine.service';
 
@@ -14,11 +16,17 @@ export class MedicineListComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['BrandName', 'GenericName', 'Manufacturar',
                                  'Unit', 'UnitPrice', 'Active', 'Edit/View'];
   medicines: IMedicine[] = [];
+  title = 'Medicine List';
+  footerName = 'Data';
   dataSource = new MatTableDataSource<IMedicine>(this.medicines);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(private medicineService: MedicineService) { }
+  isAdmin$: Observable<boolean>;
+  isDoctor$: Observable<boolean>;
+  constructor(private medicineService: MedicineService, private accountService: AccountService) { }
   ngOnInit(): void {
+    this.isAdmin$ = this.accountService.isAdmin$;
+    this.isDoctor$ = this.accountService.isdesignationDoctor$;
     this.getMedicineList();
     this.dataSource.paginator = this.paginator;
   }

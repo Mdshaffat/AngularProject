@@ -5,10 +5,24 @@ h3,
 h4,
 h5,
 h6,
+td,
+tr,
 p,
 a {
 	margin: 0;
 	padding: 0;
+}
+h2 {
+	font-size: 14px;
+	margin: 0px !important;
+}
+h1 {
+	font-size: 16px;
+	margin: 0px !important;
+	padding: 0px !important;
+}
+p {
+	font-size: 12px;
 }
 
 div {
@@ -17,7 +31,7 @@ div {
 
 h3 {
 	padding: 0px;
-	margin: 1px;
+	font-size: 12px;
 }
 
 
@@ -29,8 +43,10 @@ div:nth-child(even) {
 	background-color: rgb(245, 248, 247);
 }
 
+
 #container {
-	width: 100%;  
+	width: 100%;
+	margin-bottom: 1px;  
 }
 .bottomborder {
 	border-bottom: 1px solid black;
@@ -49,17 +65,22 @@ div:nth-child(even) {
 	width: 100%;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
-	padding: 2px 0 2px 0;
+}
+#nav-2 {
+	width: 100%;
+	border-bottom: 1px solid black;
+}
+#nav-3 {
+	width: 100%;
+	border-bottom: 1px solid black;
 }
 
 #nav > p:first-child {
 	float: left !important;
-	margin-left: 20px;
 }
 
 #nav > p:last-child {
 	float: right;
-	margin-right: 20px;
 }
 
 #nav::after {
@@ -68,9 +89,7 @@ div:nth-child(even) {
 	display: table;
 }
 
-#content {
-	height: 672px;
-}
+
 
 #aside {
 	width: 30%;
@@ -80,9 +99,20 @@ div:nth-child(even) {
 	border-right: 1px solid black;
 }
 
+#print-section {
+	margin: auto;
+	padding: 10px;
+	width: 700px;
+	height: 1100px;
+	border: 2px solid rgb(0, 0, 0);
+}
+#content {
+	height: 870px;
+}
 #main {
-	width: 70%;
+	width: 68%;
 	height: 100%;
+	margin-left: 2px;
 	box-sizing: border-box;
 	float: left;
 	position: relative;
@@ -99,20 +129,28 @@ div:nth-child(even) {
 	padding: 0;
 	box-sizing: border-box;
 	width: 95%;
-	height: 40%;
+	height: 15%;
+}
+#idflogo {
+	float: left;
+	height: 70px;
+	width: 70px;
+	margin-left: 20px;
+	position: absolute;
+	top: 20px;
 }
 textarea {
-	padding: 12px 20px !important; 
+	padding: 4px 0px 6px 4px !important; 
 	box-sizing: border-box;
 	border: 2px solid #ccc;
 	border-radius: 4px;
 	background-color: #f8f8f8;
-	font-size: 14px;
+	font-size: 11px;
 	margin-left: 3px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	overflow: hidden;
   }
-.rel {
-	bottom: 25px;
-}
 
 .rel > textarea {
 	box-sizing: border-box;
@@ -141,11 +179,11 @@ textarea {
 
 .sign {
 	display: inline;
-    width: 20%;
+    width: 200px;
+	right: 5px;
     align-items: center;
 	float: right;
-	margin-top: 10px;
-	margin-right: 100px;
+	margin-top: 20px;
 }
 .sign > p {
 	text-align: center;
@@ -153,11 +191,92 @@ textarea {
 .example-margin {
 	margin: 0 10px;
   }
-  .nextvisit{
+.nextvisit{
 	  width: 50%;
 	  display: inline-block;
   }
 
-  input {
-	  display: inline;
+  [class*="col-"] > textarea {
+	width: 190px;
   }
+  .footer {
+	position: relative;
+	font-size: 10px;
+	text-align: center;
+	bottom: 0;
+}
+.col-discat {
+	font-size: 12px;
+}
+
+.col-dis {
+	font-size: 12px;
+}
+.col-dis > mat-form-field{
+	width: 85%;
+	margin-right: 2%;
+}
+.col-dis > mat-icon{
+	width: 5%;
+}
+.f-comment {
+	width: 350px !important;
+}
+.searchbutton {
+    background-color: #eae0c8;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    width: 98px;
+    height: 45px;
+    font-size: 14px;
+    align-items: center;
+    margin-bottom: 15px;
+    margin-left: 5px
+  }
+  .searchbutton:hover {
+    background-color: #ecc66f;
+  }
+  .button2 {
+    display: inline;
+      width: 100px;
+      margin: 2px;
+      padding: 2px;
+      align-items: center;
+    float: right;
+    margin-right: 40px;
+  
+  }
+/* border: none;
+outline: none; */
+.mat-form-field {
+	font-size: 12px;
+	margin-right: 5px;
+	padding: 0px;
+	width: 148px;
+}
+.medicine-textarea {
+	border: none;
+	outline: none;
+	margin: 0px !important;
+	padding: 0px !important;
+}
+table {
+	width: 450px;
+}
+.medicine-t {
+	width: 40px !important;
+}
+.fix-width- {
+	width: 59px !important;
+}
+.fix-width-n {
+	width: 34px;
+}
+.fix-width-c {
+	margin-left: -8px !important;
+	padding-left: 0px !important;
+}
+#diagnosisTable{
+	font-size: 12px;
+	width: 200px;
+}

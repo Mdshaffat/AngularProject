@@ -1,3 +1,4 @@
+<app-title [title]="title"></app-title>
 <body>
     <button mat-button [routerLink]="['../../hospitals']" >Back</button>
       <div class="loginForm">
@@ -8,6 +9,16 @@
                   <mat-error *ngIf="f.name.hasError('required')">Required</mat-error>
                   <mat-error *ngIf="f.name.hasError('maxlength')">Maximum 80 charecter</mat-error>
               </mat-form-field><br>
+              <mat-form-field class="col-branchId" appearance="fill">
+                <mat-label>Branch</mat-label>
+                <mat-select formControlName="branchId">
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let branch of branches" [value]="branch.id">
+                    {{branch.name}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="f.branchId.hasError('required')">Please choose Branch</mat-error>
+              </mat-form-field> <br>
               <mat-form-field>
                   <mat-label>Address</mat-label>
                   <input required formControlName="address" matInput >

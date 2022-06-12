@@ -1,0 +1,60 @@
+<app-title [title]="title"></app-title>
+<button mat-button (click)="goBack()" >Back</button>
+<body class="userdetails">
+
+    <mat-card class="example-card">
+        <mat-card-header>
+        <mat-card-title>{{medicine.brandName}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <table class="table">
+                <tr>
+                <td>ID </td>
+                <td>&nbsp;{{medicine.id}}</td>
+                </tr>
+                <tr>
+                    <td>Medicine Type </td>
+                    <td>&nbsp;{{medicine.medicineType}}
+                    </td>
+                </tr>
+                <tr>
+                <tr>
+                    <td>Brand Name </td>
+                    <td>&nbsp;{{medicine.brandName}}</td>
+                    </tr>
+                <tr>
+                    <td>Generic Name</td>
+                    <td>&nbsp;{{medicine.genericName}}</td>
+                </tr>
+                <tr>
+                    <td>Manufacturar</td>
+                    <td>&nbsp;{{medicine.manufacturar}}</td>
+                </tr>
+                <tr>
+                    <td>Updated On</td>
+                    <td>&nbsp;{{medicine.updatedOn | date:'dd-MM-YYY'}}</td>
+                </tr>
+                <tr>
+                    <td>Updated By</td>
+                    <td>&nbsp;{{medicine.updatedBy}}</td>
+                </tr>
+                <tr>
+                    <td>Created On</td>
+                    <td>&nbsp;{{medicine.createdOn | date:'dd-MM-YYY'}}</td>
+                </tr>
+                <tr>
+                    <td>Created By</td>
+                    <td>&nbsp;{{medicine.createdBy}}</td>
+                </tr>
+                <tr>
+                    <td>Active</td>
+                    <td>&nbsp;<mat-checkbox style="margin-left: 10px;" disabled [checked] = medicine.isActive></mat-checkbox></td>
+                </tr>
+            </table>
+        </mat-card-content>
+        <mat-card-actions>
+        <button mat-button (click)="goBack()">Back</button>
+        <button mat-button [routerLink]="['../../update/'+ medicine.id]">Edit</button>
+        </mat-card-actions>
+    </mat-card>
+</body>

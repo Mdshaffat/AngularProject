@@ -20,14 +20,14 @@ export class ErrorInterceptor implements HttpInterceptor {
       catchError(error => {
         if (error) {
           if (error.status === 0){
-            this.router.navigate(['/account/login']);
-            this.toastr.error('Connection Refused');
+           // this.router.navigate(['/account/login']);
+            this.toastr.warning('The connection is very slow');
             }
           if (error.status === 400) {
             if (error.error.errors) {
               throw error.error;
             } else {
-              this.toastr.error(error.error.message, error.error.statusCode);
+              this.toastr.warning(error.error.message, error.error.statusCode);
             }
           }
           if (error.status === 401) {

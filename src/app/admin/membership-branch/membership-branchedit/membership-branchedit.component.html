@@ -1,3 +1,4 @@
+<app-title [title]="title"></app-title>
 <body>
     <button mat-button [routerLink]="['../../branches']" >Back</button>
       <div class="loginForm">
@@ -8,6 +9,11 @@
                   <mat-error *ngIf="f.name.hasError('maxlength')">Maximum 100 Charecter</mat-error>
                   <mat-error *ngIf="f.name.hasError('required')">Required</mat-error>
               </mat-form-field><br>
+              <mat-form-field>
+                <mat-label>Branch Code</mat-label>
+                <input required formControlName="branchCode" matInput>
+                <mat-error *ngIf="f.branchCode.hasError('maxlength')">Maximum 10 Charecter</mat-error>
+            </mat-form-field><br>
               <mat-form-field>
                   <mat-label>Address</mat-label>
                   <input required formControlName="address" matInput >

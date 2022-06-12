@@ -10,6 +10,18 @@ a {
 	margin: 0;
 	padding: 0;
 }
+h2 {
+	font-size: 14px;
+	margin: 0px !important;
+}
+h1 {
+	font-size: 16px;
+	margin: 0px !important;
+	padding: 0px !important;
+}
+p {
+	font-size: 12px;
+}
 
 div {
 	width: 100%;
@@ -17,7 +29,7 @@ div {
 
 h3 {
 	padding: 0px;
-	margin: 1px;
+	font-size: 12px;
 }
 
 
@@ -28,12 +40,37 @@ div:nth-child(odd) {
 div:nth-child(even) {
 	background-color: rgb(245, 248, 247);
 }
+#idflogo {
+	float: left;
+	height: 70px;
+	width: 70px;
+	margin-left: 20px;
+	position: absolute;
+	top: 20px;
+}
 
 #container {
-	width: 100%;  
+	width: 100%;
+	margin-bottom: 1px;  
 }
-.bottomborder {
-	border-bottom: 1px solid black;
+#content {
+	height: 730px;
+	border-bottom: 2px solid black;
+}
+/* .bottomborder {
+	height: 850px;
+} */
+#print-section {
+	margin: auto;
+	padding: 10px;
+	width: 700px;
+	height: 1000px;
+	border: 2px solid rgb(0, 0, 0);
+}
+.footer {
+	font-size: 10px;
+	text-align: center;
+	bottom: 0;
 }
 #head {
 	padding: 2px 0px 2px 0px;
@@ -43,33 +80,34 @@ div:nth-child(even) {
 #head > p,
 #head > h2 {
 	text-align: center;
+	padding: 0px!important;
 }
 
 #nav {
 	width: 100%;
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
-	padding: 2px 0 2px 0;
 }
-
+#nav-2 {
+	width: 100%;
+	border-bottom: 1px solid black;
+}
+#nav-3 {
+	width: 100%;
+	border-bottom: 1px solid black;
+}
 #nav > p:first-child {
 	float: left !important;
-	margin-left: 20px;
 }
 
 #nav > p:last-child {
 	float: right;
-	margin-right: 20px;
 }
 
 #nav::after {
 	content: '';
 	clear: both;
 	display: table;
-}
-
-#content {
-	height: 672px;
 }
 
 #aside {
@@ -81,45 +119,41 @@ div:nth-child(even) {
 }
 
 #main {
-	width: 70%;
+	width: 68%;
 	height: 100%;
+	margin-left: 2px;
 	box-sizing: border-box;
 	float: left;
 	position: relative;
 }
 #main > textarea {
+	
 	padding: 0px;
-	border: none;
-    outline: none;
 	box-sizing: border-box;
 	width: 95%;
 	height: 60%;
 }
 
 #aside > textarea {
-	
 	padding: 0;
-	border: none;
-    outline: none;
+	box-sizing: border-box;
 	width: 95%;
-	height: 40%;
+	height: 15%;
 }
 textarea {
-	padding: 12px 20px !important; 
+	padding: 4px 0px 6px 4px !important; 
 	border: none;
-    outline: none;
+	outline: none;
 	background-color: #f8f8f8;
-	font-size: 14px;
+	font-size: 11px;
 	margin-left: 3px;
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+	overflow: hidden;
   }
-.rel {
-	bottom: 25px;
-
-}
 
 .rel > textarea {
-	border: none;
-    outline: none;
+	box-sizing: border-box;
 	width: 95%;
 }
 .button1 {
@@ -145,11 +179,11 @@ textarea {
 
 .sign {
 	display: inline;
-    width: 20%;
+    width: 200px;
+	right: 5px;
     align-items: center;
 	float: right;
-	margin-top: 10px;
-	margin-right: 100px;
+	margin-top: 20px;
 }
 .sign > p {
 	text-align: center;
@@ -157,17 +191,35 @@ textarea {
 .example-margin {
 	margin: 0 10px;
   }
-  .nextvisit{
+.nextvisit{
 	  width: 50%;
 	  display: inline-block;
   }
 
-  input {
-	  display: inline;
+  [class*="col-"] > textarea {
+	width: 190px;
   }
-  .footer {
-	position: relative;
-	font-size: 10px;
-	text-align: center;
-	bottom: 0;
-}
+
+
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	
+  }
+  
+  td, th {
+	border: none;
+	text-align: left;
+	padding: 2px;
+	margin-bottom: 2px;
+  }
+  
+
+
+/* border: none;
+outline: none; */
+
+/* border: none;
+outline: none; */

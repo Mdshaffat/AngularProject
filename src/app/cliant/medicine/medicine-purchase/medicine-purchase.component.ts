@@ -18,6 +18,7 @@ export interface State {
   styleUrls: ['./medicine-purchase.component.css']
 })
 export class MedicinePurchaseComponent implements OnInit {
+  title = 'Purchase Medicine';
   trial: any;
   medicinePurchase: IMedicinePurchase;
   medicineID = new FormControl();
@@ -76,9 +77,7 @@ export class MedicinePurchaseComponent implements OnInit {
     this.medicineID.setValue(value.id);
     this.genericName.setValue(value.genericName);
     this.brandName.setValue(value.brandName);
-    this.price.setValue(value.unitPrice);
-    this.stock.setValue(value.unit);
-    this.currentStock.setValue(value.unit);
+
   }
   addMedicinetoLine(){
     this.medicineArray.push(this.getLineFormGroup());
@@ -129,7 +128,6 @@ export class MedicinePurchaseComponent implements OnInit {
   }
     return this.totalPrice;
   }
-
   onSubmit(){
     this.medicineService.postPurchaseMedicine(this.medicinePurchaseForm.value).subscribe(response => {
       if (response.message === 'success'){

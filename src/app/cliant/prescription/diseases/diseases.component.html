@@ -1,0 +1,11 @@
+<h2>Add diseases to {{data.diseasesCategoryName}}</h2>
+<div mat-dialog-content>
+  <mat-form-field appearance="fill">
+    <mat-label>New Diseases</mat-label>
+    <input matInput [(ngModel)]="data.name" maxlength="20">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>ADD</button>
+</div>

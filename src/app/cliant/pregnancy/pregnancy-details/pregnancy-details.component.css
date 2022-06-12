@@ -1,0 +1,35 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }
+  .userdetails{
+    height: 100%;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    border: #3f51b5;
+  }
+
+  .fullline {
+      height: 10px;
+      width: 370px;
+      background: rgb(126, 123, 123);
+  }
+  .line{
+      background: rgb(33, 48, 250);
+      float: left;
+      width: 10%;
+      height: 10px;
+      border-right: 2px solid black;
+  }
+  .line2{
+    background: rgb(233, 14, 149);
+    float: left;
+    width: 10%;
+    height: 10px;
+    border-right: 2px solid black;
+}

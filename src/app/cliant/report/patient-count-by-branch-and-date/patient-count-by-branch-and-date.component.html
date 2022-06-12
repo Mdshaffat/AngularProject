@@ -1,0 +1,121 @@
+<app-title [title]="title"></app-title>
+<div id="searchform">
+  <form [formGroup]="patientSearchFormByDate" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="mm/dd/yyyy" formControlName="startDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      &nbsp;&nbsp;<span>FROM</span>&nbsp;&nbsp;
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker1" placeholder="mm/dd/yyyy" formControlName="endDate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+      <button class="btn searchbutton" type="submit">
+        <span class="material-icons buttonadd btn">
+          search
+        </span>Search
+      </button>
+      <!-- <button class="btn searchbutton" color="accent" type="submit">Search</button>     -->
+  </form>
+</div>
+
+<!-- <div id="divChart" style="height:50vh; width:80vw; overflow: scroll;">
+  <canvas id="ctx"></canvas>
+</div> -->
+<div class="chartWrapper">
+  <div class="chartAreaWrapper">
+    <div #documentSection class="chartAreaWrapper2" [ngStyle]="{height: (this.doctorsName.length * 30) + 100 + 'px'}">
+      <canvas id="ctx"></canvas>
+    </div>
+  </div>
+    <canvas id="myChartAxis" height="600" width="0"></canvas>
+</div>
+
+<div class="branchform" *ngIf="patientCreationReportWithTotals">
+  <div class="downloadxls">
+    <button class="downloadbutton btn" (click)="exportexcel()">
+      <span class="material-icons buttonadd btn">
+        file_download
+      </span>Download
+    </button>
+  </div>
+    <div class="filter">
+      <mat-form-field class="search">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
+      </mat-form-field>
+    </div>
+    <div class="table" >
+      <table id="print-section" class="reporttable" *ngIf="patientCreationReportWithTotals">
+        <tr>
+          <th>
+            Branch
+          </th>
+          <th>
+            Doctor
+          </th>
+          <th>
+            Male
+          </th>
+          <th>
+            Female
+          </th>
+          <th>
+            Total
+          </th>
+        </tr>
+        <!-- branchId: number;
+    doctorsId: string;
+    doctorsName: string;
+    branchName: string;
+    totalMalePatient: number;
+    totalFemalePatient: number;
+    totalPatient: number; -->
+        <tr *ngFor="let item of patientCreationReportWithTotals.patientsCountAccordingToBranchBetweenTwoDatesDto; index as i">
+          <td>
+            {{item.branchName}}
+          </td>
+          <td>
+            {{item.doctorsName}}
+          </td>
+          <td>
+            {{item.totalMalePatient}}
+          </td>
+          <td>
+            {{item.totalFemalePatient}}
+          </td>
+          <td>
+            {{item.totalPatient}}
+          </td>
+        </tr>
+        <!-- 
+          totalMale: number;
+    totalFeMale: number;
+    total: number;
+         -->
+        <tr>
+          <td>
+            Total
+          </td>
+          <td>
+            
+          </td>
+          <td>
+            {{patientCreationReportWithTotals.totalMale}}
+          </td>
+          <td>
+            {{patientCreationReportWithTotals.totalFeMale}}
+          </td>
+          <td>
+            {{patientCreationReportWithTotals.total}}
+          </td>
+        </tr>
+      </table>
+     <footer-for-all [footerName]="footerName" ></footer-for-all>
+    </div>
+</div>
+

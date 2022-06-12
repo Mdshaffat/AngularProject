@@ -11,6 +11,7 @@ import { MedicineService } from '../medicine.service';
   styleUrls: ['./medicine-details.component.css']
 })
 export class MedicineDetailsComponent implements OnInit {
+  title = 'Medicine Details';
   medicine: IMedicine;
   id: any;
   constructor(private activateRoute: ActivatedRoute,

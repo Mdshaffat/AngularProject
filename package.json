@@ -26,12 +26,18 @@
     "@ngx-loading-bar/core": "^5.1.2",
     "@ngx-loading-bar/http-client": "^5.1.2",
     "@ngx-loading-bar/router": "^5.1.2",
+    "@sweetalert2/ngx-sweetalert2": "^10.0.0",
     "bootstrap": "^5.0.2",
+    "chart.js": "^3.7.1",
+    "file-server": "^2.2.0",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
     "ngx-print": "^1.2.1",
     "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",
+    "sweetalert2": "^11.1.10",
     "tslib": "^2.0.0",
+    "xlsx": "^0.17.4",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

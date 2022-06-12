@@ -1,4 +1,5 @@
 <body>
+    <app-title [title]="title"></app-title>
     <button mat-button [routerLink]="['/medicine']" >Back</button>
       <div class="loginForm">
           <form [formGroup]="medicineAddForm" (ngSubmit)="onSubmit()">

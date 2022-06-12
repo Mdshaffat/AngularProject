@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IPatientWithVital } from 'src/app/core/models/Patient/getPatientWithVital';
 import { AddPatientVitalComponent } from '../add-patient-vital/add-patient-vital.component';
 import { PatientService } from '../patient.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-patient-details',
@@ -14,9 +15,11 @@ import { PatientService } from '../patient.service';
 export class PatientDetailsComponent implements OnInit {
   patientDetails: IPatientWithVital;
   id: any;
+  title = 'Patient Details';
   constructor(private activateRoute: ActivatedRoute,
               private patientService: PatientService,
               private toastr: ToastrService,
+              private location: Location,
               public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -53,6 +56,9 @@ export class PatientDetailsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  goBack(){
+    this.location.back();
   }
 }
 

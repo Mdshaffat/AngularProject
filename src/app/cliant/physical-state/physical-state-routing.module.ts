@@ -9,6 +9,7 @@ const routes: Routes = [
   {path: '', redirectTo: 'list'},
   {path: 'list', component: PhysicalStateListComponent},
   {path: 'add', component: PhysicalStateAddComponent},
+  {path: 'add/:patientid/:name', component: PhysicalStateAddComponent},
   {path: 'details/:id', component: PhysicalStateDetailsComponent },
   {path: 'edit/:id', component: PhysicalStateEditComponent}
 ];

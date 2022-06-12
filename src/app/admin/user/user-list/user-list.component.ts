@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IUser } from 'src/app/core/models/user';
@@ -10,7 +11,10 @@ import { UserService } from '../user.service';
   styleUrls: ['./user-list.component.css']
 })
 export class UserListComponent implements OnInit , AfterViewInit {
+  title = 'User List';
+  footerName = 'Data';
   @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   displayedColumns: string[] = ['FirstName', 'LastName', 'Email', 'MobileNumber', 'Designation', 'HospitalName', 'Role', 'CreatedOn', 'Active', 'Action'];
   users: IUser[] = [];
   dataSource = new MatTableDataSource<IUser>(this.users);
@@ -22,6 +26,7 @@ export class UserListComponent implements OnInit , AfterViewInit {
   }
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
   getusers(){
     this.userService.getAllUser().subscribe(response => {

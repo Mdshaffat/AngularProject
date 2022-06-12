@@ -1,4 +1,115 @@
+
 <body>
+    <div class="wrapper">
+        <div class="main">
+            <div class="text">
+                <h1>dotplus</h1>
+            </div>
+            <div class="list_one">
+                <div class="content">
+                    <div class="contentimage">
+                        <img src="../../../../assets/icon/patient-centered-record-1.png" alt="patient created record">
+                    </div>
+                    <div class="contentchild">
+                        <h1>  Patient-centered record</h1>
+                        <p>Make information available instantly and securely. Contain the medical and treatment histories of patients.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="list_two">
+                <div class="content">
+                    <div class="contentimage">
+                        <img src="../../../../assets/icon/analyze-disease-pattern-1.png" alt="patient created record">
+                    </div>
+                    <div class="contentchild">
+                        <h1>Analyze disease pattern</h1>
+                        <p>
+                            More insights are presenting to the physician's by using effective methodology.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="list_three">
+                <div class="content">
+                    <div class="contentimage">
+                        <img src="../../../../assets/icon/telemedicine-support-1.png" alt="patient created record">
+                    </div>
+                    <div class="contentchild">
+                        <h1>Telemedicine support</h1>
+                        <p>Get expart opinion using virtual care feature from the comfort of patient's place.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="list_four">
+                <div class="content">
+                    <div class="contentimage">
+                        <img src="../../../../assets/icon/manage-patients_appointment-1.png" alt="patient created record">
+                    </div>
+                    <div class="contentchild">
+                        <h1>  Manage appoinments</h1>
+                        <p>Schedule next appoinment or view details of past and upcoming appoinments patients.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer1">
+            </div>
+            <div class="footer2 footerbottom">
+                <div class="content">
+                    <div class="contentchild">
+                       <p><strong (click)="openFAQDialog()">FAQs</strong>&nbsp;&nbsp;<strong (click)="openSubInfoDialog()">Subscription Info</strong>&nbsp;&nbsp;<strong (click)="openHelpDeskDialog()">Help Desk</strong> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="login">
+            <div class="text1">
+            </div>
+            <div class="list_one1">
+                <div class="loginForm">
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="nope">
+                        <!-- <div><img id="logo-large" src="../../../../assets/logo/Logo.png" alt="LOGO"  ></div> -->
+                        <p>Thanks for using <strong>dotplus</strong></p>
+                        <mat-form-field>
+                            <mat-label>Enter Your Email</mat-label>
+                            <input formControlName="email" matInput placeholder="example@domain.com" >
+                            <mat-error *ngIf="f.email.errors?.required">Email Required.</mat-error>
+                            <mat-error *ngIf="f.email.errors?.email">Email Invalid</mat-error>
+                        </mat-form-field><br>
+                        <mat-form-field>
+                            <mat-label>Enter Your Password</mat-label>
+                            <input formControlName="password" matInput [type]="hide ? 'password' : 'text'">
+                            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-error *ngIf="f.password.errors?.required">Password Required.</mat-error>
+                            <mat-error *ngIf="f.password.errors?.minlength">Minimum 8 charecter</mat-error>
+                        </mat-form-field><br>
+                        <button class="signinbutton" [disabled]="!loginForm.valid">Sign in</button><br>
+                        <a class="forgetpass" [routerLink]="['../forgotpassword']" routerLinkActive="router-link-active" >Forget Password</a>   
+                    </form><br>
+                   
+                </div>
+            </div>
+            <div class="list_three1 ">
+                
+
+            </div>
+            <div class="footer11 footerbottom">
+                <div class="content ">
+                    <div class="contentchild">
+                       <p> <strong> <strong>dotplus</strong> by Outreach for All, Inc, USA</strong> </p>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</body>
+
+<!--  -->
+
+<!-- <body>
     <div class="loginForm">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" autocomplete="nope">
             <div><img id="logo-large" src="../../../../assets/logo/Logo.png" alt="LOGO"  ></div>
@@ -23,4 +134,4 @@
         </form><br>
        
     </div>
-</body>
+</body> -->

@@ -1,4 +1,6 @@
-    export interface PatientVital {
+import { IPrescriptionWithPhysicalStatAndDiagnosis } from '../Prescriptions/prescriptionWithPhysicalStatAdnDiagnosis';
+
+export interface PatientVital {
         id: number;
         patientId: number;
         patientFirstName: string;
@@ -17,7 +19,7 @@
         updatedAt: Date;
     }
 
-    export interface Patient {
+export interface Patient {
         id: number;
         hospitalId: number;
         hospitalName: string;
@@ -29,6 +31,7 @@
         gender: string;
         maritalStatus: string;
         primaryMember: boolean;
+        membershipRegistrationNumber: string;
         address: string;
         divisionId: number;
         division: string;
@@ -41,6 +44,8 @@
         branchId: number;
         branchName: string;
         isActive: boolean;
+        covidvaccine: string;
+        vaccineBrand: string;
         note: string;
         createdOn: Date;
         createdBy: string;
@@ -49,7 +54,7 @@
         patientVitals: PatientVital[];
     }
 
-    export interface VisitEntry {
+export interface VisitEntry {
         id: number;
         hospitalId: number;
         hospitalName: string;
@@ -61,7 +66,7 @@
         status: string;
     }
 
-    export interface Prescription {
+export interface Prescription {
         id: number;
         hospitalId: number;
         hospitalName: string;
@@ -82,7 +87,7 @@
         updatedOn: Date;
     }
 
-    export interface PhysicalState {
+export interface PhysicalState {
         id: number;
         hospitalId: number;
         hospitalName: string;
@@ -101,10 +106,10 @@
         editedBy: string;
     }
 
-    export interface IPatientHistory {
+export interface IPatientHistory {
         patient: Patient;
         visitEntries: VisitEntry[];
-        prescription: Prescription[];
+        prescription: IPrescriptionWithPhysicalStatAndDiagnosis[];
         physicalState: PhysicalState[];
     }
 

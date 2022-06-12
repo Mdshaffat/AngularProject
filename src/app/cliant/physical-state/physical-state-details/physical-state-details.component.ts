@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -11,11 +12,13 @@ import { PhysicalStateService } from '../physical-state.service';
   styleUrls: ['./physical-state-details.component.css']
 })
 export class PhysicalStateDetailsComponent implements OnInit {
+  title = 'Physical Stat Details';
   physicalStateDetails: IPhysicalState;
   id: any;
   constructor(private activateRoute: ActivatedRoute,
               private physicalStateService: PhysicalStateService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private location: Location) { }
 
   ngOnInit(): void {
     this.loadPhysicalState();
@@ -30,6 +33,9 @@ export class PhysicalStateDetailsComponent implements OnInit {
     }, error => {
       console.log(error);
     });
+  }
+  goBack(){
+    this.location.back()
   }
 }
 

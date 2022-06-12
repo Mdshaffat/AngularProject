@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
@@ -10,16 +11,20 @@ import { HospitalService } from '../hospital.service';
   styleUrls: ['./hospital-list.component.css']
 })
 export class HospitalListComponent implements OnInit , AfterViewInit {
-  displayedColumns: string[] = ['Name', 'Address', 'Upazila', 'District', 'Active', 'Action'];
+  title = 'Hospital List';
+  footerName = 'Data';
+  displayedColumns: string[] = ['Name', 'branch', 'Address', 'Upazila', 'District', 'Active', 'Action'];
   hospitals: IHospital[] = [];
   dataSource = new MatTableDataSource<IHospital>(this.hospitals);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private hospitalService: HospitalService) { }
   ngOnInit(): void {
     this.getHospitalList();
   }
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
   getHospitalList(){
     this.hospitalService.getAllHospital().subscribe(response => {

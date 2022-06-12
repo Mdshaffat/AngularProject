@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UpazilaAndDistrictService } from 'src/app/cliant/patient/upazila-and-district.service';
+import { IBranch } from 'src/app/core/models/MembershipBranch/branch';
 import { IDistrict } from 'src/app/core/models/UpazilaAndDistrict/district';
 import { IDivision } from 'src/app/core/models/UpazilaAndDistrict/division';
 import { IUpazila } from 'src/app/core/models/UpazilaAndDistrict/upazila';
+import { MembershipBranchService } from '../../membership-branch/membership-branch.service';
 import { HospitalService } from '../hospital.service';
 
 @Component({
@@ -14,6 +16,8 @@ import { HospitalService } from '../hospital.service';
   styleUrls: ['./hospital-add.component.css']
 })
 export class HospitalAddComponent implements OnInit {
+  title = 'Add Hospital';
+  branches: IBranch[] = [];
   upazilas: IUpazila[] = [];
   districts: IDistrict[] = [];
   divisions: IDivision[] = [];
@@ -21,10 +25,12 @@ export class HospitalAddComponent implements OnInit {
   constructor(private toastr: ToastrService,
               private fb: FormBuilder,
               private router: Router,
+              private branchService: MembershipBranchService,
               private upazilaAndDistrictService: UpazilaAndDistrictService,
               private hospitalService: HospitalService) { }
 
   ngOnInit(): void {
+    this.loadBranch();
     this.loadDivision();
     this.createHospitalAddForm();
   }
@@ -33,6 +39,7 @@ export class HospitalAddComponent implements OnInit {
     this.hospitalAddForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(80)]],
       address: ['', [Validators.required, Validators.maxLength(200)]],
+      branchId: [],
       divisionId: [],
       upazilaId: [],
       districtId: [],
@@ -42,6 +49,11 @@ export class HospitalAddComponent implements OnInit {
 
   get f(){
     return this.hospitalAddForm.controls;
+  }
+  loadBranch(){
+    this.branchService.getAllBranchesSortByName().subscribe(response => {
+      this.branches = response;
+    });
   }
   loadDivision(){
     this.upazilaAndDistrictService.getAllDivision().subscribe(response => {

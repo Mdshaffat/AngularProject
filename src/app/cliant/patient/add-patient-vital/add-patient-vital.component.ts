@@ -14,6 +14,7 @@ import { PatientService } from '../patient.service';
   styleUrls: ['./add-patient-vital.component.css']
 })
 export class AddPatientVitalComponent implements OnInit {
+  footerName = 'form';
   patientDetails: IPatientWithVital;
   patientVitals: IPatientVital;
   patientVitalAddForm: FormGroup = new FormGroup({});

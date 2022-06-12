@@ -1,6 +1,6 @@
-<button mat-button [routerLink]="['/patient']" >Back</button>
+<button mat-button (click)="goBack()" >Back</button>
 <body class="userdetails">
-
+    <app-title [title]="title"></app-title>
     <mat-card class="example-card">
         <mat-card-header>
         <h2 style="float: left; width: 80%;">{{patientDetails.firstName}} {{patientDetails.lastName}}</h2>
@@ -20,7 +20,11 @@
                 <tr>
                     <td>Branch Name </td>
                     <td>{{patientDetails.branchName}}</td>
-                    </tr>
+                </tr>
+                <tr>
+                    <td>Membership Registration Number</td>
+                    <td>{{patientDetails.membershipRegistrationNumber}}</td>
+                </tr>
                 <tr>
                     <td>Age</td>
                     <td>{{patientDetails.age}}</td>
@@ -30,7 +34,7 @@
                     <td>{{patientDetails.mobileNumber}}</td>
                 </tr>
                 <tr>
-                    <td>Bate Of Birth</td>
+                    <td>Date Of Birth</td>
                     <td>{{patientDetails.doB | date:'dd-MM-YYY'}}</td>
                 </tr>
                 <tr>
@@ -58,6 +62,36 @@
                 <tr>
                     <td>Blood Group</td>
                     <td>{{patientDetails.bloodGroup}}</td>
+                </tr>
+                <tr>
+                    <td>COVID-19 Vaccination</td>
+                    <td>
+                        <span *ngIf="patientDetails.covidvaccine==='1'">Yes 
+                            <span *ngIf="patientDetails.vaccineBrand==='1'">(Pfizer)</span>
+                            <span *ngIf="patientDetails.vaccineBrand==='2'">(Astrazeneca)</span>
+                            <span *ngIf="patientDetails.vaccineBrand==='3'">(Moderna)</span>
+                            <span *ngIf="patientDetails.vaccineBrand==='4'">(Sinopharm)</span>
+                            <span *ngIf="patientDetails.vaccineBrand==='5'">(Others)</span>
+                          </span>
+                         <span *ngIf="patientDetails.covidvaccine==='2'">No</span>
+                         <span *ngIf="!patientDetails.covidvaccine">No Data</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Dose With Date
+                    </td>
+                    <td>
+                        <span *ngIf="patientDetails.firstDoseDate">
+                            1st Dose: {{patientDetails.firstDoseDate | date:'dd-MM-YYY'}}
+                        </span>
+                        <span *ngIf="patientDetails.secondDoseDate">
+                            2nd Dose: {{patientDetails.secondDoseDate | date:'dd-MM-YYY'}}
+                        </span>
+                        <span *ngIf="patientDetails.bosterDoseDate">
+                            Boster Dose: {{patientDetails.bosterDoseDate | date:'dd-MM-YYY'}}
+                        </span>
+                    </td>
                 </tr>
                 <tr>
                     <td>Updated On</td>
@@ -90,7 +124,7 @@
             </table>
         </mat-card-content>
         <mat-card-actions>
-        <button mat-button [routerLink]="['../../list']" >Back</button>
+        <button mat-button (click)="goBack()" >Back</button>
         <button mat-button [routerLink]="['../../edit/'+ patientDetails.id]">Edit</button>
         </mat-card-actions>
     </mat-card>
@@ -144,6 +178,32 @@
                         <td>Hospital</td>
                         <td>{{patientVital.hospitalName}}</td>
                     </tr>
+                    <!-- ksjdh -->
+                    <tr>
+                        <td>Anemia</td>
+                        <td>{{patientVital.anemia}}</td>
+                    </tr>
+                    <tr>
+                        <td>Jaundice</td>
+                        <td>{{patientVital.jaundice}}</td>
+                    </tr>
+                    <tr>
+                        <td>Dehydration</td>
+                        <td>{{patientVital.dehydration}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>RBS/FBS</td>
+                        <td>{{patientVital.rbsFbs}}</td>
+                    </tr>
+                    <!-- <tr>
+                        <td>P/A</td>
+                        <td>{{patientVital.pa}}</td>
+                    </tr>
+                    <tr>
+                        <td>B/B</td>
+                        <td>{{patientVital.bb}}</td>
+                    </tr> -->
                 </table>
             </mat-card-content>
             <mat-card-actions>

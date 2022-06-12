@@ -14,6 +14,7 @@ import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DatePipe } from '@angular/common';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DatePipe } from '@angular/common';
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}},
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'},
   ],
   bootstrap: [AppComponent]
 })

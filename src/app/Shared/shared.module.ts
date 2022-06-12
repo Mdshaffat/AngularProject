@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { MaterialModule } from './material/material.module';
+import { TitleComponent } from './component/title/title.component';
+import { FooterForAllComponent } from './component/footer-for-all/footer-for-all.component';
+import { FrontDialogComponent } from './component/front-dialog/front-dialog.component';
 
 const sharedModule = [
 ReactiveFormsModule,
@@ -10,6 +13,9 @@ FormsModule
 
 @NgModule({
   declarations: [
+    TitleComponent,
+    FooterForAllComponent,
+    FrontDialogComponent
   ],
   providers: [
     {provide: ToastrService, useClass: ToastrService}
@@ -25,7 +31,9 @@ FormsModule
   ],
   exports: [
     sharedModule,
-    ToastrModule
+    ToastrModule,
+    TitleComponent,
+    FooterForAllComponent
   ]
 })
 export class SharedModule { }

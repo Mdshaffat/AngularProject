@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/Shared/shared.module';
 import { MaterialModule } from 'src/app/Shared/material/material.module';
 import {NgxPrintModule} from 'ngx-print';
 import { PrescriptionPrintComponent } from './prescription-print/prescription-print.component';
+import { DiseasesComponent } from './diseases/diseases.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { PrescriptionPrintComponent } from './prescription-print/prescription-pr
     PrescriptionDetailsComponent,
     PrescriptionEditComponent,
     PrescriptionAddComponent,
-    PrescriptionPrintComponent
+    PrescriptionPrintComponent,
+    DiseasesComponent
   ],
   imports: [
     CommonModule,

@@ -4,6 +4,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/account/account.service';
+import { HospitalService } from 'src/app/admin/hospital/hospital.service';
+import { IHospital } from 'src/app/core/models/Hospital/hospital';
+import { IHospitalSortByName } from 'src/app/core/models/Hospital/hospitalsortbyname';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
 import { VisitEntriesAddComponent } from '../visit-entries-add/visit-entries-add.component';
 import { VisitEntriesCliantService } from '../visit-entries-cliant.service';
@@ -19,14 +23,21 @@ import { VisitEntriesStatusUpdateComponent } from '../visit-entries-status-updat
 export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
   displayedColumns: string[] = ['HospitalName', 'Date', 'FirstName', 'LastName', 'Serial',
                                  'Status', 'EditStatus', 'Edit'];
+  footerName = 'Data';
   visitEntries: IVisitEntry[] = [];
+  hospitals: IHospitalSortByName[] = [];
+  hospitalId: number;
   dataSource = new MatTableDataSource(this.visitEntries);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private visitEntryService: VisitEntriesCliantService,
+              private accountService: AccountService,
+              private hospitalService: HospitalService,
               private toastr: ToastrService,
               public dialog: MatDialog) { }
   ngOnInit(): void {
+    this.getCurrectUserHospitalId();
+    this.getHospital();
     this.getVisitEntryList();
     this.dataSource = new MatTableDataSource(this.visitEntries);
     this.dataSource.paginator = this.paginator;
@@ -43,6 +54,16 @@ export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
       console.log(error);
     });
   }
+
+  // todays visit list according to hospital
+  visitListAccordingToHospital(hospitalId) {
+    this.visitEntryService.getTodayVisitEntriesAccordingToHospital(hospitalId).subscribe(response => {
+      this.visitEntries = response;
+      this.dataSource.data = response;
+    }, error => {
+      console.log(error);
+    });
+    }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -93,5 +114,18 @@ export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
           this.toastr.error('Error to Update.');
         });
       }
+      getHospital(){
+        this.hospitalService.getAllHospitalSortByName().subscribe(response => {
+          this.hospitals = response;
+        }, error => {
+          console.log(error);
+        });
+      }
+      getCurrectUserHospitalId(){
+        const hospitalid =  this.accountService.getDecoadedHospitalIdFromToken();
+        if (hospitalid){
+             this.hospitalId = +hospitalid;
+           }
+       }
 }
 

@@ -1,8 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IPhysicalState } from 'src/app/core/models/PhysicalState/getPhysicalState';
+import { IPhysicalStatPagination } from 'src/app/core/models/PhysicalState/physicalstatPagination';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -15,13 +16,15 @@ export class PhysicalStateService {
 
     constructor(private http: HttpClient) { }
 
-    getAllPhysicalStates(){
-      if (this.physicalStates.length > 0) {
-        return of(this.physicalStates);
-      }
-      return this.http.get<IPhysicalState[]>(this.baseUrl + 'physicalState').pipe(
+    getAllPhysicalStates(searchString: string, sort: any, pageNumber: any, pageSize: any){
+      const params = new HttpParams()
+      .set('searchString', searchString)
+      .set('sort', sort)
+      .set('pageNumber', pageNumber)
+      .set('pageSize', pageSize);
+      return this.http.get<IPhysicalStatPagination>(this.baseUrl + 'physicalState', {params}).pipe(
         map(response => {
-          this.physicalStates = response;
+          this.physicalStates = response.data;
           return response;
         })
       );

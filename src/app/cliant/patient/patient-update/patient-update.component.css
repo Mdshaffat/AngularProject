@@ -19,11 +19,11 @@
         margin-left: 2%;
     }
     .col-hospitalId{
-        width: 48%;
+        width: 30%;
         margin-right: 2%;
     }
     .col-branchId{
-        width: 48%;
+        width: 30%;
         margin-right: 2%;
     }
     .col-address{
@@ -43,7 +43,7 @@
         margin-left: 1%;
     }
     .col-nid{
-        width: 48%;
+        width: 34%;
         margin-left: 2%;
     }
 
@@ -70,6 +70,12 @@
     .col-bloodGroup{
         width: 32%;
     }
+    .col-covidvaccine {
+        margin-right: 1%;
+    }
+    .col-vaccineBrand {
+        margin-right: 1%;
+    }
     .col-note{
         display: block;
         margin: auto;
@@ -77,6 +83,10 @@
     [class*="col-v-"] {
         margin: 1%;
         width: 23%;
+      }
+      [class*="col-d-"] {
+        margin: 1%;
+        width: 15%;
       }
     
 }
@@ -99,6 +109,22 @@ td {
   }
 
 .updatebutton {
-    background-color: #eae0c8;
+    width: 250px;
+      background-color: #fff;
+      color: #787878;
+}
+button {
+    background-color: #fff;
+    cursor: pointer;
+    color: #787878;
+    height: 45px;
+    margin: 5px;
+    font-size: 18px;
+    align-items: center;
+}
+button:hover {
     color: black;
 }
+.addbutton {
+    
+  }

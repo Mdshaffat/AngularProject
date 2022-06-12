@@ -91,7 +91,23 @@ tr{
       }
 }
 
-.addbutton {
-    background-color: #eae0c8;
-      color: black;
+button {
+
+    margin: 5px;
+    align-items: center;
+    background-color: #fff;
+    cursor: pointer;
+    color: #787878;
+    height: 45px;
+
+    margin: 5px;
+    font-size: 18px;
 }
+button:hover {
+    color: black;
+}
+.addbutton {
+    width: 330px;
+      background-color: #fff;
+      color: #787878;
+  }

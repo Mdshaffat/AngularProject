@@ -16,6 +16,7 @@ import { MembershipBranchService } from '../membership-branch.service';
   styleUrls: ['./membership-branchedit.component.css']
 })
 export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
+  title = 'Update Branch';
   upazilas: IUpazila[] = [];
   districts: IDistrict[] = [];
   divisions: IDivision[] = [];
@@ -42,6 +43,7 @@ export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
   createUpdateBranchForm(){
     this.updateBranchForm = this.fb.group({
       id: [this.id],
+      branchCode: [ , [Validators.maxLength(10)]],
       name: ['', [Validators.required, Validators.maxLength(100)]],
       address: ['', [Validators.required, Validators.maxLength(200)]],
       divisionId: [],
@@ -85,6 +87,7 @@ export class MembershipBrancheditComponent implements OnInit , AfterViewInit {
   populateHospitalFrom(){
     this.updateBranchForm.patchValue({
       name: this.branch.name,
+      branchCode: this.branch.branchCode,
       address: this.branch.address,
       divisionId: this.branch.divisionId,
       districtId: this.branch.districtId,

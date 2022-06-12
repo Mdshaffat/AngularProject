@@ -1,16 +1,19 @@
-table {
+  table {
     margin: 10px;
     width: 99%;
   }
-
-  
   .mat-form-field {
     font-size: 14px;
     width: 100%;
   }
+  
+  .mat-column-Edit {
+    padding-right: 20px;
+    text-align: center;
+  }
   .search {
     float: left;
-    width: 70%;
+    width: 50%;
     margin-left: 5%;
     height: 2%;
   }
@@ -20,33 +23,34 @@ table {
     margin-bottom: 10px;
     margin-right: 5%;
   }
-  .mat-column-Edit {
-    padding-right: 20px;
-    text-align: center;
-  }
   .buttonadd {
     margin-right: -1%;
     color: rgb(0, 0, 0);
-  
+  }
+  .addbutton {
+    color: #807777 !important;
+    background: #ffffff;
+    cursor: pointer;
+    height: 45px;
+  }
+  button {
+    width: 200px;
+    font-size: 18px;
+    align-items: center;
+  }
+  .addbutton:hover {
+    cursor: pointer;
+    color: black !important;
   }
   .mat-icon {
     margin: 2%;
   }
   .mat-icon:hover {
-    background-color: #ebc672 ;
+    background-color: #ffffff ;
     color: rgb(0, 0, 0);
     cursor: pointer;
   }
-  .addbutton {
-    background-color: #eae0c8;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-  }
-  .addbutton:hover {
-    background-color: #ecc66f;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-  }
+ 
   th.mat-sort-header-sorted {
     color: black;
   }
@@ -58,6 +62,10 @@ table {
   .mat-cell {
     padding-top:0% ;
     padding-bottom:0% ;
+  }
+  .mat-column-serialNumber {
+    width: 90px !important;
+    padding-right: 10px !important;
   }
   .mat-column-ID {
     width: 90px !important;
@@ -93,4 +101,17 @@ table {
   .mat-column-EditView {
     width: 60px !important;
     padding-right: 5px !important;
+  }
+  .downloadbutton {
+    float: left;
+    margin-top: 20px;
+    margin-left: 5%;
+    cursor: pointer;
+    height: 45px;
+    color: #807777 !important;
+    background: #ffffff;
+    /* border: 0.3px solid rgb(248, 194, 235) !important; */
+  }
+  .downloadbutton:hover {
+    color: black !important;
   }

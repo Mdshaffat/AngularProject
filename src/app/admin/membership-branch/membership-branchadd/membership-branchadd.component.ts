@@ -14,6 +14,7 @@ import { MembershipBranchService } from '../membership-branch.service';
   styleUrls: ['./membership-branchadd.component.css']
 })
 export class MembershipBranchaddComponent implements OnInit {
+  title = 'Add Branch';
   upazilas: IUpazila[] = [];
   districts: IDistrict[] = [];
   divisions: IDivision[] = [];
@@ -31,6 +32,7 @@ export class MembershipBranchaddComponent implements OnInit {
 
   createBranchAddForm(){
     this.branchAddForm = this.fb.group({
+      branchCode: [ ,  Validators.maxLength(10)],
       name: ['', [Validators.required, Validators.maxLength(100)]],
       address: ['', [Validators.required, Validators.maxLength(200)]],
       divisionId: [],

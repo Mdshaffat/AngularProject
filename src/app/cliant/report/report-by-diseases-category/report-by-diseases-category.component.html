@@ -1,0 +1,307 @@
+<body id="print-section">
+  
+    <div>
+      <div id="HeaderText" style="text-align: center;">
+        <p style="font-size: 20px;">Integrated Development Foundation</p>
+        <p style="font-size: 16px;">Health Program</p>
+        <p style="font-size: 18px;">Monthly Disease Report</p>
+      </div>
+      <div id="formForHidden">
+        <form id="inputForm"  [formGroup]="diseasesCategoryForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="col-branch" appearance="fill">
+            <mat-label>Branch</mat-label>
+            <mat-select formControlName="hospitalId" [(ngModel)]="hospitalId">
+              <mat-option [value]="0">All Branch</mat-option>
+              <mat-option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                {{hospital.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <mat-form-field class="col-month" appearance="fill">
+            <mat-label>Month</mat-label>
+            <mat-select formControlName="month" [(ngModel)]="month">
+              <mat-option *ngFor="let month of months" [value]="month.value">
+                {{month.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <mat-form-field class="col-year" appearance="fill">
+            <mat-label>Year</mat-label>
+            <mat-select formControlName="year" [(ngModel)]="year">
+              <mat-option [value]="2015"> 2015 </mat-option>
+              <mat-option [value]="2016"> 2016 </mat-option>
+              <mat-option [value]="2017"> 2017 </mat-option>
+              <mat-option [value]="2018"> 2018 </mat-option>
+              <mat-option [value]="2019"> 2019 </mat-option>
+              <mat-option [value]="2020"> 2020 </mat-option>
+              <mat-option [value]="2021"> 2021 </mat-option>
+              <mat-option [value]="2022"> 2022 </mat-option>
+              <mat-option [value]="2023"> 2023 </mat-option>
+              <mat-option [value]="2024"> 2024 </mat-option>
+              <mat-option [value]="2025"> 2025 </mat-option>
+              <mat-option [value]="2026"> 2026 </mat-option>
+              <mat-option [value]="2027"> 2027 </mat-option>
+              <mat-option [value]="2028"> 2028 </mat-option>
+              <mat-option [value]="2029"> 2029 </mat-option>
+              <mat-option [value]="2030"> 2030 </mat-option>
+            </mat-select>
+          </mat-form-field>
+      
+          <button class="btn searchbutton" type="submit">
+            <span class="material-icons buttonadd btn">
+              search
+            </span>Search
+          </button>
+        </form>  
+      </div>
+      <div class="giveninfo" *ngIf="diseasesCategoryReport">
+        <p> <strong>Branch:</strong> &nbsp;{{diseasesCategoryReport.hospitalName}} &nbsp; <strong>Month: </strong> {{diseasesCategoryReport.monthName}}&nbsp; <strong>Year: </strong> {{diseasesCategoryReport.year}} </p>
+      </div>
+    </div>
+    <div class="reportTable">
+      <table *ngIf="diseasesCategoryReport">
+        <tr>
+          <th>
+    
+          </th>
+          <th>
+    
+          </th>
+          <th>
+    
+          </th>
+          <th colspan="7">Male</th>
+          <th colspan="7">Female</th>
+          <th>
+    
+          </th>
+          <th>
+    
+          </th>
+        </tr>
+        <tr>
+          <th>
+            SI No
+          </th>
+          <th>
+            Name of Disease 
+          </th>
+          <th>
+            Up to Previous Month 
+          </th>
+          <th>
+            '0'-5
+          </th>
+          <th>
+            '6-15
+          </th>
+          <th>
+            16-30
+          </th>
+          <th>
+            31-45
+          </th>
+          <th>
+            46-60
+          </th>
+          <th>
+            60+
+          </th>
+          <th>
+            Total
+          </th>
+          <th>
+            '0'-5
+          </th>
+          <th>
+            '6-15
+          </th>
+          <th>
+            16-30
+          </th>
+          <th>
+            31-45
+          </th>
+          <th>
+            46-60
+          </th>
+          <th>
+            60+
+          </th>
+          <th>
+            Total
+          </th>
+          <th>
+            Total Current Month
+          </th>
+          <th>
+            Cumulative (upto this month)
+          </th>
+        </tr>
+
+          <tr *ngFor="let item of diseasesCategoryReport.diagnosisReport; index as i">
+            <td>
+              {{i + 1}}
+            </td>
+            <td class="categoryname">
+              {{item.categoryName}}
+            </td>
+            <td>
+              {{item.upToPreviousMonth}}
+            </td>
+            <td>
+              {{item.genderMale.ages.zeroToFive}}
+            </td>
+            <td>
+              {{item.genderMale.ages.sixToFifteen}}
+            </td>
+            <td>
+              {{item.genderMale.ages.sixteenToThirty}}
+            </td>
+            <td>
+              {{item.genderMale.ages.thirtyOneToFourtyFive}}
+            </td>
+            <td>
+              {{item.genderMale.ages.fourtyFiveToSixty}}
+            </td>
+            <td>
+              {{item.genderMale.ages.sixtyPlus}}
+            </td>
+            <td>
+              {{item.genderMale.ages.total}}
+            </td>
+            <td>
+              {{item.genderFemale.ages.zeroToFive}}
+            </td>
+            <td>
+              {{item.genderFemale.ages.sixToFifteen}}
+            </td>
+            <td>
+              {{item.genderFemale.ages.sixteenToThirty}}
+            </td>
+            <td>
+              {{item.genderFemale.ages.thirtyOneToFourtyFive}}
+            </td>
+            <td>
+              {{item.genderFemale.ages.fourtyFiveToSixty}}
+            </td>
+            <td>
+              {{item.genderFemale.ages.sixtyPlus}}
+            </td>
+            <td>
+              {{item.genderFemale.ages.total}}
+            </td>
+            <td>
+              {{item.total}}
+            </td>
+            <td>
+              {{item.comulativeUpToThisMonth}}
+            </td>
+          </tr>
+          <tr>
+            <th>
+              
+            </th>
+            <th>
+              Total
+            </th>
+            <th>
+              {{diseasesCategoryReport.upToPreviousMonthTotal}} 
+            </th>
+            <th>
+              {{diseasesCategoryReport.mZeroToFiveTotal}} 
+            </th>
+            <th>
+              {{diseasesCategoryReport.mSixToFifteenTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.mSixteenToThirtyTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.mThirtyOneToFourtyFiveTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.mFourtyFiveToSixtyTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.mSixtyPlusTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.mAgeGroupTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.fmZeroToFiveTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.fmSixToFifteenTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.fmSixteenToThirtyTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.fmThirtyOneToFourtyFiveTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.fmFourtyFiveToSixtyTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.fmSixtyPlusTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.fmAgeGroupTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.thisMonthTotal}}
+            </th>
+            <th>
+              {{diseasesCategoryReport.comulativeUpToThisMonthTotal}}
+            </th>
+          </tr>
+      </table>
+    </div>
+    <div id="signature" *ngIf="diseasesCategoryReport"> 
+      <div>
+        <form id="preparedBy">
+          <p><strong>Prepared By:</strong>&nbsp; {{diseasesCategoryReport.firstName}} {{diseasesCategoryReport.lastName}}</p>
+          <p><strong>Designation:</strong>&nbsp; {{diseasesCategoryReport.designation}},IDF Health Program </p>
+        </form>
+        <form id="checkedby">
+          <label for="checkedby">Checked By:</label>
+          <input type="text" id="checkedby" name="checkedby"><br><br>
+          <label for="Designation">Designation:</label>
+          <input type="Designation" id="Designation" name="Designation"><br>
+        </form>
+      </div>
+      <br><br><br><br>
+      <p>
+        Date: {{currentDate | date:'dd-MM-yyyy'}}
+      </p>
+    </div> 
+    <div class="footer">
+      <p>
+        This report is generated by dotplus 
+      </p>
+      <p>
+        Powered by Outreach  for All, Inc, USA.
+      </p>
+    </div>
+</body>
+      <button 
+      mat-raised-button
+      class="button2" color="primary" 
+      type="button" 
+      (click)="exportexcel()">
+      Download
+      </button>
+
+        <button 
+                mat-raised-button
+                class="button2" color="primary" 
+                type="submit" 
+                styleSheetFile="assets/css/printreportbydiseases.css"
+                printSectionId="print-section"  
+                ngxPrint>
+                Print
+        </button>

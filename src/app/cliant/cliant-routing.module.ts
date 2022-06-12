@@ -13,10 +13,14 @@ const routes: Routes = [
                                     .then(m => m.PhysicalStateModule)},
             {path: 'prescription', loadChildren: () => import('./prescription/prescription.module')
                                     .then(m => m.PrescriptionModule)},
-            {path: 'medicine', loadChildren: () => import('./medicine/medicine.module')
+            {path: 'medicine', loadChildren: () => import('src/app/admin/medicine/medicine.module')
                                     .then(m => m.MedicineModule)},
             {path: 'visitentries', loadChildren: () => import('./visit-entries-cliant/visit-entries-cliant.module')
                                     .then(m => m.VisitEntriesCliantModule)},
+            {path: 'pregnancy', loadChildren: () => import('./pregnancy/pregnancy.module')
+                                    .then(m => m.PregnancyModule)},
+            {path: 'report', loadChildren: () => import('./report/report.module')
+                                    .then(m => m.ReportModule)},
           ]
   }
 ];

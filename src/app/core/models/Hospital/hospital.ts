@@ -1,6 +1,8 @@
 export interface IHospital {
     id: number;
     name: string;
+    branchId: number;
+    branch: string;
     address: string;
     divisionId: number;
     division: string;

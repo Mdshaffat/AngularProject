@@ -1,14 +1,20 @@
-
+<app-title [title]="title"></app-title>
 <body>
     <button mat-button [routerLink]="['../list']" >Back</button>
       <div class="loginForm">
           <form [formGroup]="prescriptionAddForm" (ngSubmit)="onSubmit()" autocomplete="nope" novalidate>
+                <mat-form-field appearance="fill" class="selecthospital">
+                  <mat-label>Select Branch</mat-label>
+                  <mat-select #value formControlName="hospitalId" (valueChange)="visitListAccordingToHospital(value.value)">
+                    <mat-option [value]="option.id" *ngFor="let option of hospitals">{{option.name}}</mat-option>
+                  </mat-select>
+                </mat-form-field>                
                   <mat-form-field appearance="fill">
                     <mat-label>Visit Entry Serial</mat-label>
                     <mat-select formControlName="visitEntryId" required>
                       <mat-option>--</mat-option>
                       <mat-option *ngFor="let visitEntry of visitEntries" [value]="visitEntry.id">
-                        {{visitEntry.serial}}
+                        {{visitEntry.serial}} | {{visitEntry.patientFirstName}} {{visitEntry.patientLastName}}
                       </mat-option>
                     </mat-select>
                     <mat-error *ngIf="f.visitEntryId.hasError('required')">Please choose Hospital</mat-error>
@@ -23,7 +29,7 @@
                     </mat-select>
                     <mat-error *ngIf="f.physicalStateId.hasError('required')">Please choose Hospital</mat-error>
                   </mat-form-field> -->
-                  <br/><button mat-raised-button color="primary" type="submit">ADD</button>
+                  <br/><button mat-raised-button  type="submit">ADD</button>
           </form>    
       </div>
   </body>

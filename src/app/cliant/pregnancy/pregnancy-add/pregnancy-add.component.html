@@ -1,0 +1,38 @@
+<body>
+    <app-title [title]="title"></app-title>
+    <button mat-button [routerLink]="['/pregnancy']" >Back</button>
+      <div class="loginForm">
+          <form [formGroup]="pregnancyAddForm" (ngSubmit)="onSubmit()">
+            <mat-form-field appearance="fill" class="selecthospital">
+              <mat-label>Select Branch</mat-label>
+              <mat-select #value formControlName="hospitalId"  [(value)]="hospitalId">
+                <mat-option [value]="option.id" *ngFor="let option of hospitals">{{option.name}}</mat-option>
+              </mat-select>
+            </mat-form-field>  
+            <mat-form-field>
+                  <mat-label>Patient Id</mat-label>
+                  <input required formControlName="patientId" matInput>
+              </mat-form-field><br>
+              <mat-form-field  appearance="fill">
+                <mat-label>First Date Of Last Period</mat-label>
+                <input formControlName="firstDateOfLastPeriod" matInput [matDatepicker]="picker" >
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-doB" appearance="fill">
+                <mat-label>Expected Date Of Delivery</mat-label>
+                <input formControlName="expectedDateOfDelivery" matInput [matDatepicker]="picker1" >
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-doB" appearance="fill">
+                <mat-label>Next Visit</mat-label>
+                <input formControlName="nextCheckup" matInput [matDatepicker]="picker2" >
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+              </mat-form-field>
+                  <br/><button mat-raised-button class="addbutton" type="submit">ADD</button>
+              
+          </form>    
+      </div>
+  </body>

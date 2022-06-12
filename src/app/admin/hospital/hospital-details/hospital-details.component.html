@@ -1,3 +1,4 @@
+<app-title [title]="title"></app-title>
 <body class="userdetails">
     <mat-card class="example-card">
         <mat-card-header>
@@ -5,6 +6,7 @@
         </mat-card-header>
         <mat-card-content>
             <p>ID: <small>{{hospitalDetails.id}}</small></p>
+            <p>Branch: <small>{{hospitalDetails.branch}}</small></p>
             <p>Address: <small>{{hospitalDetails.address}}</small></p>
             <p>Division: <small>{{hospitalDetails.division}}</small></p>
             <p>Upazila: <small>{{hospitalDetails.upazila}}</small></p>

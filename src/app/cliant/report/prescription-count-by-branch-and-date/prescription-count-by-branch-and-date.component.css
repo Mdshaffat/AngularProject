@@ -1,0 +1,93 @@
+#searchform {
+    margin: 2%;
+}
+.searchbutton {
+  background-color: #ffffff;
+  cursor: pointer;
+  color: #787878;
+  box-shadow: 1px 1px 1px 1px rgb(185, 189, 190);
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-left: 10px
+}
+.searchbutton:hover {
+  color: black;
+}
+.search {
+    float: left;
+    width: 60%;
+    margin-left: 5%;
+    height: 2%;
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+  }
+  td, th {
+    border: 1px solid #dddddd;
+    
+    padding: 8px;
+  }
+  th {
+    text-align: center;
+  }
+  td {
+    text-align: left;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+.mat-column-Edit {
+    padding-right: 20px;
+    text-align: center;
+  }
+ .downloadxls {
+   float: left;
+   padding-left: 10px;
+ }
+ .downloadbutton {
+    float: left;
+    margin-bottom: 20px;
+    margin-left: 5%;
+    background-color: #FFF;
+    box-shadow: 1px 1px 1px 1px rgb(185, 189, 190);
+    cursor: pointer;
+    color: #787878;
+    height: 48px;
+    width: 200px;
+    font-size: 18px;
+    align-items: center;
+ }
+ .downloadbutton:hover {
+  background-color: #fff;
+  color: black;
+}
+.mat-elevation-z8 {
+  visibility: hidden;
+}
+.chartWrapper {
+  position: relative;
+}
+.chartWrapper > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events:none;
+}
+.chartAreaWrapper {
+overflow-y: scroll;
+  position: relative;
+  width: 98%;
+  height: 300px;
+}
+.chartAreaWrapper2 {
+  position: relative;
+  height: 500px;
+}

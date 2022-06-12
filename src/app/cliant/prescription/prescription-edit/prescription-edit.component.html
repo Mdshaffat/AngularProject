@@ -2,64 +2,276 @@
   <form [formGroup]="prescriptionUpdateForm" (ngSubmit)="onSubmit()">
   <body id="print-section">
     <div id="container" class="bottomborder">
+      <div *ngIf="prescription">
+
         <div id="head">
-          <h2>Health Program </h2>
-          <h1> Integrated Development Foundation</h1>
-            <p>{{prescription.hospitalName}}</p>
-            <p>Prescribed By: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
-            <p>BMDC Reg No: {{prescription.bmdcRegNo}}</p>
-            <p>Email: {{prescription.optionalEmail}}</p>
+          <img id="idflogo" src="/assets/logo/idflogo.jpeg" alt="IDF">
+          <p style="font-size: 14px;">Health Program </p>
+          <p style="font-size: 16px;">Integrated Development Foundation</p>
+          <p>{{prescription.hospitalName}}</p>
+          <p>Prescribed By: {{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
+          <p>BMDC Reg No: {{prescription.bmdcRegNo}}</p>
+          <p>Email: {{prescription.optionalEmail}}</p>
         </div>
         <div id="nav" >
             <p> <strong> Patient Name: </strong>{{prescription.patientFirstName}} {{prescription.patientLastName}} | 
-              <strong>Age: </strong> {{prescription.patientAge}}
-              | <strong *ngIf="prescription.patientBloodGroup">Blood Group: </strong> {{prescription.patientBloodGroup}} 
-              
+              <strong>Age: </strong> {{prescription.patientAge}} |
+              <strong>Gender: </strong> {{prescription.patientGender}}
+               <strong *ngIf="prescription.patientBloodGroup">Blood Group: </strong> {{prescription.patientBloodGroup}} 
             </p>
             <p>
               <strong> Date:</strong>  {{currentDate | date: 'dd/MM/yyyy'}}
             </p>
         </div>
-        <div id="nav" *ngFor="let prescriptionVital of prescription.physicalStat">
+        <div id="nav-2" *ngIf="prescription.physicalStat">
            <p >O/E:
-            <span *ngIf="prescriptionVital.heightFeet"> <strong>| Height: </strong> {{prescriptionVital.heightFeet}}" {{prescriptionVital.heightInches}}'</span>
-            <span *ngIf="prescriptionVital.weight"> <strong>| Weight: </strong> {{prescriptionVital.weight}} kg</span>
-            <span *ngIf="prescriptionVital.bodyTemparature"><strong> | Body Temperature:</strong> {{prescriptionVital.bodyTemparature}}&#176;F</span> 
-            <span *ngIf="prescriptionVital.bmi"> <strong>| BMI: </strong> {{prescriptionVital.bmi}}</span>
-            <span *ngIf="prescriptionVital.spO2"> <strong> | spO2:</strong> {{prescriptionVital.spO2}} %</span> <strong> | </strong><br>
-            <span *ngIf="prescriptionVital.bloodPressureSystolic"> <strong> Blood Pressure:</strong> {{prescriptionVital.bloodPressureSystolic}}/{{prescriptionVital.bloodPressureDiastolic}} mmHg </span>
-            <span *ngIf="prescriptionVital.pulseRate"> <strong>| Pulse Rate: </strong> {{prescriptionVital.pulseRate}} bpm</span>
-            <span *ngIf="prescriptionVital.editedOn"> <strong>| Last Update:</strong>  {{prescriptionVital.editedOn | date: 'dd/MM/yyyy'}}</span>
+            <span *ngIf="prescription.physicalStat.heightFeet"> <strong> Height:</strong>&nbsp;{{prescription.physicalStat.heightFeet}}' {{prescription.physicalStat.heightInches}}"</span>
+            <span *ngIf="prescription.physicalStat.weight"> <strong> | Weight:</strong>&nbsp;{{prescription.physicalStat.weight}} kg</span>
+            <span *ngIf="prescription.physicalStat.bodyTemparature"><strong> | Body&nbsp;Temperature:</strong>&nbsp;{{prescription.physicalStat.bodyTemparature}}&nbsp;&#176;F</span> 
+            <span *ngIf="prescription.physicalStat.bmi"> <strong> | BMI:</strong>&nbsp;{{prescription.physicalStat.bmi}}</span>
+            <span *ngIf="prescription.physicalStat.spO2"> <strong> | spO2:</strong>&nbsp;{{prescription.physicalStat.spO2}} %</span>
+            <span *ngIf="prescription.physicalStat.bloodPressureSystolic"> <strong>| Blood&nbsp;Pressure:</strong>&nbsp;{{prescription.physicalStat.bloodPressureSystolic}}/{{prescription.physicalStat.bloodPressureDiastolic}} mmHg </span>
+            <span *ngIf="prescription.physicalStat.pulseRate"> <strong> | Pulse&nbsp;Rate: </strong>&nbsp;{{prescription.physicalStat.pulseRate}} bpm</span>
+            <span *ngIf="prescription.physicalStat.rbsFbs"> <strong> | RBS/FBS: </strong>&nbsp;{{prescription.physicalStat.rbsFbs}}</span>
           </p>
       </div>
-      <div id="nav">
-        <p >G/E:
-          <mat-checkbox color="primary" class="example-margin" formControlName="appearance">Appearance</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="anemia">Anemia</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="jundice">Jaundice</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="dehydration">Dehydration</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="edema">Edema</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="cyanosis">Cyanosis</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="heart">Heart</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="lung">Lung</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="abdomen">Abdomen</mat-checkbox>
-          <mat-checkbox color="primary" class="example-margin" formControlName="kub">KUB</mat-checkbox>
+      <div  id="nav-3" *ngIf="prescription.physicalStat">
+        <p *ngIf="prescription.physicalStat.appearance || prescription.physicalStat.anemia || prescription.physicalStat.jaundice || prescription.physicalStat.dehydration || prescription.physicalStat.edema || prescription.physicalStat.cyanosis || prescription.physicalStat.kub">G/E:
+          <span *ngIf="prescription.physicalStat.appearance"> <strong> Appearance: </strong>&nbsp;{{prescription.physicalStat.appearance}}</span>
+         <span *ngIf="prescription.physicalStat.anemia"> <strong> | Anemia: </strong>&nbsp;{{prescription.physicalStat.anemia}}</span>
+         <span *ngIf="prescription.physicalStat.jaundice"><strong> | Jaundice:</strong>&nbsp;{{prescription.physicalStat.jaundice}}</span> 
+         <span *ngIf="prescription.physicalStat.dehydration"> <strong>| Dehydration:</strong>&nbsp;{{prescription.physicalStat.dehydration}}</span>
+         <span *ngIf="prescription.physicalStat.edema"> <strong> | Edema:</strong>&nbsp;{{prescription.physicalStat.edema}}</span>
+         <span *ngIf="prescription.physicalStat.cyanosis"> <strong> | Cyanosis:</strong>&nbsp;{{prescription.physicalStat.cyanosis}}</span>
+         <!-- <span *ngIf="prescription.physicalStat.kub"> <strong> | KUB</strong>&nbsp;{{prescription.physicalStat.kub}}</span> -->
        </p>
-   </div>
+   
+   
+           
+      </div>
+       </div>
         <div id="content">
             <div id="aside">
+              <div class="col-cc">
                 <h3>Cc</h3>
-                <textarea formControlName="doctorsObservation" wrap="virtual">
-                </textarea>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows=3 formControlName="doctorsObservation"></textarea>
                 <mat-error *ngIf="f.doctorsObservation.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
-                <h3>Advice Test</h3>
-                <textarea formControlName="adviceTest"></textarea>
+              </div>
+              <div class="col-mh">
+                <h3>Systemic Examination</h3>
+                <textarea  cdkTextareaAutosize cdkAutosizeMinRows=2  formControlName="systemicExamination"></textarea>
+                <mat-error *ngIf="f.doctorsObservation.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+              </div>
+              <div *ngIf="prescription">
+                <div *ngIf="prescription.patientGender === 'Female'" class="col-oh">
+                  <h3>OB-gyn/H</h3>
+                  <textarea  cdkTextareaAutosize cdkAutosizeMinRows=2  formControlName="oh"></textarea>
+                  <mat-error *ngIf="f.doctorsObservation.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+                </div>
+              </div>
+              <div class="col-mh">
+                <h3>History of Past Illness</h3>
+                <textarea  cdkTextareaAutosize cdkAutosizeMinRows=1  formControlName="historyOfPastIllness"></textarea>
+                <mat-error *ngIf="f.doctorsObservation.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+              </div>
+              <div class="col-oh">
+                <h3>Family History</h3>
+                <textarea  cdkTextareaAutosize cdkAutosizeMinRows=1  formControlName="familyHistory"></textarea>
+                <mat-error *ngIf="f.doctorsObservation.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+              </div>
+              <div class="col-investigation">
+                <h3>Allergic History</h3>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows=1  formControlName="allergicHistory"></textarea>
                 <mat-error *ngIf="f.adviceTest.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+              </div>
+              <div *ngIf="prescription" class="col-mh">
+                <h3>COVID19 Vaccinated: <span *ngIf="prescription.covidvaccine==='1'">Yes 
+                                            <span *ngIf="prescription.vaccineBrand==='1'">(Pfizer)</span>
+                                            <span *ngIf="prescription.vaccineBrand==='2'">(Astrazeneca)</span>
+                                            <span *ngIf="prescription.vaccineBrand==='3'">(Moderna)</span>
+                                            <span *ngIf="prescription.vaccineBrand==='4'">(Sinopharm)</span>
+                                            <span *ngIf="prescription.vaccineBrand==='5'">(Others)</span>
+                                          </span>
+                                         <span *ngIf="prescription.covidvaccine==='2'">No</span>
+                                         <span *ngIf="!prescription.covidvaccine">No Data</span>
+                </h3>
+              </div>
+              <div class="col-investigation">
+                <h3>Investigation</h3>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows=2 formControlName="adviceTest"></textarea>
+                <mat-error *ngIf="f.adviceTest.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+              </div>
+              <h3>Dignosis</h3>
+              <div class="col-discat">
+                <mat-form-field appearance="fill">
+                  <mat-label>Diseases Category</mat-label>
+                  <mat-select [formControl]="diseasesCategoryControl" #value (selectionChange)="loadDiseases(value.value)">
+                    <mat-option>_______</mat-option>
+                    <mat-option *ngFor="let dc of diseasesCategory" [value]="dc">
+                      {{dc.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-dis">
+                <mat-form-field appearance="fill">
+                  <mat-label>Diseases</mat-label>
+                  <mat-select #diseasesvalue (selectionChange)="selectDiseases(diseasesvalue.value)">
+                    <mat-option>_______</mat-option>
+                    <mat-option *ngFor="let dc of diseases" [value]="dc">
+                      {{dc.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-icon *ngIf="(isDoctor$ | async)" matTooltip="Add New Disease" (click)="openDialog()" style="cursor: pointer;">addchart</mat-icon>
+              </div>
+              <div class="col-dx">
+                <div formArrayName="diagnosis">
+                  <table id="diagnosisTable">
+                    <tr *ngFor="let medicine of diagnosis.controls; index as t" [formGroupName]="t" >
+                      <td>
+                          <input formControlName="diseasesName" readonly matInput />
+                      </td>
+                      <!-- <td>
+                          <input formControlName="itemTotal" readonly matInput />
+                      </td> -->
+                      <td (click)="deleteDiagnosisFromList(t)" matTooltip="Delete" class="iconchange">
+                        <mat-icon style="cursor: pointer;">close</mat-icon>
+                    </td>
+                  </tr>
+                  </table>
+                </div> 
+              </div>
             </div>
             <div id="main">
-              <h3>Rx</h3>
-              <textarea formControlName="adviceMedication"></textarea>
-              <mat-error *ngIf="f.adviceMedication.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+              <div>
+                <div class="medicineaddform">
+                  <mat-form-field class="form-brand-name" appearance="fill">
+                    <mat-label>Medecine</mat-label>
+                    <input type="text" matInput
+                                        aria-label="BrandName"
+                                        [matAutocomplete]="autobrandName"
+                                        [formControl]="brandName">
+                    <mat-autocomplete #autobrandName="matAutocomplete">
+                      <mat-option *ngFor="let medicine of filteredMedicine | async"  (click)="selectMedicine(medicine)">
+                        <span>{{medicine.brandName}}</span> |
+                        <small>{{medicine.genericName}}</small>
+                      </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Dose</mat-label>
+                  <mat-select  [formControl]="dose" >
+                    <mat-option value="1+1+1">
+                      1+1+1
+                    </mat-option>
+                    <mat-option value="1+0+1">
+                      1+0+1
+                    </mat-option>
+                    <mat-option value="0+0+1">
+                      0+0+1
+                    </mat-option>
+                    <mat-option value="1+0+0">
+                      1+0+0
+                    </mat-option>
+                    <mat-option value="0+1+0">
+                      0+1+0
+                    </mat-option>
+                    <mat-option value="0+1+1">
+                      0+1+1
+                    </mat-option>
+                    <mat-option value="1+1+1+1">
+                      1+1+1+1
+                    </mat-option>
+                    <mat-option value="1+1+0">
+                      1+1+0
+                    </mat-option>
+                    <mat-option value="2+2+2+2">
+                      2+2+2+2
+                    </mat-option>
+                    <mat-option value="2+2+2">
+                      2+2+2
+                    </mat-option>
+                    <mat-option value="1/2+0+0">
+                      1/2+0+0
+                    </mat-option>
+                    <mat-option value="1/2+0+1/2">
+                      1/2+0+1/2
+                    </mat-option>
+                    <mat-option value="1/2+1/2+1/2">
+                      1/2+1/2+1/2
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Time</mat-label>
+                  <mat-select [formControl]="time">
+                    <mat-option  value="Before Meal">
+                      Before Meal
+                    </mat-option>
+                    <mat-option  value="After Meal">
+                      After Meal
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field><br>
+
+                <mat-form-field class="f-comment" appearance="fill">
+                  <mat-label>Comment</mat-label>
+                  <!-- <textarea cdkTextareaAutosize matInput type="text" [formControl]="comment"></textarea> -->
+                  <input matInput type="text" [formControl]="comment">
+                  <mat-error *ngIf="comment.hasError('maxlength')">Maximum Length 100 charecter</mat-error>
+                </mat-form-field>
+                <button class="btn searchbutton" type="button" (click)="addMedicineForPrescription()">
+                  <span class="material-icons buttonadd btn">
+                    add
+                  </span>Add
+                </button>
+                </div>
+              </div>
+              <div formArrayName="medicineForPrescription">
+
+                  <table>
+                    <!-- <tr>
+                      <th>MEDICINE</th>
+                      <th>DOSE</th>
+                      <th>TIME</th>
+                      <th></th>
+                    </tr> -->
+                    <tr *ngFor="let medicine of medicineForPrescription.controls; index as t" [formGroupName]="t" >
+                        <td>
+                          <!-- <input cdkTextareaAutosize formControlName="brandName" readonly matInput /> -->
+                          <textarea class="medicine-t medicine-textarea" readonly cdkTextareaAutosize cdkAutosizeMinRows=1 formControlName="medicineType" ></textarea>
+                        </td>
+                        <td>
+                            <!-- <input cdkTextareaAutosize formControlName="brandName" readonly matInput /> -->
+                            <textarea class="medicine-textarea" readonly cdkTextareaAutosize cdkAutosizeMinRows=1 formControlName="brandName" ></textarea>
+                        </td>
+                        <td>
+                            <textarea class="medicine-textarea fix-width-n" readonly cdkTextareaAutosize cdkAutosizeMinRows=1 formControlName="dose"></textarea>
+                        </td>
+                        <td>
+                            <textarea class="medicine-textarea fix-width-" readonly cdkTextareaAutosize cdkAutosizeMinRows=1 formControlName="time"></textarea>
+                        </td>
+                        <td>
+                          <textarea class="medicine-textarea fix-width-c" readonly cdkTextareaAutosize cdkAutosizeMinRows=1 formControlName="comment" ></textarea>
+                      </td>
+                        <td (click)="onDelete(t)" matTooltip="Delete" class="iconchange">
+                          <mat-icon>close</mat-icon>
+                      </td>
+                    </tr>
+
+                  </table>
+              </div>
+              <!-- <h3>Rx</h3>
+              <textarea formControlName="adviceMedication"  cdkTextareaAutosize cdkAutosizeMinRows=.9></textarea>
+              <mat-error *ngIf="f.adviceMedication.hasError('maxlength')">Maximum Length 2000 charecter</mat-error> -->
+              <div class="rel"><br>
+                <h3>Advice</h3>
+                <textarea cdkTextareaAutosize cdkAutosizeMinRows=3 formControlName="note" ></textarea>
+                <mat-error *ngIf="f.note.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
+            </div>
               <div class="nextvisit">
               <span>Next Visit: </span>
               <mat-form-field appearance="fill">
@@ -68,20 +280,13 @@
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
             </div>
-              <div class="sign">
-                <p>_________________</p>
+            <div class="sign" *ngIf="prescription">
+              <p>_____________________________________</p>
                 <p>{{prescription.doctorFirstName}} {{prescription.doctorLastName}}</p>
-              </div>
-                <div class="rel"><br>
-                    <h3>Note</h3>
-                    <textarea 
-                      cdkTextareaAutosize
-                      cdkAutosizeMinRows=1
-                      formControlName="note"
-                    >
-                    </textarea>
-                    <mat-error *ngIf="f.note.hasError('maxlength')">Maximum Length 2000 charecter</mat-error>
-                </div>
+            </div>
+             <!--  -->
+             <mat-checkbox formControlName="isTelimedicine" color="primary">Telemedicine</mat-checkbox><br>
+             <!--  -->
               </div>
             </div>
             
@@ -90,7 +295,7 @@
       <div>
         <button 
         mat-raised-button
-        class="button1" color="success" type="button" [routerLink]="['../../list']">
+        class="button1" color="success" type="button" (click)="goBack()">
         Back To List
       </button>
 

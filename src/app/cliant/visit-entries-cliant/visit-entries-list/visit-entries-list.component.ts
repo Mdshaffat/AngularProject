@@ -1,10 +1,15 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { AccountService } from 'src/app/account/account.service';
+import { HospitalService } from 'src/app/admin/hospital/hospital.service';
+import { IHospital } from 'src/app/core/models/Hospital/hospital';
+import { IHospitalSortByName } from 'src/app/core/models/Hospital/hospitalsortbyname';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
+import { IVisitEntryPagination } from 'src/app/core/models/VisitEntry/visitentrypagination';
 import { VisitEntriesAddComponent } from '../visit-entries-add/visit-entries-add.component';
 import { VisitEntriesCliantService } from '../visit-entries-cliant.service';
 import { VisitEntriesEditComponent } from '../visit-entries-edit/visit-entries-edit.component';
@@ -18,14 +23,30 @@ import { VisitEntriesStatusUpdateComponent } from '../visit-entries-status-updat
 export class VisitEntriesListComponent implements OnInit  , AfterViewInit {
   displayedColumns: string[] = ['HospitalName', 'Date', 'FirstName', 'LastName', 'Serial',
                                  'Status', 'EditStatus', 'Edit'];
+  footerName = 'Data';
   visitEntries: IVisitEntry[] = [];
+  hospitals: IHospitalSortByName[] = [];
+  hospitalId: number;
+  // paginator prop
+  visitentrieswithpaging: IVisitEntryPagination;
+  totalRows: number;
+  currentPage = 1;
+  pageSize =  50;
+  filterValue: string;
+  pageSizeOptions: number[] = [50, 100, 1000];
+  sortvalue: string;
+  // endPaginator prop
   dataSource = new MatTableDataSource<IVisitEntry>(this.visitEntries);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private visitEntryService: VisitEntriesCliantService,
+              private hospitalService: HospitalService,
+              private accountService: AccountService,
               private toastr: ToastrService,
               public dialog: MatDialog) { }
   ngOnInit(): void {
+    this. getCurrectUserHospitalId();
+    this.getHospital();
     this.getVisitEnties();
     this.dataSource = new MatTableDataSource<IVisitEntry>(this.visitEntries);
     this.dataSource.paginator = this.paginator;
@@ -35,23 +56,91 @@ export class VisitEntriesListComponent implements OnInit  , AfterViewInit {
     this.dataSource.sort = this.sort;
   }
   getVisitEnties(){
-    this.visitEntryService.getAllVisitEntry().subscribe(response => {
-      this.visitEntries = response;
-      this.dataSource.data = response;
-    }, error => {
-      console.log(error);
-    });
-  }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
+    if (this.filterValue){
+      this.visitEntryService.getAllVisitEntry(this.filterValue, '', this.currentPage, this.pageSize).subscribe(response => {
+        this.visitEntries = response.data;
+        this.totalRows = response.count;
+        this.dataSource.data = response.data;
+        setTimeout(() => {
+          this.paginator.pageIndex = this.currentPage;
+          this.paginator.length = response.count;
+        });
+      }, error => {
+        console.log(error);
+      });
+    } else {
+      this.visitEntryService.getAllVisitEntry('', '', this.currentPage, this.pageSize).subscribe(response => {
+        this.visitEntries = response.data;
+        this.totalRows = response.count;
+        this.dataSource.data = response.data;
+        setTimeout(() => {
+          this.paginator.pageIndex = this.currentPage;
+          this.paginator.length = response.count;
+        });
+      }, error => {
+        console.log(error);
+      });
     }
+   }
+    // todays visit list according to hospital
+    visitListAccordingToHospital(hospitalId) {
+      if (this.filterValue) {
+          this.visitEntryService.getVisitEntriesAccordingToHospital(this.filterValue, '', this.currentPage, this.pageSize, hospitalId)
+          .subscribe(response => {
+          this.visitEntries = response.data;
+          this.dataSource.data = response.data;
+          setTimeout(() => {
+            this.paginator.pageIndex = this.currentPage;
+            this.paginator.length = response.count;
+          });
+        }, error => {
+          console.log(error);
+        });
+      }else {
+        this.visitEntryService.getVisitEntriesAccordingToHospital('', '', this.currentPage, this.pageSize, hospitalId)
+        .subscribe(response => {
+        this.visitEntries = response.data;
+        this.dataSource.data = response.data;
+        setTimeout(() => {
+          this.paginator.pageIndex = this.currentPage;
+          this.paginator.length = response.count;
+        });
+      }, error => {
+        console.log(error);
+      });
+      }
+      }
+
+  // paging method
+  pageChanged(event: PageEvent) {
+    console.log({ event });
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.visitListAccordingToHospital(this.hospitalId);
+  }
+  // end paging method
+    applyFilter(event: Event) {
+    this.filterValue = (event.target as HTMLInputElement).value;
+    setTimeout(() => {
+      this.visitEntryService.getVisitEntriesAccordingToHospital(
+              this.filterValue, '', this.currentPage, this.pageSize, this.hospitalId).subscribe(response => {
+       this.visitEntries = response.data;
+       this.dataSource.data = response.data;
+       setTimeout(() => {
+         this.paginator.length = response.count;
+       });
+     }, error => {
+       console.log(error);
+     });
+    }, 150);
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    // if (this.dataSource.paginator) {
+    //   this.dataSource.paginator.firstPage();
+    // }
   }
   // For Add And Updade Dialog Box
   // Add visit Entry
-  openVisitEntryAddDialog() {
+    openVisitEntryAddDialog() {
     const dialogBoxWithData = this.dialog.open(VisitEntriesAddComponent, {
       width: '80%',
     });
@@ -60,7 +149,7 @@ export class VisitEntriesListComponent implements OnInit  , AfterViewInit {
     });
   }
 
-  patientVitalAddRowData(data: any){
+    patientVitalAddRowData(data: any){
       this.visitEntryService.addVisitEntry(data).subscribe(response => {
         this.toastr.success('Added');
         location.reload();
@@ -115,5 +204,20 @@ export class VisitEntriesListComponent implements OnInit  , AfterViewInit {
           console.log(error);
           this.toastr.error('Error to Update.');
         });
+      }
+
+    getHospital(){
+        this.hospitalService.getAllHospitalSortByName().subscribe(response => {
+          this.hospitals = response;
+        }, error => {
+          console.log(error);
+        });
+      }
+
+    getCurrectUserHospitalId(){
+       const hospitalid =  this.accountService.getDecoadedHospitalIdFromToken();
+       if (hospitalid){
+            this.hospitalId = +hospitalid;
+          }
       }
 }

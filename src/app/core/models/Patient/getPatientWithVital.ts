@@ -10,6 +10,7 @@ export interface IPatientWithVital {
     gender: string;
     maritalStatus: string;
     primaryMember: boolean;
+    membershipRegistrationNumber: string;
     address: string;
     divisionId: number;
     division: string;
@@ -22,6 +23,12 @@ export interface IPatientWithVital {
     branchId: number;
     branchName: string;
     isActive: boolean;
+    covidvaccine: string;
+    vaccineBrand: string;
+    vaccineDose: string;
+    firstDoseDate: Date;
+    secondDoseDate: Date;
+    bosterDoseDate: Date;
     note: string;
     createdOn: Date;
     createdBy: string;
@@ -41,6 +48,13 @@ export interface PhysicalStat {
     bloodPressureDiastolic: string;
     heartRate: string;
     bodyTemparature: string;
+    anemia: string;
+    jaundice: string;
+    dehydration: string;
+    hl: string;
+    pa: string;
+    bb: string;
+    rbsFbs: string;
     heightFeet: number;
     heightInches: number;
     weight: number;

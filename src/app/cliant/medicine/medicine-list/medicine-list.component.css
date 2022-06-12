@@ -28,6 +28,11 @@ table {
   color: rgb(0, 0, 0);
 
 }
+button {
+  width: 200px;
+  font-size: 18px;
+  align-items: center;
+}
 .mat-icon {
   margin: 2%;
 }

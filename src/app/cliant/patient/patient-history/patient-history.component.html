@@ -1,4 +1,5 @@
 <div *ngIf="!id">
+    <app-title [title]="title"></app-title>
 <mat-form-field>
     <mat-label color='red'>Enter Patient ID</mat-label>
     <input type="number" #searchBar matInput value='searchValue' (keyup.enter)='getPatientHistory(searchBar.value)'>
@@ -56,10 +57,14 @@
                         <tr>
                             <td>NID</td>
                             <td>{{patientHistory.patient.nid}}</td>
-                            </tr>
+                        </tr>
                         <tr>
                             <td>Blood Group</td>
                             <td>{{patientHistory.patient.bloodGroup}}</td>
+                        </tr>
+                        <tr>
+                            <td>COVID-19 Vaccination</td>
+                            <td>{{patientHistory.patient.covidvaccine}} {{patientHistory.patient.vaccineBrand}}</td>
                         </tr>
                         <tr>
                             <td>Updated On</td>
@@ -169,8 +174,24 @@
                                     <td>{{prescription.doctorsObservation}}</td>
                                 </tr>
                                 <tr>
+                                    <td>OB-gyn/H</td>
+                                    <td>{{prescription.oh}}</td>
+                                </tr>
+                                <tr>
+                                    <td>History of Past Illness</td>
+                                    <td>{{prescription.historyOfPastIllness}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Allergic History</td>
+                                    <td>{{prescription.allergicHistory}}</td>
+                                </tr>
+                                <tr>
                                     <td>Advice Medication</td>
-                                    <td>{{prescription.adviceMedication}}</td>
+                                    <td>
+                                        <span *ngFor="let medicine of prescription.medicineForPrescription">
+                                            {{medicine.medicineType}}.&nbsp;{{medicine.brandName}},
+                                        </span>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Advice test</td>

@@ -42,10 +42,9 @@
   }
 
   .submitbutton {
-    background-color: #eae0c8;
-    color: black;
+    background-color: #fff;
+    color: #807778;
   }
   .submitbutton:hover {
-    background-color: #e9c46d;
     color: black;
   }

@@ -6,6 +6,7 @@ import { of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
+import { IHospitalSortByName } from 'src/app/core/models/Hospital/hospitalsortbyname';
 import { IRole } from 'src/app/core/models/role';
 import { PasswordValidator } from 'src/app/core/validators/form.validator';
 import { HospitalService } from '../../hospital/hospital.service';
@@ -17,9 +18,10 @@ import { HospitalService } from '../../hospital/hospital.service';
 })
 
 export class UserAddComponent implements OnInit {
+  title = 'Add User';
   hide = true;
   roles: IRole[] = [];
-  hospitals: IHospital[] = [];
+  hospitals: IHospitalSortByName[] = [];
   userAddForm: FormGroup = new FormGroup({});
 
   constructor(private toastr: ToastrService,
@@ -92,7 +94,7 @@ export class UserAddComponent implements OnInit {
   }
 
   getHospital(){
-    this.hospitalService.getAllHospital().subscribe(response => {
+    this.hospitalService.getAllHospitalSortByName().subscribe(response => {
       this.hospitals = response;
     }, error => {
       console.log(error);

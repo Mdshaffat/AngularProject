@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
-import { VisitEntryService } from 'src/app/admin/visit-entry/visit-entry.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
 import { IPatient } from 'src/app/core/models/Patient/patient';
+import { IPatientForSearch } from 'src/app/core/models/Patient/patientForSearch';
 import { IHeightFeet, IHeightInch } from 'src/app/core/models/Patient/patientHeightandWeight';
 import { IVisitEntry } from 'src/app/core/models/VisitEntry/visitEntry';
 import { PatientService } from '../../patient/patient.service';
@@ -20,12 +20,16 @@ import { PhysicalStateService } from '../physical-state.service';
   styleUrls: ['./physical-state-add.component.css']
 })
 export class PhysicalStateAddComponent implements OnInit {
-
+  title = 'Add Physical Stat';
+  patientid: number;
+  patientName: string;
+// this.param1= this.route.snapshot.queryParamMap.get('param1');
+// this.param1= this.route.snapshot.queryParamMap.get('param2');
   physicalStateAddForm: FormGroup = new FormGroup({});
   hospitals: IHospital[];
-  patients: IPatient[] = [];
+  patients: IPatientForSearch[] = [];
   patientsearch = new FormControl();
-  filteredPatient: Observable<IPatient[]>;
+  filteredPatient: Observable<IPatientForSearch[]>;
   visitEntries: IVisitEntry[];
   heightFeet: IHeightFeet[] = [
     {feet: 1},
@@ -54,10 +58,11 @@ export class PhysicalStateAddComponent implements OnInit {
   constructor(private toastr: ToastrService,
               private fb: FormBuilder,
               private router: Router,
+              private activatedroute: ActivatedRoute,
               private physicalStateService: PhysicalStateService,
               private hospitalService: HospitalService,
               private visitEntryService: VisitEntriesCliantService,
-              private patientService: PatientService) { 
+              private patientService: PatientService) {
                 this.filteredPatient = this.patientsearch.valueChanges
                 .pipe(
                   startWith(''),
@@ -67,9 +72,19 @@ export class PhysicalStateAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadHospital();
-    this.loadPatient();
+    // this.loadPatient();
     this.loadVisitEntries();
     this.createphysicalStateAddForm();
+    if (this.activatedroute.snapshot.paramMap.get('patientid') && this.activatedroute.snapshot.paramMap.get('name')) {
+      // this.physicalStateAddForm.controls.patientId.patchValue( +this.activatedroute.snapshot.paramMap.get('patientid'));
+      // this.patientsearch.patchValue(this.activatedroute.snapshot.paramMap.get('name'));
+      this.patientid = +this.activatedroute.snapshot.paramMap.get('patientid');
+      this.patientName = this.activatedroute.snapshot.paramMap.get('name');
+      if (this.patientName !== null && this.patientid !== null) {
+          this.physicalStateAddForm.controls.patientId.patchValue(this.patientid);
+          this.patientsearch.patchValue(this.patientName);
+        }
+    }
   }
 
   createphysicalStateAddForm(){
@@ -77,6 +92,14 @@ export class PhysicalStateAddComponent implements OnInit {
       patientId: ['', Validators.required],
       visitEntryId: [],
       bodyTemparature: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
+      appearance: [ , Validators.maxLength(10)],
+      anemia: [ , Validators.maxLength(10)],
+      jaundice: [ , Validators.maxLength(10)],
+      dehydration: [ , Validators.maxLength(10)],
+      edema: [ , Validators.maxLength(10)],
+      cyanosis: [ , Validators.maxLength(10)],
+      kub: [ , Validators.maxLength(10)],
+      rbsFbs: [ , Validators.maxLength(20)],
       heightFeet: [],
       heightInches: [],
       bloodPressureSystolic: [, [Validators.maxLength(3), Validators.pattern('^[0-9]*$')]],
@@ -96,8 +119,8 @@ export class PhysicalStateAddComponent implements OnInit {
       this.hospitals = response;
     });
   }
-  loadPatient(){
-    this.patientService.getAllPatient().subscribe(response => {
+  loadPatient(search: string){
+    this.patientService.getPatientForSearch(search).subscribe(response => {
       this.patients = response;
     });
   }
@@ -119,14 +142,20 @@ export class PhysicalStateAddComponent implements OnInit {
     this.physicalStateAddForm.patchValue({patientId: patient.id});
     this.patientsearch.patchValue(patient.firstName);
     }
-  private _filterPatient(value: string): IPatient[] {
+  private _filterPatient(value: string): IPatientForSearch[] {
     const filterValue = value.toLowerCase();
-    const result = this.patients.filter(
-      (p) =>
-        p.firstName?.toLowerCase().includes(filterValue) ||
-        p.lastName?.toLowerCase().includes(filterValue) ||
-        p.mobileNumber?.toLowerCase().includes(filterValue)
-    );
-    return result;
+    this.loadPatient(filterValue);
+    return this.patients;
+    // const result = this.patients.filter(
+    //   (p) =>
+    //     p.firstName?.toLowerCase().includes(filterValue) ||
+    //     p.lastName?.toLowerCase().includes(filterValue) ||
+    //     p.mobileNumber?.toLowerCase().includes(filterValue)
+    // );
+    // return result;
+  }
+
+  gotolist() {
+    this.router.navigateByUrl('/physicalstate/list');
   }
 }

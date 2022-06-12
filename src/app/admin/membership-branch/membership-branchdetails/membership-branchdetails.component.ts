@@ -9,6 +9,7 @@ import { MembershipBranchService } from '../membership-branch.service';
   styleUrls: ['./membership-branchdetails.component.css']
 })
 export class MembershipBranchdetailsComponent implements OnInit {
+  title = 'Branch Details';
   branchDetails: IBranch;
   id: any;
   constructor(private activateRoute: ActivatedRoute, private branchService: MembershipBranchService) { }

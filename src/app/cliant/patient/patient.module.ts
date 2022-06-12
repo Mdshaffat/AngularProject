@@ -9,9 +9,7 @@ import { PatientRoutingModule } from './patient-routing.module';
 import { MaterialModule } from 'src/app/Shared/material/material.module';
 import { SharedModule } from 'src/app/Shared/shared.module';
 import { PatientHistoryComponent } from './patient-history/patient-history.component';
-
-
-
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [
     PatientAddComponent,
@@ -25,7 +23,8 @@ import { PatientHistoryComponent } from './patient-history/patient-history.compo
     CommonModule,
     PatientRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    SweetAlert2Module
   ]
 })
 export class PatientModule { }

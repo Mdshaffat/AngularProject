@@ -7,6 +7,7 @@ import { CliantRoutingModule } from './cliant-routing.module';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from '../Shared/shared.module';
 import { HospitalModule } from '../admin/hospital/hospital.module';
+import { DignosisComponent } from './diagnosis/dignosis/dignosis.component';
 
 
 
@@ -14,7 +15,8 @@ import { HospitalModule } from '../admin/hospital/hospital.module';
   declarations: [
     CliantComponent,
     NavbarComponent,
-    HomeComponent
+    HomeComponent,
+    DignosisComponent
   ],
   imports: [
     CommonModule,

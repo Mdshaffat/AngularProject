@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,6 +7,7 @@ import { IPatientWithVital } from 'src/app/core/models/Patient/getPatientWithVit
 import { IPatient } from 'src/app/core/models/Patient/patient';
 import { IPatientForSearch } from 'src/app/core/models/Patient/patientForSearch';
 import { IPatientHistory } from 'src/app/core/models/Patient/patientHistory';
+import { IPatientPagination } from 'src/app/core/models/Patient/patientpagination';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,6 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class PatientService {
   patients: IPatient[] = [];
+  patientwithpaging: IPatientPagination;
   patientForSearch: IPatientForSearch[] = [];
   patient!: IPatientWithVital;
   patientVital: IPatientVital;
@@ -22,16 +24,23 @@ export class PatientService {
 
     constructor(private http: HttpClient) { }
 
-    getAllPatient(){
-      return this.http.get<IPatient[]>(this.baseUrl + 'patient').pipe(
+    getAllPatient(searchString: string, sort: any, pageNumber: any, pageSize: any){
+      const params = new HttpParams()
+                    .set('searchString', searchString)
+                    .set('sort', sort)
+                    .set('pageNumber', pageNumber)
+                    .set('pageSize', pageSize);
+      return this.http.get<IPatientPagination>(this.baseUrl + 'patient', {params}).pipe(
         map(response => {
-          this.patients = response;
+          this.patientwithpaging = response;
           return response;
         })
       );
     }
-    getPatientForSearch(){
-      return this.http.get<IPatientForSearch[]>(this.baseUrl + 'patient/patientsearch').pipe(
+    getPatientForSearch(searchString: string){
+      const params = new HttpParams()
+                    .set('searchString', searchString);
+      return this.http.get<IPatientForSearch[]>(this.baseUrl + 'patient/patientsearch', {params}).pipe(
         map(response => {
           this.patientForSearch = response;
           return response;
@@ -70,7 +79,7 @@ export class PatientService {
       return this.http.post(this.baseUrl + 'patient', values,  {headers}).pipe(
         map((response: any) => {
           if (response) {
-            console.log(response.message);
+            return response;
           }
         })
       );

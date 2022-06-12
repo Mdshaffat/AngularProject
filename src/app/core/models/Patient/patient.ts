@@ -10,6 +10,7 @@
         gender: string;
         maritalStatus: string;
         primaryMember: boolean;
+        membershipRegistrationNumber:string;
         address: string;
         divisionId: number;
         division: string;
@@ -22,9 +23,12 @@
         branchId: number;
         branchName: string;
         isActive: boolean;
+        covidvaccine: string;
+        vaccineBrand: string;
         note: string;
         createdOn: Date;
         createdBy: string;
+        userName: string;
         updatedOn: Date;
         updatedBy: string;
     }

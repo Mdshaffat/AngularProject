@@ -16,6 +16,7 @@ export interface IPrescription {
     physicalStateId: number;
     adviceMedication: string;
     adviceTest: string;
+    isTelimedicine: boolean;
     note: string;
     createdOn: Date;
     updatedOn: Date;

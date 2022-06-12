@@ -10,6 +10,7 @@ import { MedicineService } from '../medicine.service';
   styleUrls: ['./medicine-add.component.css']
 })
 export class MedicineAddComponent implements OnInit {
+  title = 'Add Medicine';
   medicineAddForm: FormGroup = new FormGroup({});
   constructor(private toastr: ToastrService,
               private fb: FormBuilder,

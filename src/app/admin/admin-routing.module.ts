@@ -4,7 +4,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard'},
+  {path: '', redirectTo: 'user'},
   {path: '', component: AdminComponent,
     children: [
       {path: 'dashboard', component: DashboardComponent},
@@ -14,8 +14,8 @@ const routes: Routes = [
                                     .then(m => m.HospitalModule)},
       {path: 'membershipbranch', loadChildren: () => import('./membership-branch/membership-branch.module')
                                     .then(m => m.MembershipBranchModule)},
-      {path: 'visitEntries', loadChildren: () => import('./visit-entry/visit-entry.module')
-                                    .then(m => m.VisitEntryModule)},
+      {path: 'medicine', loadChildren: () => import('./medicine/medicine.module')
+                                    .then(m => m.MedicineModule)},
     ],
   }
 ];

@@ -14,7 +14,7 @@ export class PatientHistoryComponent implements OnInit {
   message: any;
   statusCode: any;
   id: any;
-
+  title = 'Patient History';
   constructor(private patientService: PatientService, private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {

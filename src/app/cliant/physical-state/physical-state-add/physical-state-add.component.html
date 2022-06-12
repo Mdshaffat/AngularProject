@@ -1,6 +1,7 @@
 
 <body>
-    <button mat-button [routerLink]="['../list']" >Back</button>
+  <app-title [title]="title"></app-title>
+    <button mat-button (click)="gotolist()">Back</button>
       <div class="loginForm">
           <form [formGroup]="physicalStateAddForm" (ngSubmit)="onSubmit()" autocomplete="nope" class="loginForm">
             <mat-form-field class="col-patient-id" appearance="fill">
@@ -21,7 +22,7 @@
                   <span>{{patient.mobileNumber}}</span>
                 </mat-option>
               </mat-autocomplete>
-                </mat-form-field>
+            </mat-form-field>
                   <mat-form-field appearance="fill" class="col-visit-entry">
                     <mat-label>Visit Entry</mat-label>
                     <mat-select formControlName="visitEntryId">
@@ -34,9 +35,9 @@
                 <table class="table">
                   <tr>
                     <td>
-                      <mat-form-field class="col-weight">
+                      <mat-form-field class="col-weight" appearance="fill">
                         <mat-label>Weight (kg)</mat-label>
-                        <input formControlName="weight" matInput maxlength="3">
+                        <input formControlName="weight" matInput maxlength="3" id="weight" name="weight">
                         <mat-error *ngIf="f.weight.hasError('pattern')">Input Valid Number</mat-error>
                     </mat-form-field>
                     </td>
@@ -63,13 +64,12 @@
                       </mat-select>
                     </mat-form-field>
                   </td>
-
                   </tr>
                   <tr>
                     <td>
-                      <mat-form-field class="col-temperature">
+                      <mat-form-field appearance="fill" class="col-temperature">
                         <mat-label>Body Temparature (&#176;F)</mat-label>
-                        <input formControlName="bodyTemparature" matInput maxlength="3" >
+                        <input formControlName="bodyTemparature" matInput maxlength="3" id="bodytemparature" name="bodytemparature">
                         <mat-error *ngIf="f.bodyTemparature.hasError('pattern')">Input Valid Number</mat-error>
                         <mat-error *ngIf="f.bodyTemparature.hasError('required')">Required</mat-error>
                     </mat-form-field>
@@ -80,7 +80,7 @@
                   <td>
                     <mat-form-field  appearance="fill">
                       <mat-label>Systolic</mat-label>
-                      <input formControlName="bloodPressureSystolic" matInput maxlength="3">
+                      <input formControlName="bloodPressureSystolic" matInput maxlength="3" id="bloodPressureSystolic" name="bloodPressureSystolic">
                       <mat-error *ngIf="f.bloodPressureSystolic.hasError('pattern')">Input Valid Number</mat-error>
                       <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
                   </mat-form-field>
@@ -88,24 +88,75 @@
                   <td>
                     <mat-form-field  appearance="fill">
                       <mat-label>Diastolic</mat-label>
-                      <input formControlName="bloodPressureDiastolic" matInput maxlength="3">
+                      <input formControlName="bloodPressureDiastolic" matInput maxlength="3" id="bloodPressureDiastolic" name="bloodPressureDiastolic">
                       <mat-error *ngIf="f.bloodPressureDiastolic.hasError('pattern')">Input Valid Number</mat-error>
                       <mat-error *ngIf="f.spO2.hasError('required')">Required</mat-error>
                   </mat-form-field>
                   </td>
                   </tr>
+                  <tr>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>SpO2 (%)</mat-label>
+                        <input  formControlName="spO2" matInput maxlength="3" id="spo2" name="spo2">
+                        <mat-error *ngIf="f.spO2.hasError('pattern')">Input Valid Number</mat-error>
+                    </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Pulse Rate (bpm)</mat-label>
+                        <input  formControlName="pulseRate" matInput maxlength="3" id="pulserate" name="pulserate">
+                        <mat-error *ngIf="f.pulseRate.hasError('pattern')">Input Valid Number</mat-error>
+                    </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field  appearance="fill">
+                        <mat-label>Appearance</mat-label>
+                        <input formControlName="appearance" maxlength="10" matInput id="appearance" name="appearance">
+                    </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field  appearance="fill">
+                        <mat-label>Anemia</mat-label>
+                        <input formControlName="anemia" maxlength="10" matInput id="anemia" name="anemia">
+                    </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                  <td>
+                    <mat-form-field  appearance="fill">
+                      <mat-label>Dehydration</mat-label>
+                      <input formControlName="dehydration" matInput maxlength="10" id="dehydration" name="dehydration">
+                    </mat-form-field>
+                 </td>
+                  <td>
+                    <mat-form-field  appearance="fill">
+                      <mat-label>Cyanosis</mat-label>
+                      <input formControlName="cyanosis" matInput maxlength="10" id="cyanosis" name="cyanosis">
+                  </mat-form-field>
+                </td>
+                <td>
+                  <mat-form-field  appearance="fill">
+                    <mat-label>Edema</mat-label>
+                    <input formControlName="edema" matInput maxlength="10" id="edema" name="edema">
+                  </mat-form-field>
+            </td>
+                  <td>
+                    <mat-form-field  appearance="fill">
+                      <mat-label>Jaundice</mat-label>
+                      <input formControlName="jaundice" matInput maxlength="10" id="jaundice" name="jaundice">
+                    </mat-form-field>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                      <mat-form-field  appearance="fill">
+                        <mat-label>RBS/FBS</mat-label>
+                        <input formControlName="rbsFbs" matInput maxlength="20" id="rbsfbs" name="rbsfbs">
+                      </mat-form-field>
+                  </td>
+                </tr>
                 </table>
-                
-              <mat-form-field class="col-v-pulserate">
-                <mat-label>Pulse Rate (bpm)</mat-label>
-                <input  formControlName="pulseRate" matInput maxlength="3">
-                <mat-error *ngIf="f.pulseRate.hasError('pattern')">Input Valid Number</mat-error>
-            </mat-form-field>
-            <mat-form-field class="col-v-spo2">
-              <mat-label>SpO2 (%)</mat-label>
-              <input  formControlName="spO2" matInput maxlength="3">
-              <mat-error *ngIf="f.spO2.hasError('pattern')">Input Valid Number</mat-error>
-          </mat-form-field>
           <button class="addbutton" mat-raised-button type="submit">ADD</button>
           </form>    
       </div>

@@ -1,8 +1,10 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IPrescription } from 'src/app/core/models/Prescriptions/getPrescriptions';
 import { IPrescriptionWithVital } from 'src/app/core/models/Prescriptions/getPrescriptionWithVital';
+import { IPrescriptionWithPhysicalStatAndDiagnosis } from 'src/app/core/models/Prescriptions/prescriptionWithPhysicalStatAdnDiagnosis';
 import { PrescriptionService } from '../prescription.service';
 
 @Component({
@@ -11,11 +13,12 @@ import { PrescriptionService } from '../prescription.service';
   styleUrls: ['./prescription-details.component.css']
 })
 export class PrescriptionDetailsComponent implements OnInit {
-  prescriptionDetails: IPrescriptionWithVital;
+  prescriptionDetails: IPrescriptionWithPhysicalStatAndDiagnosis;
   id: any;
   constructor(private activateRoute: ActivatedRoute,
               private prescriptionService: PrescriptionService,
-              private toastr: ToastrService) { }
+              private toastr: ToastrService,
+              private location: Location) { }
 
   ngOnInit(): void {
     this.loadPrescription();
@@ -33,6 +36,9 @@ export class PrescriptionDetailsComponent implements OnInit {
   }
   printData() {
     window.print();
+    }
+  goBack(){
+      this.location.back();
     }
 }
 

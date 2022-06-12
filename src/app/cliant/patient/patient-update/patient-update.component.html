@@ -1,5 +1,6 @@
 <body>
-    <button mat-button [routerLink]="['/patient']" >Back</button>
+  <app-title [title]="title"></app-title>
+    <button mat-button (click)="goBack()" >Back</button>
       <div class="loginForm">
           <form [formGroup]="updatePatientForm" (ngSubmit)="onSubmit()">
 
@@ -14,6 +15,16 @@
                 <input formControlName="lastName" matInput>
                 <mat-error *ngIf="f.lastName.hasError('maxlength')">Maximum Length 40 Charecter</mat-error>
                 <mat-error *ngIf="f.lastName.hasError('required')">Required</mat-error>
+            </mat-form-field>
+            <mat-form-field class="col-hospitalId" appearance="fill">
+              <mat-label>Hospital</mat-label>
+              <mat-select formControlName="hospitalId" required>
+                <mat-option>--</mat-option>
+                <mat-option *ngFor="let hospital of hospitals" [value]="hospital.id">
+                  {{hospital.name}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.branchId.hasError('required')">Please choose Branch</mat-error>
             </mat-form-field>
             <mat-form-field class="col-branchId" appearance="fill">
               <mat-label>Branch</mat-label>
@@ -121,6 +132,58 @@
                 </mat-select>
                 <mat-error *ngIf="f.bloodGroup.hasError('required')">Required</mat-error>
             </mat-form-field>
+            <mat-form-field class="col-covidvaccine" appearance="fill">
+              <mat-label>COVID-19 Vaccination</mat-label>
+              <mat-select formControlName="covidvaccine">
+                <mat-option>--</mat-option>
+                <mat-option value="1">Yes</mat-option>
+                <mat-option value="2">No</mat-option>
+              </mat-select>
+              <mat-error *ngIf="f.covidvaccine.hasError('required')">Required</mat-error>
+          </mat-form-field>
+          <mat-form-field class="col-vaccineBrand" appearance="fill">
+            <mat-label>Vaccine</mat-label>
+            <mat-select formControlName="vaccineBrand">
+              <mat-option>--</mat-option>
+              <mat-option value="1">Pfizer</mat-option>
+              <mat-option value="2">Astrazeneca</mat-option>
+              <mat-option value="3">Moderna</mat-option>
+              <mat-option value="4">Sinopharm</mat-option>
+              <mat-option value="5">Others</mat-option>
+            </mat-select>
+            <mat-error *ngIf="f.vaccineBrand.hasError('required')">Required</mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-vaccineDose" appearance="fill">
+          <mat-label>Vaccine Dose</mat-label>
+          <mat-select formControlName="vaccineDose">
+            <mat-option>--</mat-option>
+            <mat-option value="1">1st Dose</mat-option>
+            <mat-option value="2">2nd Dose</mat-option>
+            <mat-option value="3">Boster Dose</mat-option>
+          </mat-select>
+          <mat-error *ngIf="f.vaccineBrand.hasError('required')">Required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-d-firstDoseDate" appearance="fill">
+        <mat-label>First Dose Date</mat-label>
+        <input formControlName="firstDoseDate" matInput [matDatepicker]="pickerf">
+        <mat-datepicker-toggle matSuffix [for]="pickerf"></mat-datepicker-toggle>
+        <mat-datepicker #pickerf></mat-datepicker>
+        <mat-error *ngIf="f.firstDoseDate.hasError('required')">Please choose a Date</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-d-secondDoseDate" appearance="fill" >
+        <mat-label>Second Dose Date</mat-label>
+        <input formControlName="secondDoseDate" matInput [matDatepicker]="pickers">
+        <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
+        <mat-datepicker #pickers></mat-datepicker>
+        <mat-error *ngIf="f.secondDoseDate.hasError('required')">Please choose a Date</mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-d-bosterDoseDate" appearance="fill">
+        <mat-label>Boster Dose Date</mat-label>
+        <input formControlName="bosterDoseDate" matInput [matDatepicker]="pickerb">
+        <mat-datepicker-toggle matSuffix [for]="pickerb"></mat-datepicker-toggle>
+        <mat-datepicker #pickerb></mat-datepicker>
+        <mat-error *ngIf="f.bosterDoseDate.hasError('required')">Please choose a Date</mat-error>
+      </mat-form-field>
             <mat-form-field class="col-note" appearance="fill">
               <mat-label>Note</mat-label>
               <input formControlName="note" matInput >
@@ -129,10 +192,14 @@
           </mat-form-field>
 <!-- checkBox -->
             <mat-checkbox formControlName="primaryMember" class="col-primaryMember">Primary Member</mat-checkbox><br>
+            <mat-form-field class="col-age" appearance="fill">
+              <mat-label>Membership Registration Number</mat-label>
+              <input formControlName="membershipRegistrationNumber" matInput maxlength="20">
+            </mat-form-field>
             <mat-checkbox formControlName="isActive" class="col-isActive">Active</mat-checkbox>
 
             <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <br/><button mat-raised-button class="updatebutton" type="submit">UPDATE</button>
-          </form>    
+        <br/><button mat-raised-button class="updatebutton" type="submit">Save</button>
+          </form> 
       </div>
   </body>
