@@ -2,7 +2,8 @@
 <div>
     <mat-form-field class="search">
       <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Patient First Name / Last Name, Hospital" #input>
+      <input matInput [formControl]="patientsearch" placeholder="Patient First Name / Last Name, Hospital" #input>
+      <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Patient First Name / Last Name, Hospital" #input> -->
     </mat-form-field><br>
     <div class="addnewuser">
       <button mat-raised-button  class="btn addbutton" [routerLink]="['../add']" >

@@ -2,7 +2,8 @@
 <div>
       <mat-form-field class="search">
         <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Brand Name / Generic Name" #input>
+        <input matInput [formControl]="patientsearch" placeholder="Brand Name / Generic Name" #input>
+        <!-- <input matInput (keyup)="applyFilter($event)" placeholder="Brand Name / Generic Name" #input> -->
       </mat-form-field><br>
       <div *ngIf="(isDoctor$ | async) || (isAdmin$ | async)" class="addnewuser">
         <button mat-raised-button class="btn addbutton" [routerLink]="['../add']" >

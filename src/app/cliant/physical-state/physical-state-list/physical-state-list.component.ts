@@ -7,6 +7,9 @@ import { IPhysicalState } from 'src/app/core/models/PhysicalState/getPhysicalSta
 import { IPhysicalStatPagination } from 'src/app/core/models/PhysicalState/physicalstatPagination';
 import { PhysicalStateService } from '../physical-state.service';
 
+import { filter, distinctUntilChanged, debounceTime, tap, switchMap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-physical-state-list',
   templateUrl: './physical-state-list.component.html',
@@ -26,13 +29,40 @@ export class PhysicalStateListComponent implements OnInit , AfterViewInit {
     filterValue: string;
     pageSizeOptions: number[] = [20, 50, 100, 1000];
     sortvalue: string;
+
+    minLengthTerm = 3;
+    patientsearch = new FormControl();
     // endPaginator prop
   dataSource = new MatTableDataSource<IPhysicalState>(this.physicalStates);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private physicalStateService: PhysicalStateService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+                
+                this.patientsearch.valueChanges
+                .pipe(
+                  // filter(res => {
+                  //   return res !== null && res.length >= this.minLengthTerm
+                  // }),
+                  distinctUntilChanged(),
+                  debounceTime(2000),
+                  tap(() => {
+                    this.physicalStates = [];
+                  }),
+                  switchMap(value => this.physicalStateService.getAllPhysicalStates(value, 'nameAsc', 1, 20)
+                  )).subscribe(response => {
+                    this.physicalStates = response.data;
+                    this.dataSource.data = response.data;
+                    this.filterValue = this.patientsearch.value;
+                    setTimeout(() => {
+                      this.paginator.length = response.count;
+                    });
+                  }, error => {
+                    console.log(error);
+                  }
+                )
+               }
   ngOnInit(): void {
     this.initDataWithPaginator()
   }

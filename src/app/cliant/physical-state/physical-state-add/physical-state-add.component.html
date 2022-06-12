@@ -4,11 +4,18 @@
     <button mat-button (click)="gotolist()">Back</button>
       <div class="loginForm">
           <form [formGroup]="physicalStateAddForm" (ngSubmit)="onSubmit()" autocomplete="nope" class="loginForm">
-            <mat-form-field class="col-patient-id" appearance="fill">
-              <mat-label>Patient Id</mat-label>
-              <input formControlName="patientId" matInput readonly>
-              <mat-error *ngIf="f.patientId.hasError('required')">Required</mat-error>
-          </mat-form-field>    
+           <div class="col-patientwithvarify">
+             <mat-form-field class="col-patient-id" appearance="fill">
+               <mat-label>Patient Id</mat-label>
+               <input formControlName="patientId" matInput>
+               <mat-error *ngIf="f.patientId.hasError('required')">Required</mat-error>
+           </mat-form-field> 
+           <button 
+                 mat-raised-button 
+                 type="button" 
+                 class="loadbutton"
+                 (click)="varifyPatient()">Verify</button>   
+           </div>
             <mat-form-field appearance="fill" class="col-patient">
               <mat-label>Search Patient</mat-label>
               <input type="text" matInput
@@ -16,14 +23,14 @@
                                   [matAutocomplete]="autobrandName"
                                   [formControl]="patientsearch">
               <mat-autocomplete #autobrandName="matAutocomplete">
-                <mat-option *ngFor="let patient of filteredPatient | async" (click)="onSelectPatient(patient)">
+                <mat-option *ngFor="let patient of patients" (click)="onSelectPatient(patient)">
                   <span>{{patient.id}}</span> |
                   <span>{{patient.firstName}}</span>|
                   <span>{{patient.mobileNumber}}</span>
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
-                  <mat-form-field appearance="fill" class="col-visit-entry">
+                  <!-- <mat-form-field appearance="fill" class="col-visit-entry">
                     <mat-label>Visit Entry</mat-label>
                     <mat-select formControlName="visitEntryId">
                       <mat-option>--</mat-option>
@@ -31,7 +38,7 @@
                         {{visitEntry.serial}}
                       </mat-option>
                     </mat-select>
-                  </mat-form-field>
+                  </mat-form-field> -->
                 <table class="table">
                   <tr>
                     <td>

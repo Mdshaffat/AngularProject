@@ -14,12 +14,12 @@ tr{
         margin: auto;
       }
       .col-patient-id{
-        width: 29%;
+        width: 60%;
         margin-right: 2%;
     }
 
     .col-patient{
-        width: 29%;
+        width: 43%;
         margin-right: 2%;
     }
     .col-visit-entry{
@@ -27,7 +27,7 @@ tr{
     
     }
     .col-hospitalId{
-        width: 48%;
+        width: 30%;
         margin-right: 2%;
     }
     .col-branchId{
@@ -70,10 +70,24 @@ tr{
         display: block;
         margin: auto;
     }
+    .col-patientwithvarify {
+        width: 49%;
+        margin-right: 2%;
+        display: inline-block;
+    }
+    .patientid{
+        width: 200px;
+        float: left;
+    }
+    .loadbutton {
+        width: 20%;
+        margin-top: 20px;
+    }
     [class*="col-v-"] {
         margin: 1%;
         width: 23%;
       }
+
     
 }
 

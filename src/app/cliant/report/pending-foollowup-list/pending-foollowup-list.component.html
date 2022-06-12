@@ -2,7 +2,8 @@
 <div>
     <mat-form-field class="search">
       <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder=" " #input>
+      <input matInput [formControl]="followupsearch" placeholder=" " #input>
+      <!-- <input matInput (keyup)="applyFilter($event)" placeholder=" " #input> -->
     </mat-form-field><br>
     <mat-form-field appearance="fill" class="selecthospital">
       <mat-label>Select Branch</mat-label>

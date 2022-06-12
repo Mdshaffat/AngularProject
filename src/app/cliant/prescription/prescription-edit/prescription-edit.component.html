@@ -151,9 +151,10 @@
                     <input type="text" matInput
                                         aria-label="BrandName"
                                         [matAutocomplete]="autobrandName"
-                                        [formControl]="brandName">
+                                        [formControl]="brandName"
+                                        >
                     <mat-autocomplete #autobrandName="matAutocomplete">
-                      <mat-option *ngFor="let medicine of filteredMedicine | async"  (click)="selectMedicine(medicine)">
+                      <mat-option *ngFor="let medicine of medicineForSearch"  (click)="selectMedicine(medicine)">
                         <span>{{medicine.brandName}}</span> |
                         <small>{{medicine.genericName}}</small>
                       </mat-option>

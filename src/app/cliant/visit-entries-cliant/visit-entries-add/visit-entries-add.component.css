@@ -39,3 +39,12 @@ button {
 button :hover {
     color: black;
 }
+.patientid{
+    width: 230px;
+    float: left;
+}
+.loadbutton {
+    width: 110px;
+    float: right;
+    margin-top: 20px;
+}

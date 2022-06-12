@@ -10,6 +10,10 @@ import { IprescriptionPagination } from 'src/app/core/models/Prescriptions/presc
 import { IUserTokenProvider } from 'src/app/core/models/UserTokenProvider';
 import { PrescriptionService } from '../prescription.service';
 
+
+import { filter, distinctUntilChanged, debounceTime, tap, switchMap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-prescription-list',
   templateUrl: './prescription-list.component.html',
@@ -31,6 +35,10 @@ export class PrescriptionListComponent implements OnInit , AfterViewInit {
     filterValue: string;
     pageSizeOptions: number[] = [20, 50, 100];
     sortvalue: string;
+
+
+    minLengthTerm = 3;
+    patientsearch = new FormControl();
     // endPaginator prop
   dataSource = new MatTableDataSource<IPrescription>(this.prescriptions);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -38,7 +46,31 @@ export class PrescriptionListComponent implements OnInit , AfterViewInit {
   constructor(private prescriptionService: PrescriptionService,
               private accountService: AccountService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {
+                
+                this.patientsearch.valueChanges
+                .pipe(
+                  // filter(res => {
+                  //   return res !== null && res.length >= this.minLengthTerm
+                  // }),
+                  distinctUntilChanged(),
+                  debounceTime(2000),
+                  tap(() => {
+                    this.prescriptions = [];
+                  }),
+                  switchMap(value => this.prescriptionService.getAllPrescriptions(value, 'nameAsc', 1, 20)
+                  )).subscribe(response => {
+                    this.prescriptions = response.data;
+                    this.dataSource.data = response.data;
+                    this.filterValue = this.patientsearch.value;
+                    setTimeout(() => {
+                      this.paginator.length = response.count;
+                    });
+                  }, error => {
+                    console.log(error);
+                  }
+                )
+               }
   ngOnInit(): void {
     this.currentUser$ = this.accountService.currentUser$;
     this.isAdmin$ = this.accountService.isAdmin$;
@@ -118,19 +150,19 @@ export class PrescriptionListComponent implements OnInit , AfterViewInit {
       });
     }
     // end paging method
-    applyFilter(event: Event) {
-      this.filterValue = (event.target as HTMLInputElement).value;
-      setTimeout(() => {
-        this.prescriptionService.getAllPrescriptions(this.filterValue, 'nameAsc', 1, 20).subscribe(response => {
-         this.prescriptions = response.data;
-         this.dataSource.data = response.data;
-         setTimeout(() => {
-           this.paginator.length = response.count;
-         });
-       }, error => {
-         console.log(error);
-       });
-      }, 150);
-   }
+  //   applyFilter(event: Event) {
+  //     this.filterValue = (event.target as HTMLInputElement).value;
+  //     setTimeout(() => {
+  //       this.prescriptionService.getAllPrescriptions(this.filterValue, 'nameAsc', 1, 20).subscribe(response => {
+  //        this.prescriptions = response.data;
+  //        this.dataSource.data = response.data;
+  //        setTimeout(() => {
+  //          this.paginator.length = response.count;
+  //        });
+  //      }, error => {
+  //        console.log(error);
+  //      });
+  //     }, 150);
+  //  }
 }
 

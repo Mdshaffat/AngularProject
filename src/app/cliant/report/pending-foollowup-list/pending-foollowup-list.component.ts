@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { filter, distinctUntilChanged, debounceTime, tap, switchMap } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { IFollowup } from 'src/app/core/models/FollowUp/followup';
@@ -35,13 +37,40 @@ export class PendingFoollowupListComponent implements OnInit, AfterViewInit {
     // endPaginator prop
   hospitalId: number;
   dataSource = new MatTableDataSource(this.followUps);
+
+  minLengthTerm = 3;
+  followupsearch = new FormControl();
+  
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private reportService: ReportService,
               private accountService: AccountService,
               private hospitalService: HospitalService,
               private router: Router,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) {
+                this.followupsearch.valueChanges
+                .pipe(
+                  // filter(res => {
+                  //   return res !== null && res.length >= this.minLengthTerm
+                  // }),
+                  distinctUntilChanged(),
+                  debounceTime(2000),
+                  tap(() => {
+                    this.followUps = [];
+                  }),
+                  switchMap(value => this.reportService.getPendingFollowUp(value, 'nameAsc', 1, 50, this.hospitalId)
+                  )).subscribe(response => {
+                    this.followUps = response.data;
+                    this.dataSource.data = response.data;
+                    this.filterValue = this.followupsearch.value;
+                    setTimeout(() => {
+                      this.paginator.length = response.count;
+                    });
+                  }, error => {
+                    console.log(error);
+                  }
+                )
+               }
   ngOnInit(): void {
     this.getCurrectUserHospitalId();
     this. followupListAccordingToHospital(this.hospitalId);

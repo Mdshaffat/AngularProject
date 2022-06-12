@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
 import { IPatient } from 'src/app/core/models/Patient/patient';
@@ -31,6 +31,7 @@ export class PhysicalStateAddComponent implements OnInit {
   patientsearch = new FormControl();
   filteredPatient: Observable<IPatientForSearch[]>;
   visitEntries: IVisitEntry[];
+  minLengthTerm = 3;
   heightFeet: IHeightFeet[] = [
     {feet: 1},
     {feet: 2},
@@ -63,11 +64,20 @@ export class PhysicalStateAddComponent implements OnInit {
               private hospitalService: HospitalService,
               private visitEntryService: VisitEntriesCliantService,
               private patientService: PatientService) {
-                this.filteredPatient = this.patientsearch.valueChanges
+                this.patientsearch.valueChanges
                 .pipe(
-                  startWith(''),
-                  map(p => p ? this._filterPatient(p) : this.patients.slice())
-                      );
+                  filter(res => {
+                    return res !== null && res.length >= this.minLengthTerm
+                  }),
+                  distinctUntilChanged(),
+                  debounceTime(1500),
+                  tap(() => {
+                    this.patients = [];
+                  }),
+                  switchMap(value => this.patientService.getPatientForSearch(value)
+                  )).subscribe(res => {
+                    this.patients = res;
+                  })
               }
 
   ngOnInit(): void {
@@ -119,11 +129,11 @@ export class PhysicalStateAddComponent implements OnInit {
       this.hospitals = response;
     });
   }
-  loadPatient(search: string){
-    this.patientService.getPatientForSearch(search).subscribe(response => {
-      this.patients = response;
-    });
-  }
+  // loadPatient(search: string){
+  //   this.patientService.getPatientForSearch(search).subscribe(response => {
+  //     this.patients = response;
+  //   });
+  // }
   loadVisitEntries(){
     this.visitEntryService.getAllCurrentDayVisitEntry().subscribe(response => {
       this.visitEntries = response;
@@ -138,22 +148,42 @@ export class PhysicalStateAddComponent implements OnInit {
       this.toastr.error('Error to Create.Please check your connection and try again');
     });
   }
-  onSelectPatient(patient: IPatient){
+  onSelectPatient(patient: IPatientForSearch){
     this.physicalStateAddForm.patchValue({patientId: patient.id});
-    this.patientsearch.patchValue(patient.firstName);
+    this.patientsearch.patchValue(patient.firstName + ' ' + patient.lastName);
     }
-  private _filterPatient(value: string): IPatientForSearch[] {
-    const filterValue = value.toLowerCase();
-    this.loadPatient(filterValue);
-    return this.patients;
-    // const result = this.patients.filter(
-    //   (p) =>
-    //     p.firstName?.toLowerCase().includes(filterValue) ||
-    //     p.lastName?.toLowerCase().includes(filterValue) ||
-    //     p.mobileNumber?.toLowerCase().includes(filterValue)
-    // );
-    // return result;
-  }
+  // private _filterPatient(value: string): IPatientForSearch[] {
+  //   const filterValue = value.toLowerCase();
+  //   this.loadPatient(filterValue);
+  //   return this.patients;
+  //   // const result = this.patients.filter(
+  //   //   (p) =>
+  //   //     p.firstName?.toLowerCase().includes(filterValue) ||
+  //   //     p.lastName?.toLowerCase().includes(filterValue) ||
+  //   //     p.mobileNumber?.toLowerCase().includes(filterValue)
+  //   // );
+  //   // return result;
+  // }
+
+  varifyPatient() {
+    if(+this.physicalStateAddForm.controls.patientId.value >= 1)
+      {
+        this.patientService.getPatientForSearchById(+this.physicalStateAddForm.controls.patientId.value).subscribe(res => {
+          this.onSelectPatient(res);
+        }, err => {
+          if(err.error.statusCode === 404)
+          {
+            this.toastr.error("Patient Not Found");
+          } else {
+ 
+            this.toastr.error(err.error.message);
+          }
+        })
+     
+      } else {
+        this.toastr.error('please Input valid Patient Id')
+      }
+   }
 
   gotolist() {
     this.router.navigateByUrl('/physicalstate/list');

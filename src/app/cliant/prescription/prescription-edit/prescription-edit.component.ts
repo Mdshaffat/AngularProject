@@ -6,7 +6,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { MedicineService } from 'src/app/admin/medicine/medicine.service';
 import { IDiseases } from 'src/app/core/models/Diagnosis/diseases';
@@ -17,6 +16,9 @@ import Swal from 'sweetalert2';
 import { DignosisService } from '../../diagnosis/dignosis.service';
 import { DiseasesComponent } from '../diseases/diseases.component';
 import { PrescriptionService } from '../prescription.service';
+
+
+import { debounceTime, distinctUntilChanged, filter, tap, map, startWith, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-prescription-edit',
@@ -52,6 +54,10 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
     diseasesNameControl = new FormControl();
     isDoctor$: Observable<boolean>;
     // deases controller
+
+    minLengthTerm = 3;
+    medicinesearch = new FormControl();
+
   constructor(private toastr: ToastrService,
               private fb: FormBuilder,
               private router: Router,
@@ -63,11 +69,14 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
               private location: Location,
               private accountService: AccountService
               ) {
-                this.filteredMedicine = this.brandName.valueChanges
-                .pipe(
-                  startWith(''),
-                  map(state => state ? this._filterMedicine(state) : this.medicineForSearch.slice())
-                );
+                
+                
+
+                // this.filteredMedicine = this.brandName.valueChanges
+                // .pipe(
+                //   startWith(''),
+                //   map(state => state ? this._filterMedicine(state) : this.medicineForSearch.slice())
+                // );
               }
   ngOnInit(): void {
     this.isDoctor$ = this.accountService.isdesignationDoctor$;
@@ -77,6 +86,21 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
     // this.populatePrescriptionUpdateFrom();
     // this.CalculateAge();
     // this.patientAge = this.calculateAge(this.prescription.patientDob.getDate);
+
+    this.brandName.valueChanges
+                .pipe(
+                  filter(res => {
+                    return res !== null && res.length >= this.minLengthTerm
+                  }),
+                  distinctUntilChanged(),
+                  debounceTime(1500),
+                  tap(() => {
+                    this.medicineForSearch = [];
+                  }),
+                  switchMap(value =>  this.medicineService.getmedicineForSearch(value)
+                  )).subscribe(res => {
+                    this.medicineForSearch = res;
+                  })
   }
   ngAfterViewInit(){
 

@@ -1,12 +1,13 @@
 import { DatePipe } from '@angular/common';
+import { identifierModuleUrl } from '@angular/compiler';
 import { AfterViewInit, Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, tap, map, startWith, switchMap } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
@@ -27,6 +28,7 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
   title = 'Add Visit Entries';
   patients: IPatient [] = [];
   PatientsForSearch: IPatientForSearch[] = [];
+  patientsForSearch = new BehaviorSubject<IPatientForSearch[]>([]);
   filteredPatient: Observable<IPatientForSearch[]>;
   visitEntries: IVisitEntry [];
   hospitals: IHospitalSortByName [];
@@ -34,6 +36,7 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
   lastSerialNumber: number;
   patientsearch = new FormControl();
   visitEntryAddForm: FormGroup = new FormGroup({});
+  minLengthTerm = 3;
 
   date = new Date();
   latestdate = this.datepipe.transform(this.date, 'yyyy-MM-dd');
@@ -46,11 +49,20 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
               private accountService: AccountService,
               private patientService: PatientService,
               public datepipe: DatePipe) {
-                this.filteredPatient = this.patientsearch.valueChanges
+                this.patientsearch.valueChanges
                 .pipe(
-                  startWith(''),
-                  map(p => p ? this._filterPatient(p) : this.PatientsForSearch.slice())
-                      );
+                  filter(res => {
+                    return res !== null && res.length >= this.minLengthTerm
+                  }),
+                  distinctUntilChanged(),
+                  debounceTime(1500),
+                  tap(() => {
+                    this.PatientsForSearch = [];
+                  }),
+                  switchMap(value => this.patientService.getPatientForSearch(value)
+                  )).subscribe(res => {
+                    this.PatientsForSearch = res;
+                  })
               }
   ngAfterViewInit(): void {}
 
@@ -174,9 +186,35 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
        }
    }
 
-  private _filterPatient(value: any): IPatientForSearch[] {
-    const filterValue = value.toLowerCase();
-    this.loadAllPatient(filterValue);
-    return this.PatientsForSearch;
-  }
+   loadserial() {
+    if(+this.visitEntryAddForm.controls.hospitalId.value > 0)
+    {
+      if(+this.visitEntryAddForm.controls.patientId.value >= 1)
+      {
+        this.patientService.getPatientForSearchById(+this.visitEntryAddForm.controls.patientId.value).subscribe(res => {
+          this.onSelectPatient(res);
+        }, err => {
+          if(err.error.statusCode === 404)
+          {
+            this.visitEntryAddForm.reset();
+            this.toastr.error("Patient Not Found");
+          } else {
+            this.visitEntryAddForm.reset();
+            this.toastr.error(err.error.message);
+          }
+        })
+      } else {
+        this.toastr.error('please Input valid Patient Id')
+      }
+    }
+    else {
+      this.toastr.error('Please select Branch')
+    }
+
+
+   }
+  // private _filterPatient(value: any): Observable<IPatientForSearch[]> {
+  //   const filterValue = value.toLowerCase();
+  //   return this.patientService.getPatientForSearch(filterValue);
+  // }
 }

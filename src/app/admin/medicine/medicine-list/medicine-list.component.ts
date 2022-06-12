@@ -8,6 +8,11 @@ import { AccountService } from 'src/app/account/account.service';
 import { IMedicine, IMedicinePagination } from 'src/app/core/models/Medicine/medicinePagination';
 import { MedicineService } from '../medicine.service';
 
+
+import { filter, distinctUntilChanged, debounceTime, tap, switchMap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+
+
 @Component({
   selector: 'app-medicine-list',
   templateUrl: './medicine-list.component.html',
@@ -31,10 +36,38 @@ dataSource = new MatTableDataSource<IMedicine>(this.medicines);
   sortvalue: string;
   isAdmin$: Observable<boolean>;
   isDoctor$: Observable<boolean>;
+
+  minLengthTerm = 3;
+  patientsearch = new FormControl();
+  
   constructor(private medicineService: MedicineService,
               private activatedRoute: ActivatedRoute,
               private accountService: AccountService,
-              private router: Router) { }
+              private router: Router) {
+                
+                this.patientsearch.valueChanges
+                .pipe(
+                  // filter(res => {
+                  //   return res !== null && res.length >= this.minLengthTerm
+                  // }),
+                  distinctUntilChanged(),
+                  debounceTime(2000),
+                  tap(() => {
+                    this.medicines = [];
+                  }),
+                  switchMap(value => this.medicineService.getAllMedicine(value, 'nameAsc', 1, 20)
+                  )).subscribe(response => {
+                    this.medicines = response.data;
+                    this.dataSource.data = response.data;
+                    this.filterValue = this.patientsearch.value;
+                    setTimeout(() => {
+                      this.paginator.length = response.count;
+                    });
+                  }, error => {
+                    console.log(error);
+                  }
+                )
+               }
 
   ngOnInit(): void {
     this.isAdmin$ = this.accountService.isAdmin$;

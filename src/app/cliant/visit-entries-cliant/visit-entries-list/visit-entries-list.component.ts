@@ -1,9 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ToastrService } from 'ngx-toastr';
+import { filter, distinctUntilChanged, debounceTime, tap, switchMap } from 'rxjs/operators';
 import { AccountService } from 'src/app/account/account.service';
 import { HospitalService } from 'src/app/admin/hospital/hospital.service';
 import { IHospital } from 'src/app/core/models/Hospital/hospital';
@@ -35,6 +37,10 @@ export class VisitEntriesListComponent implements OnInit  , AfterViewInit {
   filterValue: string;
   pageSizeOptions: number[] = [50, 100, 1000];
   sortvalue: string;
+
+
+  minLengthTerm = 3;
+  patientsearch = new FormControl();
   // endPaginator prop
   dataSource = new MatTableDataSource<IVisitEntry>(this.visitEntries);
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -43,7 +49,31 @@ export class VisitEntriesListComponent implements OnInit  , AfterViewInit {
               private hospitalService: HospitalService,
               private accountService: AccountService,
               private toastr: ToastrService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog) { 
+                this.patientsearch.valueChanges
+                .pipe(
+                  // filter(res => {
+                  //   return res !== null && res.length >= this.minLengthTerm
+                  // }),
+                  distinctUntilChanged(),
+                  debounceTime(2000),
+                  tap(() => {
+                    this.visitEntries = [];
+                  }),
+                  switchMap(value => this.visitEntryService.getVisitEntriesAccordingToHospital(
+                    value, '', this.currentPage, this.pageSize, this.hospitalId)
+                  )).subscribe(response => {
+                    this.visitEntries = response.data;
+                    this.dataSource.data = response.data;
+                    this.filterValue = this.patientsearch.value;
+                    setTimeout(() => {
+                      this.paginator.length = response.count;
+                    });
+                  }, error => {
+                    console.log(error);
+                  }
+                )
+              }
   ngOnInit(): void {
     this. getCurrectUserHospitalId();
     this.getHospital();

@@ -1,10 +1,12 @@
 import { Route } from '@angular/compiler/src/core';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as moment from 'moment';
+import { filter, distinctUntilChanged, debounceTime, tap, switchMap } from 'rxjs/operators';
 import { IPatient } from 'src/app/core/models/Patient/patient';
 import { IPatientPagination } from 'src/app/core/models/Patient/patientpagination';
 import { TableUtil } from 'src/app/Shared/Inputes/ExportAsExcel/TableUtil';
@@ -33,10 +35,33 @@ export class PatientListComponent implements OnInit , AfterViewInit {
   filterValue: string;
   pageSizeOptions: number[] = [20, 50, 100];
   sortvalue: string;
+  minLengthTerm = 3;
+  patientsearch = new FormControl();
   // endPaginator prop
   constructor(private patientService: PatientService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) { 
+                this.patientsearch.valueChanges
+                .pipe(
+                  // filter(res => {
+                  //   return res !== null && res.length >= this.minLengthTerm
+                  // }),
+                  distinctUntilChanged(),
+                  debounceTime(2000),
+                  tap(() => {
+                    this.patients = [];
+                  }),
+                  switchMap(value => this.patientService.getAllPatient(value, 'nameAsc', 1, 20)
+                  )).subscribe(response => {
+                    this.patients = response.data;
+                    this.dataSource.data = response.data;
+                    this.filterValue = this.patientsearch.value;
+                    setTimeout(() => {
+                      this.paginator.length = response.count;
+                    });
+                  }
+                )
+              }
   ngOnInit(): void {
     this.initDataWithPaginator();
   }
@@ -147,18 +172,24 @@ export class PatientListComponent implements OnInit , AfterViewInit {
   // end paging method
 
   // fieltering method
-  applyFilter(event: Event) {
-     this.filterValue = (event.target as HTMLInputElement).value;
-     setTimeout(() => {
-       this.patientService.getAllPatient(this.filterValue, 'nameAsc', 1, 20).subscribe(response => {
-        this.patients = response.data;
-        this.dataSource.data = response.data;
-        setTimeout(() => {
-          this.paginator.length = response.count;
-        });
-      }, error => {
-        console.log(error);
-      });
-     }, 150);
-  }
+  // applyFilter(event: Event) {
+  //    this.filterValue = (event.target as HTMLInputElement).value;
+
+  //   if(this.filterValue.length >= this.minLengthTerm)
+  //   {
+  //     distinctUntilChanged(),
+  //     debounceTime(1500),
+  //      setTimeout(() => {
+  //        this.patientService.getAllPatient(this.filterValue, 'nameAsc', 1, 20).subscribe(response => {
+  //         this.patients = response.data;
+  //         this.dataSource.data = response.data;
+  //         setTimeout(() => {
+  //           this.paginator.length = response.count;
+  //         });
+  //       }, error => {
+  //         console.log(error);
+  //       });
+  //      }, 150);
+  //   }
+  // }
 }

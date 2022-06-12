@@ -32,7 +32,6 @@ export class PatientService {
                     .set('pageSize', pageSize);
       return this.http.get<IPatientPagination>(this.baseUrl + 'patient', {params}).pipe(
         map(response => {
-          this.patientwithpaging = response;
           return response;
         })
       );
@@ -42,7 +41,6 @@ export class PatientService {
                     .set('searchString', searchString);
       return this.http.get<IPatientForSearch[]>(this.baseUrl + 'patient/patientsearch', {params}).pipe(
         map(response => {
-          this.patientForSearch = response;
           return response;
         })
       );
@@ -104,6 +102,16 @@ export class PatientService {
           if (response) {
             console.log(response.message);
           }
+        })
+      );
+    }
+
+    getPatientForSearchById(id: any){
+      const params = new HttpParams()
+                    .set('id', id);
+      return this.http.get<IPatientForSearch>(this.baseUrl + 'patient/patientSearchbyid', {params}).pipe(
+        map(response => {
+          return response;
         })
       );
     }

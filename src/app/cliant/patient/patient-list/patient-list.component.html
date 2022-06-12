@@ -9,7 +9,8 @@
   </div>
     <mat-form-field class="search">
       <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="First Name/Last Name/Mobile Number/Branch" #input>
+      <!-- <input matInput (keyup)="applyFilter($event)" placeholder="First Name/Last Name/Mobile Number/Branch" #input> -->
+      <input matInput  [formControl]="patientsearch" placeholder="First Name/Last Name/Mobile Number/Branch" #input>
     </mat-form-field><br>
 
     <div class="addnewuser">

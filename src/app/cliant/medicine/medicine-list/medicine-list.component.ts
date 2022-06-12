@@ -7,6 +7,10 @@ import { AccountService } from 'src/app/account/account.service';
 import { IMedicine } from 'src/app/core/models/Medicine/medicine';
 import { MedicineService } from '../medicine.service';
 
+
+import { filter, distinctUntilChanged, debounceTime, tap, switchMap } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-medicine-list',
   templateUrl: './medicine-list.component.html',
@@ -23,6 +27,10 @@ export class MedicineListComponent implements OnInit , AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   isAdmin$: Observable<boolean>;
   isDoctor$: Observable<boolean>;
+
+  minLengthTerm = 3;
+  patientsearch = new FormControl();
+
   constructor(private medicineService: MedicineService, private accountService: AccountService) { }
   ngOnInit(): void {
     this.isAdmin$ = this.accountService.isAdmin$;
