@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,7 +24,8 @@ export class PregnancyAddComponent implements OnInit {
               private router: Router,
               private pregnancyService: PregnancyService,
               private hospitalService: HospitalService,
-              private accountService: AccountService
+              private accountService: AccountService,
+              private location: Location
               ) { }
 
   ngOnInit(): void {
@@ -72,8 +74,12 @@ export class PregnancyAddComponent implements OnInit {
 
 getCurrectUserHospitalId(){
    const hospitalid =  this.accountService.getDecoadedHospitalIdFromToken();
-       if (hospitalid){
+   if (hospitalid){
         this.hospitalId = +hospitalid;
       }
+  }
+
+  goBack() {
+    this.location.back();
   }
 }

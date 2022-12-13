@@ -1,0 +1,79 @@
+<app-title [title]="title"></app-title>
+<div>
+    <mat-form-field class="search">
+      <mat-label>Search</mat-label>
+      <input matInput [formControl]="followupsearch" placeholder=" " #input>
+      <!-- <input matInput (keyup)="applyFilter($event)" placeholder=" " #input> -->
+    </mat-form-field><br>
+    <mat-form-field appearance="fill" class="selecthospital">
+      <mat-label>Select Branch</mat-label>
+      <mat-select #value (valueChange)="motherListAccordingToHospital(value.value)" [(value)]="hospitalId">
+        <mat-option [value]="option.id" *ngFor="let option of hospitals">{{option.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="addnewuser">
+      <button mat-raised-button class="btn addbutton" [routerLink]="['../add']">
+        <span class="material-icons buttonadd btn">
+          add
+        </span>Mother</button>
+    </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"
+  matSort >
+<ng-container class="cell-id" matColumnDef="ID">
+<th mat-header-cell *matHeaderCellDef>ID</th>
+<td mat-cell *matCellDef="let dataSource"> {{dataSource.id}} </td>
+</ng-container>
+<ng-container matColumnDef="Name">
+<th mat-header-cell *matHeaderCellDef mat-sort-header matSortDisableClear matSortDirection="nameAsc"> Name </th>
+<td mat-cell *matCellDef="let dataSource"> {{dataSource.name}} </td>
+</ng-container>
+<!-- <ng-container matColumnDef="MobileNo">
+<th mat-header-cell *matHeaderCellDef > Mobile No. </th>
+<td mat-cell *matCellDef="let dataSource"> {{dataSource.mobileNumber}} </td>
+</ng-container> -->
+<ng-container matColumnDef="FDLP">
+<th mat-header-cell *matHeaderCellDef > FDLP </th>
+<td mat-cell *matCellDef="let dataSource"> {{dataSource.firstDateOfLastPeriod | date:'dd/MM/YYY'}} </td>
+</ng-container>
+<ng-container matColumnDef="EDD">
+<th mat-header-cell *matHeaderCellDef > EDD </th>
+<td mat-cell *matCellDef="let dataSource"> {{dataSource.expectedDateOfDelivery | date:'dd/MM/YYY'}} </td>
+</ng-container>
+<ng-container matColumnDef="NextCheckup">
+<th mat-header-cell *matHeaderCellDef > NextCheckup </th>
+<td mat-cell *matCellDef="let dataSource"> {{dataSource.nextCheckup | date:'dd/MM/YYY'}} </td>
+</ng-container>
+
+<!-- <ng-container class="cell-blood-group" matColumnDef="BloodGroup">
+<th mat-header-cell *matHeaderCellDef > Blood <br> Group </th>
+<td mat-cell *matCellDef="let dataSource"> {{dataSource.bloodGroup}} </td>
+</ng-container> -->
+
+<ng-container matColumnDef="Details">
+<th mat-header-cell *matHeaderCellDef > Details </th>
+<td mat-cell *matCellDef="let dataSource">
+<mat-icon 
+[routerLink]="['../details/'+ dataSource.id]"
+matTooltip="Details"
+>info</mat-icon>
+</td>
+</ng-container>
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+<!-- Row shown when there is no matching data. -->
+<tr class="mat-row" *matNoDataRow>
+<td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+</tr>
+</table>
+      <mat-paginator
+      #paginator 
+      [length]="totalRows" 
+      [pageIndex]="currentPage" 
+      [pageSize]="pageSize"
+      [pageSizeOptions]="pageSizeOptions" 
+      (page)="pageChanged($event)" 
+      aria-label="Select page"
+       ></mat-paginator>
+       <footer-for-all [footerName]="footerName"></footer-for-all>

@@ -6,6 +6,7 @@ import { IFollowUpPagination } from 'src/app/core/models/FollowUp/followuppagina
 import { IDiseasesCategoryReport } from 'src/app/core/models/Report/diseasesCategoryReport';
 import { IMedicalReport } from 'src/app/core/models/Report/madicalReport';
 import { INewPatientCreatedByDateAndBranch, IPatientsCountAccordingToBranchBetweenTwoDates } from 'src/app/core/models/Report/NewPatientCreatedByDate';
+import { Revenue } from 'src/app/core/models/Report/revenue';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -38,6 +39,22 @@ export class ReportService {
     headers = headers.set('Authorization', `Bearer ${token}`);
     const headersAndParams = { params, headers };
     return this.http.get<IPatientsCountAccordingToBranchBetweenTwoDates>(this.baseUrl + 'reports/getprescriptionreport', headersAndParams).pipe(
+      map(response => {
+        console.log(response);
+        return response;
+      })
+    );
+  }
+
+  getRevenueAccordingToDateAndBranch(startDate: string, endDate: string){
+    let params = new HttpParams();
+    params = params.append('startDate', startDate);
+    params = params.append('endDate', endDate);
+    const token = localStorage.getItem('hotpital_user_token');
+    let headers = new HttpHeaders();
+    headers = headers.set('Authorization', `Bearer ${token}`);
+    const headersAndParams = { params, headers };
+    return this.http.get<Revenue>(this.baseUrl + 'reports/getrevenuereport', headersAndParams).pipe(
       map(response => {
         console.log(response);
         return response;

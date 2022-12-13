@@ -24,7 +24,6 @@ export class PhysicalStateService {
       .set('pageSize', pageSize);
       return this.http.get<IPhysicalStatPagination>(this.baseUrl + 'physicalState', {params}).pipe(
         map(response => {
-          this.physicalStates = response.data;
           return response;
         })
       );

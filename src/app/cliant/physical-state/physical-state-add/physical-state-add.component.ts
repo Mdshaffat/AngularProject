@@ -142,7 +142,7 @@ export class PhysicalStateAddComponent implements OnInit {
   onSubmit(){
     this.physicalStateService.addPhysicalState(this.physicalStateAddForm.value).subscribe(response => {
       this.toastr.success( 'Added' , 'Success' );
-      this.router.navigateByUrl('/physicalstate/list').then(() => {location.reload(); } );
+      this.router.navigateByUrl('/physicalstate/list');
     }, error => {
       console.log(error);
       this.toastr.error('Error to Create.Please check your connection and try again');

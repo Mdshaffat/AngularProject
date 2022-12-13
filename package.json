@@ -32,6 +32,7 @@
     "file-server": "^2.2.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.1",
+    "ngx-extended-pdf-viewer": "^14.5.3",
     "ngx-print": "^1.2.1",
     "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",

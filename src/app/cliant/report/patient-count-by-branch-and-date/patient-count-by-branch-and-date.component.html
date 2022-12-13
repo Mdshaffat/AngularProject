@@ -36,19 +36,8 @@
 </div>
 
 <div class="branchform" *ngIf="patientCreationReportWithTotals">
-  <div class="downloadxls">
-    <button class="downloadbutton btn" (click)="exportexcel()">
-      <span class="material-icons buttonadd btn">
-        file_download
-      </span>Download
-    </button>
-  </div>
-    <div class="filter">
-      <mat-form-field class="search">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex.ium" #input>
-      </mat-form-field>
-    </div>
+
+
     <div class="table" >
       <table id="print-section" class="reporttable" *ngIf="patientCreationReportWithTotals">
         <tr>
@@ -115,7 +104,17 @@
           </td>
         </tr>
       </table>
+      <div class="downloadxls">
+        <button class="downloadbutton btn" (click)="exportexcel()">
+          <span class="material-icons buttonadd btn">
+            file_download
+          </span>Download
+        </button>
+      </div>
+      <div height="50"></div>
      <footer-for-all [footerName]="footerName" ></footer-for-all>
     </div>
+
+
 </div>
 

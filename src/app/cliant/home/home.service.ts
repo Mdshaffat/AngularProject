@@ -59,8 +59,30 @@ export class HomeService {
                         })
                       );
       }
+  getCurrentMonthRevenueReport() {
+        const token = localStorage.getItem('hotpital_user_token');
+        let headers = new HttpHeaders();
+        headers = headers.set('Authorization', `Bearer ${token}`);
+        const headersAndParams = { headers };
+        return this.http.get<HomePageReport>(this.baseUrl + 'homepagereport/currentmonthrevenuereport', headersAndParams).pipe(
+                        map(response => {
+                          return response;
+                        })
+                      );
+      }
+  getPreviousMonthRevenueReport() {
+        const token = localStorage.getItem('hotpital_user_token');
+        let headers = new HttpHeaders();
+        headers = headers.set('Authorization', `Bearer ${token}`);
+        const headersAndParams = { headers };
+        return this.http.get<HomePageReport>(this.baseUrl + 'homepagereport/previousmonthrevenuereport', headersAndParams).pipe(
+                        map(response => {
+                          return response;
+                        })
+                      );
+      }
 
-      getCurrentUserNameAndTotalPatientReport() {
+  getCurrentUserNameAndTotalPatientReport() {
         const token = localStorage.getItem('hotpital_user_token');
         let headers = new HttpHeaders();
         headers = headers.set('Authorization', `Bearer ${token}`);

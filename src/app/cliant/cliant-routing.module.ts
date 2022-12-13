@@ -21,6 +21,10 @@ const routes: Routes = [
                                     .then(m => m.PregnancyModule)},
             {path: 'report', loadChildren: () => import('./report/report.module')
                                     .then(m => m.ReportModule)},
+            {path: 'bloodcamp', loadChildren: () => import('./blood-camp/blood-camp.module')
+                                    .then(m => m.BloodCampModule)},
+            {path: 'knowledgehub', loadChildren: () => import('./knowledge-hub/knowledge-hub.module')
+                                    .then(m => m.KnowledgeHubModule)},
           ]
   }
 ];

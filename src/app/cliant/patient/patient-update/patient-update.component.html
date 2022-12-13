@@ -184,12 +184,24 @@
         <mat-datepicker #pickerb></mat-datepicker>
         <mat-error *ngIf="f.bosterDoseDate.hasError('required')">Please choose a Date</mat-error>
       </mat-form-field>
-            <mat-form-field class="col-note" appearance="fill">
-              <mat-label>Note</mat-label>
-              <input formControlName="note" matInput >
-              <mat-error *ngIf="f.note.hasError('required')">Required</mat-error>
-              <mat-error *ngIf="f.note.hasError('maxlength')">Maximum 300 Charecter</mat-error>
-          </mat-form-field>
+      <br>
+      <!--  -->
+      <mat-form-field class="col-tobacohabit" appearance="fill">
+        <mat-label>Smoking Habit</mat-label>
+        <mat-select formControlName="tobacoHabit">
+          <mat-option>--</mat-option>
+          <mat-option value="1">Smoker</mat-option>
+          <mat-option value="0">Non Smoker</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.tobacoHabit.hasError('required')">Required</mat-error>
+    </mat-form-field>
+      <!--  -->
+    <mat-form-field class="col-note" appearance="fill">
+      <mat-label>Note</mat-label>
+      <input formControlName="note" matInput >
+      <mat-error *ngIf="f.note.hasError('required')">Required</mat-error>
+      <mat-error *ngIf="f.note.hasError('maxlength')">Maximum 300 Charecter</mat-error>
+  </mat-form-field>
 <!-- checkBox -->
             <mat-checkbox formControlName="primaryMember" class="col-primaryMember">Primary Member</mat-checkbox><br>
             <mat-form-field class="col-age" appearance="fill">

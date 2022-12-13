@@ -135,6 +135,7 @@
                 </mat-select>
                 <mat-error *ngIf="f.maritalStatus.hasError('required')">Required</mat-error>
             </mat-form-field>
+
             <mat-form-field class="col-bloodGroup" appearance="fill">
                 <mat-label>Blood Group</mat-label>
                 <mat-select formControlName="bloodGroup">
@@ -202,6 +203,18 @@
         <mat-datepicker #pickerb></mat-datepicker>
         <mat-error *ngIf="f.bosterDoseDate.hasError('required')">Please choose a Date</mat-error>
       </mat-form-field>
+      <br>
+      <!--  -->
+      <mat-form-field class="col-tobacohabit" appearance="fill">
+        <mat-label>Smoking Habit</mat-label>
+        <mat-select formControlName="tobacoHabit">
+          <mat-option>--</mat-option>
+          <mat-option value="1">Smoker</mat-option>
+          <mat-option value="0">Non Smoker</mat-option>
+        </mat-select>
+        <mat-error *ngIf="f.tobacoHabit.hasError('required')">Required</mat-error>
+    </mat-form-field>
+      <!--  -->
       <mat-form-field class="col-note" appearance="fill">
         <mat-label>Note</mat-label>
         <textarea cdkTextareaAutosize matInput formControlName="note" id="note" name="note"></textarea>

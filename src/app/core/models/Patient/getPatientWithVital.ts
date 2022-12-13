@@ -9,6 +9,7 @@ export interface IPatientWithVital {
     doB: Date;
     gender: string;
     maritalStatus: string;
+    tobacoHabit: string;
     primaryMember: boolean;
     membershipRegistrationNumber: string;
     address: string;

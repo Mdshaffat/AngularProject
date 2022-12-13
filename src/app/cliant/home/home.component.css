@@ -101,6 +101,6 @@ overflow-y: scroll;
 } */
 .charttt {
   display: inline-block;
-  height: 400px !important;
+  height: 500px !important;
   width: 400px !important;
 }

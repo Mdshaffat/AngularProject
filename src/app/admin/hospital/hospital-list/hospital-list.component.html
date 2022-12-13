@@ -2,7 +2,7 @@
 <div>
     <mat-form-field class="search">
       <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder=" " #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder=" " #input placeholder="Name">
     </mat-form-field><br>
     <div class="addnewuser">
       <button mat-raised-button class="btn addbutton" color="accent" [routerLink]="['../add']" >

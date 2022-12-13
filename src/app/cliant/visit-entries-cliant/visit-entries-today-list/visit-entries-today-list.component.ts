@@ -107,7 +107,7 @@ export class VisitEntriesTodayListComponent implements OnInit , AfterViewInit {
     updateVisitEntryStatusRowData(data: any){
         this.visitEntryService.updateVisitEntryStatus(data).subscribe(response => {
           this.toastr.success('Updated');
-          location.reload();
+          this.getVisitEntryList();
           console.log(response);
         }, error => {
           console.log(error);

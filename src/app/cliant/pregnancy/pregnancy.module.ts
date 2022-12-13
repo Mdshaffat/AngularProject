@@ -7,6 +7,9 @@ import { SharedModule } from 'src/app/Shared/shared.module';
 import { MaterialModule } from 'src/app/Shared/material/material.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { PregnancyDetailsComponent } from './pregnancy-details/pregnancy-details.component';
+import { CheckupComponent } from './checkup/checkup.component';
+import { TodaysListComponent } from './todays-list/todays-list.component';
+import { BranchWisePregnincyListComponent } from './branch-wise-pregnincy-list/branch-wise-pregnincy-list.component';
 
 
 
@@ -14,7 +17,10 @@ import { PregnancyDetailsComponent } from './pregnancy-details/pregnancy-details
   declarations: [
     PregnancyAddComponent,
     PregnancyListComponent,
-    PregnancyDetailsComponent
+    PregnancyDetailsComponent,
+    CheckupComponent,
+    TodaysListComponent,
+    BranchWisePregnincyListComponent
   ],
   imports: [
     CommonModule,

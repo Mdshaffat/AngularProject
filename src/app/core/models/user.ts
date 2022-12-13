@@ -7,6 +7,7 @@ export interface IUser {
     email: string;
     phoneNumber: string;
     designation: string;
+    specialization: string;
     bmdcRegNo: string;
     optionalEmail: string;
     joiningDate: Date;

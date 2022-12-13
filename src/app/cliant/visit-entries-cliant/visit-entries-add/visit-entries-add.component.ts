@@ -172,7 +172,7 @@ export class VisitEntriesAddComponent implements OnInit, AfterViewInit{
         this.router.navigateByUrl('/visitentries/list');
       } else {
         this.toastr.success( 'Added' , 'Success' );
-        this.router.navigateByUrl('/visitentries/list').then(() => {location.reload(); } );
+        this.router.navigateByUrl('/visitentries/list');
       }
     }, error => {
       console.log(error);

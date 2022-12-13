@@ -6,18 +6,21 @@
         </mat-card-header>
         <mat-card-content>
             <p>ID: <small>{{pregnantProfile.id}}</small></p>
-            <!-- <p>Branch: <small>{{hospitalDetails.branch}}</small></p>
-            <p>Address: <small>{{hospitalDetails.address}}</small></p>
-            <p>Division: <small>{{hospitalDetails.division}}</small></p>
-            <p>Upazila: <small>{{hospitalDetails.upazila}}</small></p>
-            <p>District: <small>{{hospitalDetails.district}}</small></p>
-            <p>Updated On: <small>{{hospitalDetails.updatedOn | date:'dd/MM/YYY'}}</small></p>
-            <p>Updated By: <small>{{hospitalDetails.updatedBy}}</small></p>
-            <p>Created On: <small>{{hospitalDetails.createdOn | date:'dd/MM/YYY'}}</small></p>
-            <p>Created By: <small>{{hospitalDetails.createdBy}}</small></p>
-            <p>Active:
-                <mat-checkbox style="margin-left: 10px;" disabled [checked] = hospitalDetails.isActive></mat-checkbox>
-            </p> -->
+            <p>Name: <small>{{pregnantProfile.name}}</small></p>
+            <p>First date of last period : <small>{{pregnantProfile.firstDateOfLastPeriod | date:'dd-MM-YYY'}}</small></p>
+            <p>Expected Delevery Date : <small>{{pregnantProfile.expectedDeliveryDate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.firstCheckupdate">1st Checkup : <small>{{pregnantProfile.firstCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.secondCheckupdate">2nd Checkup : <small>{{pregnantProfile.secondCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.thirdCheckupdate">3rd Checkup : <small>{{pregnantProfile.thirdCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.fourthCheckupdate">4th Checkup : <small>{{pregnantProfile.fourthCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.fifthCheckupdate">5th Checkup : <small>{{pregnantProfile.fifthCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.sixthCheckupdate">6th Checkup : <small>{{pregnantProfile.sixthCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.seventhCheckupdate">7th Checkup : <small>{{pregnantProfile.seventhCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.eightthCheckupdate">8th Checkup : <small>{{pregnantProfile.eightthCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.ninethCheckupdate">9th Checkup : <small>{{pregnantProfile.ninethCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            <p *ngIf="pregnantProfile.tenthCheckupdate">10th Checkup : <small>{{pregnantProfile.tenthCheckupdate | date:'dd-MM-YYY'}}</small></p>
+            
+            <!-- line -->
             <div class="fullline">
                 <div [ngClass]="{'line': pregnantProfile.firstCheckup === 1, 'line2' : pregnantProfile.firstCheckup === 0 }"></div>
                 <div [ngClass]="{'line': pregnantProfile.secondCheckup === 1, 'line2' : pregnantProfile.secondCheckup === 0 }"></div>
@@ -30,10 +33,14 @@
                 <div [ngClass]="{'line': pregnantProfile.ninethCheckup === 1, 'line2' : pregnantProfile.ninethCheckup === 0 }"></div>
                 <div [ngClass]="{'line': pregnantProfile.tenthCheckup === 1, 'line2' : pregnantProfile.tenthCheckup === 0 }"></div>
             </div>
+            <br>
+            <br>
+            <button mat-button type="button" (click)="openCheckupDialog()">+Add Checkup</button>
+        <!-- endLine -->
         </mat-card-content>
         <mat-card-actions>
-        <button mat-button [routerLink]="['../../pregnancy']" >Back</button>
-        <button mat-button [routerLink]="['../../edit/'+ pregnantProfile.id]">Edit</button>
+        <button mat-button (click)="goBack()">Back</button>
+        <!-- <button mat-button [routerLink]="['../../edit/'+ pregnantProfile.id]">Edit</button> -->
         </mat-card-actions>
     </mat-card>
 </body>

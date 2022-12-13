@@ -18,8 +18,8 @@ const TREE_DATA: RouteNode[] = [
   {
     name: 'Patient',
     children: [
-      { path: '/patient/list', icon: 'wc' , name: 'Patient list', class: 'router-link-active'},
-      { path: '/patient/history', icon: 'history', name: 'Patient history', class: 'router-link-active'},
+      { path: '/patient/list', icon: 'wc' , name: 'Patient List', class: 'router-link-active'},
+      { path: '/patient/history', icon: 'history', name: 'Patient History', class: 'router-link-active'},
       { path: '/report/followup', icon: 'bookmark', name: 'Followup', class: 'router-link-active'},
     ]
   },
@@ -33,7 +33,7 @@ const TREE_DATA: RouteNode[] = [
   {
     name: 'Appoinment',
     children: [
-      {path: '/visitentries/list', icon: 'date_range', name: 'Visit entries', class: 'router-link-active'},
+      {path: '/visitentries/list', icon: 'date_range', name: 'Visit Entries', class: 'router-link-active'},
       {path: '/prescription/list', icon: 'description', name: 'Prescription', class: 'router-link-active'},
     ]
   },
@@ -46,7 +46,8 @@ const TREE_DATA1: RouteNode[] = [
       {path: '/report/countprescriptionbydate', icon: 'summarize', name: 'Prescription tally report', class: 'router-link-active'},
       {path: '/report/diagnosismonthlyreport', icon: 'summarize', name: 'Monthly disease report', class: 'router-link-active'},
       {path: '/report/medicalreport', icon: 'summarize', name: 'Medical report', class: 'router-link-active'},
-      {path: '/report/telimedicinereport', icon: 'summarize', name: 'Telemedicine report', class: 'router-link-active'}
+      {path: '/report/telimedicinereport', icon: 'summarize', name: 'Telemedicine report', class: 'router-link-active'},
+      {path: '/report/revenuereport', icon: 'summarize', name: 'Revenue Report', class: 'router-link-active'}
     ]
   },
 ];
@@ -66,7 +67,7 @@ interface RouteInfo {
 export const ROUTES: RouteInfo[] = [
   // { path: '/patient/list', title: 'PATIENT',  icon: 'Patient', class: 'router-link-active' },
   // { path: '/patient/history', title: 'PATIENT HISTORY',  icon: 'Patient', class: 'router-link-active' },
-  { path: '/physicalstate/list', title: 'Physical stat',  icon: 'physicalstate', class: 'router-link-active' },
+  { path: '/physicalstate/list', title: 'Physical State',  icon: 'physicalstate', class: 'router-link-active' },
   // { path: '/medicine/list', title: 'MEDICINE',  icon: 'physicalstate', class: 'router-link-active' },
  //  { path: '/medicine/purchase', title: 'PURCHASE MEDICINE',  icon: 'physicalstate', class: 'router-link-active' },
   // { path: '/visitentries/list', title: 'VISIT ENTRIES',  icon: 'physicalstate', class: 'router-link-active' },

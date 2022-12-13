@@ -1,0 +1,78 @@
+table {
+  margin: 10px;
+  width: 98%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 200px;
+  margin: 10px;
+}
+.search {
+  float: left;
+  width: 70%;
+  margin-left: 5%;
+  height: 2%;
+}
+.mat-column-Edit {
+  padding-right: 20px;
+  text-align: center;
+}
+.mat-icon {
+  margin: 2%;
+}
+.mat-icon:hover {
+  cursor: pointer;
+}
+.addnewuser {
+  float: right;
+  width: 15%;
+  margin-bottom: 10px;
+  margin-right: 5%;
+}
+.buttonadd {
+  margin-right: -1%;
+  color: rgb(0, 0, 0);
+}
+.addbutton {
+  background-color: #fff;
+  cursor: pointer;
+  color: #787878;
+  height: 42px;
+
+}
+button {
+  width: 200px;
+  font-size: 18px;
+  align-items: center;
+}
+.addbutton:hover {
+  background-color: #fff;
+  cursor: pointer;
+  color: rgb(0, 0, 0);
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.searchbutton {
+  background-color: #FFF;
+  cursor: pointer;
+  color: #787878;
+  box-shadow: 1px 1px 1px 1px rgb(185, 189, 190);
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+  align-items: center;
+  margin-bottom: 15px;
+  margin-left: 10px
+}
+.searchbutton:hover {
+  background-color: #FFF;
+  color: black;
+}
+.search {
+    float: left;
+    width: 60%;
+    margin-left: 5%;
+    height: 2%;
+  }

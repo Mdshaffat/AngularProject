@@ -34,6 +34,11 @@
                   <mat-error *ngIf="f.designation.hasError('maxlength')">Maximum 20 charecter</mat-error>
               </mat-form-field><br>
               <mat-form-field>
+                <mat-label>Specialization</mat-label>
+                <input formControlName="specialization" matInput>
+                <mat-error *ngIf="f.specialization.hasError('maxlength')">Maximum 40 charecter</mat-error>
+            </mat-form-field><br>
+              <mat-form-field>
                   <mat-label>Phone Number</mat-label>
                   <input formControlName="phoneNumber" matInput>
                   <mat-error *ngIf="f.phoneNumber.hasError('pattern')">Input a valid number</mat-error>

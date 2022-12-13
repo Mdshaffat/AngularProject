@@ -10,6 +10,7 @@ import { ReportByDiseasesCategoryComponent } from './report-by-diseases-category
 import { NgxPrintModule } from 'ngx-print';
 import { MedicalReportComponent } from './medical-report/medical-report.component';
 import { TelimedicineReportComponent } from './telimedicine-report/telimedicine-report.component';
+import { RevenueReportComponent } from './revenue-report/revenue-report.component';
 
 
 
@@ -20,7 +21,8 @@ import { TelimedicineReportComponent } from './telimedicine-report/telimedicine-
     PendingFoollowupListComponent,
     ReportByDiseasesCategoryComponent,
     MedicalReportComponent,
-    TelimedicineReportComponent
+    TelimedicineReportComponent,
+    RevenueReportComponent
   ],
   imports: [
     CommonModule,

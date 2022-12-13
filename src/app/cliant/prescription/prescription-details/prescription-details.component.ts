@@ -15,6 +15,7 @@ import { PrescriptionService } from '../prescription.service';
 export class PrescriptionDetailsComponent implements OnInit {
   prescriptionDetails: IPrescriptionWithPhysicalStatAndDiagnosis;
   id: any;
+  isAdd = false;
   constructor(private activateRoute: ActivatedRoute,
               private prescriptionService: PrescriptionService,
               private toastr: ToastrService,
@@ -40,5 +41,9 @@ export class PrescriptionDetailsComponent implements OnInit {
   goBack(){
       this.location.back();
     }
+  toggleIsAdd() {
+    this.isAdd != this.isAdd;
+  }
+  
 }
 

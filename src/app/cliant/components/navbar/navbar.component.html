@@ -9,37 +9,40 @@
       <div fxShow="true" fxHide.lt-md>
         <button mat-button [matMenuTriggerFor]="menupatient">Patient<mat-icon>expand_more</mat-icon></button>
         <mat-menu #menupatient="matMenu" class="my-class">
-          <button mat-menu-item [routerLink]="['/patient/list']" routerLinkActive="router-link-active" >Patient list</button>
-          <button mat-menu-item [routerLink]="['/patient/history']" routerLinkActive="router-link-active">Patient history</button>
+          <button mat-menu-item [routerLink]="['/patient/list']" routerLinkActive="router-link-active" >Patient List</button>
+          <button mat-menu-item [routerLink]="['/patient/history']" routerLinkActive="router-link-active">Patient History</button>
           <button mat-menu-item [routerLink]="['/report/followup']" routerLinkActive="router-link-active" >Followup</button>
         </mat-menu>
         <!-- <button mat-button [matMenuTriggerFor]="menumedicine" >MEDICINE<mat-icon>expand_more</mat-icon></button> -->
         <mat-menu #menumedicine="matMenu" class="my-class">
-          <button mat-menu-item [routerLink]="['/medicine/list']" routerLinkActive="router-link-active" >Medicine list</button>
+          <button mat-menu-item [routerLink]="['/medicine/list']" routerLinkActive="router-link-active" >Medicine List</button>
           <!-- <button mat-menu-item [routerLink]="['/medicine/purchase']" routerLinkActive="router-link-active">PURCHASE MEDICINE</button> -->
         </mat-menu>
         <button mat-button [matMenuTriggerFor]="menuappoinment" >Appoinment<mat-icon>expand_more</mat-icon></button>
         <mat-menu #menuappoinment="matMenu" class="my-class">
-          <button mat-menu-item [routerLink]="['/visitentries/list']" routerLinkActive="router-link-active" >Visit entry</button>
+          <button mat-menu-item [routerLink]="['/visitentries/list']" routerLinkActive="router-link-active" >Visit Entry</button>
           <button mat-menu-item [routerLink]="['/prescription/list']" routerLinkActive="router-link-active">Prescription</button>
         </mat-menu>
         <button mat-button  [routerLink]="['/medicine/list']" routerLinkActive="router-link-active">Medicine</button>
-        <button mat-button  [routerLink]="['/pregnancy/list']" routerLinkActive="router-link-active">Maternity Health</button>
+        <button mat-button  [routerLink]="['/pregnancy/branchwiselist']" routerLinkActive="router-link-active">Maternity Health</button>
+        <button mat-button  [routerLink]="['/bloodcamp']" routerLinkActive="router-link-active">Blood Camp</button>
         <a *ngFor="let menuItem of menuItems"
         mat-button
         [routerLink]="menuItem.path"
         [routerLinkActive]="menuItem.class"
         [routerLinkActiveOptions]="{exact:true}"
         >{{menuItem.title}}</a>
-        <button *ngIf="(isDoctor$ | async) || (isAdmin$ | async)" mat-button [matMenuTriggerFor]="menureport" >Report<mat-icon>expand_more</mat-icon></button>
+        <!-- <button *ngIf="(isDoctor$ | async) || (isAdmin$ | async)" mat-button [matMenuTriggerFor]="menureport" >Report<mat-icon>expand_more</mat-icon></button> -->
+        <button  mat-button [matMenuTriggerFor]="menureport" >Report<mat-icon>expand_more</mat-icon></button>
         <mat-menu  #menureport="matMenu" class="my-class">
-          <button mat-menu-item [routerLink]="['/report/countpatientbydate']" routerLinkActive="router-link-active">Patient tally report</button>
-          <button mat-menu-item [routerLink]="['/report/countprescriptionbydate']" routerLinkActive="router-link-active">Prescription tally report</button>
-          <button mat-menu-item [routerLink]="['/report/diagnosismonthlyreport']" routerLinkActive="router-link-active">Monthly disease report</button>
-          <button mat-menu-item [routerLink]="['/report/medicalreport']" routerLinkActive="router-link-active">Medical report</button>
-          <button mat-menu-item [routerLink]="['/report/telimedicinereport']" routerLinkActive="router-link-active">Telemedicine report</button>
+          <button mat-menu-item [routerLink]="['/report/countpatientbydate']" routerLinkActive="router-link-active">Patient Tally Report</button>
+          <button mat-menu-item [routerLink]="['/report/countprescriptionbydate']" routerLinkActive="router-link-active">Prescription Tally Report</button>
+          <button mat-menu-item [routerLink]="['/report/diagnosismonthlyreport']" routerLinkActive="router-link-active">Monthly Disease Report</button>
+          <button mat-menu-item [routerLink]="['/report/medicalreport']" routerLinkActive="router-link-active">Medical Report</button>
+          <button mat-menu-item [routerLink]="['/report/telimedicinereport']" routerLinkActive="router-link-active">Telemedicine Report</button>
+          <button mat-menu-item [routerLink]="['/report/revenuereport']" routerLinkActive="router-link-active">Revenue Report</button>
         </mat-menu>
-        <button mat-button >Telemedicine</button>
+        <button mat-button [routerLink]="['/knowledgehub/list']" routerLinkActive="router-link-active">Knowledge Hub</button>
 
         <button mat-button *ngIf="(isAdmin$ | async)" [routerLink]="['/admin']">Admin</button>
         <a mat-button (click)="logout()" >Logout&nbsp;<mat-icon matTooltip="Logout" >logout</mat-icon></a>
@@ -99,11 +102,12 @@
 
 
         <!--  -->
-        <a mat-list-item [routerLink]="['/physicalstate/list']" >Physical stat</a>
+        <a mat-list-item [routerLink]="['/physicalstate/list']" >Physical Stat</a>
         <!-- <a mat-list-item [routerLink]="['/report']" routerLinkActive="router-link-active" >REPORT</a> -->
-        <a mat-list-item  >Telemedicine</a>
+        <a mat-list-item  [routerLink]="['/knowledgehub/list']">Knowledge Hub</a>
         <a mat-list-item  [routerLink]="['/medicine/list']" >Medicine</a>
-        <a mat-list-item  [routerLink]="['/pregnancy/list']" >Maternity Health</a>
+        <a mat-list-item  [routerLink]="['/pregnancy/branchwiselist']" >Maternity Health</a>
+        <a mat-list-item  [routerLink]="['/bloodcamp']" >Blood Camp</a>
         <a mat-list-item *ngIf="(isAdmin$ | async)" [routerLink]="['/admin']" >Admin</a>
         <a mat-list-item (click)="logout()" >Logout &nbsp;<mat-icon>logout</mat-icon></a>
       </mat-nav-list>

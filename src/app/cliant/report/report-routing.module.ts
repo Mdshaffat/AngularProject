@@ -7,6 +7,7 @@ import { PendingFoollowupListComponent } from './pending-foollowup-list/pending-
 import { ReportByDiseasesCategoryComponent } from './report-by-diseases-category/report-by-diseases-category.component';
 import { MedicalReportComponent } from './medical-report/medical-report.component';
 import { TelimedicineReportComponent } from './telimedicine-report/telimedicine-report.component';
+import { RevenueReportComponent } from './revenue-report/revenue-report.component';
 
 const routes: Routes = [
   {path: '', redirectTo: 'countpatientbydate'},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'followup', component: PendingFoollowupListComponent},
   {path: 'diagnosismonthlyreport', component: ReportByDiseasesCategoryComponent},
   {path: 'medicalreport', component: MedicalReportComponent},
-  {path: 'telimedicinereport', component: TelimedicineReportComponent}
+  {path: 'telimedicinereport', component: TelimedicineReportComponent},
+  {path: 'revenuereport', component: RevenueReportComponent},
 ];
 
 @NgModule({

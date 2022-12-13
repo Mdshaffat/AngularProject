@@ -141,7 +141,7 @@ export class PhysicalStateEditComponent implements OnInit, AfterViewInit {
     this.physicalStateService.updatePhysicalState(this.updatePhysicalStateForm.value).subscribe(response => {
       this.toastr.success(' Updated');
       console.log(response);
-      this.router.navigateByUrl('/physicalstate/list').then(() => {location.reload(); } );
+      this.router.navigateByUrl('/physicalstate/list');
     },
     error => {
       this.toastr.error('error to Update');

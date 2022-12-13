@@ -1,6 +1,6 @@
 <body>
     <app-title [title]="title"></app-title>
-    <button mat-button [routerLink]="['/pregnancy']" >Back</button>
+    <button mat-button (click)="goBack()" >Back</button>
       <div class="loginForm">
           <form [formGroup]="pregnancyAddForm" (ngSubmit)="onSubmit()">
             <mat-form-field appearance="fill" class="selecthospital">

@@ -48,6 +48,24 @@ export class HomeComponent implements OnInit {
   previousMonthPrescriptioncount: number[] = [];
   previousMonthPrescriptiondate: string[] = [];
   // *******END*******
+
+  // currentMonthRevenue
+  currentMonthRevenuechart: Chart;
+  currentRevenueRecord: HomePageReport;
+  revenueCurrentmonthName: string;
+  currentRevenuetotalData: number;
+  currentMonthRevenuecount: number[] = [];
+  currentMonthRevenuedate: string[] = [];
+  // *******END*******
+
+  // previousMonthRevenue
+  previousMonthRevenuechart: Chart;
+  previousMonthRevenueRecord: HomePageReport;
+  revenuePreviousMonthName: string;
+  previousMonthRevenuetotalData: number;
+  previousMonthRevenuecount: number[] = [];
+  previousMonthRevenuedate: string[] = [];
+  // *******END*******
   currentUserInfo: IUserNameAndPatientCount;
 
   // greeting
@@ -57,17 +75,22 @@ export class HomeComponent implements OnInit {
 
   /////////////////////////
   constructor(private homeService: HomeService, public dialog: MatDialog) {
-    if (this.hrs < 12)
+    if (this.hrs < 12) {
       this.greet = 'Good Morning';
-    else if (this.hrs >= 12 && this.hrs <= 17)
+    }
+    else if (this.hrs >= 12 && this.hrs <= 17) {
       this.greet = 'Good Afternoon';
-    else if (this.hrs >= 17 && this.hrs <= 24)
+ }
+    else if (this.hrs >= 17 && this.hrs <= 24) {
       this.greet = 'Good Evening';
+ }
 
     this.getCurrentMontPrescriptionReport();
     this.getCurrentMontPatientReport();
     this.getPreviousMontPatientReport();
     this.getPreviounMonthPrescriptionReport();
+    this.getPreviounMonthRevenueReport();
+    this.getCurrentMontRevenueReport();
    }
 
   ngOnInit(): void {
@@ -127,9 +150,9 @@ export class HomeComponent implements OnInit {
                 display: true,
                 stacked: true,
                 min: 0,
-                max: 1500,
+                max: 3000,
                 ticks: {
-                  stepSize: 20,
+                  stepSize: 200,
                  },
              },
 
@@ -193,9 +216,9 @@ export class HomeComponent implements OnInit {
                 display: true,
                 stacked: true,
                 min: 0,
-                max: 1500,
+                max: 3000,
                 ticks: {
-                  stepSize: 20,
+                  stepSize: 200,
                  },
              },
 
@@ -259,9 +282,9 @@ export class HomeComponent implements OnInit {
                 display: true,
                 stacked: true,
                 min: 0,
-                max: 1500,
+                max: 3000,
                 ticks: {
-                  stepSize: 20,
+                  stepSize: 200,
                  },
              },
 
@@ -325,15 +348,15 @@ export class HomeComponent implements OnInit {
                 display: true,
                 stacked: true,
                 min: 0,
-                max: 1500,
+                max: 3000,
                 ticks: {
-                  stepSize: 20,
+                  stepSize: 200,
                  },
              },
 
             },
           }
-          
+
       });
         this.previousMonthPrescriptionchart.update();
   }, error => {
@@ -341,28 +364,166 @@ export class HomeComponent implements OnInit {
       });
   }
 
+// revenue
+
+getCurrentMontRevenueReport() {
+  // int chart Data
+  this.currentMonthRevenuecount = [];
+  this.currentMonthRevenuedate = [];
+  this.revenueCurrentmonthName = '';
+  this.currentRevenuetotalData = 0;
+  if (this.currentMonthRevenuechart) {
+    this.currentMonthRevenuechart.destroy();
+  }
+
+  this.homeService.getCurrentMonthRevenueReport().subscribe(response => {
+      this.currentRevenueRecord = response;
+      this.revenueCurrentmonthName = response.monthName;
+      this.currentRevenuetotalData = response.totalData;
+      // Implement Chart Data
+      response.weeklyDataCounts.forEach((res) => {
+        this.currentMonthRevenuecount.push(res.count);
+        this.currentMonthRevenuedate.push(res.lastDate);
+      });
+      this.currentMonthRevenuechart = new Chart('ctx5', {
+        type: 'line',
+        data: {
+            labels: this.currentMonthRevenuedate,
+            datasets: [
+              {
+                // barPercentage: 0.5,
+                label: `Month:(${this.revenueCurrentmonthName}) - Total Revenue: (${this.currentRevenuetotalData})`,
+                data: this.currentMonthRevenuecount,
+                fill: false,
+                borderColor: 'rgb(245, 88, 142)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderWidth: 3
+            },
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'x',
+          scales: {
+            x: {
+              // position: 'top',
+              stacked: true,
+              ticks: {
+                maxRotation: 180,
+                minRotation: 90
+              },
+           },
+            y: {
+              display: true,
+              stacked: true,
+              min: 0,
+              max: 300000,
+              ticks: {
+                stepSize: 30000,
+               },
+           },
+
+          },
+        }
+    });
+      this.currentMonthRevenuechart.update();
+}, error => {
+      console.log(error);
+    });
+}
+getPreviounMonthRevenueReport() {
+  // int chart Data
+  this.previousMonthRevenuecount = [];
+  this.previousMonthRevenuedate = [];
+  this.revenuePreviousMonthName = '';
+  this.previousMonthRevenuetotalData = 0;
+  if (this.previousMonthRevenuechart) {
+    this.previousMonthRevenuechart.destroy();
+  }
+
+  this.homeService.getPreviousMonthRevenueReport().subscribe(response => {
+      this.previousMonthRevenueRecord = response;
+      this.revenuePreviousMonthName = response.monthName;
+      this.previousMonthRevenuetotalData = response.totalData;
+      // Implement Chart Data
+      response.weeklyDataCounts.forEach((res) => {
+        this.previousMonthRevenuecount.push(res.count);
+        this.previousMonthRevenuedate.push(res.lastDate);
+      });
+      this.previousMonthRevenuechart = new Chart('ctx6', {
+        type: 'line',
+        data: {
+            labels: this.previousMonthRevenuedate,
+            datasets: [
+              {
+                // barPercentage: 0.5,
+                label: `Month:(${this.revenuePreviousMonthName}) - Total Revenue: (${this.previousMonthRevenuetotalData})`,
+                data: this.previousMonthRevenuecount,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderWidth: 3
+            },
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          indexAxis: 'x',
+          scales: {
+            x: {
+              // position: 'top',
+              stacked: true,
+              ticks: {
+                maxRotation: 180,
+                minRotation: 90
+              },
+           },
+            y: {
+              display: true,
+              stacked: true,
+              min: 0,
+              max: 300000,
+              ticks: {
+                stepSize: 30000,
+               },
+           },
+
+          },
+        }
+
+    });
+      this.previousMonthRevenuechart.update();
+}, error => {
+      console.log(error);
+    });
+}
+
+// END
+
   getCurrentUserReport(){
     this.homeService.getCurrentUserNameAndTotalPatientReport().subscribe(response => {
       this.currentUserInfo = response;
-        this.dialog.open(FrontDialogComponent, {
+      this.dialog.open(FrontDialogComponent, {
           data: {
             title: `
               ${this.greet} ${response.name}
-              Happy to connect with you again. your service are always 
-              valuable for us. 
+              Happy to connect with you again. your service are always
+              valuable for us.
               So far, you’ve served ${response.patientCount} community patients.
               Thank you for all of your contributions.
-    
+
             `,
             details: `
-            
+
             `
           },
         });
 
     }, error => {
       console.log(error);
-    })
+    });
   }
 
   private dataLabelPlugin = function(chart, easing) {
@@ -374,12 +535,12 @@ export class HomeComponent implements OnInit {
     const padding = 5;
 
     chart.data.datasets.forEach((dataset, key) => {
-        let meta = chart.getDatasetMeta(key);
+        const meta = chart.getDatasetMeta(key);
         if (!meta.hidden) {
             meta.data.forEach((element, index) => {
-                let position = element.tooltipPosition();
+                const position = element.tooltipPosition();
                 // Just naively convert to string for now
-                let dataString = dataset.data[index].toString();
+                const dataString = dataset.data[index].toString();
 
                 ctx.fillStyle = '#676a6c';
 

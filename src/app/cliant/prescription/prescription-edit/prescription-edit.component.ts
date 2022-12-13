@@ -69,9 +69,7 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
               private location: Location,
               private accountService: AccountService
               ) {
-                
-                
-
+                this.applyfilter();
                 // this.filteredMedicine = this.brandName.valueChanges
                 // .pipe(
                 //   startWith(''),
@@ -86,21 +84,6 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
     // this.populatePrescriptionUpdateFrom();
     // this.CalculateAge();
     // this.patientAge = this.calculateAge(this.prescription.patientDob.getDate);
-
-    this.brandName.valueChanges
-                .pipe(
-                  filter(res => {
-                    return res !== null && res.length >= this.minLengthTerm
-                  }),
-                  distinctUntilChanged(),
-                  debounceTime(1500),
-                  tap(() => {
-                    this.medicineForSearch = [];
-                  }),
-                  switchMap(value =>  this.medicineService.getmedicineForSearch(value)
-                  )).subscribe(res => {
-                    this.medicineForSearch = res;
-                  })
   }
   ngAfterViewInit(){
 
@@ -206,11 +189,13 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
         this.getmedicineFormGroup()
       );
       this.medicineId.patchValue('');
-      this.brandName.patchValue('');
+      this.brandName = new FormControl();
       this.medicineType.patchValue('');
       this.dose.patchValue('');
       this.time.patchValue('');
       this.comment.patchValue('');
+      this.applyfilter();
+      this.medicineForSearch = [];
     } else {
       Swal.fire({
         icon: 'error',
@@ -366,4 +351,20 @@ export class PrescriptionEditComponent implements OnInit, AfterViewInit {
     this.location.back();
   }
 
+  applyfilter() {
+    this.brandName.valueChanges
+                .pipe(
+                  filter(res => {
+                    return res !== null && res.length >= this.minLengthTerm;
+                  }),
+                  distinctUntilChanged(),
+                  debounceTime(1500),
+                  tap(() => {
+                    this.medicineForSearch = [];
+                  }),
+                  switchMap(value =>  this.medicineService.getmedicineForSearch(value)
+                  )).subscribe(res => {
+                    this.medicineForSearch = res;
+                  });
+  }
 }

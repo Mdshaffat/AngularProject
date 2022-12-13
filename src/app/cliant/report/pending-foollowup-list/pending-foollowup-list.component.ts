@@ -40,7 +40,7 @@ export class PendingFoollowupListComponent implements OnInit, AfterViewInit {
 
   minLengthTerm = 3;
   followupsearch = new FormControl();
-  
+
   @ViewChild(MatSort, {static: false}) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private reportService: ReportService,
@@ -69,7 +69,7 @@ export class PendingFoollowupListComponent implements OnInit, AfterViewInit {
                   }, error => {
                     console.log(error);
                   }
-                )
+                );
                }
   ngOnInit(): void {
     this.getCurrectUserHospitalId();
